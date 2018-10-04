@@ -22,7 +22,6 @@ export default {
   name: 'App',
   data () {
     return {
-      activeTab: 0,
       tabs: [{
         title: '用户',
         icon: '//gw.alicdn.com/tfs/TB19YESOVXXXXaNaXXXXXXXXXXX-45-45.png'
@@ -42,12 +41,19 @@ export default {
     }
   },
   computed: {
+    activeTab: {
+      get () {
+        return this.$store.state.Home.activeTab
+      },
+      set () {}
+    },
     panels () {
       return this.tabs.map(tab => ({ content: tab.title }))
     }
   },
   methods: {
     onClick: function (i) {
+      this.$store.commit('SET_activeTab', i)
       storage.setItem('activeTab', i, e => {})
       storage.getItem('activeTab', e => {
         this.activeTab = e.data
