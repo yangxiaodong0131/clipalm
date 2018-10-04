@@ -16,6 +16,8 @@
 </template>
 
 <script>
+const storage = weex.requireModule('storage')
+
 export default {
   name: 'App',
   data () {
@@ -46,7 +48,10 @@ export default {
   },
   methods: {
     onClick: function (i) {
-      this.activeTab = i
+      storage.setItem('activeTab', i, e => {})
+      storage.getItem('activeTab', e => {
+        this.activeTab = e.data
+      })
       switch (i) {
         case 0:
           this.$router.push('/user')

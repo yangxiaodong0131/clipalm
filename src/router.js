@@ -1,6 +1,6 @@
 /* global Vue */
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import HomePage from '@/components/HomePage'
 import EditPage from '@/components/EditPage'
 import LibraryPage from '@/components/LibraryPage'
 import UserPage from '@/components/UserPage'
@@ -13,8 +13,8 @@ module.exports = new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'HomePage',
+      component: HomePage
     },
     {
       path: '/edit',
