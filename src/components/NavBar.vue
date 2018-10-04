@@ -7,7 +7,7 @@
         <text class="title">{{tab.title}}</text>
       </div>
     </div>
-    <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}">
+    <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}" v-if="visible">
       <div class="panel" v-for="(panel, pi) in panels" :key="pi">
         <text class="content">{{panel.content}}</text>
       </div>
@@ -22,6 +22,7 @@ export default {
   name: 'App',
   data () {
     return {
+      visible: true,
       tabs: [{
         title: '用户',
         icon: '//gw.alicdn.com/tfs/TB19YESOVXXXXaNaXXXXXXXXXXX-45-45.png'
@@ -53,6 +54,7 @@ export default {
   },
   methods: {
     onClick: function (i) {
+      this.visible = !this.visible
       this.$store.commit('SET_activeTab', i)
       storage.setItem('activeTab', i, e => {})
       storage.getItem('activeTab', e => {

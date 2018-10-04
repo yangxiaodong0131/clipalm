@@ -18,8 +18,8 @@ export default {
     justify-content: center;
   }
   .panel {
-    width: 600px;
-    margin-left: 75px;
+    width: 100%;
+    margin-left: 0px;
     border-width: 2px;
     border-style: solid;
     border-color: #BBBBBB;
