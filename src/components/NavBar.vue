@@ -98,7 +98,7 @@ export default {
     top: 0;
     left: 0;
     background-color: rgb(218, 59, 85);
-    transition: left 0.2s ease-in-out;
+    transition: left 200 ease-in-out;
   }
   .icon {
     width: 45px;
@@ -106,17 +106,17 @@ export default {
   }
   .title {
     font-size: 28px;
-    color: #FFF;
+    color: #FFFFFF;
     margin-top: 10px;
   }
   .tab-panels {
-    position: relative;
+    /* position: relative; */
     width: 3750;
     flex: 1;
     flex-direction: row;
-    align-items: stretch;
+    /* align-items: stretch; */
     background-color: #F5F5F5;
-    transition: left 0.2s ease-in-out;
+    transition: left 200 ease-in-out;
   }
   .panel {
     width: 750px;

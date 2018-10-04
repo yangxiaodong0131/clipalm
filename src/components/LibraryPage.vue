@@ -18,7 +18,7 @@ export default {
 
 <style scoped>
   .wrapper {
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
   }
   .panel {
@@ -26,7 +26,7 @@ export default {
     margin-left: 75px;
     border-width: 2px;
     border-style: solid;
-    border-color: #BBB;
+    border-color: #BBBBBB;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
