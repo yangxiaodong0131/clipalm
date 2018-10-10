@@ -3,16 +3,18 @@
     <nav-bar></nav-bar>
     <div class="panel">
       <text class="text" lines="3">block page. </text>
+      <block></block>
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from './NavBar'
+import Block from './block/Block'
 
 export default {
   name: 'block-page',
-  components: { NavBar }
+  components: { NavBar, Block }
 }
 </script>
 
@@ -22,7 +24,6 @@ export default {
     justify-content: center;
   }
   .panel {
-    width: 100;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;

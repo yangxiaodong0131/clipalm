@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="panel">
-      <text class="text" lines="3">Weex is an cross-platform development solution that builds high-performance, scalable native applications with a Web development experience. Vue is a lightweight and powerful progressive front-end framework. </text>
+      <text class="text" lines="3">区块链信息</text>
     </div>
   </div>
 </template>
@@ -18,7 +18,6 @@ export default {
     justify-content: center;
   }
   .panel {
-    width: 100;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;

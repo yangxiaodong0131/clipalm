@@ -3,16 +3,18 @@
     <nav-bar></nav-bar>
     <div class="panel">
       <text class="text" lines="3">drg page. </text>
+      <Drg></Drg>
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from './NavBar'
+import Drg from './drg/Drg'
 
 export default {
   name: 'drg-page',
-  components: { NavBar }
+  components: { NavBar, Drg }
 }
 </script>
 
@@ -22,7 +24,6 @@ export default {
     justify-content: center;
   }
   .panel {
-    width: 100;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;

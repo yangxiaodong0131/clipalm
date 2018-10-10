@@ -17,13 +17,12 @@
 
 <script>
 const storage = weex.requireModule('storage')
-
+const modal = weex.requireModule('modal')
 export default {
   name: 'App',
   data () {
     return {
       visible: true,
-      activeTab: 0,
       tabs: [{
         title: '用户',
         icon: '//gw.alicdn.com/tfs/TB19YESOVXXXXaNaXXXXXXXXXXX-45-45.png'
@@ -45,15 +44,22 @@ export default {
   computed: {
     panels () {
       return this.tabs.map(tab => ({ content: tab.title }))
+    },
+    activeTab () {
+      return this.$store.state.Home.activeTab
     }
   },
   methods: {
     onClick: function (i) {
       this.visible = !this.visible
-      this.activeTab = i
+      this.$store.commit('SET_activeTab', i)
       storage.setItem('activeTab', i, e => {})
       storage.getItem('activeTab', e => {
         // this.activeTab = e.data
+      })
+      modal.toast({
+        message: "点击事件",
+        duration: 1
       })
       switch (i) {
         case 0:

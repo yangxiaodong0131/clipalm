@@ -3,16 +3,18 @@
     <nav-bar></nav-bar>
     <div class="panel">
       <text class="text" lines="3">user page. </text>
+      <User></User>
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from './NavBar'
+import User from './user/User'
 
 export default {
   name: 'user-page',
-  components: { NavBar }
+  components: { NavBar, User }
 }
 </script>
 
@@ -22,7 +24,6 @@ export default {
     justify-content: center;
   }
   .panel {
-    width: 100;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;

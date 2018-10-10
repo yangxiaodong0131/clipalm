@@ -22,7 +22,6 @@ export default {
     justify-content: center;
   }
   .panel {
-    width: 100;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;
