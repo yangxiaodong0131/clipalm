@@ -3,6 +3,8 @@
 
 ## Quickstart
 
+http://weex.apache.org/cn/guide/
+
 https://github.com/weexteam/weex-pack
 
 #### web端开发：
@@ -26,6 +28,8 @@ $ npm start
 安装haxm-windows_v7_3_0.zip
 
 启动AVD安卓模拟器
+
+$ weex platform add android
 
 $ weex run android
 
