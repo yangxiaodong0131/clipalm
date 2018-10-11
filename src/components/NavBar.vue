@@ -7,34 +7,38 @@
         <text class="title">{{tab.title}}</text>
       </div>
     </div>
-    <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}" v-if="visible">
+    <wxc-popup popup-color="rgb(92, 184, 92)"
+              ref="wxcPopup"
+              :show="visible"
+              @wxcPopupOverlayClicked="popup()"
+              pos="left">
+    <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}">
       <div class="panel" v-for="(panel, pi) in panels" :key="pi">
-          <wxc-minibar v-for="(menu, mi) in panel.menu" :key="mi"
-            :title="menu"
-            background-color="#009ff0"
-            text-color="#FFFFFF"
-            right-text="进入"
-            right-button="more"
-            leftButton=""
-            @wxcMinibarRightButtonClicked="RightButtonClick(menu)"
-            >
-          </wxc-minibar>
-
+        <wxc-minibar v-for="(menu, mi) in panel.menu" :key="mi"
+          :title="menu"
+          background-color="#009ff0"
+          text-color="#FFFFFF"
+          right-text="进入"
+          right-button="more"
+          leftButton=""
+          @wxcMinibarRightButtonClicked="RightButtonClick(menu)"
+          >
+        </wxc-minibar>
       </div>
     </div>
+    </wxc-popup>
   </div>
 </template>
 
 <script>
-import { WxcMinibar } from 'weex-ui'
+import { WxcMinibar, WxcPopup } from 'weex-ui'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 export default {
   name: 'App',
-  components: { WxcMinibar },
+  components: { WxcMinibar, WxcPopup },
   data () {
     return {
-      visible: true,
       tabs: [{
         title: '用户',
         menu: ['用户登陆', '个人信息'],
@@ -59,6 +63,9 @@ export default {
     }
   },
   computed: {
+    visible () {
+      return this.$store.state.Home.visible
+    },
     panels () {
       return this.tabs.map(tab => ({ content: tab.title, menu: tab.menu }))
     },
@@ -68,7 +75,7 @@ export default {
   },
   methods: {
     onClick (i) {
-      this.visible = !this.visible
+      this.$store.commit('SET_visible', 0)
       this.$store.commit('SET_activeTab', i)
       storage.setItem('activeTab', i, e => {})
       storage.getItem('activeTab', e => {
@@ -99,8 +106,12 @@ export default {
       }
     },
     RightButtonClick (menu) {
-      this.visible = !this.visible
+      this.$store.commit('SET_visible', 0)
       this.$store.commit('SET_menu', menu)
+    },
+    popup () {
+      this.$store.commit('SET_visible', 0)
+      this.$refs.wxcPopup.hide()
     }
   }
 }
