@@ -9,48 +9,65 @@
     </div>
     <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}" v-if="visible">
       <div class="panel" v-for="(panel, pi) in panels" :key="pi">
-        <text class="content">{{panel.content}}</text>
+          <wxc-minibar v-for="(menu, mi) in panel.menu" :key="mi"
+            :title="menu"
+            background-color="#009ff0"
+            text-color="#FFFFFF"
+            right-text="进入"
+            right-button="more"
+            leftButton=""
+            @wxcMinibarRightButtonClicked="RightButtonClick(menu)"
+            >
+          </wxc-minibar>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { WxcMinibar } from 'weex-ui'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 export default {
   name: 'App',
+  components: { WxcMinibar },
   data () {
     return {
       visible: true,
       tabs: [{
         title: '用户',
+        menu: ['用户登陆', '个人信息'],
         icon: '//gw.alicdn.com/tfs/TB19YESOVXXXXaNaXXXXXXXXXXX-45-45.png'
       }, {
         title: '病案',
+        menu: ['录入', '查询', 'DRG分组'],
         icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png'
       }, {
         title: '字典',
+        menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
         icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png'
       }, {
         title: 'DRG',
+        menu: ['统计', '查询', '比较'],
         icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png'
       }, {
         title: '区块',
+        menu: ['账户', '区块', '节点', '交易', '转账'],
         icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png'
       }]
     }
   },
   computed: {
     panels () {
-      return this.tabs.map(tab => ({ content: tab.title }))
+      return this.tabs.map(tab => ({ content: tab.title, menu: tab.menu }))
     },
     activeTab () {
       return this.$store.state.Home.activeTab
     }
   },
   methods: {
-    onClick: function (i) {
+    onClick (i) {
       this.visible = !this.visible
       this.$store.commit('SET_activeTab', i)
       storage.setItem('activeTab', i, e => {})
@@ -72,7 +89,7 @@ export default {
           this.$router.push('/library')
           break
         case 3:
-          this.$router.push('/drg')
+          this.$router.push('/stat')
           break
         case 4:
           this.$router.push('/block')
@@ -80,6 +97,10 @@ export default {
         default :
           this.$router.push('/')
       }
+    },
+    RightButtonClick (menu) {
+      this.visible = !this.visible
+      this.$store.commit('SET_menu', menu)
     }
   }
 }

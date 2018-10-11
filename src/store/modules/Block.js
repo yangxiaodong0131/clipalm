@@ -1,7 +1,6 @@
 const state = {
   activeTab: -1,
-  menu: '用户登陆',
-  notice: '未注册用户！'
+  menu: '账户'
 }
 
 const mutations = {

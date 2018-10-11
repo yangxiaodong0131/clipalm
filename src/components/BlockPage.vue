@@ -14,7 +14,14 @@ import Block from './block/Block'
 
 export default {
   name: 'block-page',
-  components: { NavBar, Block }
+  components: { NavBar, Block },
+  computed: {
+    menu () {
+      return this.$store.state.Block.menu
+    }
+  },
+  methods: {
+  }
 }
 </script>
 

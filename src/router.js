@@ -4,7 +4,7 @@ import HomePage from '@/components/HomePage'
 import EditPage from '@/components/EditPage'
 import LibraryPage from '@/components/LibraryPage'
 import UserPage from '@/components/UserPage'
-import DrgPage from '@/components/DrgPage'
+import StatPage from '@/components/StatPage'
 import BlockPage from '@/components/BlockPage'
 
 Vue.use(Router)
@@ -32,9 +32,9 @@ module.exports = new Router({
       component: UserPage
     },
     {
-      path: '/drg',
-      name: 'DrgPage',
-      component: DrgPage
+      path: '/stat',
+      name: 'StatPage',
+      component: StatPage
     },
     {
       path: '/block',

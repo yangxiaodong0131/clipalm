@@ -1,34 +1,20 @@
 <template>
   <div class="wrapper">
-    <nav-bar></nav-bar>
     <div class="panel">
-      <User v-if="menu == '个人信息'"></User>
-      <Login v-if="menu == '用户登陆'"></Login>
+      <text class="text" lines="3">ICD9</text>
     </div>
   </div>
 </template>
 
 <script>
-import NavBar from './NavBar'
-import User from './user/User'
-import Login from './user/Login'
 
 export default {
-  name: 'user-page',
-  components: { NavBar, User, Login },
-  computed: {
-    menu () {
-      return this.$store.state.Home.menu
-    }
-  },
-  methods: {
-  }
+  name: 'Mdc-doc'
 }
 </script>
 
 <style scoped>
   .wrapper {
-    /* flex-direction: column; */
     justify-content: center;
   }
   .panel {

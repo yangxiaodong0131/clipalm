@@ -14,7 +14,14 @@ import Drg from './drg/Drg'
 
 export default {
   name: 'drg-page',
-  components: { NavBar, Drg }
+  components: { NavBar, Drg },
+  computed: {
+    menu () {
+      return this.$store.state.Stat.menu
+    }
+  },
+  methods: {
+  }
 }
 </script>
 

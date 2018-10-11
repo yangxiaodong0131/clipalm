@@ -14,7 +14,14 @@ import Edit from './edit/Edit'
 
 export default {
   name: 'edit-page',
-  components: { NavBar, Edit }
+  components: { NavBar, Edit },
+  computed: {
+    menu () {
+      return this.$store.state.Edit.menu
+    }
+  },
+  methods: {
+  }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="panel">
-      <text class="text" lines="3">术语字典</text>
+      <text class="text" lines="3">用户登陆/注册 </text>
     </div>
   </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'library-doc'
+  name: 'login-doc'
 }
 </script>
 
