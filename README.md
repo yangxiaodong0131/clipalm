@@ -7,6 +7,10 @@ http://weex.apache.org/cn/guide/
 
 https://github.com/weexteam/weex-pack
 
+https://github.com/alibaba/weex-ui
+
+http://weex-project.io/examples.html
+
 #### web端开发：
 
 $ npm install -g weex-toolkit

@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'block-doc',
+  name: 'block-doc'
 }
 </script>
 

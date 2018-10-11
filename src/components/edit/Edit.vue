@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'edit-doc',
+  name: 'edit-doc'
 }
 </script>
 

@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'library-doc',
+  name: 'library-doc'
 }
 </script>
 

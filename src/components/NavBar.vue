@@ -58,7 +58,7 @@ export default {
         // this.activeTab = e.data
       })
       modal.toast({
-        message: "点击事件",
+        message: '点击事件',
         duration: 1
       })
       switch (i) {
