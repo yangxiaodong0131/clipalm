@@ -2,9 +2,14 @@
   <div class="wrapper">
     <nav-bar></nav-bar>
     <div class="panel">
+      <!-- default-value='hitb' -->
+      <!-- cancel-label='用户名' -->
+      <!-- placeholder='用户名' -->
       <wxc-searchbar ref="wxc-searchbar"
-        input-type='text' autofocus=true
-        default-value='hitb' cancel-label='用户名'
+        input-type='text' autofocus=false
+        v-model = 'user.username'
+        default-value='hitb'
+        placeholder='用户名'
         @wxcSearchbarCancelClicked="NameOnCancel"
         @wxcSearchbarInputReturned="NameOnReturn"
         @wxcSearchbarInputOnInput="NameOnInput"
@@ -12,9 +17,12 @@
         @wxcSearchbarInputOnFocus="NameOnFocus"
         @wxcSearchbarInputOnBlur="NameOnBlur">
       </wxc-searchbar>
+      <!-- default-value='123456'  -->
       <wxc-searchbar ref="wxc-searchbar"
         input-type='password'
-        default-value='123456' cancel-label='密码'
+        v-model = 'user.password'
+        default-value='123456'
+        cancel-label='密码'
         @wxcSearchbarCancelClicked="PwdOnCancel"
         @wxcSearchbarInputReturned="PwdOnReturn"
         @wxcSearchbarInputOnInput="PwdOnInput"
@@ -23,7 +31,7 @@
         @wxcSearchbarInputOnBlur="PwdOnBlur">
       </wxc-searchbar>
       <wxc-button text="用户登陆" @wxcButtonClicked="login"></wxc-button>
-      <text class="count">{{count}}</text>
+      <text class="info">{{info}}</text>
       <text class="value-text">{{value}}</text>
     </div>
   </div>
@@ -32,30 +40,42 @@
 <script>
 import NavBar from './NavBar'
 import { WxcButton, WxcSearchbar } from 'weex-ui'
+const qs = require('qs');
 const stream = weex.requireModule('stream')
 const modal = weex.requireModule('modal')
+
 
 export default {
   name: 'home-page',
   components: { NavBar, WxcButton, WxcSearchbar },
   data () {
     return {
-      count: '网络连接中...',
-      value: '输入框内容。。。'
+      info: '网络连接中...',
+      value: '输入框内容。。。',
+      islogin: false,
+      user: { password: '123456', username: 'hitb' }
     }
   },
   methods: {
     login () {
       stream.fetch({
-        method: 'GET',
+        method: 'POST',
         type: 'json',
-        url: 'https://api.github.com/repos/vuejs/vue'
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        responseType: 'json',
+        url: 'http://www.jiankanglaifu.com/servers/login',
+        body: qs.stringify({ user: this.user })
       }, res => {
         if (res.ok) {
-          this.count = res.data.stargazers_count
-          this.count = '登陆成功'
+          if (res.data.login) {
+            this.info = res.data
+            this.islogin = true
+          } else {
+            this.info = '- 账号或密码错误 -'
+            this.islogin = false
+          }
         } else {
-          this.count = '- unknown -'
+          this.info = '- 网络连接失败 -'
         }
       })
     },
