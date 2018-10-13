@@ -6,7 +6,7 @@
       <!-- cancel-label='用户名' -->
       <!-- placeholder='用户名' -->
       <wxc-searchbar ref="wxc-searchbar"
-        input-type='text' autofocus=false
+        input-type='text'
         v-model = 'user.username'
         default-value='hitb'
         placeholder='用户名'
@@ -40,10 +40,9 @@
 <script>
 import NavBar from './NavBar'
 import { WxcButton, WxcSearchbar } from 'weex-ui'
-const qs = require('qs');
+const qs = require('qs')
 const stream = weex.requireModule('stream')
 const modal = weex.requireModule('modal')
-
 
 export default {
   name: 'home-page',
