@@ -2,3 +2,5 @@
 /dist/
 /*.js
 /test/unit/coverage/
+/src/components/testPage/
+/src/components/TestPage.vue

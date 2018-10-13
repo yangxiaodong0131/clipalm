@@ -11,7 +11,8 @@
               ref="wxcPopup"
               :show="visible"
               @wxcPopupOverlayClicked="popup()"
-              pos="left">
+              height="height"
+              pos="bottom">
     <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}">
       <div class="panel" v-for="(panel, pi) in panels" :key="pi">
         <wxc-minibar v-for="(menu, mi) in panel.menu" :key="mi"
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-import { WxcMinibar, WxcPopup } from 'weex-ui'
+import { WxcMinibar, WxcPopup, Utils } from 'weex-ui'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 export default {
@@ -39,6 +40,7 @@ export default {
   components: { WxcMinibar, WxcPopup },
   data () {
     return {
+      height: 400,
       tabs: [{
         title: '用户',
         menu: ['用户登陆', '个人信息'],
@@ -72,6 +74,12 @@ export default {
     activeTab () {
       return this.$store.state.Home.activeTab
     }
+  },
+  created () {
+    const tabPageHeight = Utils.env.getPageHeight()
+    // 如果页面没有导航栏，可以用下面这个计算高度的方法
+    // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750
+    this.height = tabPageHeight + 'px'
   },
   methods: {
     onClick (i) {
