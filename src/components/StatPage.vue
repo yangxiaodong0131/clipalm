@@ -1,16 +1,13 @@
 <template>
   <div class="wrapper">
     <nav-bar></nav-bar>
-    <div class="panel">
-      <text class="text" lines="3">drg page. </text>
-      <Drg></Drg>
-    </div>
+    <Drg></Drg>
   </div>
 </template>
 
 <script>
 import NavBar from './NavBar'
-import Drg from './drg/Drg'
+import Drg from './stat/Drg'
 
 export default {
   name: 'drg-page',

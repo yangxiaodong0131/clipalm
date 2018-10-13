@@ -2,19 +2,26 @@
   <div class="wrapper">
     <nav-bar></nav-bar>
     <div class="panel">
-      <text class="text" lines="3">block page. </text>
-      <block></block>
+      <Block v-if="menu == '区块'"></Block>
+      <Account v-if="menu == '账户'"></Account>
+      <Peer v-if="menu == '节点'"></Peer>
+      <Transact v-if="menu == '交易'"></Transact>
+      <Transfer v-if="menu == '转账'"></Transfer>
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from './NavBar'
+import Account from './block/Account'
 import Block from './block/Block'
+import Peer from './block/Peer'
+import Transact from './block/Transact'
+import Transfer from './block/Transfer'
 
 export default {
   name: 'block-page',
-  components: { NavBar, Block },
+  components: { NavBar, Block, Account, Peer, Transact, Transfer },
   computed: {
     menu () {
       return this.$store.state.Block.menu

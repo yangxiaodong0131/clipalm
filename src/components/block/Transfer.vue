@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="demo">
-      <text class="demo-title">区块信息</text>
+      <text class="demo-title">转账</text>
       <wxc-cell label="用户名"
                 title="Weex Ui"
                 :has-arrow="true"
