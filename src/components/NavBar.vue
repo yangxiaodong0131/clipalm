@@ -7,13 +7,7 @@
         <text class="title">{{tab.title}}</text>
       </div>
     </div>
-    <wxc-popup popup-color="rgb(92, 184, 92)"
-              ref="wxcPopup"
-              :show="visible"
-              @wxcPopupOverlayClicked="popup()"
-              height="height"
-              pos="bottom">
-    <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}">
+    <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}" v-if="visible">
       <div class="panel" v-for="(panel, pi) in panels" :key="pi">
         <wxc-minibar v-for="(menu, mi) in panel.menu" :key="mi"
           :title="menu"
@@ -27,7 +21,6 @@
         </wxc-minibar>
       </div>
     </div>
-    </wxc-popup>
   </div>
 </template>
 
