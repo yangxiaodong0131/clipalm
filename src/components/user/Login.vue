@@ -6,7 +6,7 @@
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
-      default-value='hitb'
+      default-value='test'
       placeholder='用户名'
       @wxcSearchbarCancelClicked="NameOnCancel"
       @wxcSearchbarInputReturned="NameOnReturn"
@@ -28,7 +28,8 @@
       @wxcSearchbarInputOnFocus="PwdOnFocus"
       @wxcSearchbarInputOnBlur="PwdOnBlur">
     </wxc-searchbar>
-    <wxc-button text="用户登陆" @wxcButtonClicked="login"></wxc-button>
+    <wxc-button type="blue" text="登陆" size="small" @wxcButtonClicked="login"></wxc-button>
+    <wxc-button text="注册" size="small" @wxcButtonClicked="login"></wxc-button>
     <text class="info">{{info}}</text>
     <text class="value-text">{{value}}</text>
   </div>

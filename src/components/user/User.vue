@@ -1,15 +1,45 @@
 <template>
-  <div class="wrapper">
-    <div class="panel">
-      <text class="text" lines="3">用户信息维护 </text>
+  <div class="container">
+    <div class="demo">
+      <text class="demo-title">用户信息</text>
+      <wxc-cell label="用户名"
+                title="Weex Ui"
+                :has-arrow="true"
+                @wxcCellClicked="wxcCellClicked"
+                :has-margin="true"></wxc-cell>
+      <wxc-cell label="邮箱"
+                title="Weex Ui"
+                :has-arrow="true"
+                @wxcCellClicked="wxcCellClicked"
+                :has-top-border="false"></wxc-cell>
+    </div>
+    <div class="demo">
+      <text class="demo-title">用户权限</text>
+      <wxc-cell title="专家组成员"
+                :has-arrow="false"
+                :has-top-border="true">
+        <switch slot="value"></switch>
+      </wxc-cell>
+      <wxc-cell title="MDC组"
+                desc="A、B、C"
+                :has-arrow="true"
+                @wxcCellClicked="wxcCellClicked"
+                :has-top-border="true">
+      </wxc-cell>
     </div>
   </div>
 </template>
 
 <script>
-
+import { WxcCell } from 'weex-ui'
 export default {
-  name: 'user-doc'
+  name: 'user-doc',
+  components: { WxcCell },
+  methods: {
+    wxcCellClicked (e) {
+      console.log(e)
+    }
+  }
 }
 </script>
 

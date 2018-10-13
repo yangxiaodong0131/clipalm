@@ -25,12 +25,12 @@
 </template>
 
 <script>
-import { WxcMinibar, WxcPopup, Utils } from 'weex-ui'
+import { WxcMinibar, WxcPopup, Utils, WxcIcon } from 'weex-ui'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 export default {
   name: 'App',
-  components: { WxcMinibar, WxcPopup },
+  components: { WxcMinibar, WxcPopup, WxcIcon },
   data () {
     return {
       height: 400,

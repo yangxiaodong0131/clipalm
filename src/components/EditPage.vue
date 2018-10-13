@@ -1,10 +1,7 @@
 <template>
   <div class="wrapper">
     <nav-bar></nav-bar>
-    <div class="panel">
-      <text class="text" lines="3">edit page. </text>
-      <Edit></Edit>
-    </div>
+    <Edit></Edit>
   </div>
 </template>
 
