@@ -39,6 +39,16 @@ $ weex platform add android
 
 $ weex run android
 
+#### 移动端开发-ios：
+
+安装xcode
+
+xcode-Preferences-Locations-CommandLineTools-Xcode
+
+$ weex platform add ios
+
+$ weex run ios
+
 #### 移动端发布
 
 $ npm run pack:android
