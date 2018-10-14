@@ -1,71 +1,42 @@
 <template>
-<div>
-  <wxc-tab-bar :tab-titles="tabTitles"
-               :tab-styles="tabStyles"
-               title-type="icon"
-               @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
-    <!-- 第一个页面内容-->
-    <div class="item-container" :style="contentStyle"><text>首页</text></div>
-
-    <!-- 第二个页面内容-->
-    <div class="item-container" :style="contentStyle"><text>特别推荐</text></div>
-
-    <!-- 第三个页面内容-->
-    <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
-
-    <!-- 第四个页面内容-->
-    <div class="item-container" :style="contentStyle"><text>我的主页</text></div>
-  </wxc-tab-bar>
-  <wxc-popup popup-color="rgb(92, 184, 92)"
-               :show="visible"
-               @wxcPopupOverlayClicked="popupOverlayBottomClick"
-               pos="bottom"
-               height="400">
-      <div class="demo-content">
-        <image src="https://img.alicdn.com/tfs/TB1ojYvOXXXXXaOXFXXXXXXXXXX-180-41.png" class="demo-image"></image>
-        <text>与 Web App、HTML5 App 或 hybrid App 不同，您可以使用 Weex 构建一个真正的原生应用。更贴心的是你的代码只需使用 HTML、CSS、JavaScript 可以构建原生应用，上手非常简单。
-        </text>
-      </div>
-    </wxc-popup>
-</div>
+  <wxc-simple-flow :list="testData" :themeColor="themeColor"></wxc-simple-flow>
 </template>
-
-<style scoped>
-  .item-container {
-    width: 750px;
-    background-color: #f2f3f4;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
 <script>
-  import { WxcTabBar, Utils, WxcPopup  } from 'weex-ui';
-
-  // https://github.com/alibaba/weex-ui/blob/master/example/tab-bar/config.js 
-  import Config from './testPage/config'
-
+  import { WxcSimpleFlow } from 'weex-ui';
   export default {
-    components: { WxcTabBar, WxcPopup  },
+    components: { WxcSimpleFlow },
     data: () => ({
-      tabTitles: Config.tabTitles,
-      tabStyles: Config.tabStyles,
-      visible: true
-    }),
-    created () {
-      const tabPageHeight = Utils.env.getPageHeight();
-      // 如果页面没有导航栏，可以用下面这个计算高度的方法
-      // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
-      const { tabStyles } = this;
-      this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' };
-    },
-    methods: {
-      wxcTabBarCurrentTabSelected (e) {
-        const index = e.page;
-        // console.log(index);
+      themeColor: {
+        lineColor: '#bf280b',
+        pointInnerColor: '#b95048',
+        pointBorderColor: '#bf280b',
+        highlightTitleColor: '#bf280b',
+        highlightPointInnerColor: '#bf280b',
+        highlightPointBorderColor: '#d46262'
       },
-      popupOverlayBottomClick () {
-
-      }
-    }
-  };
+      testData: [
+        {
+          'date': '2017-05-24 21:10:29',
+          'desc': '',
+          'highlight': true,
+          'title': '方案已确认'
+        },
+        {
+          'date': '2017-05-24 19:54:28',
+          'desc': '',
+          'title': '方案已更新'
+        },
+        {
+          'date': '2017-05-24 19:50:21',
+          'desc': '您以确定了方案',
+          'title': '方案已上传'
+        },
+        {
+          'date': '2017-05-24 19:49:03',
+          'desc': '商家会在2个工作小时内电话或旺旺联系您',
+          'title': '商家已接单'
+        }
+      ]
+    })
+  }
 </script>

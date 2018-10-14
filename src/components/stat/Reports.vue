@@ -4,11 +4,13 @@
                    :card-length='cardLength'
                    :card-s="cardSize"
                    :select-index="2"
+                   ref="wxc-ep-slider"
                    @wxcEpSliderCurrentIndexSelected="wxcEpSliderCurrentIndexSelected">
 
       <!--自动生成demo-->
       <div v-for="(v,index) in [1,2,3,4,5]"
            :key="index"
+           @click="onClick(index)"
            :slot="`card${index}_${sliderId}`"
            :class="['slider',`slider${index}`]">
         <text>这里是第{{index + 1}}个滑块</text>
@@ -56,6 +58,7 @@ export default {
   data: () => ({
     sliderId: 1,
     cardLength: 5,
+    currentIndex: 0,
     cardSize: {
       width: 400,
       height: 300,
@@ -63,10 +66,23 @@ export default {
       scale: 0.8
     }
   }),
+  // computed: {
+  //   playing () {
+  //     return this.play
+  //   }
+  // },
   methods: {
     wxcEpSliderCurrentIndexSelected (e) {
       const index = e.currentIndex
       console.log(index)
+    },
+    onClick (index) {
+      if (this.currentIndex === index) {
+        this.$store.commit('SET_menu', '单张报表')
+      } else {
+        this.currentIndex = index
+        this.$refs['wxc-ep-slider'].manualSetPage(index)
+      }
     }
   }
 }

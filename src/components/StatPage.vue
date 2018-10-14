@@ -1,20 +1,24 @@
 <template>
   <div class="wrapper">
     <nav-bar></nav-bar>
-    <Drg></Drg>
+    <Reports v-if="menu == '报表'"></Reports>
+    <Report v-if="menu == '单张报表'"></Report>
+    <Query v-if="menu == '查询'"></Query>
   </div>
 </template>
 
 <script>
 import NavBar from './NavBar'
-import Drg from './stat/Drg'
+import Reports from './stat/Reports'
+import Report from './stat/Report'
+import Query from './stat/Query'
 
 export default {
   name: 'drg-page',
-  components: { NavBar, Drg },
+  components: { NavBar, Report, Reports, Query },
   computed: {
     menu () {
-      return this.$store.state.Stat.menu
+      return this.$store.state.Home.menu
     }
   },
   methods: {

@@ -24,7 +24,7 @@ export default {
   components: { NavBar, Mdc, Adrg, Drg, Icd10, Icd9 },
   computed: {
     menu () {
-      return this.$store.state.Library.menu
+      return this.$store.state.Home.menu
     }
   },
   methods: {

@@ -24,7 +24,7 @@ export default {
   components: { NavBar, Block, Account, Peer, Transact, Transfer },
   computed: {
     menu () {
-      return this.$store.state.Block.menu
+      return this.$store.state.Home.menu
     }
   },
   methods: {

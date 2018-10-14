@@ -14,7 +14,7 @@ export default {
   components: { NavBar, Edit },
   computed: {
     menu () {
-      return this.$store.state.Edit.menu
+      return this.$store.state.Home.menu
     }
   },
   methods: {

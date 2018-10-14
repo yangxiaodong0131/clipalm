@@ -48,7 +48,7 @@ export default {
         icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png'
       }, {
         title: 'DRG',
-        menu: ['统计', '查询', '比较'],
+        menu: ['报表', '查询'],
         icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png'
       }, {
         title: '区块',
