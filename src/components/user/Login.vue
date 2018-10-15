@@ -6,7 +6,7 @@
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
-      default-value='test'
+      default-value='hitb'
       placeholder='用户名'
       @wxcSearchbarCancelClicked="NameOnCancel"
       @wxcSearchbarInputReturned="NameOnReturn"

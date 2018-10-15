@@ -43,7 +43,7 @@ $ weex run android
 
 安装xcode
 
-xcode-Preferences-Locations-CommandLineTools-Xcode
+xcode-Preferences-Locations-CommandLineTools-Xcode
 
 $ weex platform add ios
 
