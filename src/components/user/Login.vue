@@ -40,6 +40,7 @@ import { WxcButton, WxcSearchbar } from 'weex-ui'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const modal = weex.requireModule('modal')
+const urlConfig = require('../../utils/config.js')
 
 export default {
   name: 'login-page',
@@ -59,7 +60,7 @@ export default {
         type: 'json',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
         responseType: 'json',
-        url: 'http://www.jiankanglaifu.com/servers/login',
+        url: `${urlConfig.http}:${urlConfig.port}/servers/login`,
         body: qs.stringify({ user: this.user })
       }, res => {
         if (res.ok) {
