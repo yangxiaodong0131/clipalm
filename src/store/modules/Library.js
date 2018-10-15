@@ -10,7 +10,7 @@ const mutations = {
   },
   SET_rule (state, x) {
     state.rule = x
-  },
+  }
 }
 
 const actions = {
