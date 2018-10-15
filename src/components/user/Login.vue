@@ -60,8 +60,8 @@ export default {
         type: 'json',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
         responseType: 'json',
-        url: `${urlConfig.http}:${urlConfig.port}/servers/login`,
-        body: qs.stringify({ user: this.user })
+        url: `${urlConfig.http}:${urlConfig.port}/drgwork/expert/login`,
+        body: qs.stringify({ params: this.user })
       }, res => {
         if (res.ok) {
           if (res.data.login) {

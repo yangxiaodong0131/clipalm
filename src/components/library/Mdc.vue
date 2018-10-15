@@ -23,6 +23,9 @@ const stream = weex.requireModule('stream')
 const urlConfig = require('../../utils/config.js')
 export default {
   components: { WxcCell },
+  created: function () {
+    this.getProvince();
+  },
   methods: {
     wxcCellClicked (e) {
       // stream.fetch({
