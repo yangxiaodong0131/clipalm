@@ -2,7 +2,8 @@
   <div class="container">
     <div class="demo">
       <text class="demo-title">MDC列表</text>
-      <wxc-cell v-for="mdc in mdcs"
+      <wxc-cell v-for="(mdc, i) in mdcs"
+                v-bind:key="i"
                 :label="mdc.code"
                 :title="mdc.name"
                 :has-arrow="true"
@@ -18,10 +19,10 @@ export default {
   components: { WxcCell },
   computed: {
     mdcs: {
-      get() {
+      get () {
         return this.$store.state.Library.rule
       }
-    },
+    }
   },
   updated: function () {
   },

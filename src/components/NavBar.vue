@@ -28,7 +28,7 @@
 import { WxcMinibar, WxcPopup, Utils, WxcIcon } from 'weex-ui'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
-const qs = require('qs')
+// const qs = require('qs')
 const stream = weex.requireModule('stream')
 const urlConfig = require('../utils/config.js')
 export default {
@@ -135,8 +135,51 @@ export default {
             }
           })
           break
+        case 'ADRG':
+          stream.fetch({
+            method: 'GET',
+            type: 'json',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+            responseType: 'json',
+            url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/rule_bj_adrg`
+          }, res => {
+            if (res.ok) {
+              this.$store.commit('SET_rule', res.data.data)
+              // if (res.data.login) {
+              //   this.info = res.data
+              //   this.islogin = true
+              // } else {
+              //   this.info = '- 账号或密码错误 -'
+              //   this.islogin = false
+              // }
+            } else {
+              this.info = '- 网络连接失败 -'
+            }
+          })
+          break
+        case 'DRG':
+          stream.fetch({
+            method: 'GET',
+            type: 'json',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+            responseType: 'json',
+            url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/rule_bj_drg`
+          }, res => {
+            if (res.ok) {
+              this.$store.commit('SET_rule', res.data.data)
+              // if (res.data.login) {
+              //   this.info = res.data
+              //   this.islogin = true
+              // } else {
+              //   this.info = '- 账号或密码错误 -'
+              //   this.islogin = false
+              // }
+            } else {
+              this.info = '- 网络连接失败 -'
+            }
+          })
+          break
         default:
-
       }
     },
     popup () {

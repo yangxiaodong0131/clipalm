@@ -2,16 +2,13 @@
   <div class="container">
     <div class="demo">
       <text class="demo-title">DRG列表</text>
-      <wxc-cell label="AA19"
-                title="Weex Ui"
+      <wxc-cell v-for="(drg, i) in drgs"
+                v-bind:key="i"
+                :label="drg.code"
+                :title="drg.name"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>
-      <wxc-cell label="AB19"
-                title="Weex Ui"
-                :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked"
-                :has-top-border="false"></wxc-cell>
     </div>
   </div>
 </template>
@@ -20,6 +17,13 @@
 import { WxcCell } from 'weex-ui'
 export default {
   components: { WxcCell },
+  computed: {
+    drgs: {
+      get () {
+        return this.$store.state.Library.rule
+      }
+    }
+  },
   methods: {
     wxcCellClicked (e) {
       console.log(e)
