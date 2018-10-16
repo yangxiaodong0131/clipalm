@@ -5,6 +5,7 @@
       <wxc-cell v-for="(mdc, i) in mdcs"
                 v-bind:key="i"
                 :label="mdc.code"
+                v-bind:key='mdc.code'
                 :title="mdc.name"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
