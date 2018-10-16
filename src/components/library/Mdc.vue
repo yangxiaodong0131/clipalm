@@ -7,7 +7,7 @@
                 :label="mdc.code"
                 :title="mdc.name"
                 :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked"
+                @wxcCellClicked="wxcCellClicked(mdc)"
                 :has-margin="true"></wxc-cell>
     </div>
   </div>
@@ -20,15 +20,15 @@ export default {
   computed: {
     mdcs: {
       get () {
-        return this.$store.state.Library.rule
+        return this.$store.state.Library.mdcRule
       }
     }
   },
   updated: function () {
   },
   methods: {
-    wxcCellClicked (e) {
-      console.log(e)
+    wxcCellClicked (mdc) {
+      console.log(mdc.code)
     }
   }
 }

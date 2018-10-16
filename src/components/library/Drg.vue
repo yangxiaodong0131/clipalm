@@ -20,7 +20,7 @@ export default {
   computed: {
     drgs: {
       get () {
-        return this.$store.state.Library.rule
+        return this.$store.state.Library.drgRule
       }
     }
   },

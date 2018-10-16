@@ -112,75 +112,63 @@ export default {
     RightButtonClick (menu) {
       this.$store.commit('SET_visible', 0)
       this.$store.commit('SET_menu', menu)
+      let url = null
       switch (menu) {
         case 'MDC':
-          stream.fetch({
-            method: 'GET',
-            type: 'json',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-            responseType: 'json',
-            url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/rule_bj_mdc`
-          }, res => {
-            if (res.ok) {
-              this.$store.commit('SET_rule', res.data.data)
-              // if (res.data.login) {
-              //   this.info = res.data
-              //   this.islogin = true
-              // } else {
-              //   this.info = '- 账号或密码错误 -'
-              //   this.islogin = false
-              // }
-            } else {
-              this.info = '- 网络连接失败 -'
-            }
-          })
+          url = 'rule_bj_mdc'
           break
         case 'ADRG':
-          stream.fetch({
-            method: 'GET',
-            type: 'json',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-            responseType: 'json',
-            url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/rule_bj_adrg`
-          }, res => {
-            if (res.ok) {
-              this.$store.commit('SET_rule', res.data.data)
-              // if (res.data.login) {
-              //   this.info = res.data
-              //   this.islogin = true
-              // } else {
-              //   this.info = '- 账号或密码错误 -'
-              //   this.islogin = false
-              // }
-            } else {
-              this.info = '- 网络连接失败 -'
-            }
-          })
+          url = 'rule_bj_adrg'
           break
         case 'DRG':
-          stream.fetch({
-            method: 'GET',
-            type: 'json',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-            responseType: 'json',
-            url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/rule_bj_drg`
-          }, res => {
-            if (res.ok) {
-              this.$store.commit('SET_rule', res.data.data)
-              // if (res.data.login) {
-              //   this.info = res.data
-              //   this.islogin = true
-              // } else {
-              //   this.info = '- 账号或密码错误 -'
-              //   this.islogin = false
-              // }
-            } else {
-              this.info = '- 网络连接失败 -'
-            }
-          })
+          url = 'rule_bj_drg'
+          break
+        case 'ICD9':
+          url = 'rule_bj_icd9'
+          break
+        case 'ICD10':
+          url = 'rule_bj_icd10'
           break
         default:
       }
+      stream.fetch({
+        method: 'GET',
+        type: 'json',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        responseType: 'json',
+        url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
+      }, res => {
+        if (res.ok) {
+          switch (menu) {
+            case 'MDC':
+              this.$store.commit('SET_mdc_rule', res.data.data)
+              break
+            case 'ADRG':
+              this.$store.commit('SET_adrg_rule', res.data.data)
+              break
+            case 'DRG':
+              this.$store.commit('SET_drg_rule', res.data.data)
+              break
+            case 'ICD9':
+              this.$store.commit('SET_icd9_rule', res.data.data)
+              break
+            case 'ICD10':
+              this.$store.commit('SET_icd10_rule', res.data.data)
+              break
+            default:
+              break
+          }
+          // if (res.data.login) {
+          //   this.info = res.data
+          //   this.islogin = true
+          // } else {
+          //   this.info = '- 账号或密码错误 -'
+          //   this.islogin = false
+          // }
+        } else {
+          this.info = '- 网络连接失败 -'
+        }
+      })
     },
     popup () {
       this.$store.commit('SET_visible', 0)

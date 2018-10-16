@@ -2,16 +2,13 @@
   <div class="container">
     <div class="demo">
       <text class="demo-title">ICD9列表</text>
-      <wxc-cell label="01.1"
-                title="Weex Ui"
+      <wxc-cell v-for="(icd9, i) in icd9s"
+                v-bind:key="i"
+                :label="icd9.code"
+                :title="icd9.name"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>
-      <wxc-cell label="01.2"
-                title="Weex Ui"
-                :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked"
-                :has-top-border="false"></wxc-cell>
     </div>
   </div>
 </template>
@@ -20,6 +17,13 @@
 import { WxcCell } from 'weex-ui'
 export default {
   components: { WxcCell },
+  computed: {
+    icd9s: {
+      get () {
+        return this.$store.state.Library.icd9Rule
+      }
+    }
+  },
   methods: {
     wxcCellClicked (e) {
       console.log(e)

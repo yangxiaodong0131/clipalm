@@ -20,7 +20,7 @@ export default {
   computed: {
     adrgs: {
       get () {
-        return this.$store.state.Library.rule
+        return this.$store.state.Library.adrgRule
       }
     }
   },
