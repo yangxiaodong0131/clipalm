@@ -81,13 +81,16 @@ https://searchcode.com/
 
 C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\build.gradle
 
+    // compile 'com.taobao.android:weexplugin-loader:1.3'
+    // compile 'com.taobao.android:weexplugin-processor:1.3'
+    // compile 'com.taobao.android:weexplugin-annotation:1.3'
     implementation 'com.alibaba.android:bindingx-core:1.0.1'
-
     implementation 'com.alibaba.android:bindingx_weex_plugin:1.0.1'
 
 
 C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\src\main\java\com\weex\app\WXApplication.java
 
+    // import com.alibaba.weex.plugin.loader.WeexPluginContainer;
     import com.alibaba.android.bindingx.plugin.weex.BindingX;
 
     try {
@@ -95,6 +98,7 @@ C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\src\main\java\com\w
     } catch (WXException e) {
       e.printStackTrace();
     }
+    // WeexPluginContainer.loadAll(this);
 
 C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\src\main\AndroidManifest.xml 中加入
 
