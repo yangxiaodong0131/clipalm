@@ -2,7 +2,8 @@ const state = {
   visible: false,
   activeTab: -1,
   menu: '用户登陆',
-  notice: '未注册用户！'
+  notice: '未注册用户！',
+  user: { login: false }
 }
 
 const mutations = {
@@ -14,6 +15,9 @@ const mutations = {
   },
   SET_menu (state, x) {
     state.menu = x
+  },
+  SET_user (state, x) {
+    state.user = x
   }
 }
 
@@ -22,6 +26,7 @@ const actions = {
     commit('SET_visible')
     commit('SET_activeTab')
     commit('SET_menu')
+    commit('SET_user')
   }
 }
 

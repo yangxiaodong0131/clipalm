@@ -3,12 +3,12 @@
     <div class="demo">
       <text class="demo-title">用户信息</text>
       <wxc-cell label="用户名"
-                title="Weex Ui"
+                :title="user.data.username"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>
       <wxc-cell label="邮箱"
-                title="Weex Ui"
+                :title="user.data.email"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-top-border="false"></wxc-cell>
@@ -21,7 +21,7 @@
         <switch slot="value"></switch>
       </wxc-cell>
       <wxc-cell title="MDC组"
-                desc="A、B、C"
+                :desc="mdcs"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-top-border="true">
@@ -38,6 +38,19 @@ export default {
   methods: {
     wxcCellClicked (e) {
       console.log(e)
+    }
+  },
+  computed: {
+    user: {
+      get () {
+        console.log(this.$store.state.Home.user)
+        return this.$store.state.Home.user
+      }
+    },
+    mdcs: {
+      get () {
+        return this.$store.state.Home.user.data.mdc.join('、')
+      }
     }
   }
 }

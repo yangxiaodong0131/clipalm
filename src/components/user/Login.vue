@@ -47,10 +47,9 @@ export default {
   components: { WxcButton, WxcSearchbar },
   data () {
     return {
-      info: '网络连接中...',
+      info: '...',
       value: '输入框内容。。。',
-      islogin: false,
-      user: { password: '123456', username: 'hitb' }
+      user: { password: '123456', username: 'hitb', plat: 'client' }
     }
   },
   methods: {
@@ -65,13 +64,16 @@ export default {
       }, res => {
         if (res.ok) {
           if (res.data.login) {
-            this.info = res.data
-            this.islogin = true
+            this.$store.commit('SET_user', res.data)
+            this.$router.push('/user')
+            this.$store.commit('SET_visible', 0)
+            this.$store.commit('SET_menu', '个人信息')
           } else {
             this.info = '- 账号或密码错误 -'
-            this.islogin = false
+            this.$store.commit('SET_user', { login: false })
           }
         } else {
+          this.$store.commit('SET_user', { login: false })
           this.info = '- 网络连接失败 -'
         }
       })
