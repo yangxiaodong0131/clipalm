@@ -70,3 +70,17 @@ C:\git\clipalm\platforms\android\app\src\main\res\values\strings.xml:
     <resources>
     <string name="app_name">WEEX APP</string>
     <string name="dummy_content">Hello WEEX</string>
+
+#### bindX
+
+https://alibaba.github.io/bindingx/
+
+https://github.com/alibaba/bindingx#installation
+
+C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\build.gradle
+
+C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\src\main\java\com\weex\app\WXApplication.java
+
+C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\src\main\AndroidManifest.xml 中加入
+
+    <uses-sdk tools:overrideLibrary="com.alibaba.android.bindingx.core, com.alibaba.android.bindingx.plugin.weex"/>
