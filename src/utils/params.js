@@ -1,4 +1,4 @@
-export function toParams(params) {
+export function toParams (params) {
   let param = ''
   for (const name in params) {
     if (typeof params[name] === 'object') {
