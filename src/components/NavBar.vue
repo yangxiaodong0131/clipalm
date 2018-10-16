@@ -79,7 +79,14 @@ export default {
   },
   methods: {
     onClick (i) {
-      this.$store.commit('SET_visible', 0)
+      if (i === this.$store.state.Home.activeTab && this.$store.state.Home.activeTab !== -1) {
+        this.$store.commit('SET_visible', !this.$store.state.Home.visible)
+      } else if (this.$store.state.Home.activeTab === -1 || i !== this.$store.state.Home.activeTab) {
+        this.$store.commit('SET_visible', true)
+      } else {
+        this.$store.commit('SET_visible', this.$store.state.Home.visible)
+      }
+      this.$store.commit('SET_activeTab', i)
       this.$store.commit('SET_activeTab', i)
       storage.setItem('activeTab', i, e => {})
       storage.getItem('activeTab', e => {

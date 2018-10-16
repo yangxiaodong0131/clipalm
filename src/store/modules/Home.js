@@ -7,7 +7,7 @@ const state = {
 
 const mutations = {
   SET_visible (state, x) {
-    state.visible = !state.visible
+    state.visible = x
   },
   SET_activeTab (state, x) {
     state.activeTab = x
