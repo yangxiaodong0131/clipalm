@@ -77,10 +77,32 @@ https://alibaba.github.io/bindingx/
 
 https://github.com/alibaba/bindingx#installation
 
+https://searchcode.com/
+
 C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\build.gradle
 
+    implementation 'com.alibaba.android:bindingx-core:1.0.1'
+
+    implementation 'com.alibaba.android:bindingx_weex_plugin:1.0.1'
+
+
 C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\src\main\java\com\weex\app\WXApplication.java
+
+    import com.alibaba.android.bindingx.plugin.weex.BindingX;
+
+    try {
+      BindingX.register();
+    } catch (WXException e) {
+      e.printStackTrace();
+    }
 
 C:\Users\hitb\Documents\GitHub\clipalm\platforms\android\app\src\main\AndroidManifest.xml 中加入
 
     <uses-sdk tools:overrideLibrary="com.alibaba.android.bindingx.core, com.alibaba.android.bindingx.plugin.weex"/>
+
+
+Multiple dex files define（jar包冲突）
+
+  com/alibaba/weex/plugin/annotation/WeexAdapter
+
+  Program type already present: com.alibaba.weex.plugin.annotation.WeexAdapter
