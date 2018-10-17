@@ -26,11 +26,10 @@
 
 <script>
 import { WxcMinibar, WxcPopup, Utils, WxcIcon } from 'weex-ui'
+import { getDrgServerFile } from '../utils/libraryServerFile'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 // const qs = require('qs')
-const stream = weex.requireModule('stream')
-const urlConfig = require('../utils/config.js')
 export default {
   name: 'App',
   components: { WxcMinibar, WxcPopup, WxcIcon },
@@ -119,58 +118,7 @@ export default {
     RightButtonClick (menu) {
       this.$store.commit('SET_visible', 0)
       this.$store.commit('SET_menu', menu)
-      let url = null
-      switch (menu) {
-        case 'MDC':
-          url = 'rule_bj_mdc'
-          break
-        case 'ADRG':
-          url = 'rule_bj_adrg'
-          break
-        case 'DRG':
-          url = 'rule_bj_drg'
-          break
-        case 'ICD9':
-          url = 'rule_bj_icd9'
-          break
-        case 'ICD10':
-          url = 'rule_bj_icd10'
-          break
-        default:
-      }
-      if (url) {
-        stream.fetch({
-          method: 'GET',
-          type: 'json',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          responseType: 'json',
-          url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
-        }, res => {
-          if (res.ok) {
-            switch (menu) {
-              case 'MDC':
-                this.$store.commit('SET_mdc_rule', res.data.data)
-                break
-              case 'ADRG':
-                this.$store.commit('SET_adrg_rule', res.data.data)
-                break
-              case 'DRG':
-                this.$store.commit('SET_drg_rule', res.data.data)
-                break
-              case 'ICD9':
-                this.$store.commit('SET_icd9_rule', res.data.data)
-                break
-              case 'ICD10':
-                this.$store.commit('SET_icd10_rule', res.data.data)
-                break
-              default:
-                break
-            }
-          } else {
-            this.info = '- 网络连接失败 -'
-          }
-        })
-      }
+      getDrgServerFile(this, 'all', menu)
     },
     popup () {
       this.$store.commit('SET_visible', 0)
