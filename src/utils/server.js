@@ -32,6 +32,7 @@ export function getServer (obj, type, menu, value) {
   } else if (type === 'drgOne') {
     url = `rule_bj_drg?adrg=${value.code}`
   }
+  console.log(url)
   if (url) {
     stream.fetch({
       method: 'GET',
@@ -40,6 +41,8 @@ export function getServer (obj, type, menu, value) {
       responseType: 'json',
       url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}?plat=client`
     }, res => {
+      console.log(menu)
+      console.log(res.data.data)
       if (res.ok) {
         switch (menu) {
           case 'MDC':

@@ -28,7 +28,7 @@
 import { WxcMinibar, WxcPopup, Utils, WxcIcon } from 'weex-ui'
 import { getServer } from '../utils/server'
 const storage = weex.requireModule('storage')
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 // const qs = require('qs')
 export default {
   name: 'App',

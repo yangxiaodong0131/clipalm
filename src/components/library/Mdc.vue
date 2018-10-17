@@ -5,7 +5,7 @@
       <wxc-cell v-for="(mdc, i) in mdcs"
                 v-bind:key="i"
                 :label="mdc.code"
-                :title="mdc.name"
+                :title="mdc.desc"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked(mdc)"
                 :has-margin="true"></wxc-cell>
@@ -30,6 +30,7 @@ export default {
   methods: {
     wxcCellClicked (mdc) {
       this.$store.commit('SET_menu', 'ADRG')
+      console.log(mdc)
       getServer(this, 'adrgOne', 'ADRG', mdc)
     }
   }
