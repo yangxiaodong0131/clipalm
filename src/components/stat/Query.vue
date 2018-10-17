@@ -2,7 +2,7 @@
   <div class="container">
     <wxc-indexlist :normal-list="stats"
                    @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
-                   :show-index="false"></wxc-indexlist>
+                   :show-index="true"></wxc-indexlist>
     <wxc-popup popup-color="#FFFFFF"
                 :show="isBottomShow"
                 @wxcPopupOverlayClicked="popupOverlayBottomClick"
