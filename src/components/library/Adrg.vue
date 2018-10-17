@@ -10,14 +10,16 @@
                 @wxcCellClicked="wxcCellClicked(adrg)"
                 :has-margin="true"></wxc-cell>
     </div>
+    <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
 import { WxcCell } from 'weex-ui'
 import { getServer } from '../../utils/server'
+import PopBar from '../PopBar'
 export default {
-  components: { WxcCell },
+  components: { WxcCell, PopBar },
   computed: {
     adrgs: {
       get () {

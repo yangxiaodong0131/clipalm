@@ -56,14 +56,16 @@
           :has-margin="true"></wxc-cell>
       </div>
     </wxc-popup>
+    <pop-bar></pop-bar>
  </div>
 
 </template>
 
 <script>
 import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
+import PopBar from '../PopBar'
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell },
+  components: { WxcIndexlist, WxcPopup, WxcCell, PopBar },
   created: function () {
   },
   data () {

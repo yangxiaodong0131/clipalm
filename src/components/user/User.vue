@@ -27,14 +27,16 @@
                 :has-top-border="true">
       </wxc-cell>
     </div>
+    <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
 import { WxcCell } from 'weex-ui'
+import PopBar from '../PopBar'
 export default {
   name: 'user-doc',
-  components: { WxcCell },
+  components: { WxcCell, PopBar },
   methods: {
     wxcCellClicked (e) {
       console.log(e)

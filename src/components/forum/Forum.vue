@@ -1,18 +1,20 @@
 <template>
-  <div class="container">
+  <div>
     <wxc-rich-text :config-list="configList"
                    @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
-     <div class="special-rich">
+    <div class="special-rich">
        <wxc-special-rich-text :config-list="specialConfigList"></wxc-special-rich-text>
-     </div>
+    </div>
+    <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
 import { WxcRichText, WxcSpecialRichText } from 'weex-ui'
+import PopBar from '../PopBar'
 
 export default {
-  components: { WxcRichText, WxcSpecialRichText },
+  components: { WxcRichText, WxcSpecialRichText, PopBar },
   data: () => ({
     configList: [{
       type: 'icon',

@@ -10,13 +10,15 @@
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>
     </div>
+    <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
 import { WxcCell } from 'weex-ui'
+import PopBar from '../PopBar'
 export default {
-  components: { WxcCell },
+  components: { WxcCell, PopBar },
   computed: {
     icd10s: {
       get () {

@@ -7,32 +7,17 @@
         <text class="title">{{tab.title}}</text>
       </div>
     </div>
-    <div class="tab-panels" :style="{ left: activeTab * -750 + 'px'}" v-if="visible">
-      <div class="panel" v-for="(panel, pi) in panels" :key="pi">
-        <wxc-minibar v-for="(menu, mi) in panel.menu" :key="mi"
-          :title="menu"
-          background-color="#009ff0"
-          text-color="#FFFFFF"
-          right-text="进入"
-          right-button="more"
-          leftButton=""
-          @wxcMinibarRightButtonClicked="RightButtonClick(menu)"
-          >
-        </wxc-minibar>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import { WxcMinibar, WxcPopup, Utils, WxcIcon } from 'weex-ui'
-import { getServer } from '../utils/server'
+import { WxcMinibar, Utils, WxcIcon } from 'weex-ui'
 const storage = weex.requireModule('storage')
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 // const qs = require('qs')
 export default {
   name: 'App',
-  components: { WxcMinibar, WxcPopup, WxcIcon },
+  components: { WxcMinibar, WxcIcon },
   data () {
     return {
       height: 400,
@@ -93,32 +78,34 @@ export default {
       })
       switch (i) {
         case 0:
+          this.$store.commit('SET_menu', '用户登陆')
+          this.$store.commit('SET_menus', this.tabs[0]['menu'])
           this.$router.push('/')
           break
         case 1:
+          this.$store.commit('SET_menu', '查询')
+          this.$store.commit('SET_menus', this.tabs[1]['menu'])
           this.$router.push('/edit')
           break
         case 2:
+          this.$store.commit('SET_menu', 'MDC')
+          this.$store.commit('SET_menus', this.tabs[2]['menu'])
           this.$router.push('/library')
           break
         case 3:
+          this.$store.commit('SET_menu', '报表')
+          this.$store.commit('SET_menus', this.tabs[3]['menu'])
           this.$router.push('/stat')
           break
         case 4:
+          this.$store.commit('SET_menu', '论坛')
+          this.$store.commit('SET_menus', this.tabs[4]['menu'])
           this.$router.push('/forum')
           break
         default :
+          this.$store.commit('SET_menu', '用户登陆')
           this.$router.push('/')
       }
-    },
-    RightButtonClick (menu) {
-      this.$store.commit('SET_visible', 0)
-      this.$store.commit('SET_menu', menu)
-      getServer(this, 'all', menu)
-    },
-    popup () {
-      this.$store.commit('SET_visible', 0)
-      this.$refs.wxcPopup.hide()
     }
   }
 }

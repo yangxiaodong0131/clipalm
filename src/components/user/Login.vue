@@ -32,11 +32,13 @@
     <wxc-button text="注册" size="small" @wxcButtonClicked="login"></wxc-button>
     <text class="info">{{info}}</text>
     <text class="value-text">{{value}}</text>
+    <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
 import { WxcButton, WxcSearchbar } from 'weex-ui'
+import PopBar from '../PopBar'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const modal = weex.requireModule('modal')
@@ -44,7 +46,7 @@ const urlConfig = require('../../utils/config.js')
 
 export default {
   name: 'login-page',
-  components: { WxcButton, WxcSearchbar },
+  components: { WxcButton, WxcSearchbar, PopBar },
   data () {
     return {
       info: '...',
