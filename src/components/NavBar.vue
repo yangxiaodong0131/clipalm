@@ -52,6 +52,10 @@ export default {
         title: 'DRG',
         menu: ['报表', '查询'],
         icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png'
+      }, {
+        title: '论坛',
+        menu: ['论坛', '论坛'],
+        icon: '//gw.alicdn.com/tfs/TB19YESOVXXXXaNaXXXXXXXXXXX-45-45.png'
       }]
     }
   },
@@ -101,7 +105,7 @@ export default {
           this.$router.push('/stat')
           break
         case 4:
-          this.$router.push('/block')
+          this.$router.push('/forum')
           break
         default :
           this.$router.push('/')

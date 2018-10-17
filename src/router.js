@@ -5,6 +5,7 @@ import EditPage from '@/components/EditPage'
 import LibraryPage from '@/components/LibraryPage'
 import UserPage from '@/components/UserPage'
 import StatPage from '@/components/StatPage'
+import ForumPage from '@/components/ForumPage'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ module.exports = new Router({
       path: '/stat',
       name: 'StatPage',
       component: StatPage
+    },
+    {
+      path: '/forum',
+      name: 'ForumPage',
+      component: ForumPage
     }
   ]
 })

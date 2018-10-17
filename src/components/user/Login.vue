@@ -65,7 +65,7 @@ export default {
         if (res.ok) {
           if (res.data.login) {
             this.$store.commit('SET_user', res.data)
-            this.$router.push('/user')
+            this.$router.push('/')
             this.$store.commit('SET_visible', 0)
             this.$store.commit('SET_menu', '个人信息')
           } else {
