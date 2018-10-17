@@ -34,7 +34,7 @@ export default {
       console.log(e)
     },
     test () {
-      console.log(dataList)
+      // console.log(dataList)
     }
   }
 }

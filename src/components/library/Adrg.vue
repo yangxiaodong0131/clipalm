@@ -15,7 +15,7 @@
 
 <script>
 import { WxcCell } from 'weex-ui'
-import { getDrgServerFile } from '../../utils/libraryServerFile'
+import { getServer } from '../../utils/server'
 export default {
   components: { WxcCell },
   computed: {
@@ -28,7 +28,7 @@ export default {
   methods: {
     wxcCellClicked (adrg) {
       this.$store.commit('SET_menu', 'DRG')
-      getDrgServerFile(this, 'drgOne', 'DRG', adrg)
+      getServer(this, 'drgOne', 'DRG', adrg)
     }
   }
 }
