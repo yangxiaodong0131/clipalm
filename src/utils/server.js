@@ -1,6 +1,6 @@
 const stream = weex.requireModule('stream')
 const urlConfig = require('../utils/config.js')
-export function getDrgServerFile (obj, type, menu, value) {
+export function getServer (obj, type, menu, value) {
   // type:判断查询全部还是单项
   // menu:判断查询drg类型（mdc、adrg…）
   // value:单项查询条件
@@ -22,6 +22,9 @@ export function getDrgServerFile (obj, type, menu, value) {
       case 'ICD10':
         url = 'rule_bj_icd10'
         break
+      case '查询':
+        url = 'wt4_stat_cv'
+        break
       default:
     }
   } else if (type === 'adrgOne') {
@@ -35,7 +38,7 @@ export function getDrgServerFile (obj, type, menu, value) {
       type: 'json',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
       responseType: 'json',
-      url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
+      url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}?plat=client`
     }, res => {
       if (res.ok) {
         switch (menu) {
@@ -53,6 +56,9 @@ export function getDrgServerFile (obj, type, menu, value) {
             break
           case 'ICD10':
             obj.$store.commit('SET_icd10_rule', res.data.data)
+            break
+          case '查询':
+            this.$store.commit('SET_statDrg', res.data.data)
             break
           default:
             break

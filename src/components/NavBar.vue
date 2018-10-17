@@ -26,7 +26,7 @@
 
 <script>
 import { WxcMinibar, WxcPopup, Utils, WxcIcon } from 'weex-ui'
-import { getDrgServerFile } from '../utils/libraryServerFile'
+import { getServer } from '../utils/server'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 // const qs = require('qs')
@@ -118,7 +118,7 @@ export default {
     RightButtonClick (menu) {
       this.$store.commit('SET_visible', 0)
       this.$store.commit('SET_menu', menu)
-      getDrgServerFile(this, 'all', menu)
+      getServer(this, 'all', menu)
     },
     popup () {
       this.$store.commit('SET_visible', 0)
