@@ -18,7 +18,7 @@ export default {
   data: () => ({
     configList: [{
       type: 'icon',
-      src: 'https//gw.alicdn.com/tfs/TB1RRVWQXXXXXasXpXXXXXXXXXX-24-22.png',
+      src: '//gw.alicdn.com/tfs/TB1RRVWQXXXXXasXpXXXXXXXXXX-24-22.png',
       style: {
         height: 22
       }

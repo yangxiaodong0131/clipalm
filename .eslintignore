@@ -4,3 +4,5 @@
 /test/unit/coverage/
 /src/components/testPage/
 /src/components/TestPage.vue
+/src/components/HomePage.vue
+/src/store/index.js

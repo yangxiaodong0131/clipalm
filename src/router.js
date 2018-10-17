@@ -1,6 +1,7 @@
 /* global Vue */
 import Router from 'vue-router'
 import TestPage from '@/components/TestPage'
+import HomePage from '@/components/HomePage'
 import EditPage from '@/components/EditPage'
 import LibraryPage from '@/components/LibraryPage'
 import UserPage from '@/components/UserPage'
@@ -15,6 +16,11 @@ module.exports = new Router({
       path: '/test',
       name: 'TestPage',
       component: TestPage
+    },
+    {
+      path: '/home',
+      name: 'HomePage',
+      component: HomePage
     },
     {
       path: '/',
