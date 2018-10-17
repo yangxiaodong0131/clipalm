@@ -39,7 +39,7 @@ export default {
       tabs: [{
         title: '用户',
         menu: ['用户登陆', '个人信息'],
-        icon: '//gw.alicdn.com/tfs/TB19YESOVXXXXaNaXXXXXXXXXXX-45-45.png'
+        icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png'
       }, {
         title: '病案',
         menu: ['录入', '查询', 'DRG分组'],
@@ -51,10 +51,6 @@ export default {
       }, {
         title: 'DRG',
         menu: ['报表', '查询'],
-        icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png'
-      }, {
-        title: '区块',
-        menu: ['账户', '区块', '节点', '交易', '转账'],
         icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png'
       }]
     }
@@ -91,13 +87,9 @@ export default {
       storage.getItem('activeTab', e => {
         // this.activeTab = e.data
       })
-      modal.toast({
-        message: '点击事件',
-        duration: 1
-      })
       switch (i) {
         case 0:
-          this.$router.push('/user')
+          this.$router.push('/')
           break
         case 1:
           this.$router.push('/edit')
