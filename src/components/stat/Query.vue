@@ -1,23 +1,77 @@
-<!-- <template>
-  <div class="wrapper">
-    <text v-for="(stat, i) in stats" v-bind:key="i">{{stat.code}}</text>
-  </div>
-</template> -->
 <template>
   <div class="container">
-    <!-- :hot-list-config="hotListConfig" -->
-    <!-- :city-location-config="cityLocationConfig" -->
     <wxc-indexlist :normal-list="stats"
                    @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
-                   :show-index="showIndex"></wxc-indexlist>
-  </div>
+                   :show-index="false"></wxc-indexlist>
+    <wxc-popup popup-color="#FFFFFF"
+                :show="isBottomShow"
+                @wxcPopupOverlayClicked="popupOverlayBottomClick"
+                pos="right"
+                width="540">
+      <div class="demo-content">
+        <wxc-cell label="编码"
+          :title="info.code"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="名称"
+          :title="info.desc"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="费用变异系数"
+          :title="info.fee_cv"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="时间变异系数"
+          :title="info.day_cv"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="死亡风险等级"
+          :title="info.death_level"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="权重"
+          :title="info.weight"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="平均费用"
+          :title="info.fee_avg"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="平均住院天数"
+          :title="info.day_avg"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="病历数"
+          :title="info.num_sum"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+      </div>
+    </wxc-popup>
+ </div>
+
 </template>
 
 <script>
-import { WxcIndexlist } from 'weex-ui'
+import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
 export default {
-  components: { WxcIndexlist },
+  components: { WxcIndexlist, WxcPopup, WxcCell },
   created: function () {
+  },
+  data () {
+    return {
+      isBottomShow: false,
+      height: 400,
+      info: {}
+    }
   },
   computed: {
     stats: {
@@ -31,10 +85,14 @@ export default {
       console.log(e)
     },
     wxcIndexlistItemClicked (e) {
-      console.log(e)
+      this.isBottomShow = true
+      this.info = e.item
     },
-    test () {
-      // console.log(dataList)
+    openBottomPopup () {
+      this.isBottomShow = true
+    },
+    popupOverlayBottomClick () {
+      this.isBottomShow = false
     }
   }
 }
@@ -42,7 +100,6 @@ export default {
 
 <style scoped>
   .wrapper {
-    /* flex-direction: column; */
     justify-content: center;
   }
   .text {
