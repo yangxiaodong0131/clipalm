@@ -58,7 +58,7 @@ export function getServer (obj, type, menu, value) {
             obj.$store.commit('SET_icd10_rule', res.data.data)
             break
           case '查询':
-            this.$store.commit('SET_statDrg', res.data.data)
+            obj.$store.commit('SET_statDrg', res.data.data)
             break
           default:
             break
