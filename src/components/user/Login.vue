@@ -69,7 +69,7 @@ export default {
             this.$store.commit('SET_user', res.data)
             this.$router.push('/')
             this.$store.commit('SET_visible', 0)
-            this.$store.commit('SET_menu', '个人信息')
+            this.$store.commit('SET_menu', [0, '个人信息'])
           } else {
             this.info = '- 账号或密码错误 -'
             this.$store.commit('SET_user', { login: false })
