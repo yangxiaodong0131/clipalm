@@ -4,16 +4,52 @@
       <wxc-indexlist :normal-list="mdcs"
                     @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
                     :show-index="true"></wxc-indexlist>
+      <wxc-popup popup-color="#FFFFFF"
+                  :show="isBottomShow"
+                  @wxcPopupOverlayClicked="popupOverlayBottomClick"
+                  pos="right"
+                  width="560">
+        <wxc-button text="ADRG规则"
+              size="big"
+              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <div class="demo-content">
+          <wxc-cell label="编码"
+            :title="info.code"
+            :has-arrow="false"
+            @wxcCellClicked="wxcCellClicked"
+            :has-margin="true"></wxc-cell>
+          <wxc-cell label="名称"
+            :title="info.desc"
+            :has-arrow="false"
+            @wxcCellClicked="wxcCellClicked"
+            :has-margin="true"></wxc-cell>
+          <wxc-cell label="年份"
+            :title="info.year"
+            :has-arrow="false"
+            @wxcCellClicked="wxcCellClicked"
+            :has-margin="true"></wxc-cell>
+          <wxc-cell label="版本"
+            :title="info.version"
+            :has-arrow="false"
+            @wxcCellClicked="wxcCellClicked"
+            :has-margin="true"></wxc-cell>
+          <text class="demo-title">QY小手术</text>
+          <wxc-grid-select
+              :single="true"
+              :cols="3"
+              :list="icd9_aa"></wxc-grid-select>
+        </div>
+      </wxc-popup>
     <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
-import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
+import { WxcIndexlist, WxcPopup, WxcCell, WxcGridSelect, WxcButton } from 'weex-ui'
 import PopBar from '../PopBar'
 import { getServer } from '../../utils/server'
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell, PopBar },
+  components: { WxcIndexlist, WxcPopup, WxcCell, PopBar, WxcGridSelect, WxcButton },
   computed: {
     mdcs: {
       get () {
@@ -23,20 +59,39 @@ export default {
   },
   data () {
     return {
-      refreshing: false,
-      lists: [1, 2, 3, 4, 5]
+      isBottomShow: false,
+      height: 400,
+      info: {},
+      icd9_aa: []
     }
   },
   updated: function () {
   },
   methods: {
     wxcCellClicked (mdc) {
+      // this.$store.commit('SET_menu', 'ADRG')
+      // getServer(this, 'adrgOne', 'ADRG', mdc)
+      this.isBottomShow = true
+      this.info = mdc
+    },
+    wxcButtonClicked () {
       this.$store.commit('SET_menu', 'ADRG')
-      getServer(this, 'adrgOne', 'ADRG', mdc)
+      getServer(this, 'adrgOne', 'ADRG', this.info)
     },
     wxcIndexlistItemClicked (e) {
       this.isBottomShow = true
       this.info = e.item
+      this.icd9_aa = e.item.icd9_aa.map((x) => {
+        const obj = {}
+        obj.title = x
+        return obj
+      })
+    },
+    openBottomPopup () {
+      this.isBottomShow = true
+    },
+    popupOverlayBottomClick () {
+      this.isBottomShow = false
     }
   }
 }
