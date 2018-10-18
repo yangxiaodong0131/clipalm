@@ -1,6 +1,6 @@
 const stream = weex.requireModule('stream')
 const urlConfig = require('../utils/config.js')
-export function getServer (obj, type, menu, value) {
+export function getServer (obj, type, menu, value = null) {
   // type:判断查询全部还是单项
   // menu:判断查询drg类型（mdc、adrg…）
   // value:单项查询条件
@@ -33,6 +33,8 @@ export function getServer (obj, type, menu, value) {
     url = `rule_bj_drg?adrg=${value.code}&plat=client`
   } else if (type === 'wt4') {
     url = 'wt4_2017?plat=client'
+  } else if (type === 'icd10One') {
+    url = `rule_bj_icd10?page=${obj.$store.state.Library.icd10Page + 1}&plat=client`
   }
   if (url) {
     stream.fetch({
@@ -57,13 +59,19 @@ export function getServer (obj, type, menu, value) {
             obj.$store.commit('SET_icd9_rule', res.data.data)
             break
           case 'ICD10':
+            obj.$store.commit('SET_icd10_page', parseInt(res.data.page))
             obj.$store.commit('SET_icd10_rule', res.data.data)
+            break
+          case 'icd10One':
+            obj.$store.commit('SET_icd10_page', parseInt(res.data.page))
+            let data = obj.$store.state.Library.icd10Rule
+            data = data.concat(res.data.data)
+            obj.$store.commit('SET_icd10_rule', data)
             break
           case '查询':
             obj.$store.commit('SET_statDrg', res.data.data)
             break
           case '病案查询':
-            console.log('===')
             obj.$store.commit('SET_wt4Case', res.data.data)
             break
           default:
