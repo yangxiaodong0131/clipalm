@@ -13,9 +13,9 @@
                 @wxcPopupOverlayClicked="popupOverlayBottomClick"
                 pos="right"
                 width="560">
-      <wxc-button :text="button"
+      <!-- <wxc-button :text="button"
             size="big"
-            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+            @wxcButtonClicked="wxcButtonClicked"></wxc-button> -->
       <div class="demo-content">
         <wxc-cell label="编码"
           :title="info.code"
@@ -27,7 +27,7 @@
           :has-arrow="false"
           @wxcCellClicked="wxcCellClicked"
           :has-margin="true"></wxc-cell>
-        <!--<wxc-cell label="年份"
+        <wxc-cell label="年份"
           :title="info.year"
           :has-arrow="false"
           @wxcCellClicked="wxcCellClicked"
@@ -36,7 +36,22 @@
           :title="info.version"
           :has-arrow="false"
           @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>-->
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="MCC"
+          :title="info.mcc"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="CC"
+          :title="info.cc"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <text class="demo-title">ADRG</text>
+        <wxc-grid-select
+          :single="true"
+          :cols="3"
+          :list="adrg"></wxc-grid-select>
       </div>
     </wxc-popup>
   </scroller>
@@ -56,7 +71,7 @@ export default {
       isBottomShow: false,
       height: 400,
       info: {},
-      icd9_aa: [],
+      adrg: [],
       button: ''
     }
   },
@@ -87,8 +102,11 @@ export default {
     wxcIndexlistItemClicked (e) {
       this.isBottomShow = true
       this.info = e.item
-      // console.log(this.info)
-      this.button = `${this.info.code}-ADRG规则`
+      this.adrg = e.item.adrg.map((x) => {
+        const obj = {}
+        obj.title = x
+        return obj
+      })
     },
     openBottomPopup () {
       this.isBottomShow = true
