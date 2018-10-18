@@ -1,25 +1,21 @@
 <template>
   <div class="container">
-    <div class="demo">
+    <!-- <div class="demo"> -->
       <text class="demo-title">ADRG列表</text>
-      <wxc-cell v-for="(adrg, i) in adrgs"
-                v-bind:key="i"
-                :label="adrg.code"
-                :title="adrg.desc"
-                :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked(adrg)"
-                :has-margin="true"></wxc-cell>
-    </div>
+      <wxc-indexlist :normal-list="adrgs"
+                    @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
+                    :show-index="true"></wxc-indexlist>
+    <!-- </div> -->
     <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
-import { WxcCell } from 'weex-ui'
+import { WxcIndexlist, WxcCell } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import PopBar from '../PopBar'
 export default {
-  components: { WxcCell, PopBar },
+  components: { WxcCell, PopBar, WxcIndexlist },
   computed: {
     adrgs: {
       get () {
@@ -31,6 +27,10 @@ export default {
     wxcCellClicked (adrg) {
       this.$store.commit('SET_menu', 'DRG')
       getServer(this, 'drgOne', 'DRG', adrg)
+    },
+    wxcIndexlistItemClicked (e) {
+      this.isBottomShow = true
+      this.info = e.item
     }
   }
 }

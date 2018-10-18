@@ -1,24 +1,20 @@
+
 <template>
   <div class="container">
-    <div class="demo">
-      <text class="demo-title">ICD9列表</text>
-      <wxc-cell v-for="(icd9, i) in icd9s"
-                v-bind:key="i"
-                :label="icd9.code"
-                :title="icd9.desc"
-                :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked"
-                :has-margin="true"></wxc-cell>
-    </div>
+    <text class="demo-title">ICD9列表</text>
+    <wxc-indexlist :normal-list="icd9s"
+                  @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
+                  :show-index="false"
+                  :only-show-list="true"></wxc-indexlist>
     <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
-import { WxcCell } from 'weex-ui'
+import { WxcIndexlist, WxcCell } from 'weex-ui'
 import PopBar from '../PopBar'
 export default {
-  components: { WxcCell, PopBar },
+  components: { WxcCell, PopBar, WxcIndexlist },
   computed: {
     icd9s: {
       get () {
@@ -29,6 +25,10 @@ export default {
   methods: {
     wxcCellClicked (e) {
       console.log(e)
+    },
+    wxcIndexlistItemClicked (e) {
+      this.isBottomShow = true
+      this.info = e.item
     }
   }
 }

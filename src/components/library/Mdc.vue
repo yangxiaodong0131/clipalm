@@ -1,23 +1,19 @@
 <template>
   <div class="container">
-    <text class="demo-title">MDC列表</text>
-    <wxc-cell v-for="(mdc, i) in mdcs"
-              v-bind:key="i"
-              :label="mdc.code"
-              :title="mdc.desc"
-              :has-arrow="true"
-              @wxcCellClicked="wxcCellClicked(mdc)"
-              :has-margin="true"></wxc-cell>
+      <text class="demo-title">MDC列表</text>
+      <wxc-indexlist :normal-list="mdcs"
+                    @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
+                    :show-index="true"></wxc-indexlist>
     <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
-import { WxcCell } from 'weex-ui'
+import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
 import PopBar from '../PopBar'
 import { getServer } from '../../utils/server'
 export default {
-  components: { WxcCell, PopBar },
+  components: { WxcIndexlist, WxcPopup, WxcCell, PopBar },
   computed: {
     mdcs: {
       get () {
@@ -25,13 +21,25 @@ export default {
       }
     }
   },
+  data () {
+    return {
+      refreshing: false,
+      lists: [1, 2, 3, 4, 5]
+    }
+  },
   updated: function () {
   },
   methods: {
     wxcCellClicked (mdc) {
-      getServer(this, 'adrgOne', 'ADRG', mdc)
       this.$store.commit('SET_menu', 'ADRG')
+      getServer(this, 'adrgOne', 'ADRG', mdc)
+    },
+    wxcIndexlistItemClicked (e) {
+      this.isBottomShow = true
+      this.info = e.item
     }
   }
 }
 </script>
+<style>
+</style>
