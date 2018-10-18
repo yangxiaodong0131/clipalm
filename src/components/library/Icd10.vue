@@ -8,20 +8,56 @@
       <text class="indicator-text">Loading ...</text>
       <loading-indicator class="indicator"></loading-indicator>
     </loading>
+    <wxc-popup popup-color="#FFFFFF"
+                :show="isBottomShow"
+                @wxcPopupOverlayClicked="popupOverlayBottomClick"
+                pos="right"
+                width="560">
+      <wxc-button :text="button"
+            size="big"
+            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      <div class="demo-content">
+        <wxc-cell label="编码"
+          :title="info.code"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="名称"
+          :title="info.desc"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <!--<wxc-cell label="年份"
+          :title="info.year"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="版本"
+          :title="info.version"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>-->
+      </div>
+    </wxc-popup>
   </scroller>
 </template>
 
 <script>
-import { WxcIndexlist, WxcCell } from 'weex-ui'
+import { WxcIndexlist, WxcCell, WxcPopup, WxcGridSelect, WxcButton } from 'weex-ui'
 import PopBar from '../PopBar'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell, PopBar, WxcIndexlist },
+  components: { WxcIndexlist, WxcPopup, WxcCell, PopBar, WxcGridSelect, WxcButton },
   data () {
     return {
       loadinging: false,
-      lists: [1, 2, 3, 4, 5]
+      lists: [1, 2, 3, 4, 5],
+      isBottomShow: false,
+      height: 400,
+      info: {},
+      icd9_aa: [],
+      button: ''
     }
   },
   computed: {
@@ -40,12 +76,25 @@ export default {
         this.loadinging = false
       }, 2000)
     },
-    wxcCellClicked (e) {
-      console.log(e)
+    wxcCellClicked (icd10) {
+      this.isBottomShow = true
+      this.info = icd10
+    },
+    wxcButtonClicked () {
+      this.$store.commit('SET_menu', 'ADRG')
+      getServer(this, 'adrgOne', 'ADRG', this.info)
     },
     wxcIndexlistItemClicked (e) {
       this.isBottomShow = true
       this.info = e.item
+      // console.log(this.info)
+      this.button = `${this.info.code}-ADRG规则`
+    },
+    openBottomPopup () {
+      this.isBottomShow = true
+    },
+    popupOverlayBottomClick () {
+      this.isBottomShow = false
     }
   }
 }

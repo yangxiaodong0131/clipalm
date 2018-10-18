@@ -35,6 +35,8 @@ export function getServer (obj, type, menu, value = null) {
     url = 'wt4_2017?plat=client'
   } else if (type === 'icd10One') {
     url = `rule_bj_icd10?page=${obj.$store.state.Library.icd10Page + 1}&plat=client`
+  } else if (type === 'icd9One') {
+    url = `rule_bj_icd9?page=${obj.$store.state.Library.icd9Page + 1}&plat=client`
   }
   if (url) {
     stream.fetch({
@@ -67,6 +69,12 @@ export function getServer (obj, type, menu, value = null) {
             let data = obj.$store.state.Library.icd10Rule
             data = data.concat(res.data.data)
             obj.$store.commit('SET_icd10_rule', data)
+            break
+          case 'icd9One':
+            obj.$store.commit('SET_icd9_page', parseInt(res.data.page))
+            let data1 = obj.$store.state.Library.icd9Rule
+            data1 = data1.concat(res.data.data)
+            obj.$store.commit('SET_icd9_rule', data1)
             break
           case '查询':
             obj.$store.commit('SET_statDrg', res.data.data)
