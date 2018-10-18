@@ -31,6 +31,8 @@ export function getServer (obj, type, menu, value) {
     url = `rule_bj_adrg?mdc=${value.mdc}&plat=client`
   } else if (type === 'drgOne') {
     url = `rule_bj_drg?adrg=${value.code}&plat=client`
+  } else if (type === 'wt4') {
+    url = 'wt4_2017?plat=client'
   }
   if (url) {
     stream.fetch({
@@ -59,6 +61,10 @@ export function getServer (obj, type, menu, value) {
             break
           case '查询':
             obj.$store.commit('SET_statDrg', res.data.data)
+            break
+          case '病案查询':
+            console.log('===')
+            obj.$store.commit('SET_wt4Case', res.data.data)
             break
           default:
             break

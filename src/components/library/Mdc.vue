@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     wxcCellClicked (mdc) {
-      this.$store.commit('SET_menu', 'ADRG')
       getServer(this, 'adrgOne', 'ADRG', mdc)
+      this.$store.commit('SET_menu', 'ADRG')
     }
   }
 }

@@ -44,7 +44,11 @@ export default {
     wxcCellClicked (menu) {
       this.$store.commit('SET_visible', false)
       this.$store.commit('SET_menu', menu)
-      getServer(this, 'all', menu)
+      if (this.$store.state.Home.activeTab === 1) {
+        getServer(this, 'wt4', '病案查询')
+      } else {
+        getServer(this, 'all', menu)
+      }
     }
   }
 }
