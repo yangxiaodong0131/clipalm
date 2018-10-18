@@ -5,7 +5,7 @@
       <wxc-cell v-for="(icd10, i) in icd10s"
                 v-bind:key="i"
                 :label="icd10.code"
-                :title="icd10.name"
+                :title="icd10.desc"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>

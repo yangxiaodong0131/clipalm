@@ -4,7 +4,7 @@
     <wxc-cell v-for="(mdc, i) in mdcs"
               v-bind:key="i"
               :label="mdc.code"
-              :title="mdc.name"
+              :title="mdc.desc"
               :has-arrow="true"
               @wxcCellClicked="wxcCellClicked(mdc)"
               :has-margin="true"></wxc-cell>

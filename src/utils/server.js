@@ -8,29 +8,29 @@ export function getServer (obj, type, menu, value) {
   if (type === 'all') {
     switch (menu) {
       case 'MDC':
-        url = 'rule_bj_mdc'
+        url = 'rule_bj_mdc?plat=client'
         break
       case 'ADRG':
-        url = 'rule_bj_adrg'
+        url = 'rule_bj_adrg?plat=client'
         break
       case 'DRG':
-        url = 'rule_bj_drg'
+        url = 'rule_bj_drg?plat=client'
         break
       case 'ICD9':
-        url = 'rule_bj_icd9'
+        url = 'rule_bj_icd9?plat=client'
         break
       case 'ICD10':
-        url = 'rule_bj_icd10'
+        url = 'rule_bj_icd10?plat=client'
         break
       case '查询':
-        url = 'wt4_stat_cv'
+        url = 'wt4_stat_cv?plat=client'
         break
       default:
     }
   } else if (type === 'adrgOne') {
-    url = `rule_bj_adrg?mdc=${value.mdc}`
+    url = `rule_bj_adrg?mdc=${value.mdc}&plat=client`
   } else if (type === 'drgOne') {
-    url = `rule_bj_drg?adrg=${value.code}`
+    url = `rule_bj_drg?adrg=${value.code}&plat=client`
   }
   if (url) {
     stream.fetch({
@@ -38,7 +38,7 @@ export function getServer (obj, type, menu, value) {
       type: 'json',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
       responseType: 'json',
-      url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}?plat=client`
+      url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
     }, res => {
       if (res.ok) {
         switch (menu) {

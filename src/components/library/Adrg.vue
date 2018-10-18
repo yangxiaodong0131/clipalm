@@ -5,7 +5,7 @@
       <wxc-cell v-for="(adrg, i) in adrgs"
                 v-bind:key="i"
                 :label="adrg.code"
-                :title="adrg.name"
+                :title="adrg.desc"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked(adrg)"
                 :has-margin="true"></wxc-cell>

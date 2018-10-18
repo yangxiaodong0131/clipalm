@@ -5,7 +5,7 @@
       <wxc-cell v-for="(drg, i) in drgs"
                 v-bind:key="i"
                 :label="drg.code"
-                :title="drg.name"
+                :title="drg.desc"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>
