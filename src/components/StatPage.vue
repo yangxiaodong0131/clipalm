@@ -16,7 +16,7 @@ export default {
   components: { NavBar, Report, Query },
   computed: {
     menu () {
-      return this.$store.state.Home.menu
+      return this.$store.state.Home.menu[3]
     }
   },
   methods: {

@@ -2,7 +2,7 @@ const state = {
   visible: false,
   activeTab: -1,
   menus: [],
-  menu: '用户登陆',
+  menu: ['用户登陆', '查询', 'MDC', '查询', '论坛'],
   notice: '未注册用户！',
   user: { login: false }
 }
@@ -18,7 +18,7 @@ const mutations = {
     state.menus = x
   },
   SET_menu (state, x) {
-    state.menu = x
+    state.menu.splice(x[0], 1, x[1])
   },
   SET_user (state, x) {
     state.user = x

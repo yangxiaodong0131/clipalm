@@ -14,7 +14,7 @@ export default {
   components: { NavBar, Forum },
   computed: {
     menu () {
-      return this.$store.state.Home.menu
+      return this.$store.state.Home.menu[4]
     }
   },
   methods: {

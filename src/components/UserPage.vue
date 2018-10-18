@@ -18,7 +18,7 @@ export default {
   components: { NavBar, User, Login },
   computed: {
     menu () {
-      return this.$store.state.Home.menu
+      return this.$store.state.Home.menu[0]
     }
   },
   methods: {

@@ -12,7 +12,7 @@
 
 <script>
 import { WxcMinibar, Utils, WxcIcon } from 'weex-ui'
-const storage = weex.requireModule('storage')
+// const storage = weex.requireModule('storage')
 // const modal = weex.requireModule('modal')
 // const qs = require('qs')
 export default {
@@ -63,47 +63,34 @@ export default {
   },
   methods: {
     onClick (i) {
-      if (i === this.$store.state.Home.activeTab && this.$store.state.Home.activeTab !== -1) {
-        this.$store.commit('SET_visible', !this.$store.state.Home.visible)
-      } else if (this.$store.state.Home.activeTab === -1 || i !== this.$store.state.Home.activeTab) {
+      if (i === this.$store.state.Home.activeTab) {
         this.$store.commit('SET_visible', true)
-      } else {
-        this.$store.commit('SET_visible', this.$store.state.Home.visible)
       }
       this.$store.commit('SET_activeTab', i)
-      this.$store.commit('SET_activeTab', i)
-      storage.setItem('activeTab', i, e => {})
-      storage.getItem('activeTab', e => {
-        // this.activeTab = e.data
-      })
+
       switch (i) {
         case 0:
-          this.$store.commit('SET_menu', '用户登陆')
           this.$store.commit('SET_menus', this.tabs[0]['menu'])
           this.$router.push('/')
           break
         case 1:
-          this.$store.commit('SET_menu', '查询')
           this.$store.commit('SET_menus', this.tabs[1]['menu'])
           this.$router.push('/edit')
           break
         case 2:
-          this.$store.commit('SET_menu', 'MDC')
           this.$store.commit('SET_menus', this.tabs[2]['menu'])
           this.$router.push('/library')
           break
         case 3:
-          this.$store.commit('SET_menu', '报表')
           this.$store.commit('SET_menus', this.tabs[3]['menu'])
           this.$router.push('/stat')
           break
         case 4:
-          this.$store.commit('SET_menu', '论坛')
           this.$store.commit('SET_menus', this.tabs[4]['menu'])
           this.$router.push('/forum')
           break
         default :
-          this.$store.commit('SET_menu', '用户登陆')
+          this.$store.commit('SET_menus', this.tabs[0]['menu'])
           this.$router.push('/')
       }
     }
