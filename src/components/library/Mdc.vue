@@ -9,7 +9,7 @@
                   @wxcPopupOverlayClicked="popupOverlayBottomClick"
                   pos="right"
                   width="560">
-        <wxc-button text="ADRG规则"
+        <wxc-button :text="button"
               size="big"
               @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         <div class="demo-content">
@@ -62,15 +62,14 @@ export default {
       isBottomShow: false,
       height: 400,
       info: {},
-      icd9_aa: []
+      icd9_aa: [],
+      button: ''
     }
   },
   updated: function () {
   },
   methods: {
     wxcCellClicked (mdc) {
-      // this.$store.commit('SET_menu', 'ADRG')
-      // getServer(this, 'adrgOne', 'ADRG', mdc)
       this.isBottomShow = true
       this.info = mdc
     },
@@ -81,6 +80,7 @@ export default {
     wxcIndexlistItemClicked (e) {
       this.isBottomShow = true
       this.info = e.item
+      this.button = `${this.info.code}-ADRG规则`
       this.icd9_aa = e.item.icd9_aa.map((x) => {
         const obj = {}
         obj.title = x
