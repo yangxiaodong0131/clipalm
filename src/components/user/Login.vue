@@ -39,8 +39,10 @@
       @wxcSearchbarInputOnFocus="PwdOnFocus"
       @wxcSearchbarInputOnBlur="PwdOnBlur">
     </wxc-searchbar>
-    <wxc-button type="blue" text="登陆" size="small" @wxcButtonClicked="login"></wxc-button>
-    <wxc-button text="注册" size="small" @wxcButtonClicked="register"></wxc-button>
+    <div class="row">
+      <wxc-button type="blue" text="登陆" size="small" @wxcButtonClicked="login"></wxc-button>
+      <wxc-button text="注册" size="small" @wxcButtonClicked="register"></wxc-button>
+    </div>
     <text class="info">{{info}}</text>
     <text class="value-text">{{value}}</text>
     <pop-bar></pop-bar>
@@ -95,9 +97,13 @@ export default {
       })
     },
     register () {
-      this.name = '',
-      this.pwd = '',
-      this.visible = true
+      if (this.visible) {
+        this.info = '- 调用远程方法注册新用户 -'
+      } else {
+        this.name = '',
+        this.pwd = '',
+        this.visible = true
+      }
     },
     NameOnFocus () {
       this.value = '用户名输入中。。。'
@@ -160,5 +166,9 @@ export default {
   .text {
     color: #666666;
     font-size: 32px;
+  }
+  .row {
+    flex-direction: row;
+    justify-content: space-around;
   }
 </style>
