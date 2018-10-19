@@ -21,10 +21,6 @@
           :title="specialConfigList.gender"
           :has-arrow="false"
           :has-margin="true"></wxc-cell>
-          <!-- total_expense
-          diags_code
-          opers_code
-          gender -->
         <wxc-cell label="其他诊断"
           :title="specialConfigList.diags_code"
           :has-arrow="false"
@@ -137,8 +133,6 @@ export default {
     wxcRichTextLinkClick () {},
     wxcCellClicked (index) {
       this.isBottomShow = true
-      console.log(index)
-      console.log(this.wt4Case[index])
       this.specialConfigList = this.wt4Case[index]
       // this.specialConfigList = [{
       //   type: 'tag',
