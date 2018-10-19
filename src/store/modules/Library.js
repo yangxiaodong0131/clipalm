@@ -1,6 +1,4 @@
 const state = {
-  activeTab: -1,
-  menu: 'MDC',
   mdcRule: [],
   adrgRule: [],
   drgRule: [],
@@ -11,9 +9,6 @@ const state = {
 }
 
 const mutations = {
-  SET_activeTab (state, x) {
-    state.activeTab = x
-  },
   SET_mdc_rule (state, x) {
     state.mdcRule = x
   },
@@ -39,7 +34,6 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
-    commit('SET_activeTab')
     commit('SET_mdc_rule')
     commit('SET_adrg_rule')
     commit('SET_drg_rule')
