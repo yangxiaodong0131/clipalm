@@ -1,12 +1,10 @@
 <template>
   <div class="panel">
-    <!-- default-value='hitb' -->
-    <!-- cancel-label='用户名' -->
-    <!-- placeholder='用户名' -->
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
-      default-value='hitb'
+      :default-value='name'
+      cancel-label='用户名'
       placeholder='用户名'
       @wxcSearchbarCancelClicked="NameOnCancel"
       @wxcSearchbarInputReturned="NameOnReturn"
@@ -15,11 +13,11 @@
       @wxcSearchbarInputOnFocus="NameOnFocus"
       @wxcSearchbarInputOnBlur="NameOnBlur">
     </wxc-searchbar>
-    <!-- default-value='123456'  -->
+
     <wxc-searchbar ref="wxc-searchbar"
       input-type='password'
       v-model = 'user.password'
-      default-value='123456'
+      :default-value='pwd'
       cancel-label='密码'
       @wxcSearchbarCancelClicked="PwdOnCancel"
       @wxcSearchbarInputReturned="PwdOnReturn"
@@ -28,8 +26,21 @@
       @wxcSearchbarInputOnFocus="PwdOnFocus"
       @wxcSearchbarInputOnBlur="PwdOnBlur">
     </wxc-searchbar>
+
+    <wxc-searchbar ref="wxc-searchbar"
+      input-type='password'
+      default-value=''
+      cancel-label='重复密码'
+      v-if="visible"
+      @wxcSearchbarCancelClicked="PwdOnCancel"
+      @wxcSearchbarInputReturned="PwdOnReturn"
+      @wxcSearchbarInputOnInput="PwdOnInput"
+      @wxcSearchbarCloseClicked="PwdOnClose"
+      @wxcSearchbarInputOnFocus="PwdOnFocus"
+      @wxcSearchbarInputOnBlur="PwdOnBlur">
+    </wxc-searchbar>
     <wxc-button type="blue" text="登陆" size="small" @wxcButtonClicked="login"></wxc-button>
-    <wxc-button text="注册" size="small" @wxcButtonClicked="login"></wxc-button>
+    <wxc-button text="注册" size="small" @wxcButtonClicked="register"></wxc-button>
     <text class="info">{{info}}</text>
     <text class="value-text">{{value}}</text>
     <pop-bar></pop-bar>
@@ -51,6 +62,9 @@ export default {
     return {
       info: '...',
       value: '输入框内容。。。',
+      name: 'hitb',
+      pwd: '123456',
+      visible: false,
       user: { password: '123456', username: 'hitb', plat: 'client' }
     }
   },
@@ -79,6 +93,11 @@ export default {
           this.info = '- 网络连接失败 -'
         }
       })
+    },
+    register () {
+      this.name = '',
+      this.pwd = '',
+      this.visible = true
     },
     NameOnFocus () {
       this.value = '用户名输入中。。。'
