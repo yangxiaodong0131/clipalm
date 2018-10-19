@@ -54,6 +54,7 @@
           :list="adrg"></wxc-grid-select>
       </div>
     </wxc-popup>
+    <pop-bar></pop-bar>
   </scroller>
 </template>
 
