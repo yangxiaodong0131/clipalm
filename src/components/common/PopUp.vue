@@ -25,7 +25,7 @@
 
 <script>
 import { WxcPopup, WxcCell, WxcButton, WxcGridSelect } from 'weex-ui'
-import { getServer } from '../utils/server'
+import { getServer } from '../../utils/server'
 
 export default {
   components: { WxcPopup, WxcCell, WxcButton, WxcGridSelect },

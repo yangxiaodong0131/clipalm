@@ -12,7 +12,7 @@
 
 <script>
 import { WxcIndexlist, WxcCell } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 export default {
   components: { WxcCell, PopBar, WxcIndexlist },
   computed: {

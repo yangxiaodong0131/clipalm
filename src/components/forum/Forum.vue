@@ -11,7 +11,7 @@
 
 <script>
 import { WxcRichText, WxcSpecialRichText } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 
 export default {
   components: { WxcRichText, WxcSpecialRichText, PopBar },

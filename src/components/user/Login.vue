@@ -51,7 +51,7 @@
 
 <script>
 import { WxcButton, WxcSearchbar } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const modal = weex.requireModule('modal')
@@ -100,8 +100,8 @@ export default {
       if (this.visible) {
         this.info = '- 调用远程方法注册新用户 -'
       } else {
-        this.name = '',
-        this.pwd = '',
+        this.name = ''
+        this.pwd = ''
         this.visible = true
       }
     },

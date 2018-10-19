@@ -1,24 +1,22 @@
 <template>
   <div class="wrapper">
     <nav-bar></nav-bar>
-    <div class="panel">
-      <User v-if="menu == '个人信息'"></User>
-      <Login v-if="menu == '用户登陆'"></Login>
-    </div>
+    <Report v-if="menu == '报表'"></Report>
+    <Query v-if="menu == '查询'"></Query>
   </div>
 </template>
 
 <script>
-import NavBar from './NavBar'
-import User from './user/User'
-import Login from './user/Login'
+import NavBar from '../common/NavBar'
+import Report from './Report'
+import Query from './Query'
 
 export default {
-  name: 'user-page',
-  components: { NavBar, User, Login },
+  name: 'drg-page',
+  components: { NavBar, Report, Query },
   computed: {
     menu () {
-      return this.$store.state.Home.menu[0]
+      return this.$store.state.Home.menu[3]
     }
   },
   methods: {

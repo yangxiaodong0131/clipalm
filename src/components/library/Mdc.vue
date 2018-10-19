@@ -13,8 +13,8 @@
 
 <script>
 import { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading } from 'weex-ui'
-import PopBar from '../PopBar'
-import PopUp from '../PopUp'
+import PopBar from '../common/PopBar'
+import PopUp from '../common/PopUp'
 export default {
   components: { WxcIndexlist, WxcPopup, WxcCell, PopBar, WxcLoading, WxcPartLoading, PopUp },
   data () {

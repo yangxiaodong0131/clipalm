@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import NavBar from './NavBar'
-import Mdc from './library/Mdc'
-import Adrg from './library/Adrg'
-import Drg from './library/Drg'
-import Icd10 from './library/Icd10'
-import Icd9 from './library/Icd9'
+import NavBar from '../common/NavBar'
+import Mdc from './Mdc'
+import Adrg from './Adrg'
+import Drg from './Drg'
+import Icd10 from './Icd10'
+import Icd9 from './Icd9'
 
 export default {
   name: 'library-page',

@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="demo">
-      
       <wxc-cell label="用户名"
                 :title="user.username"
                 :has-arrow="true"
@@ -35,10 +34,10 @@
 
 <script>
 import { WxcCell, WxcButton } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 export default {
   name: 'user-doc',
-  components: { WxcCell, WxcButton , PopBar },
+  components: { WxcCell, WxcButton, PopBar },
   methods: {
     wxcCellClicked (e) {
       console.log(e)

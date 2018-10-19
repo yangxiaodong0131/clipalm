@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import NavBar from './NavBar'
-import Edit from './edit/Edit'
+import NavBar from '../common/NavBar'
+import Edit from './Edit'
 
 export default {
   name: 'edit-page',

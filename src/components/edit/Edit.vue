@@ -46,7 +46,7 @@
 
 <script>
 import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 
 export default {
   components: { PopBar, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell },

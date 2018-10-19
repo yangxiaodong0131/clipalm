@@ -18,11 +18,11 @@
   const dom = weex.requireModule('dom')
   const storage = weex.requireModule('storage')
   import { WxcTabPage, WxcPanItem, Utils, BindEnv } from 'weex-ui'
-  import UserPage from './UserPage'
-  import EditPage from './EditPage'
-  import LibraryPage from './LibraryPage'  
-  import StatPage from './StatPage'
-  import ForumPage from './ForumPage'
+  import UserPage from './user/UserPage'
+  import EditPage from './edit/EditPage'
+  import LibraryPage from './library/LibraryPage'  
+  import StatPage from './stat/StatPage'
+  import ForumPage from './forum/ForumPage'
 
   export default {
     components: { WxcTabPage, WxcPanItem, UserPage, EditPage, LibraryPage, StatPage, ForumPage },

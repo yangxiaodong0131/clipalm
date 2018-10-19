@@ -63,7 +63,7 @@
 
 <script>
 import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 export default {
   components: { WxcIndexlist, WxcPopup, WxcCell, PopBar },
   created: function () {

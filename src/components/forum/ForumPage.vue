@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import NavBar from './NavBar'
-import Forum from './forum/Forum'
+import NavBar from '../common/NavBar'
+import Forum from './Forum'
 
 export default {
   name: 'forum-page',

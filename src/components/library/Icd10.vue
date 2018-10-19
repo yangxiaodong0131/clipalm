@@ -60,7 +60,7 @@
 
 <script>
 import { WxcIndexlist, WxcCell, WxcPopup, WxcGridSelect, WxcButton } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {

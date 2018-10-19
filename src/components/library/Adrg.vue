@@ -62,7 +62,7 @@
 <script>
 import { WxcIndexlist, WxcCell, WxcButton, WxcGridSelect, WxcPopup } from 'weex-ui'
 import { getServer } from '../../utils/server'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 export default {
   components: { WxcCell, PopBar, WxcIndexlist, WxcGridSelect, WxcButton, WxcPopup },
   computed: {

@@ -6,7 +6,7 @@
 </template>
 <script>
 import { WxcSimpleFlow } from 'weex-ui'
-import PopBar from '../PopBar'
+import PopBar from '../common/PopBar'
 export default {
   components: { WxcSimpleFlow, PopBar },
   data: () => ({
