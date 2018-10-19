@@ -4,7 +4,7 @@ const state = {
   menus: [],
   menu: ['用户登陆', '查询', 'MDC', '报表', '论坛'],
   notice: '未注册用户！',
-  user: { login: false }
+  user: { login: false, data: {} }
 }
 
 const mutations = {

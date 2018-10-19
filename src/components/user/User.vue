@@ -3,12 +3,12 @@
     <div class="demo">
       <text class="demo-title">用户信息</text>
       <wxc-cell label="用户名"
-                :title="user.data.username"
+                :title="user.username"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>
       <wxc-cell label="邮箱"
-                :title="user.data.email"
+                :title="user.email"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-top-border="false"></wxc-cell>
@@ -45,13 +45,15 @@ export default {
   computed: {
     user: {
       get () {
-        console.log(this.$store.state.Home.user)
-        return this.$store.state.Home.user
+        return this.$store.state.Home.user.data
       }
     },
     mdcs: {
       get () {
-        return this.$store.state.Home.user.data.mdc.join('、')
+        if (this.$store.state.Home.user.data.mdc) {
+          return this.$store.state.Home.user.data.mdc.join('、')
+        }
+        return ''
       }
     }
   }
