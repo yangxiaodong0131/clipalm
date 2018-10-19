@@ -12,6 +12,7 @@
 
 <script>
 import { WxcMinibar, Utils, WxcIcon } from 'weex-ui'
+import { getServer } from '../utils/server'
 // const storage = weex.requireModule('storage')
 // const modal = weex.requireModule('modal')
 // const qs = require('qs')
@@ -67,7 +68,6 @@ export default {
         this.$store.commit('SET_visible', true)
       }
       this.$store.commit('SET_activeTab', i)
-
       switch (i) {
         case 0:
           this.$store.commit('SET_menus', this.tabs[0]['menu'])
@@ -80,6 +80,7 @@ export default {
         case 2:
           this.$store.commit('SET_menus', this.tabs[2]['menu'])
           this.$router.push('/library')
+          getServer(this, 'all', 'MDC')
           break
         case 3:
           this.$store.commit('SET_menus', this.tabs[3]['menu'])
