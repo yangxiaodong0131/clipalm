@@ -1,61 +1,61 @@
 <template>
   <div class="container">
-    <!-- <div class="demo"> -->
-      <text class="demo-title">ADRG列表</text>
-      <wxc-indexlist :normal-list="adrgs"
-                    @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
-                    :show-index="true"></wxc-indexlist>
-      <wxc-popup popup-color="#FFFFFF"
-                  :show="isBottomShow"
-                  @wxcPopupOverlayClicked="popupOverlayBottomClick"
-                  pos="right"
-                  width="560">
-        <wxc-button :text="button"
-              size="big"
-              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-        <div class="demo-content">
-          <wxc-cell label="编码"
-            :title="info.code"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <wxc-cell label="名称"
-            :title="info.desc"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <wxc-cell label="年份"
-            :title="info.year"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <wxc-cell label="版本"
-            :title="info.version"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <text class="demo-title">主要诊断</text>
-          <wxc-grid-select
-            :single="true"
-            :cols="3"
-            :list="icd10_aa"></wxc-grid-select>
-          <text class="demo-title">主要手术</text>
-          <wxc-grid-select
-            :single="true"
-            :cols="3"
-            :list="icd9_aa"></wxc-grid-select>
-          <text class="demo-title">其他诊断</text>
-          <wxc-grid-select
-            :single="true"
-            :cols="3"
-            :list="icd10_bb"></wxc-grid-select>
-          <text class="demo-title">其他手术</text>
-          <wxc-grid-select
-            :single="true"
-            :cols="3"
-            :list="icd9_bb"></wxc-grid-select>
-        </div>
-      </wxc-popup>
+    <text class="demo-title">ADRG列表</text>
+    <wxc-indexlist :normal-list="adrgs"
+                  @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
+                  :show-index="true"></wxc-indexlist>
+    <wxc-popup popup-color="#FFFFFF"
+                :show="isBottomShow"
+                @wxcPopupOverlayClicked="popupOverlayBottomClick"
+                pos="right"
+                width="560">
+      <wxc-button :text="button"
+            size="big"
+            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      <div class="demo-content">
+        <wxc-cell label="编码"
+          :title="info.code"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="名称"
+          :title="info.desc"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="年份"
+          :title="info.year"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-cell label="版本"
+          :title="info.version"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <text class="demo-title">主要诊断</text>
+        <wxc-grid-select
+          :single="true"
+          :cols="3"
+          :list="icd10_aa"></wxc-grid-select>
+        <text class="demo-title">主要手术</text>
+        <wxc-grid-select
+          :single="true"
+          :cols="3"
+          :list="icd9_aa"></wxc-grid-select>
+        <text class="demo-title">其他诊断</text>
+        <wxc-grid-select
+          :single="true"
+          :cols="3"
+          :list="icd10_bb"></wxc-grid-select>
+        <text class="demo-title">其他手术</text>
+        <wxc-grid-select
+          :single="true"
+          :cols="3"
+          :list="icd9_bb"></wxc-grid-select>
+      </div>
+    </wxc-popup>
+    <pop-bar></pop-bar>
   </div>
 </template>
 

@@ -54,6 +54,7 @@
           :list="adrg"></wxc-grid-select>
       </div>
     </wxc-popup>
+    <pop-bar></pop-bar>
   </scroller>
 </template>
 
@@ -121,9 +122,6 @@ export default {
 <style scoped>
   .loading {
     width: 750;
-    display: -ms-flex;
-    display: -webkit-flex;
-    display: flex;
     -ms-flex-align: center;
     -webkit-align-items: center;
     -webkit-box-align: center;

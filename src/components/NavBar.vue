@@ -24,7 +24,7 @@ export default {
       height: 400,
       tabs: [{
         title: '用户',
-        menu: ['用户登陆', '个人信息'],
+        menu: [],
         icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png'
       }, {
         title: '病案',
