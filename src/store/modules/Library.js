@@ -6,7 +6,8 @@ const state = {
   drgRule: [],
   icd9Rule: [],
   icd10Rule: [],
-  icd10Page: 1
+  icd10Page: 1,
+  icd9Page: 1
 }
 
 const mutations = {
@@ -30,6 +31,9 @@ const mutations = {
   },
   SET_icd10_page (state, x) {
     state.icd10Page = x
+  },
+  SET_icd9_page (state, x) {
+    state.icd9Page = x
   }
 }
 
@@ -42,6 +46,7 @@ const actions = {
     commit('SET_icd9_rule')
     commit('SET_icd10_rule')
     commit('SET_icd10_page')
+    commit('SET_icd9_page')
   }
 }
 
