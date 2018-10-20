@@ -6,15 +6,14 @@
                     @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
                     :show-index="true"></wxc-indexlist>
     </div>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
 <script>
 import { WxcIndexlist, WxcCell } from 'weex-ui'
-import PopBar from '../common/PopBar'
+
 export default {
-  components: { WxcCell, PopBar, WxcIndexlist },
+  components: { WxcCell, WxcIndexlist },
   computed: {
     drgs: {
       get () {

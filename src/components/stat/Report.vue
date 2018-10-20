@@ -1,14 +1,13 @@
 <template>
   <div class="panel">
     <wxc-simple-flow :list="testData" :themeColor="themeColor"></wxc-simple-flow>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 <script>
 import { WxcSimpleFlow } from 'weex-ui'
-import PopBar from '../common/PopBar'
+
 export default {
-  components: { WxcSimpleFlow, PopBar },
+  components: { WxcSimpleFlow },
   data: () => ({
     themeColor: {
       lineColor: '#bf280b',

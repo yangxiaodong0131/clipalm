@@ -50,17 +50,15 @@
             :list="adrg"></wxc-grid-select>
         </div>
       </wxc-popup>
-    <!-- <pop-bar></pop-bar> -->
   </scroller>
 </template>
 
 <script>
 import { WxcIndexlist, WxcCell, WxcButton, WxcGridSelect, WxcPopup } from 'weex-ui'
 import { getServer } from '../../utils/server'
-import PopBar from '../common/PopBar'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell, PopBar, WxcIndexlist, WxcButton, WxcGridSelect, WxcPopup },
+  components: { WxcCell, WxcIndexlist, WxcButton, WxcGridSelect, WxcPopup },
   data () {
     return {
       isBottomShow: false,

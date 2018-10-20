@@ -28,16 +28,14 @@
     </div>
     <wxc-button text="重新登陆" size="big"
               @wxcButtonClicked="login"></wxc-button>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
 <script>
 import { WxcCell, WxcButton } from 'weex-ui'
-import PopBar from '../common/PopBar'
 export default {
   name: 'user-doc',
-  components: { WxcCell, WxcButton, PopBar },
+  components: { WxcCell, WxcButton },
   methods: {
     wxcCellClicked (e) {
       console.log(e)

@@ -6,27 +6,57 @@
     title-type="icon"
     duration="10"
     @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
-    <user-page></user-page>
-    <edit-page></edit-page>
-    <library-page></library-page>
-    <stat-page></stat-page>
-    <forum-page></forum-page>
+    <!-- user页 -->
+    <div class="panel">
+      <User v-if="menu[0] == '个人信息'"></User>
+      <Login v-if="menu[0] == '用户登陆'"></Login>
+    </div>
+    <!-- edit页 -->
+    <div class="panel">
+      <Edit v-if="menu[1] == '查询'"></Edit>
+    </div>
+    <!-- library页 -->
+    <div class="panel">
+      <Mdc v-if="menu[2] == 'MDC'"></Mdc>
+      <Adrg v-if="menu[2] == 'ADRG'"></Adrg>
+      <Drg v-if="menu[2] == 'DRG'"></Drg>
+      <Icd10 v-if="menu[2] == 'ICD10'"></Icd10>
+      <Icd9 v-if="menu[2] == 'ICD9'"></Icd9>
+    </div>
+    <!-- stat页 -->
+    <div class="wrapper">
+      <Report v-if="menu[3] == '报表'"></Report>
+      <Query v-if="menu[3] == '查询'"></Query>
+    </div>
+    <!-- forum页 -->
+    <div class="panel">
+      <Forum v-if="menu[4] == '论坛'"></Forum>
+    </div>
   </wxc-tab-bar>
   <pop-bar></pop-bar>
+  <pop-up></pop-up>
 </div>
 </template>
 
 <script>
   import { WxcTabBar, Utils } from 'weex-ui';
   import PopBar from './common/PopBar'
-  import UserPage from './user/UserPage'
-  import EditPage from './edit/EditPage'
-  import LibraryPage from './library/LibraryPage'
-  import StatPage from './stat/StatPage'
-  import ForumPage from './forum/ForumPage'
+  import PopUp from './common/PopUp'
+  import User from './user/User'
+  import Login from './user/Login'
+  import Edit from './edit/Edit'
+  import Mdc from './library/Mdc'
+  import Adrg from './library/Adrg'
+  import Drg from './library/Drg'
+  import Icd10 from './library/Icd10'
+  import Icd9 from './library/Icd9'
+  import Report from './stat/Report'
+  import Query from './stat/Query'
+  import Forum from './forum/Forum'
 
   export default {
-    components: { WxcTabBar, PopBar, UserPage, EditPage, LibraryPage, StatPage, ForumPage },
+    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Mdc, Adrg, Drg, Icd9, Icd10, 
+      Report, Query, Forum },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -34,29 +64,29 @@
         // icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png',
         icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
-      }, {
-        title: '病案',
-        menu: ['录入', '查询', 'DRG分组'],
-        // icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png',
-        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
-      }, {
-        title: '字典',
-        menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
-        // icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png',
-        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
-      }, {
-        title: 'DRG',
-        menu: ['报表', '查询'],
-        // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
-        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
-      }, {
-        title: '论坛',
-        menu: ['论坛', '论坛'],
-        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+        }, {
+          title: '病案',
+          menu: ['录入', '查询', 'DRG分组'],
+          // icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png',
+          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+        }, {
+          title: '字典',
+          menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
+          // icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png',
+          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+        }, {
+          title: 'DRG',
+          menu: ['报表', '查询'],
+          // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
+          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+        }, {
+          title: '论坛',
+          menu: ['论坛', '论坛'],
+          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       }],
       tabStyles: {
         bgColor: '#FFFFFF',
@@ -73,6 +103,11 @@
         textPaddingRight: 10
       }
     }),
+    computed: {
+      menu () {
+        return this.$store.state.Home.menu
+      }
+    },
     created () {
       const tabPageHeight = Utils.env.getPageHeight();
       // 如果页面没有导航栏，可以用下面这个计算高度的方法
@@ -122,6 +157,21 @@
     bottom: 0;
     left: 0;
     background-color: #cccccc;
+  }
+  .panel {
+    width: 750px;
+    background-color: #f2f3f4;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #BBBBBB;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
   }
   .item-container {
     width: 750px;

@@ -45,13 +45,11 @@
     </div>
     <text class="info">{{info}}</text>
     <text class="value-text">{{value}}</text>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
 <script>
 import { WxcButton, WxcSearchbar } from 'weex-ui'
-import PopBar from '../common/PopBar'
 import { getServer } from '../../utils/server'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
@@ -60,7 +58,7 @@ const urlConfig = require('../../utils/config.js')
 
 export default {
   name: 'login-page',
-  components: { WxcButton, WxcSearchbar, PopBar },
+  components: { WxcButton, WxcSearchbar },
   data () {
     return {
       info: '...',

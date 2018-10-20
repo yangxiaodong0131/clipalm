@@ -6,17 +6,13 @@
       <wxc-indexlist :normal-list="mdcs"
                     @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
                     :show-index="true"></wxc-indexlist>
-    <pop-up></pop-up>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
 <script>
 import { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading } from 'weex-ui'
-import PopBar from '../common/PopBar'
-import PopUp from '../common/PopUp'
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell, PopBar, WxcLoading, WxcPartLoading, PopUp },
+  components: { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
   data () {
     return {
       // isBottomShow: false,

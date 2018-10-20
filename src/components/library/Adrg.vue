@@ -55,16 +55,15 @@
           :list="icd9_bb"></wxc-grid-select>
       </div>
     </wxc-popup>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
 <script>
 import { WxcIndexlist, WxcCell, WxcButton, WxcGridSelect, WxcPopup } from 'weex-ui'
 import { getServer } from '../../utils/server'
-import PopBar from '../common/PopBar'
+
 export default {
-  components: { WxcCell, PopBar, WxcIndexlist, WxcGridSelect, WxcButton, WxcPopup },
+  components: { WxcCell, WxcIndexlist, WxcGridSelect, WxcButton, WxcPopup },
   computed: {
     adrgs: {
       get () {

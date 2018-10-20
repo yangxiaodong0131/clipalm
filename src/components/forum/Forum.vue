@@ -5,16 +5,14 @@
     <div class="special-rich">
        <wxc-special-rich-text :config-list="specialConfigList"></wxc-special-rich-text>
     </div>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
 <script>
 import { WxcRichText, WxcSpecialRichText } from 'weex-ui'
-import PopBar from '../common/PopBar'
 
 export default {
-  components: { WxcRichText, WxcSpecialRichText, PopBar },
+  components: { WxcRichText, WxcSpecialRichText },
   data: () => ({
     configList: [{
       type: 'icon',

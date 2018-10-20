@@ -13,16 +13,14 @@
 
     <wxc-rich-text :config-list="configList"
                    @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
-    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
 <script>
 import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell } from 'weex-ui'
-import PopBar from '../common/PopBar'
 
 export default {
-  components: { PopBar, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell },
+  components: { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell },
   // data () {
   //   return {
   //     isBottomShow: false,
