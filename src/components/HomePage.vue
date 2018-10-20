@@ -1,4 +1,5 @@
 <template>
+<div class="homepage">
   <wxc-tab-bar 
     :tab-titles="tabs"
     :tab-styles="tabStyles"
@@ -11,10 +12,13 @@
     <stat-page></stat-page>
     <forum-page></forum-page>
   </wxc-tab-bar>
+  <pop-bar></pop-bar>
+</div>
 </template>
 
 <script>
   import { WxcTabBar, Utils } from 'weex-ui';
+  import PopBar from './common/PopBar'
   import UserPage from './user/UserPage'
   import EditPage from './edit/EditPage'
   import LibraryPage from './library/LibraryPage'
@@ -22,28 +26,37 @@
   import ForumPage from './forum/ForumPage'
 
   export default {
-    components: { WxcTabBar, UserPage, EditPage, LibraryPage, StatPage, ForumPage },
+    components: { WxcTabBar, PopBar, UserPage, EditPage, LibraryPage, StatPage, ForumPage },
     data: () => ({
       tabs: [{
         title: '用户',
         menu: [],
-        icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png'
+        // icon: '//img.alicdn.com/tfs/TB1D4RzQFXXXXcoXpXXXXXXXXXX-45-45.png',
+        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       }, {
         title: '病案',
         menu: ['录入', '查询', 'DRG分组'],
-        icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png'
+        // icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png',
+        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       }, {
         title: '字典',
         menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
-        icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png'
+        // icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png',
+        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       }, {
         title: 'DRG',
         menu: ['报表', '查询'],
-        icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png'
+        // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
+        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       }, {
         title: '论坛',
         menu: ['论坛', '论坛'],
-        icon: '//gw.alicdn.com/tfs/TB19YESOVXXXXaNaXXXXXXXXXXX-45-45.png'
+        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       }],
       tabStyles: {
         bgColor: '#FFFFFF',
@@ -99,6 +112,17 @@
 </script>
 
 <style scoped>
+  .homepage {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #cccccc;
+  }
   .item-container {
     width: 750px;
     background-color: #f2f3f4;

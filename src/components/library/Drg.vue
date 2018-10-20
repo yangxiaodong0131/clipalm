@@ -6,7 +6,7 @@
                     @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
                     :show-index="true"></wxc-indexlist>
     </div>
-    <pop-bar></pop-bar>
+    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 

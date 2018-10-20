@@ -56,7 +56,7 @@
           :has-margin="true"></wxc-cell>
       </div>
     </wxc-popup>
-    <pop-bar></pop-bar>
+    <!-- <pop-bar></pop-bar> -->
  </div>
 
 </template>

@@ -13,7 +13,7 @@
 
     <wxc-rich-text :config-list="configList"
                    @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
-    <pop-bar></pop-bar>
+    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 

@@ -45,7 +45,7 @@
     </div>
     <text class="info">{{info}}</text>
     <text class="value-text">{{value}}</text>
-    <pop-bar></pop-bar>
+    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 

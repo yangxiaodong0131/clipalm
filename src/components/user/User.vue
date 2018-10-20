@@ -28,7 +28,7 @@
     </div>
     <wxc-button text="重新登陆" size="big"
               @wxcButtonClicked="login"></wxc-button>
-    <pop-bar></pop-bar>
+    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 

@@ -55,7 +55,7 @@
           :list="icd9_bb"></wxc-grid-select>
       </div>
     </wxc-popup>
-    <pop-bar></pop-bar>
+    <!-- <pop-bar></pop-bar> -->
   </div>
 </template>
 
