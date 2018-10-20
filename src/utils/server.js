@@ -42,28 +42,27 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      // console.log(url)
-      // console.log(e)
       if (e.result === 'success') {
-        const edata = e.data
-        console.log(edata)
-      }
-    })
-    stream.fetch({
-      method: 'GET',
-      type: 'json',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-      responseType: 'json',
-      url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
-    }, res => {
-      if (res.ok) {
-        console.log(res.data)
-        storage.setItem(url, res.data, e => {
-          console.log('storage success')
-        })
-        setStore(obj, menu, res.data)
+        const edata = JSON.parse(e.data)
+        setStore(obj, menu, edata)
       } else {
-        obj.info = '- 网络连接失败 -'
+        stream.fetch({
+          method: 'GET',
+          type: 'json',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          responseType: 'json',
+          url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
+        }, res => {
+          if (res.ok) {
+            // console.log(res.data)
+            storage.setItem(url, JSON.stringify(res.data), e => {
+              console.log('storage success')
+            })
+            setStore(obj, menu, res.data)
+          } else {
+            obj.info = '- 网络连接失败 -'
+          }
+        })
       }
     })
   }
