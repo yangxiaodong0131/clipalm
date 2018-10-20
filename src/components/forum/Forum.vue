@@ -27,17 +27,6 @@ export default {
       value: '论坛话题',
       theme: 'yellow'
     }, {
-      type: 'link',
-      value: '自定义颜色link',
-      href: '//h5.m.taobao.com',
-      style: {
-        color: '#546E7A'
-      }
-    }, {
-      type: 'tag',
-      value: '满100减20',
-      theme: 'red'
-    }, {
       type: 'tag',
       value: '自定义标签',
       style: {
@@ -51,7 +40,7 @@ export default {
     specialConfigList: [
       {
         type: 'tag',
-        value: '自由行',
+        value: '论坛话题',
         style: {
           fontSize: 24,
           color: '#3D3D3D',

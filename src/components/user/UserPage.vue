@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <nav-bar></nav-bar>
+    <!-- <nav-bar></nav-bar> -->
     <div class="panel">
       <User v-if="menu == '个人信息'"></User>
       <Login v-if="menu == '用户登陆'"></Login>
@@ -32,6 +32,10 @@ export default {
     justify-content: center;
   }
   .panel {
+    width: 750px;
+    background-color: #f2f3f4;
+    align-items: center;
+    justify-content: center;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;

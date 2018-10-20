@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="panel">
     <wxc-simple-flow :list="testData" :themeColor="themeColor"></wxc-simple-flow>
     <pop-bar></pop-bar>
   </div>
@@ -44,3 +44,25 @@ export default {
   })
 }
 </script>
+
+<style scoped>
+  .wrapper {
+    /* flex-direction: column; */
+    justify-content: center;
+  }
+  .panel {
+    width: 750px;
+    background-color: #f2f3f4;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #BBBBBB;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+  }
+</style>

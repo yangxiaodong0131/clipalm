@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <nav-bar></nav-bar>
+    <!-- <nav-bar></nav-bar> -->
+    <text class="demo-title">Edit</text>
     <Edit></Edit>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <nav-bar></nav-bar>
+    <!-- <nav-bar></nav-bar> -->
     <Forum v-if="menu == '论坛'"></Forum>
   </div>
 </template>
@@ -28,6 +28,10 @@ export default {
     justify-content: center;
   }
   .panel {
+    width: 750px;
+    background-color: #f2f3f4;
+    align-items: center;
+    justify-content: center;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;

@@ -18,7 +18,7 @@ module.exports = new Router({
       component: TestPage
     },
     {
-      path: '/home',
+      path: '/',
       name: 'HomePage',
       component: HomePage
     },
