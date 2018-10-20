@@ -52,6 +52,7 @@
 <script>
 import { WxcButton, WxcSearchbar } from 'weex-ui'
 import PopBar from '../common/PopBar'
+import { getServer } from '../../utils/server'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const modal = weex.requireModule('modal')
@@ -86,6 +87,7 @@ export default {
             this.$router.push('/')
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_menu', [0, '个人信息'])
+            getServer(this, 'all', 'MDC')
           } else {
             this.info = '- 账号或密码错误 -'
             this.$store.commit('SET_user', { login: false })
