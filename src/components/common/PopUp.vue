@@ -56,7 +56,6 @@ export default {
     },
     popupOverlayBottomClick () {
       this.$store.commit('SET_isBottomShow', false)
-      // this.isBottomShow = false
     },
     wxcCellClicked (mdc) {
       this.isBottomShow = true
@@ -64,8 +63,27 @@ export default {
       this.info = mdc
     },
     wxcButtonClicked () {
-      this.$store.commit('SET_menu', 'ADRG')
-      getServer(this, 'adrgOne', 'ADRG', this.info)
+      let menu = ''
+      let type = ''
+      switch (this.$store.state.Home.activeTab) {
+        case 2:
+          switch (this.$store.state.Library.ruleType) {
+            case 'MDC':
+              menu = 'ADRG'
+              type = 'adrgOne'
+              break
+            case 'ADRG':
+              menu = 'DRG'
+              type = 'drgOne'
+              break
+          }
+          break
+        default :
+          break
+      }
+      this.$store.commit('SET_isBottomShow', false)
+      this.$store.commit('SET_menu', menu)
+      getServer(this, type, menu, this.info)
     }
   }
 }

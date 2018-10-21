@@ -52,19 +52,41 @@ export default {
   },
   methods: {
     wxcIndexlistItemClicked (e) {
-      // this.isBottomShow = true
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e.item)
-      // this.info = e.item
-      const button = `${e.item.code}-ADRG规则`
+      let button = ''
+      let gridList = []
+      let details = []
+      switch (this.$store.state.Library.ruleType) {
+        case 'MDC':
+          button = `${e.item.code}-ADRG规则`
+          gridList = e.item.icd9_aa.map((x) => {
+            const obj = {}
+            obj.title = x
+            return obj
+          })
+          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
+          break
+        case 'ADRG':
+          button = `${e.item.code}-DRG规则`
+          gridList = e.item.icd10_aa.map((x) => {
+            const obj = {}
+            obj.title = x
+            return obj
+          })
+          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
+          break
+        case 'DRG':
+          button = ``
+          gridList = []
+          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
+          break
+        default :
+          break
+      }
       this.$store.commit('SET_buttonText', button)
-      const icd9aa = e.item.icd9_aa.map((x) => {
-        const obj = {}
-        obj.title = x
-        return obj
-      })
-      this.$store.commit('SET_gridList', icd9aa)
-      this.$store.commit('SET_details', [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}])
+      this.$store.commit('SET_gridList', gridList)
+      this.$store.commit('SET_details', details)
     },
     openBottomPopup () {
       // this.isBottomShow = true

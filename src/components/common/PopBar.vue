@@ -42,8 +42,6 @@ export default {
       this.$store.commit('SET_visible', false)
     },
     wxcCellClicked (menu) {
-      console.log(menu)
-      console.log('---------------')
       this.$store.commit('SET_visible', false)
       const i = this.$store.state.Home.activeTab
       if (menu === '自定义查询') {
