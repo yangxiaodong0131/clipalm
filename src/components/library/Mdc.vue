@@ -23,7 +23,28 @@ export default {
   computed: {
     rule: {
       get () {
-        return this.$store.state.Library.rule
+        let data = []
+        switch (this.$store.state.Library.ruleType) {
+          case 'MDC':
+            data = this.$store.state.Library.mdcRule
+            break
+          case 'ADRG':
+            data = this.$store.state.Library.adrgRule
+            break
+          case 'DRG':
+            data = this.$store.state.Library.drgRule
+            break
+          case 'ICD10':
+            data = this.$store.state.Library.icd10Rule
+            break
+          case 'ICD9':
+            data = this.$store.state.Library.icd9Rule
+            break
+          default:
+            data = []
+            break
+        }
+        return data
       }
     }
   },

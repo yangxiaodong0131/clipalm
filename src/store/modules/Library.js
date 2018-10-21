@@ -6,7 +6,8 @@ const state = {
   icd9Rule: [],
   icd10Rule: [],
   icd10Page: 1,
-  icd9Page: 1
+  icd9Page: 1,
+  ruleType: ''
 }
 
 const mutations = {
@@ -32,7 +33,7 @@ const mutations = {
     state.icd9Page = x
   },
   SET_library_rule (state, x) {
-    console.log(x)
+    state.ruleType = x
     switch (x) {
       case 'MDC':
         state.rule = state.mdcRule

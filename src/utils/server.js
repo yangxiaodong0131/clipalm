@@ -23,7 +23,7 @@ export function getServer (obj, type, menu, value = null) {
       case 'ICD10':
         url = 'rule_bj_icd10?plat=client'
         break
-      case '查询':
+      case '报表':
         url = 'wt4_stat_cv?plat=client'
         break
       default:
@@ -42,7 +42,7 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      if (e.result === 'success') {
+      if (e.result === 'success' && JSON.parse(e.data).length === 0) {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
@@ -54,7 +54,6 @@ export function getServer (obj, type, menu, value = null) {
           url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
         }, res => {
           if (res.ok) {
-            // console.log(res.data)
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
             })
@@ -71,18 +70,23 @@ export function getServer (obj, type, menu, value = null) {
 function setStore (obj, menu, rdata) {
   switch (menu) {
     case 'MDC':
+      obj.$store.commit('SET_library_rule', menu)
       obj.$store.commit('SET_mdc_rule', rdata.data)
       break
     case 'ADRG':
+      obj.$store.commit('SET_library_rule', menu)
       obj.$store.commit('SET_adrg_rule', rdata.data)
       break
     case 'DRG':
+      obj.$store.commit('SET_library_rule', menu)
       obj.$store.commit('SET_drg_rule', rdata.data)
       break
     case 'ICD9':
+      obj.$store.commit('SET_library_rule', menu)
       obj.$store.commit('SET_icd9_rule', rdata.data)
       break
     case 'ICD10':
+      obj.$store.commit('SET_library_rule', menu)
       obj.$store.commit('SET_icd10_page', parseInt(rdata.page))
       obj.$store.commit('SET_icd10_rule', rdata.data)
       break
@@ -98,7 +102,7 @@ function setStore (obj, menu, rdata) {
       data1 = data1.concat(rdata.data)
       obj.$store.commit('SET_icd9_rule', data1)
       break
-    case '查询':
+    case '报表':
       obj.$store.commit('SET_statDrg', rdata.data)
       break
     case '病案查询':
