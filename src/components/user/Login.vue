@@ -158,6 +158,9 @@ export default {
     justify-content: center;
   }
   .panel {
+    flex-direction: column;
+    justify-content: center;
+    height: 750;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;
