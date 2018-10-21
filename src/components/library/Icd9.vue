@@ -9,47 +9,6 @@
         <text class="indicator-text">Loading ...</text>
         <loading-indicator class="indicator"></loading-indicator>
       </loading>
-      <wxc-popup popup-color="#FFFFFF"
-                  :show="isBottomShow"
-                  @wxcPopupOverlayClicked="popupOverlayBottomClick"
-                  pos="right"
-                  width="560">
-        <!-- <wxc-button :text="button"
-              size="big"
-              @wxcButtonClicked="wxcButtonClicked"></wxc-button> -->
-        <div class="demo-content">
-          <wxc-cell label="编码"
-            :title="info.code"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <wxc-cell label="名称"
-            :title="info.desc"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <wxc-cell label="年份"
-            :title="info.year"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <wxc-cell label="版本"
-            :title="info.version"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <wxc-cell label="手术室手术"
-            :title="info.p_type"
-            :has-arrow="false"
-            @wxcCellClicked="wxcCellClicked"
-            :has-margin="true"></wxc-cell>
-          <text class="demo-title">ADRG</text>
-          <wxc-grid-select
-            :single="true"
-            :cols="3"
-            :list="adrg"></wxc-grid-select>
-        </div>
-      </wxc-popup>
   </scroller>
 </template>
 
@@ -95,13 +54,15 @@ export default {
       getServer(this, 'drgOne', 'DRG', this.info)
     },
     wxcIndexlistItemClicked (e) {
-      this.isBottomShow = true
-      this.info = e.item
-      this.adrg = e.item.adrg.map((x) => {
+      this.$store.commit('SET_isBottomShow', true)
+      this.$store.commit('SET_info', e.item)
+      const adrg = e.item.adrg.map((x) => {
         const obj = {}
         obj.title = x
         return obj
       })
+      this.$store.commit('SET_gridList', adrg)
+      this.$store.commit('SET_details', [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}, {'label': '手术室手术', 'title': 'p_type'}])
     },
     openBottomPopup () {
       this.isBottomShow = true
