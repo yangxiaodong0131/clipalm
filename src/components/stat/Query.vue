@@ -3,7 +3,7 @@
     <div class="demo">
       <text class="value-text">基础输入框</text>
       <wxc-searchbar ref="wxc-searchbar"
-                     @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
+                    @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
                      @wxcSearchbarInputReturned="wxcSearchbarInputReturned"
                      @wxcSearchbarInputOnInput="wxcSearchbarInputOnInput"
                      @wxcSearchbarCloseClicked="wxcSearchbarCloseClicked"
@@ -13,44 +13,50 @@
     </div>
     <div class="demo demo1">
       <text class="value-text">输入框禁用</text>
-      <wxc-searchbar disabled="true" @wxcSearchbarInputDisabledClicked="searchbarInputDisabledOnclick"></wxc-searchbar>
+      <wxc-searchbar :disabled="true"></wxc-searchbar>
     </div>
     <div class="demo demo1">
       <text class="value-text">带有目的地模式的输入框</text>
-      <wxc-searchbar disabled="true"
+      <wxc-searchbar :disabled="true"
                      placeholder="搜索目的地"
                      mod="hasDep"
-                     dep-name="杭州出发"
-                     @wxcSearchbarDepChooseClicked="wxcSearchbarDepChooseClicked"
-                     @wxcSearchbarInputDisabledClicked="wxcSearchbarInputDisabledClicked"></wxc-searchbar>
+                     dep-name="杭州出发"></wxc-searchbar>
     </div>
   </div>
 </template>
 <script>
 import { WxcSearchbar } from 'weex-ui'
- export default {
-   components: { WxcSearchbar },
-   data: () => ({
-     value: ''
-   }),
-   methods: {
-     wxcSearchbarInputOnFocus () {
-     },
-     wxcSearchbarInputOnBlur () {
-     },
-     wxcSearchbarInputReturned (){
-     },
-     wxcSearchbarCloseClicked () {
-     },
-     wxcSearchbarInputOnInput (e) {
-       this.value = e.value;
-     },
-     wxcSearchbarCancelClicked () {
-     },
-     wxcSearchbarInputDisabledClicked () {
-     },
-     wxcSearchbarDepChooseClicked () {
-     }
-   }
- }
+const modal = weex.requireModule('modal')
+export default {
+  components: { WxcSearchbar },
+  data: () => ({
+    value: ''
+  }),
+  methods: {
+    wxcSearchbarInputOnInput (e) {
+      this.value = e.value
+    },
+    wxcSearchbarInputOnFocus () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarInputOnBlur () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarInputReturned () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarCloseClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarCancelClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarInputDisabledClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarDepChooseClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    }
+  }
+}
 </script>
