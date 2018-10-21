@@ -26,22 +26,35 @@
                 :has-top-border="true">
       </wxc-cell>
     </div>
+    <text>--选择用户版本--</text>
+    <wxc-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked">
+    </wxc-radio>
     <wxc-button text="重新登陆" size="big"
               @wxcButtonClicked="login"></wxc-button>
   </div>
 </template>
 
 <script>
-import { WxcCell, WxcButton } from 'weex-ui'
+import { WxcCell, WxcButton, WxcRadio } from 'weex-ui'
 export default {
   name: 'user-doc',
-  components: { WxcCell, WxcButton },
+  components: { WxcCell, WxcButton, WxcRadio },
+  data: () => ({
+    list: [
+      { title: '专家用户', value: 1, checked: true },
+      { title: '机构用户', value: 2 },
+      { title: '个人用户', value: 3 }
+    ]
+  }),
   methods: {
     wxcCellClicked (e) {
       console.log(e)
     },
     login () {
       this.$store.commit('SET_menu', [0, '用户登陆'])
+    },
+    wxcRadioListChecked (e) {
+      this.checkedInfo = e
     }
   },
   computed: {

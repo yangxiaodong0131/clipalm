@@ -2,7 +2,6 @@
   <div class="container">
       <wxc-loading :show="isShow" type="trip"></wxc-loading>
       <wxc-part-loading :show="isShow"></wxc-part-loading>
-      <text class="demo-title">MDC列表</text>
       <wxc-indexlist :normal-list="mdcs"
                     @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
                     :show-index="true"></wxc-indexlist>
