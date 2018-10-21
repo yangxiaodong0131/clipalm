@@ -2,7 +2,7 @@
   <div class="container">
       <wxc-loading :show="isShow" type="trip"></wxc-loading>
       <wxc-part-loading :show="isShow"></wxc-part-loading>
-      <wxc-indexlist :normal-list="mdcs"
+      <wxc-indexlist :normal-list="rule"
                     @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
                     :show-index="true"></wxc-indexlist>
   </div>
@@ -21,31 +21,21 @@ export default {
     }
   },
   computed: {
-    mdcs: {
+    rule: {
       get () {
-        return this.$store.state.Library.mdcRule
-      }
-    },
-    info: {
-      get () {
-        return this.$store.state.Home.info
+        return this.$store.state.Library.rule
       }
     }
   },
   updated: function () {
   },
   methods: {
-    wxcCellClicked (mdc) {
-      this.isBottomShow = true
-      this.$store.commit('SET_info', mdc)
-      // this.info = mdc
-    },
     wxcIndexlistItemClicked (e) {
       // this.isBottomShow = true
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e.item)
       // this.info = e.item
-      const button = `${this.info.code}-ADRG规则`
+      const button = `${e.item.code}-ADRG规则`
       this.$store.commit('SET_buttonText', button)
       const icd9aa = e.item.icd9_aa.map((x) => {
         const obj = {}

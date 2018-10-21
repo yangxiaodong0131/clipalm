@@ -8,31 +8,27 @@
     @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
     <!-- user页 -->
     <div class="panel">
-      <User v-if="menu[0] == '个人信息'"></User>
       <Login v-if="menu[0] == '用户登陆'"></Login>
+      <User v-if="menu[0] == '个人信息'"></User>
     </div>
     <!-- edit页 -->
     <div class="panel">
-      <Edit v-if="menu[1] == '病案'"></Edit>
-      <Query v-if="menu[2] == '自定义查询'"></Query>
+      <Edit v-if="menu[1] == '数据展示'"></Edit>
+      <Query v-if="menu[1] == '自定义查询'"></Query>
     </div>
     <!-- library页 -->
     <div class="panel">
-      <Mdc v-if="menu[2] == 'MDC'"></Mdc>
-      <Adrg v-if="menu[2] == 'ADRG'"></Adrg>
-      <Drg v-if="menu[2] == 'DRG'"></Drg>
-      <Icd10 v-if="menu[2] == 'ICD10'"></Icd10>
-      <Icd9 v-if="menu[2] == 'ICD9'"></Icd9>
+      <Mdc v-if="menu[2] == '数据展示'"></Mdc>
       <Query v-if="menu[2] == '自定义查询'"></Query>
     </div>
     <!-- stat页 -->
     <div class="wrapper">
-      <Report v-if="menu[3] == '报表'"></Report>
+      <Report v-if="menu[3] == '数据展示'"></Report>
       <Query v-if="menu[3] == '自定义查询'"></Query>
     </div>
     <!-- forum页 -->
     <div class="panel">
-      <Forum v-if="menu[4] == '论坛'"></Forum>
+      <Forum v-if="menu[4] == '数据展示'"></Forum>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>
@@ -49,16 +45,12 @@
   import Login from './user/Login'
   import Edit from './edit/Edit'
   import Mdc from './library/Mdc'
-  import Adrg from './library/Adrg'
-  import Drg from './library/Drg'
-  import Icd10 from './library/Icd10'
-  import Icd9 from './library/Icd9'
   import Report from './stat/Report'
   import Query from './stat/Query'
   import Forum from './forum/Forum'
 
   export default {
-    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Mdc, Adrg, Drg, Icd9, Icd10, 
+    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Mdc,
       Report, Query, Forum },
     data: () => ({
       tabs: [{

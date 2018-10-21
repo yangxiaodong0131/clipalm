@@ -86,6 +86,11 @@ export default {
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_menu', [0, '个人信息'])
             getServer(this, 'all', 'MDC')
+            getServer(this, 'all', 'ADRG')
+            getServer(this, 'all', 'DRG')
+            getServer(this, 'all', 'ICD10')
+            getServer(this, 'all', 'ICD9')
+            this.$store.commit('SET_library_rule', 'MDC')
           } else {
             this.info = '- 账号或密码错误 -'
             this.$store.commit('SET_user', { login: false })

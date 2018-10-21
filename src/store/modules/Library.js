@@ -1,4 +1,5 @@
 const state = {
+  rule: [],
   mdcRule: [],
   adrgRule: [],
   drgRule: [],
@@ -29,11 +30,33 @@ const mutations = {
   },
   SET_icd9_page (state, x) {
     state.icd9Page = x
+  },
+  SET_library_rule (state, x) {
+    console.log(x)
+    switch (x) {
+      case 'MDC':
+        state.rule = state.mdcRule
+        break
+      case 'ADRG':
+        state.rule = state.adrgRule
+        break
+      case 'DRG':
+        state.rule = state.drgRule
+        break
+      case 'ICD10':
+        state.rule = state.icd10Rule
+        break
+      case 'ICD9':
+        state.rule = state.icd9Rule
+        break
+      default: break
+    }
   }
 }
 
 const actions = {
   someAsyncTask ({ commit }) {
+    commit('SET_library_rule')
     commit('SET_mdc_rule')
     commit('SET_adrg_rule')
     commit('SET_drg_rule')
