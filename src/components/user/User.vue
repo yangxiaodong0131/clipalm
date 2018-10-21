@@ -1,62 +1,72 @@
 <template>
-  <div class="container">
-    <div class="demo">
-      <wxc-cell label="用户名"
-                :title="user.username"
-                :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked"
-                :has-margin="true"></wxc-cell>
-      <wxc-cell label="邮箱"
-                :title="user.email"
-                :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked"
-                :has-top-border="false"></wxc-cell>
-    </div>
-    <div class="demo">
-      <text class="demo-title">用户权限</text>
-      <wxc-cell title="专家组成员"
-                :has-arrow="false"
-                :has-top-border="true">
-        <switch slot="value" disabled="true"></switch>
-      </wxc-cell>
-      <wxc-cell title="MDC组"
-                :desc="mdcs"
-                :has-arrow="true"
-                @wxcCellClicked="wxcCellClicked"
-                :has-top-border="true">
-      </wxc-cell>
-    </div>
-    <text>--选择用户版本--</text>
-    <wxc-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked">
-    </wxc-radio>
-    <wxc-button text="重新登陆" size="big"
-              @wxcButtonClicked="login"></wxc-button>
+  <div class="panel">
+    <wxc-minibar :title="user.username"
+      leftButton = ""
+      background-color="#009ff0"
+      text-color="#FFFFFF"
+      right-text="返回登陆"
+      @wxcMinibarRightButtonClicked="minibarRightButtonClick">
+    </wxc-minibar>
+    <category title="--选择用户功能--"></category>
+    <wxc-grid-select
+      :single="true"
+      :cols="5"
+      :customStyles="customStyles"
+      :list="list_1"
+      @select="params => onSelect(params, 'user')">
+    </wxc-grid-select>
+    <category title="--选择字典版本--"></category>
+    <wxc-grid-select
+      :single="true"
+      :cols="5"
+      :customStyles="customStyles"
+      :list="list_2"
+      @select="params => onSelect(params, 'version')">
+    </wxc-grid-select>
+    <category title="--选择MDC修订--"></category>
+    <wxc-grid-select
+      :single="true"
+      :cols="5"
+      :customStyles="customStyles"
+      :list="mdcs"
+      @select="params => onSelect(params, 'mdc')">
+    </wxc-grid-select>
   </div>
 </template>
 
 <script>
-import { WxcCell, WxcButton, WxcRadio } from 'weex-ui'
+import { WxcMinibar, WxcGridSelect } from 'weex-ui'
+import Category from '../common/category.vue'
+
 export default {
   name: 'user-doc',
-  components: { WxcCell, WxcButton, WxcRadio },
+  components: { WxcMinibar, WxcGridSelect, Category },
   data: () => ({
-    list: [
+    list_1: [
       { title: '专家用户', value: 1, checked: true },
       { title: '机构用户', value: 2 },
       { title: '个人用户', value: 3 }
-    ]
-  }),
-  methods: {
-    wxcCellClicked (e) {
-      console.log(e)
-    },
-    login () {
-      this.$store.commit('SET_menu', [0, '用户登陆'])
-    },
-    wxcRadioListChecked (e) {
-      this.checkedInfo = e
+    ],
+    list_2: [
+      { title: 'BJ编码版', value: 1, checked: true },
+      { title: 'GB编码版', value: 2 },
+      { title: 'CC编码版', value: 3 },
+      { title: '术语版', value: 4 }
+    ],
+    customStyles: {
+      lineSpacing: '14px',
+      width: '120px',
+      height: '50px',
+      icon: '',
+      color: '#333333',
+      checkedColor: '#ffffff',
+      disabledColor: '#eeeeee',
+      borderColor: '#666666',
+      checkedBorderColor: '#ffb200',
+      backgroundColor: '#ffffff',
+      checkedBackgroundColor: '#ffb200'
     }
-  },
+  }),
   computed: {
     user: {
       get () {
@@ -65,11 +75,22 @@ export default {
     },
     mdcs: {
       get () {
-        if (this.$store.state.Home.user.data.mdc) {
-          return this.$store.state.Home.user.data.mdc.join('、')
+        const arr = this.$store.state.Home.user.data.mdc
+        if (arr) {
+          console.log(arr)
+          return arr.map((value, index) => { return {'title': 'MDC' + value} })
         }
-        return ''
+        return []
       }
+    }
+  },
+  methods: {
+    minibarRightButtonClick (e) {
+      this.$store.commit('SET_menu', [0, '用户登陆'])
+    },
+    onSelect (params, type) {
+      console.log(type)
+      console.log(params)
     }
   }
 }

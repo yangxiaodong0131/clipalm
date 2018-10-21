@@ -13,7 +13,8 @@
     </div>
     <!-- edit页 -->
     <div class="panel">
-      <Edit v-if="menu[1] == '查询'"></Edit>
+      <Edit v-if="menu[1] == '病案'"></Edit>
+      <Query v-if="menu[2] == '自定义查询'"></Query>
     </div>
     <!-- library页 -->
     <div class="panel">
@@ -22,15 +23,17 @@
       <Drg v-if="menu[2] == 'DRG'"></Drg>
       <Icd10 v-if="menu[2] == 'ICD10'"></Icd10>
       <Icd9 v-if="menu[2] == 'ICD9'"></Icd9>
+      <Query v-if="menu[2] == '自定义查询'"></Query>
     </div>
     <!-- stat页 -->
     <div class="wrapper">
-      <Report v-if="menu[3] == '自定义查询'"></Report>
-      <Query v-if="menu[3] == '报表'"></Query>
+      <Report v-if="menu[3] == '报表'"></Report>
+      <Query v-if="menu[3] == '自定义查询'"></Query>
     </div>
     <!-- forum页 -->
     <div class="panel">
       <Forum v-if="menu[4] == '论坛'"></Forum>
+      <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>
   <pop-bar></pop-bar>
@@ -118,7 +121,7 @@
     methods: {
       wxcTabBarCurrentTabSelected (e) {
         const i = e.page;
-        if (i === this.$store.state.Home.activeTab) {
+        if (i === this.$store.state.Home.activeTab && i !== 0) {
           this.$store.commit('SET_visible', true)
         }
         this.$store.commit('SET_activeTab', i)

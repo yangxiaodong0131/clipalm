@@ -1,109 +1,67 @@
 <template>
-  <div class="container">
-    <wxc-indexlist :normal-list="stats"
-                   @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
-                   :show-index="true"></wxc-indexlist>
-    <wxc-popup popup-color="#FFFFFF"
-                :show="isBottomShow"
-                @wxcPopupOverlayClicked="popupOverlayBottomClick"
-                pos="right"
-                width="540">
-      <div class="demo-content">
-        <wxc-cell label="编码"
-          :title="info.code"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="名称"
-          :title="info.desc"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="费用变异系数"
-          :title="info.fee_cv"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="时间变异系数"
-          :title="info.day_cv"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="死亡风险等级"
-          :title="info.death_level"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="权重"
-          :title="info.weight"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="平均费用"
-          :title="info.fee_avg"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="平均住院天数"
-          :title="info.day_avg"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="病历数"
-          :title="info.num_sum"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-      </div>
-    </wxc-popup>
- </div>
-
+  <div class="panel">
+    <wxc-simple-flow :list="testData" :themeColor="themeColor"></wxc-simple-flow>
+  </div>
 </template>
-
 <script>
-import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
+import { WxcSimpleFlow } from 'weex-ui'
+
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell },
-  created: function () {
-  },
-  data () {
-    return {
-      isBottomShow: false,
-      height: 400,
-      info: {}
-    }
-  },
-  computed: {
-    stats: {
-      get () {
-        return this.$store.state.Stat.statDrg
+  components: { WxcSimpleFlow },
+  data: () => ({
+    themeColor: {
+      lineColor: '#bf280b',
+      pointInnerColor: '#b95048',
+      pointBorderColor: '#bf280b',
+      highlightTitleColor: '#bf280b',
+      highlightPointInnerColor: '#bf280b',
+      highlightPointBorderColor: '#d46262'
+    },
+    testData: [
+      {
+        'date': '2017-05-24 21:10:29',
+        'desc': '',
+        'highlight': true,
+        'title': '方案已确认'
+      },
+      {
+        'date': '2017-05-24 19:54:28',
+        'desc': '',
+        'title': '方案已更新'
+      },
+      {
+        'date': '2017-05-24 19:50:21',
+        'desc': '您以确定了方案',
+        'title': '方案已上传'
+      },
+      {
+        'date': '2017-05-24 19:49:03',
+        'desc': '商家会在2个工作小时内电话或旺旺联系您',
+        'title': '商家已接单'
       }
-    }
-  },
-  methods: {
-    wxcCellClicked (e) {
-      console.log(e)
-    },
-    wxcIndexlistItemClicked (e) {
-      this.isBottomShow = true
-      this.info = e.item
-    },
-    openBottomPopup () {
-      this.isBottomShow = true
-    },
-    popupOverlayBottomClick () {
-      this.isBottomShow = false
-    }
-  }
+    ]
+  })
 }
 </script>
 
 <style scoped>
   .wrapper {
+    /* flex-direction: column; */
     justify-content: center;
   }
-  .text {
-    color: #666666;
-    font-size: 32px;
+  .panel {
+    width: 750px;
+    background-color: #f2f3f4;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #BBBBBB;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
   }
 </style>

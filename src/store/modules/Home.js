@@ -2,7 +2,7 @@ const state = {
   visible: false,
   activeTab: -1,
   menus: [],
-  menu: ['用户登陆', '查询', 'MDC', '报表', '论坛'],
+  menu: ['用户登陆', '病案', 'MDC', '报表', '论坛'],
   notice: '未注册用户！',
   user: { login: false, data: {} },
   details: [],
