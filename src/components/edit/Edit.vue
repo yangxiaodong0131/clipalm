@@ -1,6 +1,6 @@
 <template>
   <scroller class="container">
-    <title title="wxc-cell">未入组病历</title>
+    <title title="wxc-cell">{{wxcCellTitle}}</title>
     <div class="demo">
       <wxc-cell v-for="wt4 in wt4Case"
                 v-bind:key="wt4.id"
@@ -32,6 +32,11 @@ export default {
           return obj
         })
         return data
+      }
+    },
+    wxcCellTitle: {
+      get () {
+        return this.$store.state.Edit.editMenu
       }
     }
   },

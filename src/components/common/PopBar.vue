@@ -49,6 +49,15 @@ export default {
       } else if (menu === '未入组病历') {
         this.$store.commit('SET_editMenu', menu)
         getServer(this, 'all', '未入组病历')
+      } else if (menu === '低风险死亡病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', '低风险死亡病历')
+      } else if (menu === '高CV病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', '高CV病历')
+      } else if (menu === 'QY病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', 'QY病历')
       } else {
         this.$store.commit('SET_library_menu', menu)
         this.$store.commit('SET_menu', [i, '数据展示'])

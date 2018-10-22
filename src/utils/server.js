@@ -26,8 +26,17 @@ export function getServer (obj, type, menu, value = null) {
       case '报表':
         url = 'wt4_stat_cv?plat=client'
         break
+      case 'QY病历':
+        url = 'wt4_2017?plat=client&drg=QY'
+        break
       case '未入组病历':
         url = 'wt4_2017?plat=client&drg=0000'
+        break
+      case '低风险死亡病历':
+        url = 'wt4_2017?plat=client&drg='
+        break
+      case '高CV病历':
+        url = 'wt4_2017?plat=client&cv=1'
         break
       default:
     }
@@ -110,6 +119,15 @@ function setStore (obj, menu, rdata) {
       obj.$store.commit('SET_statDrg', rdata.data)
       break
     case '未入组病历':
+      obj.$store.commit('SET_wt4Case', rdata.data)
+      break
+    case 'QY病历':
+      obj.$store.commit('SET_wt4Case', rdata.data)
+      break
+    case '低风险死亡病历':
+      obj.$store.commit('SET_wt4Case', rdata.data)
+      break
+    case '高CV病历':
       obj.$store.commit('SET_wt4Case', rdata.data)
       break
     default:
