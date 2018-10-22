@@ -55,11 +55,13 @@ export default {
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e.item)
       let button = ''
+      let isInfoButtonShow = false
       let gridList = []
       let details = []
       switch (this.$store.state.Library.libraryMenu) {
         case 'MDC':
           button = `${e.item.code}-ADRG规则`
+          isInfoButtonShow = true
           gridList = e.item.icd9_aa.map((x) => {
             const obj = {}
             obj.title = x
@@ -69,6 +71,7 @@ export default {
           break
         case 'ADRG':
           button = `${e.item.code}-DRG规则`
+          isInfoButtonShow = true
           gridList = e.item.icd10_aa.map((x) => {
             const obj = {}
             obj.title = x
@@ -84,6 +87,7 @@ export default {
         default :
           break
       }
+      this.$store.commit('SET_isInfoButtonShow', isInfoButtonShow)
       this.$store.commit('SET_buttonText', button)
       this.$store.commit('SET_gridList', gridList)
       this.$store.commit('SET_details', details)

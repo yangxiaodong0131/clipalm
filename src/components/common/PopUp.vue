@@ -5,6 +5,7 @@
             pos="right"
             width="560">
   <wxc-button :text="button"
+        :show="isInfoButtonShow"
         size="big"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   <div class="demo-content">
@@ -46,6 +47,9 @@ export default {
     },
     isBottomShow () {
       return this.$store.state.Home.isBottomShow
+    },
+    isInfoButtonShow () {
+      return this.$store.state.Home.isInfoButtonShow
     },
     info () {
       return this.$store.state.Home.info

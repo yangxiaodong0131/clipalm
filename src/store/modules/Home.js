@@ -9,6 +9,7 @@ const state = {
   gridList: [],
   buttonText: '',
   isBottomShow: false,
+  isInfoButtonShow: false,
   info: ''
 }
 
@@ -40,6 +41,9 @@ const mutations = {
   SET_isBottomShow (state, x) {
     state.isBottomShow = x
   },
+  SET_isInfoButtonShow (state, x) {
+    state.isInfoButtonShow = x
+  },
   SET_info (state, x) {
     state.info = x
   }
@@ -56,6 +60,7 @@ const actions = {
     commit('SET_gridList')
     commit('SET_buttonText')
     commit('SET_isBottomShow')
+    commit('SET_isInfoButtonShow')
     commit('SET_info')
   }
 }
