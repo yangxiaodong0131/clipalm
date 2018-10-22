@@ -1,6 +1,6 @@
 <template>
 <div class="homepage">
-  <wxc-tab-bar 
+  <wxc-tab-bar
     :tab-titles="tabs"
     :tab-styles="tabStyles"
     title-type="icon"
@@ -13,6 +13,7 @@
     </div>
     <!-- edit页 -->
     <div class="panel">
+      <Edit v-if="menu[1] == '未入组病历'"></Edit>
       <Edit v-if="menu[1] == '数据展示'"></Edit>
       <Query v-if="menu[1] == '自定义查询'"></Query>
     </div>

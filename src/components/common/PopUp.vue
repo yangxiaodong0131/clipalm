@@ -67,7 +67,7 @@ export default {
       let type = ''
       switch (this.$store.state.Home.activeTab) {
         case 2:
-          switch (this.$store.state.Library.ruleType) {
+          switch (this.$store.state.Library.libraryMenu) {
             case 'MDC':
               menu = 'ADRG'
               type = 'adrgOne'

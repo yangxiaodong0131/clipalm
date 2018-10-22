@@ -46,15 +46,18 @@ export default {
       const i = this.$store.state.Home.activeTab
       if (menu === '自定义查询') {
         this.$store.commit('SET_menu', [i, menu])
+      } else if (menu === '未入组病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', '未入组病历')
       } else {
-        this.$store.commit('SET_library_rule', menu)
+        this.$store.commit('SET_library_menu', menu)
         this.$store.commit('SET_menu', [i, '数据展示'])
       }
-      if (i === 1) {
-        getServer(this, 'wt4', '病案查询')
-      } else {
-        getServer(this, 'all', menu)
-      }
+      // if (i === 1) {
+      //   getServer(this, 'wt4', '病案查询')
+      // } else {
+      //   getServer(this, 'all', menu)
+      // }
     }
   }
 }

@@ -26,6 +26,9 @@ export function getServer (obj, type, menu, value = null) {
       case '报表':
         url = 'wt4_stat_cv?plat=client'
         break
+      case '未入组病历':
+        url = 'wt4_2017?plat=client&drg=0000'
+        break
       default:
     }
   } else if (type === 'adrgOne') {
@@ -71,23 +74,23 @@ export function getServer (obj, type, menu, value = null) {
 function setStore (obj, menu, rdata) {
   switch (menu) {
     case 'MDC':
-      obj.$store.commit('SET_library_rule', menu)
+      obj.$store.commit('SET_library_menu', menu)
       obj.$store.commit('SET_mdc_rule', rdata.data)
       break
     case 'ADRG':
-      obj.$store.commit('SET_library_rule', menu)
+      obj.$store.commit('SET_library_menu', menu)
       obj.$store.commit('SET_adrg_rule', rdata.data)
       break
     case 'DRG':
-      obj.$store.commit('SET_library_rule', menu)
+      obj.$store.commit('SET_library_menu', menu)
       obj.$store.commit('SET_drg_rule', rdata.data)
       break
     case 'ICD9':
-      obj.$store.commit('SET_library_rule', menu)
+      obj.$store.commit('SET_library_menu', menu)
       obj.$store.commit('SET_icd9_rule', rdata.data)
       break
     case 'ICD10':
-      obj.$store.commit('SET_library_rule', menu)
+      obj.$store.commit('SET_library_menu', menu)
       obj.$store.commit('SET_icd10_page', parseInt(rdata.page))
       obj.$store.commit('SET_icd10_rule', rdata.data)
       break
@@ -106,7 +109,7 @@ function setStore (obj, menu, rdata) {
     case '报表':
       obj.$store.commit('SET_statDrg', rdata.data)
       break
-    case '病案查询':
+    case '未入组病历':
       obj.$store.commit('SET_wt4Case', rdata.data)
       break
     default:

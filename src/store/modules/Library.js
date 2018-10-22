@@ -7,7 +7,7 @@ const state = {
   icd10Rule: [],
   icd10Page: 1,
   icd9Page: 1,
-  ruleType: ''
+  libraryMenu: ''
 }
 
 const mutations = {
@@ -32,8 +32,8 @@ const mutations = {
   SET_icd9_page (state, x) {
     state.icd9Page = x
   },
-  SET_library_rule (state, x) {
-    state.ruleType = x
+  SET_library_menu (state, x) {
+    state.libraryMenu = x
     switch (x) {
       case 'MDC':
         state.rule = state.mdcRule
@@ -57,7 +57,7 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
-    commit('SET_library_rule')
+    commit('SET_library_menu')
     commit('SET_mdc_rule')
     commit('SET_adrg_rule')
     commit('SET_drg_rule')

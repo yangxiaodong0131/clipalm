@@ -24,7 +24,7 @@ export default {
     rule: {
       get () {
         let data = []
-        switch (this.$store.state.Library.ruleType) {
+        switch (this.$store.state.Library.libraryMenu) {
           case 'MDC':
             data = this.$store.state.Library.mdcRule
             break
@@ -57,7 +57,7 @@ export default {
       let button = ''
       let gridList = []
       let details = []
-      switch (this.$store.state.Library.ruleType) {
+      switch (this.$store.state.Library.libraryMenu) {
         case 'MDC':
           button = `${e.item.code}-ADRG规则`
           gridList = e.item.icd9_aa.map((x) => {

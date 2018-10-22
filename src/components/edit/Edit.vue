@@ -1,157 +1,109 @@
 <template>
-  <div class="panel">
-    <wxc-cell v-for="(wt4Case, i) in wt4Cases"
-              v-bind:key="i"
-              :label="wt4Case.disease_code"
-              :title="wt4Case.mix"
-              :has-arrow="true"
-              @wxcCellClicked="wxcCellClicked(i)"
-              :has-margin="true"></wxc-cell>
-    <div class="special-rich">
-      <wxc-special-rich-text :config-list="specialConfigList"></wxc-special-rich-text>
+  <scroller class="container">
+    <title title="wxc-cell">未入组病历</title>
+    <div class="demo">
+      <wxc-cell v-for="wt4 in wt4Case"
+                v-bind:key="wt4.id"
+                :label="wt4.drg"
+                @wxcCellClicked="wxcCellClicked(wt4)"
+                :has-margin="false"
+                :extraContent="wt4.extraContent"></wxc-cell>
     </div>
-
-    <wxc-rich-text :config-list="configList"
-                   @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
-  </div>
+  </scroller>
 </template>
 
 <script>
-import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell } from 'weex-ui'
+import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading } from 'weex-ui'
 
 export default {
-  components: { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell },
-  // data () {
-  //   return {
-  //     isBottomShow: false,
-  //     specialConfigList: []
-  //   }
-  // },
-  data: () => ({
-    configList: [{
-      type: 'icon',
-      src: '//gw.alicdn.com/tfs/TB1RRVWQXXXXXasXpXXXXXXXXXX-24-22.png',
-      style: {
-        height: 22
-      }
-    }, {
-      type: 'text',
-      value: '黄色主题',
-      theme: 'yellow'
-    }, {
-      type: 'link',
-      value: '自定义颜色link',
-      href: '//h5.m.taobao.com',
-      style: {
-        color: '#546E7A'
-      }
-    }, {
-      type: 'tag',
-      value: '满100减20',
-      theme: 'red'
-    }, {
-      type: 'tag',
-      value: '自定义标签',
-      style: {
-        fontSize: 26,
-        color: '#ffffff',
-        borderColor: '#3d3d3d',
-        backgroundColor: '#546E7A',
-        height: 36
-      }
-    }],
-    specialConfigList: [
-      {
-        type: 'tag',
-        value: '自由行',
-        style: {
-          fontSize: 24,
-          color: '#3D3D3D',
-          borderColor: '#FFC900',
-          backgroundColor: '#FFC900',
-          borderRadius: 14
-        }
-      },
-      {
-        type: 'text',
-        value: '春秋旅游广州-泰国曼谷6天往返单机票自由行自由春秋旅游广州-泰国曼谷6天往返单机票自由行自由行…',
-        theme: 'black',
-        style: {
-          fontSize: 28
-        }
-      }
-    ]
-  }),
+  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
+  data () {
+    return {
+    }
+  },
+  created () {
+  },
   computed: {
     wt4Case: {
       get () {
-        return this.$store.state.Edit.wt4Case
-      }
-    },
-    wt4Cases: {
-      get () {
-        const value = this.wt4Case.map((x) => {
-          const obj = {}
-          obj.disease_code = x.disease_code
-          obj.mix = `${x.age},${x.total_expense},${x.diags_code},${x.opers_code},${x.gender}`
+        const data = this.$store.state.Edit.wt4Case.map((x) => {
+          const obj = x
+          obj.extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.disease_code}`
           return obj
         })
-        return value
+        return data
       }
     }
   },
   methods: {
-    wxcRichTextLinkClick () {},
-    wxcCellClicked (index) {
-      this.isBottomShow = true
-      this.specialConfigList = this.wt4Case[index]
-      // this.specialConfigList = [{
-      //   type: 'tag',
-      //   value: this.wt4Case[index].total_expense,
-      //   style: {
-      //     fontSize: 24,
-      //     color: '#3D3D3D',
-      //     borderColor: '#FFC900',
-      //     backgroundColor: '#FFC900',
-      //     borderRadius: 14
-      //   }
-      // },
-      // {
-      //   type: 'tag',
-      //   value: this.wt4Case[index].id,
-      //   style: {
-      //     fontSize: 24,
-      //     color: '#3D3D3D',
-      //     borderColor: '#FFC900',
-      //     backgroundColor: '#FFC900',
-      //     borderRadius: 14
-      //   }
-      // }]
-    },
-    popupOverlayBottomClick () {
-      this.isBottomShow = false
+    wxcCellClicked (e) {
+      this.$store.commit('SET_isBottomShow', true)
+      this.$store.commit('SET_info', e)
+      const button = ''
+      const gridList = []
+      const details = [
+        {'label': '入组DRG', 'title': 'drg'},
+        {'label': '病案ID', 'title': 'b_wt4_v1_id'},
+        {'label': '主要诊断编码', 'title': 'disease_code'},
+        {'label': '主要诊断名称', 'title': 'disease_name'},
+        {'label': '其他诊断', 'title': 'diags_code'},
+        {'label': '手术/操作', 'title': 'opers_code'},
+        {'label': '住院天数', 'title': 'acctual_days'},
+        {'label': '住院总费用', 'title': 'total_expense'},
+        {'label': '性别', 'title': 'gender'},
+        {'label': '年龄', 'title': 'age'},
+        {'label': '新生儿天数', 'title': 'sf0100'},
+        {'label': '新生儿体重', 'title': 'sf0102'},
+        {'label': '呼吸机使用时间', 'title': 'sf0104'},
+        {'label': '出院转归', 'title': 'sf0108'},
+        {'label': '分组日志', 'title': 'log'}]
+      this.$store.commit('SET_buttonText', button)
+      this.$store.commit('SET_gridList', gridList)
+      this.$store.commit('SET_details', details)
     }
   }
 }
 </script>
 
 <style scoped>
-  .wrapper {
-    justify-content: center;
+  .wxc-demo {
+    width: 750px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
   }
-  .panel {
+  .container {
+    flex: 1;
+  }
+  .demo {
     width: 750px;
     background-color: #f2f3f4;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #BBBBBB;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 30px;
+  }
+  .category {
+    margin-top: 40px;
+  }
+  .default {
+    color: #000000;
+  }
+  .active {
+    color: #FFC900;
+  }
+  .red {
+    color: #C3413D;
+  }
+  .image {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+  .demo-title {
+    font-size: 30px;
+    color: #333333;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 16px;
   }
 </style>
