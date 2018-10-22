@@ -90,7 +90,7 @@ export default {
             getServer(this, 'all', 'DRG')
             getServer(this, 'all', 'ICD10')
             getServer(this, 'all', 'ICD9')
-            this.$store.commit('SET_library_rule', 'MDC')
+            this.$store.commit('SET_library_menu', 'MDC')
           } else {
             this.info = '- 账号或密码错误 -'
             this.$store.commit('SET_user', { login: false })
