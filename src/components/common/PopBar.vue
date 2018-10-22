@@ -59,7 +59,7 @@ export default {
         this.$store.commit('SET_editMenu', menu)
         getServer(this, 'all', 'QY病历')
       } else {
-        // getServer(this, 'all', menu)
+        getServer(this, 'all', menu)
         this.$store.commit('SET_library_menu', menu)
         this.$store.commit('SET_menu', [i, '数据展示'])
       }
