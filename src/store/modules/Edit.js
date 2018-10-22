@@ -1,17 +1,21 @@
 const state = {
-  wt4Case: []
+  wt4Case: [],
+  editMenu: ''
 }
 
 const mutations = {
   SET_wt4Case (state, x) {
     state.wt4Case = x
-    console.log(state.wt4Case)
+  },
+  SET_editMenu (state, x) {
+    state.editMenu = x
   }
 }
 
 const actions = {
   someAsyncTask ({ commit }) {
     commit('SET_wt4Case')
+    commit('SET_editMenu')
   }
 }
 

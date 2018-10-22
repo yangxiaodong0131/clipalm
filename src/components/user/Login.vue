@@ -45,13 +45,12 @@
     </div>
     <text class="info">{{info}}</text>
     <text class="value-text">{{value}}</text>
-    <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
 import { WxcButton, WxcSearchbar } from 'weex-ui'
-import PopBar from '../PopBar'
+import { getServer } from '../../utils/server'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const modal = weex.requireModule('modal')
@@ -59,7 +58,7 @@ const urlConfig = require('../../utils/config.js')
 
 export default {
   name: 'login-page',
-  components: { WxcButton, WxcSearchbar, PopBar },
+  components: { WxcButton, WxcSearchbar },
   data () {
     return {
       info: '...',
@@ -86,6 +85,12 @@ export default {
             this.$router.push('/')
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_menu', [0, '个人信息'])
+            getServer(this, 'all', 'MDC')
+            getServer(this, 'all', 'ADRG')
+            getServer(this, 'all', 'DRG')
+            getServer(this, 'all', 'ICD10')
+            getServer(this, 'all', 'ICD9')
+            this.$store.commit('SET_library_menu', 'MDC')
           } else {
             this.info = '- 账号或密码错误 -'
             this.$store.commit('SET_user', { login: false })
@@ -100,8 +105,8 @@ export default {
       if (this.visible) {
         this.info = '- 调用远程方法注册新用户 -'
       } else {
-        this.name = '',
-        this.pwd = '',
+        this.name = ''
+        this.pwd = ''
         this.visible = true
       }
     },
@@ -153,6 +158,9 @@ export default {
     justify-content: center;
   }
   .panel {
+    flex-direction: column;
+    justify-content: center;
+    height: 750;
     margin-left: 0px;
     border-width: 2px;
     border-style: solid;

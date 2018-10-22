@@ -2,13 +2,14 @@ const state = {
   visible: false,
   activeTab: -1,
   menus: [],
-  menu: ['用户登陆', '查询', 'MDC', '报表', '论坛'],
+  menu: ['用户登陆', '数据展示', '数据展示', '数据展示', '数据展示'],
   notice: '未注册用户！',
   user: { login: false, data: {} },
   details: [],
   gridList: [],
   buttonText: '',
   isBottomShow: false,
+  isInfoButtonShow: false,
   info: ''
 }
 
@@ -40,6 +41,9 @@ const mutations = {
   SET_isBottomShow (state, x) {
     state.isBottomShow = x
   },
+  SET_isInfoButtonShow (state, x) {
+    state.isInfoButtonShow = x
+  },
   SET_info (state, x) {
     state.info = x
   }
@@ -56,6 +60,7 @@ const actions = {
     commit('SET_gridList')
     commit('SET_buttonText')
     commit('SET_isBottomShow')
+    commit('SET_isInfoButtonShow')
     commit('SET_info')
   }
 }

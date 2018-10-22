@@ -1,111 +1,62 @@
 <template>
   <div class="container">
-    <wxc-indexlist :normal-list="stats"
-                   @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
-                   :show-index="true"></wxc-indexlist>
-    <wxc-popup popup-color="#FFFFFF"
-                :show="isBottomShow"
-                @wxcPopupOverlayClicked="popupOverlayBottomClick"
-                pos="right"
-                width="540">
-      <div class="demo-content">
-        <wxc-cell label="编码"
-          :title="info.code"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="名称"
-          :title="info.desc"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="费用变异系数"
-          :title="info.fee_cv"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="时间变异系数"
-          :title="info.day_cv"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="死亡风险等级"
-          :title="info.death_level"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="权重"
-          :title="info.weight"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="平均费用"
-          :title="info.fee_avg"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="平均住院天数"
-          :title="info.day_avg"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-        <wxc-cell label="病历数"
-          :title="info.num_sum"
-          :has-arrow="false"
-          @wxcCellClicked="wxcCellClicked"
-          :has-margin="true"></wxc-cell>
-      </div>
-    </wxc-popup>
-    <pop-bar></pop-bar>
- </div>
-
+    <div class="demo">
+      <text class="value-text">基础输入框</text>
+      <wxc-searchbar ref="wxc-searchbar"
+                    @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
+                     @wxcSearchbarInputReturned="wxcSearchbarInputReturned"
+                     @wxcSearchbarInputOnInput="wxcSearchbarInputOnInput"
+                     @wxcSearchbarCloseClicked="wxcSearchbarCloseClicked"
+                     @wxcSearchbarInputOnFocus="wxcSearchbarInputOnFocus"
+                     @wxcSearchbarInputOnBlur="wxcSearchbarInputOnBlur"></wxc-searchbar>
+      <text class="value-text">{{value}}</text>
+    </div>
+    <div class="demo demo1">
+      <text class="value-text">输入框禁用</text>
+      <wxc-searchbar :disabled="true"></wxc-searchbar>
+    </div>
+    <div class="demo demo1">
+      <text class="value-text">带有目的地模式的输入框</text>
+      <wxc-searchbar :disabled="true"
+                     placeholder="搜索目的地"
+                     mod="hasDep"
+                     dep-name="杭州出发"></wxc-searchbar>
+    </div>
+  </div>
 </template>
-
 <script>
-import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
-import PopBar from '../PopBar'
+import { WxcSearchbar } from 'weex-ui'
+const modal = weex.requireModule('modal')
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell, PopBar },
-  created: function () {
-  },
-  data () {
-    return {
-      isBottomShow: false,
-      height: 400,
-      info: {}
-    }
-  },
-  computed: {
-    stats: {
-      get () {
-        return this.$store.state.Stat.statDrg
-      }
-    }
-  },
+  components: { WxcSearchbar },
+  data: () => ({
+    value: ''
+  }),
   methods: {
-    wxcCellClicked (e) {
-      console.log(e)
+    wxcSearchbarInputOnInput (e) {
+      this.value = e.value
     },
-    wxcIndexlistItemClicked (e) {
-      this.isBottomShow = true
-      this.info = e.item
+    wxcSearchbarInputOnFocus () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
     },
-    openBottomPopup () {
-      this.isBottomShow = true
+    wxcSearchbarInputOnBlur () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
     },
-    popupOverlayBottomClick () {
-      this.isBottomShow = false
+    wxcSearchbarInputReturned () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarCloseClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarCancelClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarInputDisabledClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
+    },
+    wxcSearchbarDepChooseClicked () {
+      modal.toast({ 'message': 'onfocus', 'duration': 1 })
     }
   }
 }
 </script>
-
-<style scoped>
-  .wrapper {
-    justify-content: center;
-  }
-  .text {
-    color: #666666;
-    font-size: 32px;
-  }
-</style>

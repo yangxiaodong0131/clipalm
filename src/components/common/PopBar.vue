@@ -18,7 +18,7 @@
 
 <script>
 import { WxcPopup, WxcCell, Utils } from 'weex-ui'
-import { getServer } from '../utils/server'
+import { getServer } from '../../utils/server'
 
 export default {
   components: { WxcPopup, WxcCell },
@@ -44,13 +44,30 @@ export default {
     wxcCellClicked (menu) {
       this.$store.commit('SET_visible', false)
       const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_menu', [i, menu])
-
-      if (i === 1) {
-        getServer(this, 'wt4', '病案查询')
+      if (menu === '自定义查询') {
+        this.$store.commit('SET_menu', [i, menu])
+      } else if (menu === '未入组病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', '未入组病历')
+      } else if (menu === '低风险死亡病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', '低风险死亡病历')
+      } else if (menu === '高CV病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', '高CV病历')
+      } else if (menu === 'QY病历') {
+        this.$store.commit('SET_editMenu', menu)
+        getServer(this, 'all', 'QY病历')
       } else {
         getServer(this, 'all', menu)
+        this.$store.commit('SET_library_menu', menu)
+        this.$store.commit('SET_menu', [i, '数据展示'])
       }
+      // if (i === 1) {
+      //   getServer(this, 'wt4', '病案查询')
+      // } else {
+      //   getServer(this, 'all', menu)
+      // }
     }
   }
 }

@@ -1,20 +1,18 @@
 <template>
-  <div>
+  <div class="panel">
     <wxc-rich-text :config-list="configList"
                    @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
     <div class="special-rich">
        <wxc-special-rich-text :config-list="specialConfigList"></wxc-special-rich-text>
     </div>
-    <pop-bar></pop-bar>
   </div>
 </template>
 
 <script>
 import { WxcRichText, WxcSpecialRichText } from 'weex-ui'
-import PopBar from '../PopBar'
 
 export default {
-  components: { WxcRichText, WxcSpecialRichText, PopBar },
+  components: { WxcRichText, WxcSpecialRichText },
   data: () => ({
     configList: [{
       type: 'icon',
@@ -26,17 +24,6 @@ export default {
       type: 'text',
       value: '论坛话题',
       theme: 'yellow'
-    }, {
-      type: 'link',
-      value: '自定义颜色link',
-      href: '//h5.m.taobao.com',
-      style: {
-        color: '#546E7A'
-      }
-    }, {
-      type: 'tag',
-      value: '满100减20',
-      theme: 'red'
     }, {
       type: 'tag',
       value: '自定义标签',
@@ -51,7 +38,7 @@ export default {
     specialConfigList: [
       {
         type: 'tag',
-        value: '自由行',
+        value: '论坛话题',
         style: {
           fontSize: 24,
           color: '#3D3D3D',
@@ -75,3 +62,25 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .wrapper {
+    /* flex-direction: column; */
+    justify-content: center;
+  }
+  .panel {
+    width: 750px;
+    background-color: #f2f3f4;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #BBBBBB;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+  }
+</style>
