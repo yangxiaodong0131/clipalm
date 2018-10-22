@@ -19,7 +19,7 @@
     </div>
     <!-- library页 -->
     <div class="panel">
-      <Mdc v-if="menu[2] == '数据展示'"></Mdc>
+      <Library v-if="menu[2] == '数据展示'"></Library>
       <Query v-if="menu[2] == '自定义查询'"></Query>
     </div>
     <!-- stat页 -->
@@ -45,13 +45,13 @@
   import User from './user/User'
   import Login from './user/Login'
   import Edit from './edit/Edit'
-  import Mdc from './library/Mdc'
+  import Library from './library/Library'
   import Report from './stat/Report'
   import Query from './stat/Query'
   import Forum from './forum/Forum'
 
   export default {
-    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Mdc,
+    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Library,
       Report, Query, Forum },
     data: () => ({
       tabs: [{

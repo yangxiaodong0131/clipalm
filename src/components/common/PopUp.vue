@@ -4,8 +4,8 @@
             @wxcPopupOverlayClicked="popupOverlayBottomClick"
             pos="right"
             width="560">
-  <wxc-button :text="button"
-        :show="isInfoButtonShow"
+  <wxc-button :text="'button'"
+        v-show="isInfoButtonShow"
         size="big"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   <div class="demo-content">
@@ -49,6 +49,7 @@ export default {
       return this.$store.state.Home.isBottomShow
     },
     isInfoButtonShow () {
+      console.log(this.$store.state.Home.isInfoButtonShow)
       return this.$store.state.Home.isInfoButtonShow
     },
     info () {

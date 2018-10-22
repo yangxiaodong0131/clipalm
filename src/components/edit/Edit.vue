@@ -1,6 +1,6 @@
 <template>
   <scroller class="container">
-    <title title="wxc-cell">{{wxcCellTitle}}</title>
+    <text class="demo-title">{{wxcCellTitle}}</text>
     <div class="demo">
       <wxc-cell v-for="wt4 in wt4Case"
                 v-bind:key="wt4.id"
@@ -44,6 +44,7 @@ export default {
     wxcCellClicked (e) {
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e)
+      this.$store.commit('SET_isInfoButtonShow', false)
       const button = ''
       const gridList = []
       const details = [
