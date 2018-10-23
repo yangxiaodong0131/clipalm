@@ -1,7 +1,8 @@
 <template>
-  <scroller class="container">
+  <div class="demo">
+    <text class="demo-title">{{wxcCellTitlea}}</text>
     <text class="demo-title">{{wxcCellTitle}}</text>
-    <div class="demo">
+    <div class="demo" @swipe="test">
       <wxc-cell v-for="wt4 in wt4Case"
                 v-bind:key="wt4.id"
                 :label="wt4.drg"
@@ -9,7 +10,21 @@
                 :has-margin="false"
                 :extraContent="wt4.extraContent"></wxc-cell>
     </div>
-  </scroller>
+  </div>
+  <!-- <text class="demo-title">{{wxcCellTitlea}}</text> -->
+  <!-- wxcIndexlistItemClicked -->
+  <!-- <div class="container">
+       <text class="demo-title">{{wxcCellTitlea}}</text>
+      <wxc-loading :show="false" type="trip"></wxc-loading>
+      <wxc-part-loading :show="false"></wxc-part-loading>
+      <wxc-indexlist :normal-list="wt4Case"
+                    @swipe="wxcCellClicked"
+                    @wxcIndexlistItemClicked="wxcCellClicked"
+                    :show-index="true"></wxc-indexlist>
+  </div> -->
+  <!-- <div>
+    <text style="font-size:100px; border-width:2px;width:600px;height:600px;top:40px;left:40px" @swipe="test">{{forceValue}}</text>
+  </div> -->
 </template>
 
 <script>
@@ -19,6 +34,8 @@ export default {
   components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
   data () {
     return {
+      wxcCellTitlea: 'sdasdas',
+      forceValue: 0
     }
   },
   created () {
@@ -42,30 +59,64 @@ export default {
   },
   methods: {
     wxcCellClicked (e) {
-      this.$store.commit('SET_isBottomShow', true)
-      this.$store.commit('SET_info', e)
-      this.$store.commit('SET_isInfoButtonShow', false)
-      const button = ''
-      const gridList = []
-      const details = [
-        {'label': '入组DRG', 'title': 'drg'},
-        {'label': '病案ID', 'title': 'b_wt4_v1_id'},
-        {'label': '主要诊断编码', 'title': 'disease_code'},
-        {'label': '主要诊断名称', 'title': 'disease_name'},
-        {'label': '其他诊断', 'title': 'diags_code'},
-        {'label': '手术/操作', 'title': 'opers_code'},
-        {'label': '住院天数', 'title': 'acctual_days'},
-        {'label': '住院总费用', 'title': 'total_expense'},
-        {'label': '性别', 'title': 'gender'},
-        {'label': '年龄', 'title': 'age'},
-        {'label': '新生儿天数', 'title': 'sf0100'},
-        {'label': '新生儿体重', 'title': 'sf0102'},
-        {'label': '呼吸机使用时间', 'title': 'sf0104'},
-        {'label': '出院转归', 'title': 'sf0108'},
-        {'label': '分组日志', 'title': 'log'}]
-      this.$store.commit('SET_buttonText', button)
-      this.$store.commit('SET_gridList', gridList)
-      this.$store.commit('SET_details', details)
+      if (this.wxcCellTitlea === 'sdasdas') {
+        this.wxcCellTitlea = 'dsdsadasdasd'
+      } else {
+        this.wxcCellTitlea = 'sdasdas'
+      }
+      // console.log(e)
+      // this.$store.commit('SET_isBottomShow', true)
+      // this.$store.commit('SET_info', e)
+      // this.$store.commit('SET_isInfoButtonShow', false)
+      // const button = ''
+      // const gridList = []
+      // const details = [
+      //   {'label': '入组DRG', 'title': 'drg'},
+      //   {'label': '病案ID', 'title': 'b_wt4_v1_id'},
+      //   {'label': '主要诊断编码', 'title': 'disease_code'},
+      //   {'label': '主要诊断名称', 'title': 'disease_name'},
+      //   {'label': '其他诊断', 'title': 'diags_code'},
+      //   {'label': '手术/操作', 'title': 'opers_code'},
+      //   {'label': '住院天数', 'title': 'acctual_days'},
+      //   {'label': '住院总费用', 'title': 'total_expense'},
+      //   {'label': '性别', 'title': 'gender'},
+      //   {'label': '年龄', 'title': 'age'},
+      //   {'label': '新生儿天数', 'title': 'sf0100'},
+      //   {'label': '新生儿体重', 'title': 'sf0102'},
+      //   {'label': '呼吸机使用时间', 'title': 'sf0104'},
+      //   {'label': '出院转归', 'title': 'sf0108'},
+      //   {'label': '分组日志', 'title': 'log'}]
+      // this.$store.commit('SET_buttonText', button)
+      // this.$store.commit('SET_gridList', gridList)
+      // this.$store.commit('SET_details', details)
+    },
+    ontouchstart (e) {
+      if (e.changedTouches[0].force) {
+        this.forceValue = e.changedTouches[0].force
+      }
+    },
+    ontouchmove (e) {
+      if (e.changedTouches[0].force) {
+        this.forceValue = e.changedTouches[0].force
+      }
+    },
+    ontouchend (e) {
+      this.forceValue = 0
+    },
+    test (e) {
+      if (this.wxcCellTitlea === 'sdasdas') {
+        this.wxcCellTitlea = 'dsdsadasdasd'
+      } else {
+        this.wxcCellTitlea = 'sdasdas'
+      }
+      // switch (e.direction) {
+      //   case 'left':
+      //
+      //     break
+      //   case 'right':
+      //
+      //     break
+      // }
     }
   }
 }

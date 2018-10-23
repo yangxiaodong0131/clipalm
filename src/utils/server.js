@@ -1,6 +1,7 @@
 const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
 const urlConfig = require('../utils/config.js')
+const qs = require('qs')
 export function getServer (obj, type, menu, value = null) {
   // type:判断查询全部还是单项
   // menu:判断查询drg类型（mdc、adrg…）
@@ -80,6 +81,27 @@ export function getServer (obj, type, menu, value = null) {
   }
 }
 
+export function compDrg (obj, wt4) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `127.0.0.1:3001/comp_drg`,
+    body: qs.stringify({ params: wt4 })
+  }, res => {
+    if (res.ok) {
+      // storage.setItem(url, JSON.stringify(res.data), e => {
+      //   console.log('storage success')
+      // })
+      // setStore(obj, menu, res.data)
+      console.log(res.data)
+    } else {
+      obj.info = '- 网络连接失败 -'
+    }
+  })
+}
+
 function setStore (obj, menu, rdata) {
   switch (menu) {
     case 'MDC':
@@ -119,6 +141,7 @@ function setStore (obj, menu, rdata) {
       obj.$store.commit('SET_statDrg', rdata.data)
       break
     case '未入组病历':
+      console.log(rdata)
       obj.$store.commit('SET_wt4Case', rdata.data)
       break
     case 'QY病历':
