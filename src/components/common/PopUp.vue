@@ -4,7 +4,7 @@
             @wxcPopupOverlayClicked="popupOverlayBottomClick"
             pos="right"
             width="560">
-  <wxc-button :text="button"
+  <wxc-button :text="'button'"
         v-show="isInfoButtonShow"
         size="big"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
