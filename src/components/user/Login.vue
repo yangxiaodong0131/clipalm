@@ -1,11 +1,13 @@
 <template>
   <div class="panel">
+    <text class="text">掌上医助</text>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
       :default-value='name'
       cancel-label='用户名'
       placeholder='用户名'
+      :bar-style='barStyle'
       @wxcSearchbarCancelClicked="NameOnCancel"
       @wxcSearchbarInputReturned="NameOnReturn"
       @wxcSearchbarInputOnInput="NameOnInput"
@@ -19,6 +21,7 @@
       v-model = 'user.password'
       :default-value='pwd'
       cancel-label='密码'
+      :bar-style='barStyle'
       @wxcSearchbarCancelClicked="PwdOnCancel"
       @wxcSearchbarInputReturned="PwdOnReturn"
       @wxcSearchbarInputOnInput="PwdOnInput"
@@ -32,6 +35,7 @@
       default-value=''
       cancel-label='重复密码'
       v-if="visible"
+      :bar-style='barStyle'
       @wxcSearchbarCancelClicked="PwdOnCancel"
       @wxcSearchbarInputReturned="PwdOnReturn"
       @wxcSearchbarInputOnInput="PwdOnInput"
@@ -40,11 +44,9 @@
       @wxcSearchbarInputOnBlur="PwdOnBlur">
     </wxc-searchbar>
     <div class="row">
-      <wxc-button type="blue" text="登陆" size="small" @wxcButtonClicked="login"></wxc-button>
-      <wxc-button text="注册" size="small" @wxcButtonClicked="register"></wxc-button>
+      <wxc-button type="blue" text="登陆" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+      <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
     </div>
-    <text class="info">{{info}}</text>
-    <text class="value-text">{{value}}</text>
   </div>
 </template>
 
@@ -66,7 +68,13 @@ export default {
       name: 'hitb',
       pwd: '123456',
       visible: false,
-      user: { password: '123456', username: 'hitb', plat: 'client' }
+      user: { password: '123456', username: 'hitb', plat: 'client' },
+      barStyle: {
+        backgroundColor: '#f2f3f4'
+      },
+      btnStyle: {
+        marginTop: '20px'
+      }
     }
   },
   methods: {
@@ -162,8 +170,8 @@ export default {
     justify-content: center;
     height: 750;
     margin-left: 0px;
-    border-width: 2px;
-    border-style: solid;
+    /* border-width: 2px; */
+    /* border-style: solid; */
     border-color: #BBBBBB;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -174,9 +182,13 @@ export default {
   .text {
     color: #666666;
     font-size: 32px;
+    margin-left: 30px;
+    margin-bottom: 15px;
   }
   .row {
+    width: 750px;
     flex-direction: row;
     justify-content: space-around;
+    padding-bottom: 10px;
   }
 </style>

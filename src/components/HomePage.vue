@@ -160,11 +160,11 @@
     align-items: center;
     justify-content: center;
     margin-left: 0px;
-    border-width: 2px;
-    border-style: solid;
+    /* border-width: 2px; */
+    /* border-style: solid; */
     border-color: #BBBBBB;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 30px;

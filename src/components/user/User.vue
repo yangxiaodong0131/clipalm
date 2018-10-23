@@ -54,9 +54,7 @@ export default {
       { title: '术语版', value: 4 }
     ],
     customStyles: {
-      lineSpacing: '14px',
-      width: '120px',
-      height: '50px',
+      width: '',
       icon: '',
       color: '#333333',
       checkedColor: '#ffffff',
@@ -64,7 +62,7 @@ export default {
       borderColor: '#666666',
       checkedBorderColor: '#ffb200',
       backgroundColor: '#ffffff',
-      checkedBackgroundColor: '#ffb200'
+      checkedBackgroundColor: '#ffb200',
     }
   }),
   computed: {
@@ -102,14 +100,14 @@ export default {
   }
   .panel {
     margin-left: 0px;
-    border-width: 2px;
-    border-style: solid;
+    /* border-width: 2px;
+    border-style: solid; */
     border-color: #BBBBBB;
-    padding-top: 15px;
+    padding-top: 0;
     padding-bottom: 15px;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
   }
   .text {
     color: #666666;
