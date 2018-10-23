@@ -48,6 +48,7 @@ export default {
       this.$store.commit('SET_menu', [i, '数据详情'])
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e)
+      this.$store.commit('SET_infoTitle', '病案详情')
       this.$store.commit('SET_isInfoButtonShow', false)
       const button = ''
       const gridList = []

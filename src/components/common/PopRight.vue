@@ -1,23 +1,26 @@
 <template>
-  <div class="demo">
-    <wxc-button :text="'button'"
-          v-show="isInfoButtonShow"
-          size="big"
-          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    <wxc-cell v-for="(detail, index) in details"
-      :key="index"
-      :label="detail.label"
-      :title="info[detail.title]"
-      :has-arrow="false"
-      @wxcCellClicked="wxcCellClicked"
-      :has-margin="true"></wxc-cell>
-    <wxc-grid-select
-        :single="true"
-        :cols="3"
-        :list="gridList"></wxc-grid-select>
+  <div class="demo"
+    :show="isBottomShow">
+      <text class="demo-title">{{wxcCellTitle}}</text>
+      <wxc-button :text="button"
+            v-show="isInfoButtonShow"
+            size="big"
+            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      <div class="demo-content">
+        <wxc-cell v-for="(detail, index) in details"
+          :key="index"
+          :label="detail.label"
+          :title="info[detail.title]"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked"
+          :has-margin="true"></wxc-cell>
+        <wxc-grid-select
+            :single="true"
+            :cols="3"
+            :list="gridList"></wxc-grid-select>
+      </div>
   </div>
 </template>
-
 <script>
 import { WxcPopup, WxcCell, WxcButton, WxcGridSelect } from 'weex-ui'
 import { getServer } from '../../utils/server'
@@ -30,6 +33,9 @@ export default {
     }
   },
   computed: {
+    wxcCellTitle () {
+      return this.$store.state.Home.infoTitle
+    },
     details () {
       return this.$store.state.Home.details
     },
@@ -86,3 +92,45 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .wxc-demo {
+    width: 750px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+  }
+  .container {
+    flex: 1;
+  }
+  .demo {
+    width: 750px;
+    background-color: #f2f3f4;
+  }
+  .category {
+    margin-top: 40px;
+  }
+  .default {
+    color: #000000;
+  }
+  .active {
+    color: #FFC900;
+  }
+  .red {
+    color: #C3413D;
+  }
+  .image {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+  .demo-title {
+    font-size: 30px;
+    color: #333333;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 16px;
+  }
+</style>
