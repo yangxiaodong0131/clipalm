@@ -16,6 +16,7 @@
       <Edit v-if="menu[1] == '未入组病历'"></Edit>
       <Edit v-if="menu[1] == '数据展示'"></Edit>
       <Query v-if="menu[1] == '自定义查询'"></Query>
+      <PopRight v-if="menu[1] == '数据详情'"></PopRight>
     </div>
     <!-- library页 -->
     <div class="panel">
@@ -34,7 +35,7 @@
     </div>
   </wxc-tab-bar>
   <pop-bar></pop-bar>
-  <pop-up></pop-up>
+  <!-- <pop-up></pop-up> -->
 </div>
 </template>
 
@@ -42,6 +43,7 @@
   import { WxcTabBar, Utils } from 'weex-ui';
   import PopBar from './common/PopBar'
   import PopUp from './common/PopUp'
+  import PopRight from './common/PopRight'
   import User from './user/User'
   import Login from './user/Login'
   import Edit from './edit/Edit'
@@ -52,7 +54,7 @@
 
   export default {
     components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Library,
-      Report, Query, Forum },
+      Report, Query, Forum, PopRight },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -81,9 +83,10 @@
         }, {
           title: '论坛',
           menu: ['论坛', '自定义查询'],
+          // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
-      }],
+        }],
       tabStyles: {
         bgColor: '#FFFFFF',
         titleColor: '#666666',

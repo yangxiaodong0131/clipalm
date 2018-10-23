@@ -43,6 +43,9 @@ export default {
   },
   methods: {
     wxcCellClicked (e) {
+      this.$store.commit('SET_visible', false)
+      const i = this.$store.state.Home.activeTab
+      this.$store.commit('SET_menu', [i, '数据详情'])
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e)
       this.$store.commit('SET_isInfoButtonShow', false)
