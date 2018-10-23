@@ -1,27 +1,23 @@
 <template>
-<wxc-popup popup-color="#FFFFFF"
-            :show="isBottomShow"
-            @wxcPopupOverlayClicked="popupOverlayBottomClick"
-            pos="right"
-            width="560">
-  <wxc-button :text="'button'"
-        v-show="isInfoButtonShow"
-        size="big"
-        @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-  <div class="demo-content">
-    <wxc-cell v-for="(detail, index) in details"
-      :key="index"
-      :label="detail.label"
-      :title="info[detail.title]"
-      :has-arrow="false"
-      @wxcCellClicked="wxcCellClicked"
-      :has-margin="true"></wxc-cell>
-    <wxc-grid-select
-        :single="true"
-        :cols="3"
-        :list="gridList"></wxc-grid-select>
-    </div>
-  </wxc-popup>
+  <div class="demo">
+    <wxc-button :text="'button'"
+          v-show="isInfoButtonShow"
+          size="big"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    <div class="demo-content">
+      <wxc-cell v-for="(detail, index) in details"
+        :key="index"
+        :label="detail.label"
+        :title="info[detail.title]"
+        :has-arrow="false"
+        @wxcCellClicked="wxcCellClicked"
+        :has-margin="true"></wxc-cell>
+      <wxc-grid-select
+          :single="true"
+          :cols="3"
+          :list="gridList"></wxc-grid-select>
+      </div>
+  </div>
 </template>
 
 <script>

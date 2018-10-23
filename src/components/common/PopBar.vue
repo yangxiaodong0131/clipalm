@@ -44,15 +44,14 @@ export default {
     wxcCellClicked (menu) {
       this.$store.commit('SET_visible', false)
       const i = this.$store.state.Home.activeTab
+      this.$store.commit('SET_menu', [i, menu])
       if (['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历'].includes(menu)) {
         this.$store.commit('SET_editMenu', menu)
         this.$store.commit('SET_wt4Page', 1)
         getServer(this, 'all', menu)
       } else if (menu === '自定义查询') {
-        this.$store.commit('SET_menu', [i, menu])
       } else if (['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu)) {
         this.$store.commit('SET_library_menu', menu)
-        this.$store.commit('SET_menu', [i, '数据展示'])
         getServer(this, 'all', menu)
       }
     }
