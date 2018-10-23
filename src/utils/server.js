@@ -28,16 +28,16 @@ export function getServer (obj, type, menu, value = null) {
         url = 'wt4_stat_cv?plat=client'
         break
       case 'QY病历':
-        url = 'wt4_2017?plat=client&drg=QY'
+        url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}`
         break
       case '未入组病历':
-        url = 'wt4_2017?plat=client&drg=0000'
+        url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}`
         break
       case '低风险死亡病历':
-        url = 'wt4_2017?plat=client&drg='
+        url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}`
         break
       case '高CV病历':
-        url = 'wt4_2017?plat=client&cv=1'
+        url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
       default:
     }
@@ -91,10 +91,6 @@ export function compDrg (obj, wt4) {
     body: qs.stringify({ params: wt4 })
   }, res => {
     if (res.ok) {
-      // storage.setItem(url, JSON.stringify(res.data), e => {
-      //   console.log('storage success')
-      // })
-      // setStore(obj, menu, res.data)
       console.log(res.data)
     } else {
       obj.info = '- 网络连接失败 -'
@@ -103,6 +99,7 @@ export function compDrg (obj, wt4) {
 }
 
 function setStore (obj, menu, rdata) {
+  let data = []
   switch (menu) {
     case 'MDC':
       obj.$store.commit('SET_library_menu', menu)
@@ -127,31 +124,38 @@ function setStore (obj, menu, rdata) {
       break
     case 'icd10One':
       obj.$store.commit('SET_icd10_page', parseInt(rdata.page))
-      let data = obj.$store.state.Library.icd10Rule
+      data = obj.$store.state.Library.icd10Rule
       data = data.concat(rdata.data)
       obj.$store.commit('SET_icd10_rule', data)
       break
     case 'icd9One':
       obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
-      let data1 = obj.$store.state.Library.icd9Rule
-      data1 = data1.concat(rdata.data)
-      obj.$store.commit('SET_icd9_rule', data1)
+      data = obj.$store.state.Library.icd9Rule
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_icd9_rule', data)
       break
     case '报表':
       obj.$store.commit('SET_statDrg', rdata.data)
       break
     case '未入组病历':
-      console.log(rdata)
-      obj.$store.commit('SET_wt4Case', rdata.data)
+      data = obj.$store.state.Edit.wt4Case
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_wt4Case', data)
       break
     case 'QY病历':
-      obj.$store.commit('SET_wt4Case', rdata.data)
+      data = obj.$store.state.Edit.wt4Case
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_wt4Case', data)
       break
     case '低风险死亡病历':
-      obj.$store.commit('SET_wt4Case', rdata.data)
+      data = obj.$store.state.Edit.wt4Case
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_wt4Case', data)
       break
     case '高CV病历':
-      obj.$store.commit('SET_wt4Case', rdata.data)
+      data = obj.$store.state.Edit.wt4Case
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_wt4Case', data)
       break
     default:
       break
