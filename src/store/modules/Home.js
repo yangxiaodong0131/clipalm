@@ -10,7 +10,8 @@ const state = {
   buttonText: '',
   isBottomShow: false,
   isInfoButtonShow: false,
-  info: ''
+  info: '',
+  infoTitle: ''
 }
 
 const mutations = {
@@ -46,6 +47,9 @@ const mutations = {
   },
   SET_info (state, x) {
     state.info = x
+  },
+  SET_infoTitle (state, x) {
+    state.infoTitle = x
   }
 }
 
@@ -62,6 +66,7 @@ const actions = {
     commit('SET_isBottomShow')
     commit('SET_isInfoButtonShow')
     commit('SET_info')
+    commit('SET_infoTitle')
   }
 }
 
