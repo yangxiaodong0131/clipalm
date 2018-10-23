@@ -41,9 +41,9 @@ $ weex run android
 
 #### 移动端开发-ios：
 
-安装xcode
+安装Xcode
 
-xcode-Preferences-Locations-CommandLineTools-Xcode
+Xcode-Preferences-Locations-CommandLineTools-Xcode
 
 $ weex platform add ios
 
