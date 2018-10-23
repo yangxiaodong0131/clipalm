@@ -84,6 +84,24 @@ export default {
           gridList = []
           details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
           break
+        case 'ICD10':
+          button = ``
+          gridList = e.item.adrg.map((x) => {
+            const obj = {}
+            obj.title = x
+            return obj
+          })
+          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
+          break
+        case 'ICD9':
+          button = ``
+          gridList = e.item.adrg.map((x) => {
+            const obj = {}
+            obj.title = x
+            return obj
+          })
+          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
+          break
         default :
           break
       }
