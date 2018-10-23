@@ -1,7 +1,7 @@
 <template>
-  <scroller class="container">
+  <div class="demo">
     <text class="demo-title">{{wxcCellTitle}}</text>
-    <div class="demo">
+    <div class="demo" @swipe="swipe">
       <wxc-cell v-for="wt4 in wt4Case"
                 v-bind:key="wt4.id"
                 :label="wt4.drg"
@@ -9,16 +9,17 @@
                 :has-margin="false"
                 :extraContent="wt4.extraContent"></wxc-cell>
     </div>
-  </scroller>
+  </div>
 </template>
 
 <script>
 import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading } from 'weex-ui'
-
+import { getServer } from '../../utils/server'
 export default {
   components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
   data () {
     return {
+      forceValue: 0
     }
   },
   created () {
@@ -66,6 +67,13 @@ export default {
       this.$store.commit('SET_buttonText', button)
       this.$store.commit('SET_gridList', gridList)
       this.$store.commit('SET_details', details)
+    },
+    swipe (e) {
+      const page = this.$store.state.Edit.wt4Page
+      if (e.direction === 'up') {
+        this.$store.commit('SET_wt4Page', page + 1)
+        getServer(this, 'all', this.$store.state.Edit.editMenu)
+      }
     }
   }
 }
