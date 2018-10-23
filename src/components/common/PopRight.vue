@@ -4,19 +4,17 @@
           v-show="isInfoButtonShow"
           size="big"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    <div class="demo-content">
-      <wxc-cell v-for="(detail, index) in details"
-        :key="index"
-        :label="detail.label"
-        :title="info[detail.title]"
-        :has-arrow="false"
-        @wxcCellClicked="wxcCellClicked"
-        :has-margin="true"></wxc-cell>
-      <wxc-grid-select
-          :single="true"
-          :cols="3"
-          :list="gridList"></wxc-grid-select>
-      </div>
+    <wxc-cell v-for="(detail, index) in details"
+      :key="index"
+      :label="detail.label"
+      :title="info[detail.title]"
+      :has-arrow="false"
+      @wxcCellClicked="wxcCellClicked"
+      :has-margin="true"></wxc-cell>
+    <wxc-grid-select
+        :single="true"
+        :cols="3"
+        :list="gridList"></wxc-grid-select>
   </div>
 </template>
 
