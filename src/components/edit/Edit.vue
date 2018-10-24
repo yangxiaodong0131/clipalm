@@ -50,6 +50,7 @@ export default {
       this.$store.commit('SET_info', e)
       this.$store.commit('SET_infoTitle', '病案详情')
       this.$store.commit('SET_isInfoButtonShow', false)
+      this.$store.commit('SET_lastPages', [this.$store.state.Edit.editMenu, 'push'])
       const button = ''
       const gridList = []
       const details = [
@@ -77,6 +78,11 @@ export default {
       if (e.direction === 'up') {
         this.$store.commit('SET_wt4Page', page + 1)
         getServer(this, 'all', this.$store.state.Edit.editMenu)
+      } else if (e.direction === 'left' && this.$store.state.Home.info !== '') {
+        this.$store.commit('SET_lastPages', [this.$store.state.Edit.editMenu, 'push'])
+        const i = this.$store.state.Home.activeTab
+        this.$store.commit('SET_menu', [i, '数据详情'])
+        this.$store.commit('SET_isBottomShow', true)
       }
     }
   }
