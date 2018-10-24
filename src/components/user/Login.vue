@@ -44,8 +44,11 @@
       @wxcSearchbarInputOnBlur="PwdOnBlur">
     </wxc-searchbar>
     <div class="row">
-      <wxc-button type="blue" text="登陆" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
-      <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
+      <wxc-button type="blue" text="登陆" size="full" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+    </div>
+    <div class="input-wrapper">
+        <text class="input-forget" @click="findPassword">找回密码</text>
+        <text class="input-register" @click="register">立即注册</text>
     </div>
   </div>
 </template>
@@ -191,4 +194,20 @@ export default {
     justify-content: space-around;
     padding-bottom: 10px;
   }
+  .input-forget{
+    position: absolute;
+    left: 30px;
+    font-size: 30px;
+    }
+    .input-register{
+    position: absolute;
+    right: 30px;
+    font-size: 30px;
+    }
+  .input-wrapper{
+    width: 550px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 30px;
+    }
 </style>
