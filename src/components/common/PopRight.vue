@@ -1,6 +1,6 @@
 <template>
   <div class="demo"
-    :show="isBottomShow">
+    :show="isBottomShow" @swipe="swipe">
       <text class="demo-title">{{wxcCellTitle}}</text>
       <wxc-button :text="button"
             v-show="isInfoButtonShow"
@@ -88,6 +88,17 @@ export default {
       this.$store.commit('SET_isBottomShow', false)
       this.$store.commit('SET_menu', menu)
       getServer(this, type, menu, this.info)
+    },
+    swipe (e) {
+      if (e.direction === 'right') {
+        const i = this.$store.state.Home.activeTab
+        const lastPages = this.$store.state.Home.lastPages
+        const lastPage = lastPages[lastPages.length - 1]
+        this.$store.commit('SET_lastPages', [lastPage, 'filter'])
+        this.$store.commit('SET_menu', [i, lastPage])
+        // this.$store.commit('SET_wt4Page', page + 1)
+        // getServer(this, 'all', this.$store.state.Edit.editMenu)
+      }
     }
   }
 }
