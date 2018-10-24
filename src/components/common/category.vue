@@ -12,15 +12,15 @@
   margin-top: 0px;
   padding-left: 24px;
   width: 750px;
-  height: 68px;
-  background-color: #FFF100;
+  height: 50px;
+  background-color: #FFF8DC;
   justify-content: center;
 }
 
 .category-text {
   color: #000000;
-  font-weight: 600;
-  font-size: 28px;
+  /* font-weight: 600; */
+  font-size: 27px;
 }
 
 </style>

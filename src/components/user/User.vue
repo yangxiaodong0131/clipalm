@@ -54,7 +54,9 @@ export default {
       { title: '术语版', value: 4 }
     ],
     customStyles: {
-      width: '',
+      width: '150px',
+      lineSpacing: '12px',
+      height: '60px',
       icon: '',
       color: '#333333',
       checkedColor: '#ffffff',
@@ -62,7 +64,7 @@ export default {
       borderColor: '#666666',
       checkedBorderColor: '#ffb200',
       backgroundColor: '#ffffff',
-      checkedBackgroundColor: '#ffb200'
+      checkedBackgroundColor: '#1E90FF',
     }
   }),
   computed: {
