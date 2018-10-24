@@ -57,7 +57,6 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      const a = 'sad'
       if (e.result === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
