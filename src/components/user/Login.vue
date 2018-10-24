@@ -7,6 +7,7 @@
       :default-value='name'
       cancel-label='用户名'
       placeholder='用户名'
+      theme='yellow'
       :bar-style='barStyle'
       @wxcSearchbarCancelClicked="NameOnCancel"
       @wxcSearchbarInputReturned="NameOnReturn"
@@ -21,6 +22,7 @@
       v-model = 'user.password'
       :default-value='pwd'
       cancel-label='密码'
+      theme='yellow'
       :bar-style='barStyle'
       @wxcSearchbarCancelClicked="PwdOnCancel"
       @wxcSearchbarInputReturned="PwdOnReturn"
@@ -34,7 +36,9 @@
       input-type='password'
       default-value=''
       cancel-label='重复密码'
+      placeholder='重复密码'
       v-if="visible"
+      theme='yellow'
       :bar-style='barStyle'
       @wxcSearchbarCancelClicked="PwdOnCancel"
       @wxcSearchbarInputReturned="PwdOnReturn"
@@ -70,7 +74,7 @@ export default {
       visible: false,
       user: { password: '123456', username: 'hitb', plat: 'client' },
       barStyle: {
-        backgroundColor: '#f2f3f4'
+        backgroundColor: '#C6e2FF'
       },
       btnStyle: {
         marginTop: '20px'

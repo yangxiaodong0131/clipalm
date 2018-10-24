@@ -43,30 +43,25 @@ export default {
   methods: {
     wxcCellClicked (e) {
       this.$store.commit('SET_visible', false)
+      this.$store.commit('SET_isBottomShow', true)
       const i = this.$store.state.Home.activeTab
       const menu = '病案详情'
-      const details = getDetails(menu)
       this.$store.commit('SET_menu', [i, menu])
-      this.$store.commit('SET_isBottomShow', true)
+      this.$store.commit('SET_infoMenu', this.wxcCellTitle)
+      this.$store.commit('SET_infoLevel', 1)
+      const details = getDetails(menu)
+      this.$store.commit('SET_infoPage', details)
       this.$store.commit('SET_info', e)
-      this.$store.commit('SET_infoTitle', details.infoTitle)
-      this.$store.commit('SET_isInfoButtonShow', details.isInfoButtonShow)
-      this.$store.commit('SET_infos', [e, 'push'])
-      this.$store.commit('SET_lastPages', [this.$store.state.Edit.editMenu, 'push'])
-      this.$store.commit('SET_buttonText', details.buttonText)
-      this.$store.commit('SET_gridList', details.gridList)
-      this.$store.commit('SET_details', details.details)
     },
     swipe (e) {
       const page = this.$store.state.Edit.wt4Page
       if (e.direction === 'up') {
         this.$store.commit('SET_wt4Page', page + 1)
         getServer(this, 'all', this.$store.state.Edit.editMenu)
-      } else if (e.direction === 'left' && this.$store.state.Home.info !== '') {
-        this.$store.commit('SET_lastPages', [this.$store.state.Edit.editMenu, 'push'])
-        const i = this.$store.state.Home.activeTab
-        this.$store.commit('SET_menu', [i, '数据详情'])
-        this.$store.commit('SET_isBottomShow', true)
+      } else if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
+        this.$store.commit('SET_infoMenu', this.wxcCellTitle)
+        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
+        this.$store.commit('SET_infoLevel', 1)
       }
     }
   }

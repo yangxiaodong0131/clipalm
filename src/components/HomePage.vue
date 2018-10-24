@@ -159,9 +159,10 @@
   }
   .panel {
     width: 750px;
-    background-color: #f2f3f4;
+    height: 1050px;
+    background-color: #C6e2FF;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     margin-left: 0px;
     /* border-width: 2px; */
     /* border-style: solid; */
@@ -170,11 +171,11 @@
     padding-bottom: 0px;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
   }
   .item-container {
     width: 750px;
-    background-color: #f2f3f4;
+    /* background-color: green; */
     align-items: center;
     justify-content: center;
   }

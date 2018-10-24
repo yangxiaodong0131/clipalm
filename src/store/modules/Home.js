@@ -5,20 +5,13 @@ const state = {
   menu: ['用户登陆', '数据展示', '数据展示', '数据展示', '数据展示'],
   notice: '未注册用户！',
   user: { login: false, data: {} },
-  details: [],
-  gridList: [],
-  buttonText: '',
   isBottomShow: false,
-  isInfoButtonShow: false,
-  info: '',
-  info1: '',
-  info2: '',
-  info3: '',
-  info4: '',
-  infos: [],
   infoLevel: 0,
-  infoTitle: '',
-  lastPages: []
+  infoMenu: '',
+  infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false }
 }
 
 const mutations = {
@@ -37,43 +30,60 @@ const mutations = {
   SET_user (state, x) {
     state.user = x
   },
-  SET_details (state, x) {
-    state.details = x
-  },
-  SET_gridList (state, x) {
-    state.gridList = x
-  },
-  SET_buttonText (state, x) {
-    state.buttonText = x
-  },
   SET_isBottomShow (state, x) {
     state.isBottomShow = x
   },
-  SET_isInfoButtonShow (state, x) {
-    state.isInfoButtonShow = x
-  },
   SET_info (state, x) {
-    state.info = x
-  },
-  SET_infoTitle (state, x) {
-    state.infoTitle = x
-  },
-  SET_infos (state, x) {
-    if (x[1] === 'filter') {
-      state.infos = state.infos.filter(i => i !== state.info)
-      state.info = state.infos[state.infos.length - 1]
-    } else if (x[1] === 'push' && !state.infos.includes(x[0])) {
-      state.infos.push(x[0])
+    switch (state.infoLevel) {
+      case 1:
+        state.infoPage1.info = x
+        break
+      case 2:
+        state.infoPage2.info = x
+        break
+      case 3:
+        state.infoPage3.info = x
+        break
+      case 4:
+        state.infoPage4.info = x
+        break
     }
   },
-  SET_lastPages (state, x) {
-    // x = [menu, type]
-    if (x[1] === 'filter') {
-      state.lastPages = state.lastPages.filter(i => i !== x[0])
-    } else if (x[1] === 'push' && !state.lastPages.includes(x[0])) {
-      state.lastPages.push(x[0])
+  SET_infoMenu (state, x) {
+    state.infoMenu = x
+  },
+  SET_infoPage (state, x) {
+    switch (state.infoLevel) {
+      case 1:
+        x.info = state.infoPage1.info
+        break
+      case 2:
+        x.info = state.infoPage2.info
+        break
+      case 3:
+        x.info = state.infoPage3.info
+        break
+      case 4:
+        x.info = state.infoPage4.info
+        break
     }
-    console.log(state.lastPages)
+    switch (state.infoLevel) {
+      case 1:
+        state.infoPage1 = x
+        break
+      case 2:
+        state.infoPage2 = x
+        break
+      case 3:
+        state.infoPage3 = x
+        break
+      case 4:
+        state.infoPage4 = x
+        break
+    }
+  },
+  SET_infoLevel (state, x) {
+    state.infoLevel = x
   }
 }
 
@@ -85,14 +95,11 @@ const actions = {
     commit('SET_menu')
     commit('SET_user')
     commit('SET_labelDetails')
-    commit('SET_gridList')
-    commit('SET_buttonText')
     commit('SET_isBottomShow')
-    commit('SET_isInfoButtonShow')
     commit('SET_info')
-    commit('SET_infos')
-    commit('SET_infoTitle')
-    commit('SET_lastPages')
+    commit('SET_infoMenu')
+    commit('SET_infoPage')
+    commit('SET_infoLevel')
   }
 }
 
