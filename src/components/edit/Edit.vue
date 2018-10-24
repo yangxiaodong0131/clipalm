@@ -13,6 +13,7 @@
 <script>
 import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading } from 'weex-ui'
 import { getServer } from '../../utils/server'
+import { getDetails } from '../../utils/details'
 export default {
   components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
   data () {
@@ -43,34 +44,18 @@ export default {
     wxcCellClicked (e) {
       this.$store.commit('SET_visible', false)
       const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_menu', [i, '数据详情'])
+      const menu = '病案详情'
+      const details = getDetails(menu)
+      this.$store.commit('SET_menu', [i, menu])
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e)
-      this.$store.commit('SET_infoTitle', '病案详情')
-      this.$store.commit('SET_isInfoButtonShow', false)
+      this.$store.commit('SET_infoTitle', details.infoTitle)
+      this.$store.commit('SET_isInfoButtonShow', details.isInfoButtonShow)
       this.$store.commit('SET_infos', [e, 'push'])
       this.$store.commit('SET_lastPages', [this.$store.state.Edit.editMenu, 'push'])
-      const button = ''
-      const gridList = []
-      const details = [
-        {'label': '入组DRG', 'title': 'drg'},
-        {'label': '病案ID', 'title': 'b_wt4_v1_id'},
-        {'label': '主要诊断编码', 'title': 'disease_code'},
-        {'label': '主要诊断名称', 'title': 'disease_name'},
-        {'label': '其他诊断', 'title': 'diags_code'},
-        {'label': '手术/操作', 'title': 'opers_code'},
-        {'label': '住院天数', 'title': 'acctual_days'},
-        {'label': '住院总费用', 'title': 'total_expense'},
-        {'label': '性别', 'title': 'gender'},
-        {'label': '年龄', 'title': 'age'},
-        {'label': '新生儿天数', 'title': 'sf0100'},
-        {'label': '新生儿体重', 'title': 'sf0102'},
-        {'label': '呼吸机使用时间', 'title': 'sf0104'},
-        {'label': '出院转归', 'title': 'sf0108'},
-        {'label': '分组日志', 'title': 'log'}]
-      this.$store.commit('SET_buttonText', button)
-      this.$store.commit('SET_gridList', gridList)
-      this.$store.commit('SET_details', details)
+      this.$store.commit('SET_buttonText', details.buttonText)
+      this.$store.commit('SET_gridList', details.gridList)
+      this.$store.commit('SET_details', details.details)
     },
     swipe (e) {
       const page = this.$store.state.Edit.wt4Page
