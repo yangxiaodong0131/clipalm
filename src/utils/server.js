@@ -51,11 +51,13 @@ export function getServer (obj, type, menu, value = null) {
     url = `rule_bj_icd10?page=${obj.$store.state.Library.icd10Page + 1}&plat=client`
   } else if (type === 'icd9One') {
     url = `rule_bj_icd9?page=${obj.$store.state.Library.icd9Page + 1}&plat=client`
+  } else if (type === 'statOne') {
+    url = `wt4_stat_cv?plat=client&drg=${value}`
   }
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      // console.log(e)
+      const a = 'sad'
       if (e.result === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
@@ -156,6 +158,11 @@ function setStore (obj, menu, rdata) {
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
+      break
+    case 'info':
+      if (rdata.data.length === 1) {
+        obj.$store.commit('SET_info', rdata.data[0])
+      }
       break
     default:
       break

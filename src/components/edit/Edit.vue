@@ -1,14 +1,12 @@
 <template>
-  <div class="demo">
+  <div class="demo" @swipe="swipe">
     <text class="demo-title">{{wxcCellTitle}}</text>
-    <div class="demo" @swipe="swipe">
-      <wxc-cell v-for="wt4 in wt4Case"
-                v-bind:key="wt4.id"
-                :label="wt4.drg"
-                @wxcCellClicked="wxcCellClicked(wt4)"
-                :has-margin="false"
-                :extraContent="wt4.extraContent"></wxc-cell>
-    </div>
+    <wxc-cell v-for="wt4 in wt4Case"
+              v-bind:key="wt4.id"
+              :label="wt4.drg"
+              @wxcCellClicked="wxcCellClicked(wt4)"
+              :has-margin="false"
+              :extraContent="wt4.extraContent"></wxc-cell>
   </div>
 </template>
 
@@ -50,6 +48,7 @@ export default {
       this.$store.commit('SET_info', e)
       this.$store.commit('SET_infoTitle', '病案详情')
       this.$store.commit('SET_isInfoButtonShow', false)
+      this.$store.commit('SET_infos', [e, 'push'])
       this.$store.commit('SET_lastPages', [this.$store.state.Edit.editMenu, 'push'])
       const button = ''
       const gridList = []
