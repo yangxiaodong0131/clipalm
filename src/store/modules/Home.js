@@ -11,6 +11,7 @@ const state = {
   isBottomShow: false,
   isInfoButtonShow: false,
   info: '',
+  infos: [],
   infoTitle: '',
   lastPages: []
 }
@@ -52,6 +53,14 @@ const mutations = {
   SET_infoTitle (state, x) {
     state.infoTitle = x
   },
+  SET_infos (state, x) {
+    if (x[1] === 'filter') {
+      state.infos = state.infos.filter(i => i !== state.info)
+      state.info = state.infos[state.infos.length - 1]
+    } else if (x[1] === 'push' && !state.infos.includes(x[0])) {
+      state.infos.push(x[0])
+    }
+  },
   SET_lastPages (state, x) {
     // x = [menu, type]
     if (x[1] === 'filter') {
@@ -59,6 +68,7 @@ const mutations = {
     } else if (x[1] === 'push' && !state.lastPages.includes(x[0])) {
       state.lastPages.push(x[0])
     }
+    console.log(state.lastPages)
   }
 }
 
@@ -75,6 +85,7 @@ const actions = {
     commit('SET_isBottomShow')
     commit('SET_isInfoButtonShow')
     commit('SET_info')
+    commit('SET_infos')
     commit('SET_infoTitle')
     commit('SET_lastPages')
   }

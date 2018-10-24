@@ -14,9 +14,9 @@
     <!-- edit页 -->
     <div class="panel">
       <Edit v-if="menu[1] == '未入组病历'"></Edit>
-      <Edit v-if="menu[1] == '数据展示'"></Edit>
-      <Query v-if="menu[1] == '自定义查询'"></Query>
-      <PopRight v-if="menu[1] == '数据详情'"></PopRight>
+      <Edit v-else-if="menu[1] == '数据展示'"></Edit>
+      <Query v-else-if="menu[1] == '自定义查询'"></Query>
+      <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
     <div class="panel">
