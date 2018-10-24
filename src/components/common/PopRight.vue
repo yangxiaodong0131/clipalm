@@ -12,6 +12,7 @@
           :label="detail.label"
           :title="infoPage.info[detail.title]"
           :has-arrow="false"
+          @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
           :has-margin="true"></wxc-cell>
         <wxc-grid-select
@@ -129,6 +130,9 @@ export default {
           this.$store.commit('SET_infoLevel', this.infoLevel - 1)
         }
       }
+    },
+    LongPress (e) {
+      console.log(e)
     }
   }
 }
