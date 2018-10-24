@@ -3,7 +3,7 @@
     :show="isBottomShow" @swipe="swipe">
       <text class="demo-title">{{wxcCellTitle}}</text>
       <wxc-button :text="button"
-            v-show="isInfoButtonShow"
+            v-if="isInfoButtonShow"
             size="big"
             @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       <div class="demo-content">
@@ -62,7 +62,6 @@ export default {
       this.$store.commit('SET_isBottomShow', false)
     },
     wxcCellClicked (mdc) {
-      this.isBottomShow = true
       this.$store.commit('SET_isBottomShow', true)
       this.info = mdc
     },
