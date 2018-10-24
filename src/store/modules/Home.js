@@ -11,7 +11,12 @@ const state = {
   isBottomShow: false,
   isInfoButtonShow: false,
   info: '',
+  info1: '',
+  info2: '',
+  info3: '',
+  info4: '',
   infos: [],
+  infoLevel: 0,
   infoTitle: '',
   lastPages: []
 }

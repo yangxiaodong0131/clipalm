@@ -62,6 +62,7 @@
 
 <script>
 import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
+import { getDetails } from '../../utils/details'
 export default {
   components: { WxcIndexlist, WxcPopup, WxcCell },
   created: function () {
@@ -85,21 +86,12 @@ export default {
       console.log(e)
     },
     wxcIndexlistItemClicked (e) {
-      this.$store.commit('SET_isBottomShow', true)
+      const details = getDetails('分析详情')
       this.$store.commit('SET_info', e.item)
-      const details = [
-        {'label': '编码', 'title': 'code'},
-        {'label': '名称', 'title': 'desc'},
-        {'label': '费用变异系数', 'title': 'fee_cv'},
-        {'label': '时间变异系数', 'title': 'day_cv'},
-        {'label': '死亡风险等级', 'title': 'death_level'},
-        {'label': '权重', 'title': 'weight'},
-        {'label': '平均费用', 'title': 'fee_avg'},
-        {'label': '平均住院天数', 'title': 'day_avg'},
-        {'label': '病历数', 'title': 'num_sum'}]
-      this.$store.commit('SET_buttonText', '')
-      this.$store.commit('SET_gridList', [])
-      this.$store.commit('SET_details', details)
+      this.$store.commit('SET_isBottomShow', true)
+      this.$store.commit('SET_buttonText', details.buttonText)
+      this.$store.commit('SET_gridList', details.gridList)
+      this.$store.commit('SET_details', details.details)
     },
     openBottomPopup () {
       this.isBottomShow = true
