@@ -61,7 +61,7 @@ export default {
       this.$store.commit('SET_menu', [i, menu])
       this.$store.commit('SET_infoMenu', this.wxcCellTitle)
       this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails(menu)
+      const details = getDetails(menu, e)
       this.$store.commit('SET_infoPage', details)
       this.$store.commit('SET_info', e)
     },

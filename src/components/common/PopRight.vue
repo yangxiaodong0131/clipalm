@@ -89,7 +89,7 @@ export default {
     wxcCellClicked (detail) {
       switch (detail.label) {
         case '入组DRG':
-          const details = getDetails('分析详情')
+          const details = getDetails('分析详情', this.infoPage.info)
           const drg = this.infoPage.info[detail.title]
           this.$store.commit('SET_infoLevel', this.infoLevel + 1)
           this.$store.commit('SET_infoPage', details)

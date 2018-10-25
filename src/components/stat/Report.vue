@@ -86,7 +86,7 @@ export default {
       console.log(e)
     },
     wxcIndexlistItemClicked (e) {
-      const details = getDetails('分析详情')
+      const details = getDetails('分析详情', e.item)
       this.$store.commit('SET_info', e.item)
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_buttonText', details.buttonText)
