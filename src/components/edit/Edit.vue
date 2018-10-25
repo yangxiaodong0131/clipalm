@@ -24,6 +24,7 @@
 import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading, WxcButton } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
+const modal = weex.requireModule('modal')
 export default {
   components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton },
   data () {
@@ -78,6 +79,7 @@ export default {
     fetch () {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
       getServer(this, 'all', this.$store.state.Edit.editMenu)
+      modal.toast({ message: '加载下一页', duration: 1 })
       // setTimeout(() => {
       //   const length = this.lists.length
       //   for (let i = length; i < length + LOADMORE_COUNT; ++i) {
