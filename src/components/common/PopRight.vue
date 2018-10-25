@@ -1,8 +1,8 @@
 <template>
   <div class="demo"
     :show="infoPage.isBottomShow" @swipe="swipe">
-      <text class="demo-title">{{a}}</text>
-      <text class="demo-title">{{infoPage.wxcCellTitle}}</text>
+      <text class="demo-title"></text>
+      <text class="demo-title"></text>
       <wxc-button :text="infoPage.button"
             v-if="infoPage.isInfoButtonShow"
             size="big"

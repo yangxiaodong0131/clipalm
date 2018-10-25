@@ -2,7 +2,7 @@
   <div class="wxc-demo">
     <scroller class="scroller">
       <div class="demo">
-        <wxc-minibar title="右侧带icon的导航栏"
+        <wxc-minibar :title="infoPage.wxcCellTitle"
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
@@ -49,24 +49,27 @@ export default {
     wxcCellTitle () {
       return this.$store.state.Edit.editMenu
     },
-    rightButtonShow () {
-      let show = false
-      let info = ''
+    infoPage () {
+      let result = {}
       switch (this.infoLevel) {
         case 1:
-          info = this.$store.state.Home.infoPage1.info
+          result = this.$store.state.Home.infoPage1
           break
         case 2:
-          info = this.$store.state.Home.infoPage2.info
+          result = this.$store.state.Home.infoPage2
           break
         case 3:
-          info = this.$store.state.Home.infoPage3.info
+          result = this.$store.state.Home.infoPage3
           break
         case 4:
-          info = this.$store.state.Home.infoPage4.info
+          result = this.$store.state.Home.infoPage4
           break
       }
-      if (info === '') {
+      return result
+    },
+    rightButtonShow () {
+      let show = false
+      if (this.infoPage.info === '') {
         show = false
       } else {
         show = true
