@@ -1,6 +1,7 @@
 <template>
   <div class="demo"
     :show="infoPage.isBottomShow" @swipe="swipe">
+      <text class="demo-title">{{a}}</text>
       <text class="demo-title">{{infoPage.wxcCellTitle}}</text>
       <wxc-button :text="infoPage.button"
             v-if="infoPage.isInfoButtonShow"
@@ -13,7 +14,7 @@
           :title="infoPage.info[detail.title]"
           :has-arrow="false"
           @LongPress="LongPress(detail)"
-          @wxcCellClicked="wxcCellClicked(detail)"
+          
           :has-margin="true"></wxc-cell>
         <wxc-grid-select
             :single="true"
@@ -31,6 +32,7 @@ export default {
   components: { WxcPopup, WxcCell, WxcButton, WxcGridSelect },
   data () {
     return {
+      a: '1'
       // isBottomShow: false
     }
   },
@@ -132,6 +134,7 @@ export default {
       }
     },
     LongPress (e) {
+      this.a = '2'
       console.log(e)
     }
   }
