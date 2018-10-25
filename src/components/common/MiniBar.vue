@@ -2,11 +2,12 @@
   <div class="wxc-demo">
     <scroller class="scroller">
       <div class="demo">
-        <wxc-minibar :title="infoPage.wxcCellTitle"
+        <wxc-minibar :title="infoPage.infoTitle"
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick">
+          <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon>
           <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon>
         </wxc-minibar>
       </div>
@@ -68,8 +69,54 @@ export default {
       return result
     },
     rightButtonShow () {
+      let info = ''
+      switch (this.infoLevel) {
+        case 0:
+          info = this.$store.state.Home.infoPage1.info
+          break
+        case 1:
+          info = this.$store.state.Home.infoPage2.info
+          break
+        case 2:
+          info = this.$store.state.Home.infoPage3.info
+          break
+        case 3:
+          info = this.$store.state.Home.infoPage4.info
+          break
+        case 4:
+          info = ''
+          break
+      }
       let show = false
-      if (this.infoPage.info === '') {
+      if (info === '') {
+        show = false
+      } else {
+        show = true
+      }
+      return show
+    },
+    leftButtonShow () {
+      let info = ''
+      switch (this.infoLevel) {
+        case 0:
+          info = ''
+          break
+        case 1:
+          info = this.$store.state.Home.infoPage1.info
+          break
+        case 2:
+          info = this.$store.state.Home.infoPage1.info
+          break
+        case 3:
+          info = this.$store.state.Home.infoPage2.info
+          break
+        case 4:
+          info = this.$store.state.Home.infoPage3.info
+          break
+      }
+      console.log(info === '')
+      let show = false
+      if (info === '') {
         show = false
       } else {
         show = true
