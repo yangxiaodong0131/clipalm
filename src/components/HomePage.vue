@@ -36,6 +36,7 @@
     </div>
   </wxc-tab-bar>
   <pop-bar></pop-bar>
+  <mini-bar></mini-bar>
   <!-- <pop-up></pop-up> -->
 </div>
 </template>
@@ -161,7 +162,7 @@
   }
   .panel {
     width: 750px;
-    height: 1050px;
+    height: 1250px;
     background-color: #C6e2FF;
     align-items: center;
     /* justify-content: center; */
