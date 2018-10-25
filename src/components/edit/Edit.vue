@@ -10,22 +10,22 @@
   </div> -->
   <list class="list" @loadmore="fetch" loadmoreoffset="20">
     <cell class="cell" v-for="num in wt4Case" v-bind:key="num.id">
-      <div class="panel">
-        <text class="text">{{num.extraContent}}</text>
-      </div>
+      <wxc-cell
+                :label="num.drg"
+                @wxcCellClicked="wxcCellClicked(num)"
+                :has-margin="false"
+                :extraContent="num.extraContent"></wxc-cell>
     </cell>
   </list>
 </div>
 </template>
 
 <script>
-import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading } from 'weex-ui'
+import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading, WxcButton } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
-const modal = weex.requireModule('modal')
-const LOADMORE_COUNT = 4
 export default {
-  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
+  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton },
   data () {
     return {
       forceValue: 0,
@@ -75,14 +75,15 @@ export default {
         this.$store.commit('SET_infoLevel', 1)
       }
     },
-    fetch (event) {
-      modal.toast({ message: 'loadmore', duration: 1 })
-      setTimeout(() => {
-        const length = this.lists.length
-        for (let i = length; i < length + LOADMORE_COUNT; ++i) {
-          this.lists.push(i + 1)
-        }
-      }, 800)
+    fetch () {
+      this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
+      getServer(this, 'all', this.$store.state.Edit.editMenu)
+      // setTimeout(() => {
+      //   const length = this.lists.length
+      //   for (let i = length; i < length + LOADMORE_COUNT; ++i) {
+      //     this.lists.push(i + 1)
+      //   }
+      // }, 800)
     }
   }
 }
