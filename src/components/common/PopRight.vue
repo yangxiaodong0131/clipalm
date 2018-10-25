@@ -14,7 +14,7 @@
           :title="infoPage.info[detail.title]"
           :has-arrow="false"
           @LongPress="LongPress(detail)"
-          
+          @wxcCellClicked="wxcCellClicked(detail)"
           :has-margin="true"></wxc-cell>
         <wxc-grid-select
             :single="true"

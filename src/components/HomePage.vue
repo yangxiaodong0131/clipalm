@@ -1,5 +1,6 @@
 <template>
 <div class="homepage">
+  <mini-bar></mini-bar>
   <wxc-tab-bar
     :tab-titles="tabs"
     :tab-styles="tabStyles"
@@ -44,6 +45,7 @@
   import PopBar from './common/PopBar'
   import PopUp from './common/PopUp'
   import PopRight from './common/PopRight'
+  import MiniBar from './common/MiniBar'
   import User from './user/User'
   import Login from './user/Login'
   import Edit from './edit/Edit'
@@ -54,7 +56,7 @@
 
   export default {
     components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Library,
-      Report, Query, Forum, PopRight },
+      Report, Query, Forum, PopRight, MiniBar },
     data: () => ({
       tabs: [{
         title: '用户',
