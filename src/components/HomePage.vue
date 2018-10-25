@@ -21,8 +21,8 @@
     </div>
     <!-- library页 -->
     <div class="panel">
-      <Library v-if="menu[2] == '数据展示'"></Library>
       <Query v-if="menu[2] == '自定义查询'"></Query>
+      <Library v-else></Library>
     </div>
     <!-- stat页 -->
     <div class="wrapper">
