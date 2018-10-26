@@ -1,12 +1,12 @@
 <template>
   <div class="panel">
-    <wxc-minibar :title="user.username"
+    <!--<wxc-minibar :title="user.username"
       leftButton = ""
       background-color="#009ff0"
       text-color="#FFFFFF"
       right-text="返回登陆"
       @wxcMinibarRightButtonClicked="minibarRightButtonClick">
-    </wxc-minibar>
+    </wxc-minibar> -->
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
       :single="true"
