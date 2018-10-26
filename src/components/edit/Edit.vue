@@ -1,23 +1,16 @@
 <template>
   <div class="demo" @swipe="swipe" style="height:1000px;">
     <text class="demo-title">{{wxcCellTitle}}</text>
-    <!-- <wxc-cell v-for="wt4 in wt4Case"
-              v-bind:key="wt4.id"
-              :label="wt4.drg"
-              @wxcCellClicked="wxcCellClicked(wt4)"
-              :has-margin="false"
-              :extraContent="wt4.extraContent"></wxc-cell>
-  </div> -->
-  <list class="list" @loadmore="fetch" loadmoreoffset="20">
-    <cell class="cell" v-for="num in wt4Case" v-bind:key="num.id">
-      <wxc-cell
-                :label="num.drg"
-                @wxcCellClicked="wxcCellClicked(num)"
-                :has-margin="false"
-                :extraContent="num.extraContent"></wxc-cell>
-    </cell>
-  </list>
-</div>
+    <list class="list" @loadmore="fetch" loadmoreoffset="20">
+      <cell class="cell" v-for="num in wt4Case" v-bind:key="num.id">
+        <wxc-cell
+                  :label="num.drg"
+                  @wxcCellClicked="wxcCellClicked(num)"
+                  :has-margin="false"
+                  :extraContent="num.extraContent"></wxc-cell>
+      </cell>
+    </list>
+  </div>
 </template>
 
 <script>
@@ -92,7 +85,7 @@ export default {
 </script>
 
 <style scoped>
-  .refresh {
+  /* .refresh {
     width: 750;
     display: -ms-flex;
     display: -webkit-flex;
@@ -101,19 +94,19 @@ export default {
     -webkit-align-items: center;
     -webkit-box-align: center;
     align-items: center;
-  }
-  .indicator-text {
+  } */
+  /* .indicator-text {
     color: #888888;
     font-size: 42px;
     text-align: center;
-  }
-  .indicator {
+  } */
+  /* .indicator {
     margin-top: 16px;
     height: 40px;
     width: 40px;
     color: blue;
-  }
-  .panel {
+  } */
+  /* .panel {
     width: 600px;
     height: 250px;
     margin-left: 75px;
@@ -125,10 +118,12 @@ export default {
     border-style: solid;
     border-color: #DDDDDD;
     background-color: #F5F5F5;
+  } */
+  .demo-title {
+    font-size: 30px;
   }
-  .text {
-    font-size: 50px;
-    text-align: center;
-    color: #41B883;
+  .demo {
+    width: 750px;
+    height: 1250px;
   }
 </style>
