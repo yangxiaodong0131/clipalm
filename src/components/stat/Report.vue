@@ -37,6 +37,7 @@ export default {
       this.$store.commit('SET_info', e.item)
       this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '分析详情'])
+      this.$store.commit('SET_infoMenu', '报表')
       this.$store.commit('SET_infoPage', getDetails(`分析详情`, e.item))
     },
     openBottomPopup () {
