@@ -5,9 +5,10 @@
         <wxc-minibar :title="infoPage.infoTitle"
                     background-color="#009ff0"
                     text-color="#FFFFFF"
+                    :left-button="leftButtonShow"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick">
-          <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon>
+          <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
           <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon>
         </wxc-minibar>
       </div>
@@ -96,30 +97,11 @@ export default {
       return show
     },
     leftButtonShow () {
-      let info = ''
-      switch (this.infoLevel) {
-        case 0:
-          info = ''
-          break
-        case 1:
-          info = this.$store.state.Home.infoPage1.info
-          break
-        case 2:
-          info = this.$store.state.Home.infoPage1.info
-          break
-        case 3:
-          info = this.$store.state.Home.infoPage2.info
-          break
-        case 4:
-          info = this.$store.state.Home.infoPage3.info
-          break
-      }
-      console.log(info === '')
-      let show = false
-      if (info === '') {
-        show = false
+      let show = ''
+      if (this.infoLevel === 0) {
+        show = ''
       } else {
-        show = true
+        show = 'https://gw.alicdn.com/tfs/TB1cAYsbv2H8KJjy0FcXXaDlFXa-30-53.png'
       }
       return show
     }
@@ -127,15 +109,17 @@ export default {
   methods: {
     minibarLeftButtonClick () {
       const i = this.$store.state.Home.activeTab
-      if (this.infoLevel === 1) {
-        this.$store.commit('SET_infoLevel', 0)
+      const level = this.infoLevel - 1
+      this.$store.commit('SET_infoLevel', level)
+      if (level === 0) {
         this.$store.commit('SET_menu', [i, this.$store.state.Home.infoMenu])
-      } else {
-        this.$store.commit('SET_infoLevel', this.infoLevel - 1)
       }
       modal.toast({ message: '上一页', duration: 1 })
     },
     minibarRightButtonClick () {
+      if (this.infoLevel === 0) {
+        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
+      }
       this.$store.commit('SET_infoLevel', this.infoLevel + 1)
       modal.toast({ message: '下一页', duration: 1 })
     }
