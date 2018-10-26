@@ -97,14 +97,9 @@ export default {
 }
 </script>
 <style scoped>
-.demo-title {
-  font-size: 30px;
-}
-.demo {
-  width: 750px;
-  height: 1250px;
-}
 .container {
   margin-top: 91px;
+  width: 750px;
+  height: 1250px;
 }
 </style>
