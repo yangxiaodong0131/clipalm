@@ -136,6 +136,7 @@
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             if (this.$store.state.Edit.wt4Case.length === 0) {
               getServer(this, 'all', '未入组病历')
+              this.$store.commit('SET_editMenu', '未入组病历')
             }
             break
           case 2:
