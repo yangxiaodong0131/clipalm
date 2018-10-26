@@ -2,7 +2,7 @@
   <div class="wxc-demo">
     <scroller class="scroller">
       <div class="demo">
-        <wxc-minibar :title="infoPage.infoTitle"
+        <wxc-minibar :title="miniBarTitle"
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :left-button="leftButtonShow"
@@ -108,6 +108,25 @@ export default {
         show = 'https://gw.alicdn.com/tfs/TB1cAYsbv2H8KJjy0FcXXaDlFXa-30-53.png'
       }
       return show
+    },
+    miniBarTitle () {
+      let title = '测试'
+      if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
+        title = this.infoPage.infoTitle
+      } else {
+        switch (this.$store.state.Home.activeTab) {
+          case 1:
+            title = this.$store.state.Edit.editMenu
+            break
+          case 2:
+            title = this.$store.state.Library.libraryMenu
+            break
+          case 3:
+            title = '报表'
+            break
+        }
+      }
+      return title
     }
   },
   methods: {
