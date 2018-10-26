@@ -19,10 +19,10 @@ export function getServer (obj, type, menu, value = null) {
         url = 'rule_bj_drg?plat=client'
         break
       case 'ICD9':
-        url = 'rule_bj_icd9?plat=client'
+        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}`
         break
       case 'ICD10':
-        url = 'rule_bj_icd10?plat=client'
+        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}`
         break
       case '报表':
         url = 'wt4_stat_cv?plat=client'
@@ -47,17 +47,15 @@ export function getServer (obj, type, menu, value = null) {
     url = `rule_bj_drg?adrg=${value.code}&plat=client`
   } else if (type === 'wt4') {
     url = 'wt4_2017?plat=client'
-  } else if (type === 'icd10One') {
-    url = `rule_bj_icd10?page=${obj.$store.state.Library.icd10Page + 1}&plat=client`
-  } else if (type === 'icd9One') {
-    url = `rule_bj_icd9?page=${obj.$store.state.Library.icd9Page + 1}&plat=client`
   } else if (type === 'statOne') {
     url = `wt4_stat_cv?plat=client&drg=${value}`
   }
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      if (e.result === 'success') {
+      const a = '111'
+      // if (e.result === 'success') {
+      if (a === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
