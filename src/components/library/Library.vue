@@ -104,4 +104,7 @@ export default {
   width: 750px;
   height: 1250px;
 }
+.container {
+  margin-top: 91px;
+}
 </style>

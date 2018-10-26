@@ -119,5 +119,6 @@ export default {
   .demo {
     width: 750px;
     height: 1250px;
+    margin-top: 91px;
   }
 </style>

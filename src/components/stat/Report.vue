@@ -57,4 +57,7 @@ export default {
     color: #666666;
     font-size: 32px;
   }
+  .container {
+    margin-top: 91px;
+  }
 </style>

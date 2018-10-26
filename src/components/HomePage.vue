@@ -111,7 +111,14 @@
     computed: {
       menu () {
         return this.$store.state.Home.menu
-      }
+      },
+      isShow () {
+        let isShow = false
+        if (this.$store.state.Home.activeTab > 0) {
+          isShow = true
+        }
+        return isShow
+      },
     },
     created () {
       const tabPageHeight = Utils.env.getPageHeight();
@@ -126,14 +133,15 @@
         if (i === this.$store.state.Home.activeTab && i !== 0) {
           this.$store.commit('SET_visible', true)
         }
-        console.log(this.$store.state.Edit.wt4Case)
         this.$store.commit('SET_activeTab', i)
         switch (i) {
           case 0:
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
+            this.$store.commit('SET_isMiniShow', false)
             break
           case 1:
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
             if (this.$store.state.Edit.wt4Case.length === 0) {
               getServer(this, 'all', '未入组病历')
               this.$store.commit('SET_editMenu', '未入组病历')
@@ -141,15 +149,19 @@
             break
           case 2:
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
             break
           case 3:
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
             break
           case 4:
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
             break
           default :
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
         }
       }
     }
@@ -183,7 +195,6 @@
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 0px;
-    margin-top: 91px;
   }
   .item-container {
     width: 750px;

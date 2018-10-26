@@ -11,7 +11,8 @@ const state = {
   infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false }
+  infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  isMiniShow: false
 }
 
 const mutations = {
@@ -70,6 +71,9 @@ const mutations = {
   },
   SET_infoLevel (state, x) {
     state.infoLevel = x
+  },
+  SET_isMiniShow (state, x) {
+    state.isMiniShow = x
   }
 }
 
@@ -86,6 +90,7 @@ const actions = {
     commit('SET_infoMenu')
     commit('SET_infoPage')
     commit('SET_infoLevel')
+    commit('SET_isMiniShow')
   }
 }
 

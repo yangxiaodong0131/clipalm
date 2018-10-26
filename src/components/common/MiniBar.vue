@@ -6,6 +6,7 @@
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :left-button="leftButtonShow"
+                    :show="isShow"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick">
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
@@ -47,6 +48,9 @@ export default {
   computed: {
     infoLevel () {
       return this.$store.state.Home.infoLevel
+    },
+    isShow () {
+      return this.$store.state.Home.isMiniShow
     },
     wxcCellTitle () {
       return this.$store.state.Edit.editMenu
