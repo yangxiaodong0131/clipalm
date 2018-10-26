@@ -63,7 +63,7 @@ export default {
       this.$store.commit('SET_infoLevel', 1)
       const details = getDetails(menu, e)
       this.$store.commit('SET_infoPage', details)
-      this.$store.commit('SET_info', e)
+      // this.$store.commit('SET_info', e)
     },
     swipe (e) {
       const page = this.$store.state.Edit.wt4Page

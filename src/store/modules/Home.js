@@ -55,20 +55,6 @@ const mutations = {
   SET_infoPage (state, x) {
     switch (state.infoLevel) {
       case 1:
-        x.info = state.infoPage1.info
-        break
-      case 2:
-        x.info = state.infoPage2.info
-        break
-      case 3:
-        x.info = state.infoPage3.info
-        break
-      case 4:
-        x.info = state.infoPage4.info
-        break
-    }
-    switch (state.infoLevel) {
-      case 1:
         state.infoPage1 = x
         break
       case 2:

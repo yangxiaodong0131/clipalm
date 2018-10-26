@@ -1,5 +1,6 @@
-function caseInfo () {
+function caseInfo (data) {
   const result = {
+    info: data,
     infoTitle: '病案详情',
     isInfoButtonShow: false,
     buttonText: ``,
@@ -23,8 +24,9 @@ function caseInfo () {
   }
   return result
 }
-function statInfo () {
+function statInfo (data) {
   const result = {
+    info: data,
     infoTitle: '分析详情',
     isInfoButtonShow: false,
     buttonText: ``,
@@ -49,6 +51,7 @@ function mdcInfo (data) {
     return obj
   })
   const result = {
+    info: data,
     infoTitle: 'MDC规则详情',
     isInfoButtonShow: true,
     buttonText: `${data.code}-ADRG规则`,
@@ -58,6 +61,84 @@ function mdcInfo (data) {
       {'label': '名称', 'title': 'desc'},
       {'label': '年份', 'title': 'year'},
       {'label': '版本', 'title': 'version'}]
+  }
+  return result
+}
+function adrgInfo (data) {
+  const gridList = data.icd9_aa.map((x) => {
+    const obj = {}
+    obj.title = x
+    return obj
+  })
+  const result = {
+    info: data,
+    infoTitle: 'ADRG规则详情',
+    isInfoButtonShow: true,
+    buttonText: `${data.code}-DRG规则`,
+    gridList: gridList,
+    details: [
+      {'label': '编码', 'title': 'code'},
+      {'label': '名称', 'title': 'desc'},
+      {'label': '年份', 'title': 'year'},
+      {'label': '版本', 'title': 'version'}]
+  }
+  return result
+}
+function drgInfo (data) {
+  const result = {
+    info: data,
+    infoTitle: 'DRG规则详情',
+    isInfoButtonShow: false,
+    buttonText: ``,
+    gridList: [],
+    details: [
+      {'label': '编码', 'title': 'code'},
+      {'label': '名称', 'title': 'desc'},
+      {'label': '年份', 'title': 'year'},
+      {'label': '版本', 'title': 'version'}]
+  }
+  return result
+}
+function icd10Info (data) {
+  const gridList = data.adrg.map((x) => {
+    const obj = {}
+    obj.title = x
+    return obj
+  })
+  const result = {
+    info: data,
+    infoTitle: 'ICD10规则详情',
+    isInfoButtonShow: false,
+    buttonText: ``,
+    gridList: gridList,
+    details: [
+      {'label': '编码', 'title': 'code'},
+      {'label': '名称', 'title': 'desc'},
+      {'label': '年份', 'title': 'year'},
+      {'label': '版本', 'title': 'version'},
+      {'label': 'MCC', 'title': 'mcc'},
+      {'label': 'CC', 'title': 'cc'}]
+  }
+  return result
+}
+function icd9Info (data) {
+  const gridList = data.adrg.map((x) => {
+    const obj = {}
+    obj.title = x
+    return obj
+  })
+  const result = {
+    info: data,
+    infoTitle: 'ICD9规则详情',
+    isInfoButtonShow: false,
+    buttonText: ``,
+    gridList: gridList,
+    details: [
+      {'label': '编码', 'title': 'code'},
+      {'label': '名称', 'title': 'desc'},
+      {'label': '年份', 'title': 'year'},
+      {'label': '版本', 'title': 'version'},
+      {'label': '手术室手术', 'title': 'p_type'}]
   }
   return result
 }
@@ -73,13 +154,25 @@ export function getDetails (menu, data) {
   let result = info
   switch (menu) {
     case '病案详情':
-      result = caseInfo()
+      result = caseInfo(data)
       break
     case '分析详情':
-      result = statInfo()
+      result = statInfo(data)
       break
     case 'MDC规则详情':
       result = mdcInfo(data)
+      break
+    case 'ADRG规则详情':
+      result = adrgInfo(data)
+      break
+    case 'DRG规则详情':
+      result = drgInfo(data)
+      break
+    case 'ICD10规则详情':
+      result = icd10Info(data)
+      break
+    case 'ICD9规则详情':
+      result = icd9Info(data)
       break
     default:
       break
