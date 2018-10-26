@@ -44,6 +44,7 @@
 
 <script>
   import { WxcTabBar, Utils } from 'weex-ui';
+  import { getServer } from '../utils/server'
   import PopBar from './common/PopBar'
   import PopUp from './common/PopUp'
   import PopRight from './common/PopRight'
@@ -125,6 +126,7 @@
         if (i === this.$store.state.Home.activeTab && i !== 0) {
           this.$store.commit('SET_visible', true)
         }
+        console.log(this.$store.state.Edit.wt4Case)
         this.$store.commit('SET_activeTab', i)
         switch (i) {
           case 0:
@@ -132,6 +134,9 @@
             break
           case 1:
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
+            if (this.$store.state.Edit.wt4Case.length === 0) {
+              getServer(this, 'all', '未入组病历')
+            }
             break
           case 2:
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
