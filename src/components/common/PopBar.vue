@@ -53,6 +53,8 @@ export default {
       } else if (['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu)) {
         this.$store.commit('SET_library_menu', menu)
         getServer(this, 'all', menu)
+      } else {
+        getServer(this, 'all', menu)
       }
     }
   }

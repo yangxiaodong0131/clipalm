@@ -27,8 +27,9 @@
     </div>
     <!-- stat页 -->
     <div class="wrapper">
-      <Report v-if="menu[3] == '数据展示'"></Report>
-      <Query v-if="menu[3] == '自定义查询'"></Query>
+      <Report v-if="menu[3] == '报表'"></Report>
+      <Query v-else-if="menu[3] == '自定义查询'"></Query>
+      <PopRight v-else></PopRight>
     </div>
     <!-- forum页 -->
     <div class="panel">
@@ -109,7 +110,6 @@
     }),
     computed: {
       menu () {
-        console.log(this.$store.state.Home.menu[2])
         return this.$store.state.Home.menu
       }
     },
