@@ -113,6 +113,7 @@ function setStore (obj, menu, rdata) {
       break
     case 'ICD9':
       obj.$store.commit('SET_library_menu', menu)
+      obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
       obj.$store.commit('SET_icd9_rule', rdata.data)
       break
     case 'ICD10':
