@@ -57,7 +57,9 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      if (e.result === 'success') {
+      const a = 'asdas'
+      if (a === 'success') {
+      // if (e.result === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
@@ -72,6 +74,7 @@ export function getServer (obj, type, menu, value = null) {
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
             })
+            console.log(res.data)
             setStore(obj, menu, res.data)
           } else {
             obj.info = '- 网络连接失败 -'

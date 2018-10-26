@@ -59,7 +59,9 @@ export default {
       // let isInfoButtonShow = false
       // let gridList = []
       // let details = []
-      const details = getDetails(`${this.$store.state.Library.libraryMenu}规则详情`, e)
+      this.$store.commit('SET_infoLevel', 1)
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
+      const details = getDetails(`${this.$store.state.Library.libraryMenu}规则详情`, e.item)
       this.$store.commit('SET_infoPage', details)
       // switch (this.$store.state.Library.libraryMenu) {
       //   case 'MDC':

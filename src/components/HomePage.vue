@@ -22,6 +22,7 @@
     <!-- library页 -->
     <div class="panel">
       <Query v-if="menu[2] == '自定义查询'"></Query>
+      <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
@@ -107,6 +108,7 @@
     }),
     computed: {
       menu () {
+        console.log(this.$store.state.Home.menu[2])
         return this.$store.state.Home.menu
       }
     },
