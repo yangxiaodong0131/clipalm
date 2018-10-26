@@ -53,6 +53,14 @@ const mutations = {
   SET_infoMenu (state, x) {
     state.infoMenu = x
   },
+  SET_infoPageClear (state) {
+    const clear = { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false }
+    state.infoLevel = 0
+    state.infoPage1 = clear
+    state.infoPage2 = clear
+    state.infoPage3 = clear
+    state.infoPage4 = clear
+  },
   SET_infoPage (state, x) {
     switch (state.infoLevel) {
       case 1:
@@ -91,6 +99,7 @@ const actions = {
     commit('SET_infoPage')
     commit('SET_infoLevel')
     commit('SET_isMiniShow')
+    commit('SET_infoPageClear')
   }
 }
 

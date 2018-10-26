@@ -136,6 +136,7 @@
           this.$store.commit('SET_visible', true)
         }
         this.$store.commit('SET_activeTab', i)
+        this.$store.commit('SET_infoPageClear')
         switch (i) {
           case 0:
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
