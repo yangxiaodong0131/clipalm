@@ -17,6 +17,7 @@
       <Edit v-if="menu[1] == '未入组病历'"></Edit>
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
+      <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
       <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
@@ -53,13 +54,14 @@
   import User from './user/User'
   import Login from './user/Login'
   import Edit from './edit/Edit'
+  import SingleGroup from './edit/SingleGroup'
   import Library from './library/Library'
   import Report from './stat/Report'
   import Query from './stat/Query'
   import Forum from './forum/Forum'
 
   export default {
-    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Library,
+    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, SingleGroup, Library,
       Report, Query, Forum, PopRight, MiniBar },
     data: () => ({
       tabs: [{
@@ -70,7 +72,7 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询'],
+          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询', '单条分组'],
           // icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
