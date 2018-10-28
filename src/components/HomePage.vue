@@ -34,7 +34,7 @@
     </div>
     <!-- forum页 -->
     <div class="panel">
-      <Forum v-if="menu[4] == '数据展示'"></Forum>
+      <Forum v-if="menu[4] == '论坛'"></Forum>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>
@@ -114,6 +114,9 @@
       menu () {
         return this.$store.state.Home.menu
       },
+      test () {
+        return this.$store.state.Home.test
+      },
       isShow () {
         let isShow = false
         if (this.$store.state.Home.activeTab > 0) {
@@ -145,10 +148,10 @@
           case 1:
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            if (this.$store.state.Edit.wt4Case.length === 0) {
-              getServer(this, 'all', '未入组病历')
-              this.$store.commit('SET_editMenu', '未入组病历')
-            }
+            // if (this.$store.state.Edit.wt4Case.length === 0) {
+            //   getServer(this, 'all', '未入组病历')
+            //   this.$store.commit('SET_editMenu', '未入组病历')
+            // }
             break
           case 2:
             this.$store.commit('SET_menus', this.tabs[2]['menu'])

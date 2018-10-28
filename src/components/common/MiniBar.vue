@@ -110,7 +110,7 @@ export default {
       return show
     },
     miniBarTitle () {
-      let title = '测试'
+      let title = ' '
       if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
         title = this.infoPage.infoTitle
       } else {
