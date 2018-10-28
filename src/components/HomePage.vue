@@ -14,7 +14,7 @@
     </div>
     <!-- edit页 -->
     <div class="panel">
-      <Edit v-if="menu[1] == '未入组病历'"></Edit>
+      <Edit v-if="['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历'].includes(menu[1])"></Edit>
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
