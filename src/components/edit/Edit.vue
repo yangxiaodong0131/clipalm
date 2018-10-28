@@ -2,12 +2,15 @@
   <div class="demo" @swipe="swipe" style="height:1000px;">
     <text class="demo-title">{{wxcCellTitle}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
-      <cell class="cell" v-for="(num, index) in wt4Case" v-bind:key="index">
-        <wxc-cell
-                  :label="num.drg"
-                  @wxcCellClicked="wxcCellClicked(num)"
-                  :has-margin="false"
-                  :extraContent="num.extraContent"></wxc-cell>
+      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
+        <div class="panel" @longpress="longpress(wt4)">
+          <wxc-cell
+            :label="wt4.drg"
+            :has-margin="false"
+            @wxcCellClicked="wxcCellClicked(wt4)"
+            :extraContent="wt4.extraContent">
+          </wxc-cell>
+        </div>
       </cell>
     </list>
   </div>
@@ -56,7 +59,6 @@ export default {
       this.$store.commit('SET_infoLevel', 1)
       const details = getDetails(menu, e)
       this.$store.commit('SET_infoPage', details)
-      // this.$store.commit('SET_info', e)
     },
     swipe (e) {
       if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
@@ -69,6 +71,11 @@ export default {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
       getServer(this, 'all', this.$store.state.Edit.editMenu)
       modal.toast({ message: '加载下一页', duration: 1 })
+    },
+    longpress (wt4) {
+      modal.toast({ message: '跳转论坛', duration: 1 })
+      console.log('longpress')
+      console.log(wt4)
     }
   }
 }
