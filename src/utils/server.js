@@ -39,7 +39,8 @@ export function getServer (obj, type, menu, value = null) {
       case '高CV病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
-      default:
+      case '论坛':
+        url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
     }
   } else if (type === 'adrgOne') {
     url = `rule_bj_adrg?mdc=${value.mdc}&plat=client`
@@ -156,6 +157,12 @@ function setStore (obj, menu, rdata) {
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
+      break
+    case '论坛':
+      data = obj.$store.state.Forum.post
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
+      obj.$store.commit('SET_post', data)
       break
     case 'info':
       if (rdata.data.length === 1) {

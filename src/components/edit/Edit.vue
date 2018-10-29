@@ -77,7 +77,9 @@ export default {
       this.$store.commit('SET_showForum', true)
       this.$store.commit('SET_menus', ['论坛', '自定义查询'])
       this.$store.commit('SET_menu', [4, '论坛'])
-      this.$store.commit('SET_title', wt4)
+      this.$store.commit('SET_post', [])
+      this.$store.commit('SET_forumPage', 1)
+      getServer(this, 'all', '论坛', wt4)
     }
   }
 }

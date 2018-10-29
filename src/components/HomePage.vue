@@ -36,6 +36,7 @@
     <!-- forum页 -->
     <div class="panel">
       <Forum v-if="menu[4] == '论坛'"></Forum>
+      <Content v-if="menu[4] == '帖子内容'"></Content>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>
@@ -60,10 +61,11 @@
   import Report from './stat/Report'
   import Query from './stat/Query'
   import Forum from './forum/Forum'
+  import Content from './forum/Content'
 
   export default {
     components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar },
+      Report, Query, Forum, PopRight, MiniBar, Content },
     data: () => ({
       tabs: [{
         title: '用户',

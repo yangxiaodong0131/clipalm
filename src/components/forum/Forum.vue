@@ -1,7 +1,9 @@
 <template>
   <div class="panel">
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
-       <wxc-special-rich-text :config-list="specialList"></wxc-special-rich-text>
+       <!-- <wxc-special-rich-text :config-list="specialList" @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-special-rich-text> -->
+       <wxc-rich-text :config-list="specialList"
+                   @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
     </div>
   </div>
 </template>
@@ -16,12 +18,12 @@ export default {
   computed: {
     specialConfigList () {
       const configs = []
-      const wt4s = [this.$store.state.Forum.title]
-      wt4s.map((x) => {
+      const posts = this.$store.state.Forum.post
+      posts.map((x) => {
         const config = [
           {
             type: 'tag',
-            value: this.$store.state.Forum.title.b_wt4_v1_id,
+            value: x.label,
             style: {
               fontSize: 24,
               color: '#3D3D3D',
@@ -32,7 +34,7 @@ export default {
           },
           {
             type: 'text',
-            value: '测试标题',
+            value: x.title,
             theme: 'black',
             style: { fontSize: 28 }
           }
@@ -45,7 +47,9 @@ export default {
   created: function () {
   },
   methods: {
-    wxcRichTextLinkClick () {}
+    wxcRichTextLinkClick (e) {
+      console.log('ss')
+    }
   }
 }
 </script>
