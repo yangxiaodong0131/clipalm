@@ -1,5 +1,5 @@
 <template>
-  <web src="http://127.0.0.1:3009/drgwork/clipalm_version" style="width: 1000px; height: 1000px"></web>
+  <web src="http://210.75.199.113:3009/drgwork/clipalm_version" style="width: 1000px; height: 1000px"></web>
   <!-- <div class="panel">
     <text class="text">掌上医助</text>
     <wxc-searchbar ref="wxc-searchbar"
