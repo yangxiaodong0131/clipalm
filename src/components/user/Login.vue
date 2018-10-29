@@ -1,6 +1,5 @@
 <template>
-  <web src="http://210.75.199.113:3009/drgwork/clipalm_version" style="width: 1000px; height: 1000px"></web>
-  <!-- <div class="panel">
+  <div class="panel">
     <text class="text">掌上医助</text>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
@@ -52,7 +51,7 @@
       <wxc-button type="blue" text="登陆" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
       <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
