@@ -1,28 +1,26 @@
 <template>
   <div class="wxc-demo">
     <scroller class="scroller">
-      <div>
-        <div class="demo">
-          <wxc-minibar title="右侧带icon的导航栏"
-                      background-color="#009ff0"
-                      text-color="#FFFFFF"
-                      @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
-                      @wxcMinibarRightButtonClicked="minibarRightButtonClick">
-            <wxc-icon slot="right" name="more"></wxc-icon>
-          </wxc-minibar>
-        </div>
+      <div class="demo">
+        <wxc-minibar :title="miniBarTitle"
+                    background-color="#009ff0"
+                    text-color="#FFFFFF"
+                    :left-button="leftButtonShow"
+                    :show="isShow"
+                    @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
+                    @wxcMinibarRightButtonClicked="minibarRightButtonClick">
+          <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
+          <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon>
+        </wxc-minibar>
       </div>
     </scroller>
   </div>
 </template>
 
-<style>
+<style scoped>
   .wxc-demo {
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background-color: #FFFFFF;
   }
   .scroller {
@@ -30,9 +28,7 @@
   }
   .demo {
     width: 750px;
-    height: 180px;
     align-items: flex-start;
-    padding-top: 60px;
   }
 </style>
 
@@ -49,12 +45,106 @@ export default {
   },
   created () {
   },
+  computed: {
+    infoLevel () {
+      return this.$store.state.Home.infoLevel
+    },
+    isShow () {
+      return this.$store.state.Home.isMiniShow
+    },
+    wxcCellTitle () {
+      return this.$store.state.Edit.editMenu
+    },
+    infoPage () {
+      let result = {}
+      switch (this.infoLevel) {
+        case 1:
+          result = this.$store.state.Home.infoPage1
+          break
+        case 2:
+          result = this.$store.state.Home.infoPage2
+          break
+        case 3:
+          result = this.$store.state.Home.infoPage3
+          break
+        case 4:
+          result = this.$store.state.Home.infoPage4
+          break
+      }
+      return result
+    },
+    rightButtonShow () {
+      let info = ''
+      switch (this.infoLevel) {
+        case 0:
+          info = this.$store.state.Home.infoPage1.info
+          break
+        case 1:
+          info = this.$store.state.Home.infoPage2.info
+          break
+        case 2:
+          info = this.$store.state.Home.infoPage3.info
+          break
+        case 3:
+          info = this.$store.state.Home.infoPage4.info
+          break
+        case 4:
+          info = ''
+          break
+      }
+      let show = false
+      if (info === '') {
+        show = false
+      } else {
+        show = true
+      }
+      return show
+    },
+    leftButtonShow () {
+      let show = ''
+      if (this.infoLevel === 0) {
+        show = ''
+      } else {
+        show = 'https://gw.alicdn.com/tfs/TB1cAYsbv2H8KJjy0FcXXaDlFXa-30-53.png'
+      }
+      return show
+    },
+    miniBarTitle () {
+      let title = ' '
+      if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
+        title = this.infoPage.infoTitle
+      } else {
+        switch (this.$store.state.Home.activeTab) {
+          case 1:
+            title = this.$store.state.Edit.editMenu
+            break
+          case 2:
+            title = this.$store.state.Library.libraryMenu
+            break
+          case 3:
+            title = '报表'
+            break
+        }
+      }
+      return title
+    }
+  },
   methods: {
     minibarLeftButtonClick () {
-      console.log('asdasasdsa')
+      const i = this.$store.state.Home.activeTab
+      const level = this.infoLevel - 1
+      this.$store.commit('SET_infoLevel', level)
+      if (level === 0) {
+        this.$store.commit('SET_menu', [i, this.$store.state.Home.infoMenu])
+      }
+      modal.toast({ message: '上一页', duration: 1 })
     },
     minibarRightButtonClick () {
-      modal.toast({ message: 'click rightButton!', duration: 1 })
+      if (this.infoLevel === 0) {
+        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
+      }
+      this.$store.commit('SET_infoLevel', this.infoLevel + 1)
+      modal.toast({ message: '下一页', duration: 1 })
     }
   }
 }

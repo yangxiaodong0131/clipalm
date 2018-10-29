@@ -1,12 +1,10 @@
 <template>
   <div class="demo"
     :show="infoPage.isBottomShow" @swipe="swipe">
-      <text class="demo-title">{{a}}</text>
-      <text class="demo-title">{{infoPage.wxcCellTitle}}</text>
-      <wxc-button :text="infoPage.button"
+      <wxc-button :text="infoPage.buttonText"
             v-if="infoPage.isInfoButtonShow"
-            size="big"
-            @wxcButtonClicked="infoPage.wxcButtonClicked"></wxc-button>
+            size="full"
+            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       <div class="demo-content">
         <wxc-cell v-for="(detail, index) in infoPage.details"
           :key="index"
@@ -18,7 +16,7 @@
           :has-margin="true"></wxc-cell>
         <wxc-grid-select
             :single="true"
-            :cols="3"
+            :cols="2"
             :list="infoPage.gridList"></wxc-grid-select>
       </div>
   </div>
@@ -58,27 +56,6 @@ export default {
       }
       return result
     }
-    // wxcCellTitle () {
-    //   return this.$store.state.Home.infoTitle
-    // },
-    // details () {
-    //   return this.$store.state.Home.details
-    // },
-    // gridList () {
-    //   return this.$store.state.Home.gridList
-    // },
-    // button () {
-    //   return this.$store.state.Home.buttonText
-    // },
-    // isBottomShow () {
-    //   return this.$store.state.Home.isBottomShow
-    // },
-    // isInfoButtonShow () {
-    //   return this.$store.state.Home.isInfoButtonShow
-    // },
-    // info () {
-    //   return this.$store.state.Home.info
-    // }
   },
   methods: {
     wxcRichTextLinkClick () {
@@ -89,7 +66,7 @@ export default {
     wxcCellClicked (detail) {
       switch (detail.label) {
         case '入组DRG':
-          const details = getDetails('分析详情')
+          const details = getDetails('分析详情', this.infoPage.info)
           const drg = this.infoPage.info[detail.title]
           this.$store.commit('SET_infoLevel', this.infoLevel + 1)
           this.$store.commit('SET_infoPage', details)
@@ -100,27 +77,19 @@ export default {
       }
     },
     wxcButtonClicked () {
-      let menu = ''
-      let type = ''
-      switch (this.$store.state.Home.activeTab) {
-        case 2:
-          switch (this.$store.state.Library.libraryMenu) {
-            case 'MDC':
-              menu = 'ADRG'
-              type = 'adrgOne'
-              break
-            case 'ADRG':
-              menu = 'DRG'
-              type = 'drgOne'
-              break
-          }
+      switch (this.infoPage.infoTitle) {
+        case 'MDC规则详情':
+          getServer(this, 'adrgOne', 'ADRG', this.infoPage.info)
+          break
+        case 'ADRG规则详情':
+          getServer(this, 'drgOne', 'DRG', this.infoPage.info)
           break
         default :
           break
       }
+      this.$store.commit('SET_infoLevel', 0)
       this.$store.commit('SET_isBottomShow', false)
-      this.$store.commit('SET_menu', menu)
-      getServer(this, type, menu, this.info)
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, this.$store.state.Home.infoMenu])
     },
     swipe (e) {
       if (e.direction === 'right') {

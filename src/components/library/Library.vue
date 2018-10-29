@@ -1,15 +1,27 @@
 <template>
-  <div class="container">
-      <wxc-loading :show="isShow" type="trip"></wxc-loading>
-      <wxc-part-loading :show="isShow"></wxc-part-loading>
-      <wxc-indexlist :normal-list="rule"
+  <div class="container" v-if="['MDC', 'ADRG', 'DRG'].includes(menu)">
+      <wxc-indexlist :normal-list="rules"
                     @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
                     :show-index="true"></wxc-indexlist>
+  </div>
+  <div class="container" v-else>
+      <list class="list" @loadmore="fetch" loadmoreoffset="30000">
+        <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
+          <wxc-cell
+                    :label="rule.code"
+                    @wxcCellClicked="wxcIndexlistItemClicked(rule)"
+                    :has-margin="false"
+                    :extraContent="rule.desc"></wxc-cell>
+        </cell>
+      </list>
   </div>
 </template>
 
 <script>
 import { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading } from 'weex-ui'
+import { getDetails } from '../../utils/details'
+import { getServer } from '../../utils/server'
+const modal = weex.requireModule('modal')
 export default {
   components: { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
   data () {
@@ -21,10 +33,15 @@ export default {
     }
   },
   computed: {
-    rule: {
+    menu: {
+      get () {
+        return this.$store.state.Library.libraryMenu
+      }
+    },
+    rules: {
       get () {
         let data = []
-        switch (this.$store.state.Library.libraryMenu) {
+        switch (this.menu) {
           case 'MDC':
             data = this.$store.state.Library.mdcRule
             break
@@ -52,74 +69,44 @@ export default {
   },
   methods: {
     wxcIndexlistItemClicked (e) {
-      this.$store.commit('SET_isBottomShow', true)
-      this.$store.commit('SET_info', e.item)
-      let button = ''
-      let isInfoButtonShow = false
-      let gridList = []
-      let details = []
-      switch (this.$store.state.Library.libraryMenu) {
-        case 'MDC':
-          button = `${e.item.code}-ADRG规则`
-          isInfoButtonShow = true
-          gridList = e.item.icd9_aa.map((x) => {
-            const obj = {}
-            obj.title = x
-            return obj
-          })
-          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
-          break
-        case 'ADRG':
-          button = `${e.item.code}-DRG规则`
-          isInfoButtonShow = true
-          gridList = e.item.icd10_aa.map((x) => {
-            const obj = {}
-            obj.title = x
-            return obj
-          })
-          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
-          break
-        case 'DRG':
-          button = ``
-          gridList = []
-          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
-          break
-        case 'ICD10':
-          button = ``
-          gridList = e.item.adrg.map((x) => {
-            const obj = {}
-            obj.title = x
-            return obj
-          })
-          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
-          break
-        case 'ICD9':
-          button = ``
-          gridList = e.item.adrg.map((x) => {
-            const obj = {}
-            obj.title = x
-            return obj
-          })
-          details = [{'label': '编码', 'title': 'code'}, {'label': '名称', 'title': 'desc'}, {'label': '年份', 'title': 'year'}, {'label': '版本', 'title': 'version'}]
-          break
-        default :
-          break
+      if (['MDC', 'ADRG', 'DRG'].includes(this.menu)) {
+        e = e.item
       }
-      this.$store.commit('SET_isInfoButtonShow', isInfoButtonShow)
-      this.$store.commit('SET_buttonText', button)
-      this.$store.commit('SET_gridList', gridList)
-      this.$store.commit('SET_details', details)
+      this.$store.commit('SET_isBottomShow', true)
+      this.$store.commit('SET_info', e)
+      this.$store.commit('SET_infoLevel', 1)
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
+      this.$store.commit('SET_infoPage', getDetails(`${this.menu}规则详情`, e))
     },
     openBottomPopup () {
-      // this.isBottomShow = true
       this.$store.commit('SET_isBottomShow', true)
     },
     popupOverlayBottomClick () {
-      // this.isBottomShow = false
       this.$store.commit('SET_isBottomShow', false)
+    },
+    swipe (e) {
+      if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
+        this.$store.commit('SET_infoMenu', '规则详情')
+        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, this.menu])
+        this.$store.commit('SET_infoLevel', 1)
+      }
+    },
+    fetch () {
+      if (this.menu === 'ICD10') {
+        this.$store.commit('SET_icd10_page', this.$store.state.Library.icd10Page + 1)
+      } else {
+        this.$store.commit('SET_icd9_page', this.$store.state.Library.icd9Page + 1)
+      }
+      getServer(this, 'all', this.menu)
+      modal.toast({ message: '加载下一页', duration: 1 })
     }
   }
 }
 </script>
 <style scoped>
+.container {
+  margin-top: 91px;
+  width: 750px;
+  height: 1250px;
+}
 </style>

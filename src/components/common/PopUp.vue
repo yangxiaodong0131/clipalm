@@ -5,7 +5,7 @@
             pos="right"
             width="560">
   <wxc-button :text="button"
-        v-show="isInfoButtonShow"
+        :v-show="isInfoButtonShow"
         size="big"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   <div class="demo-content">

@@ -11,12 +11,17 @@ const state = {
   infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false }
+  infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  isMiniShow: false,
+  test: false
 }
 
 const mutations = {
   SET_visible (state, x) {
     state.visible = x
+  },
+  SET_test (state, x) {
+    state.test = x
   },
   SET_activeTab (state, x) {
     state.activeTab = x
@@ -52,21 +57,15 @@ const mutations = {
   SET_infoMenu (state, x) {
     state.infoMenu = x
   },
+  SET_infoPageClear (state) {
+    const clear = { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false }
+    state.infoLevel = 0
+    state.infoPage1 = clear
+    state.infoPage2 = clear
+    state.infoPage3 = clear
+    state.infoPage4 = clear
+  },
   SET_infoPage (state, x) {
-    switch (state.infoLevel) {
-      case 1:
-        x.info = state.infoPage1.info
-        break
-      case 2:
-        x.info = state.infoPage2.info
-        break
-      case 3:
-        x.info = state.infoPage3.info
-        break
-      case 4:
-        x.info = state.infoPage4.info
-        break
-    }
     switch (state.infoLevel) {
       case 1:
         state.infoPage1 = x
@@ -84,11 +83,15 @@ const mutations = {
   },
   SET_infoLevel (state, x) {
     state.infoLevel = x
+  },
+  SET_isMiniShow (state, x) {
+    state.isMiniShow = x
   }
 }
 
 const actions = {
   someAsyncTask ({ commit }) {
+    commit('SET_test')
     commit('SET_visible')
     commit('SET_activeTab')
     commit('SET_menus')
@@ -100,6 +103,8 @@ const actions = {
     commit('SET_infoMenu')
     commit('SET_infoPage')
     commit('SET_infoLevel')
+    commit('SET_isMiniShow')
+    commit('SET_infoPageClear')
   }
 }
 

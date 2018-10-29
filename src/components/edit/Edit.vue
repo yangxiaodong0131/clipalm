@@ -1,24 +1,32 @@
 <template>
-  <div class="demo" @swipe="swipe">
+  <div class="demo" @swipe="swipe" style="height:1000px;">
     <text class="demo-title">{{wxcCellTitle}}</text>
-    <wxc-cell v-for="wt4 in wt4Case"
-              v-bind:key="wt4.id"
-              :label="wt4.drg"
-              @wxcCellClicked="wxcCellClicked(wt4)"
-              :has-margin="false"
-              :extraContent="wt4.extraContent"></wxc-cell>
+    <list class="list" @loadmore="fetch" loadmoreoffset="20">
+      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
+        <div class="panel" @longpress="longpress(wt4)">
+          <wxc-cell
+            :label="wt4.drg"
+            :has-margin="false"
+            @wxcCellClicked="wxcCellClicked(wt4)"
+            :extraContent="wt4.extraContent">
+          </wxc-cell>
+        </div>
+      </cell>
+    </list>
   </div>
 </template>
 
 <script>
-import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading } from 'weex-ui'
+import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading, WxcButton } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
+const modal = weex.requireModule('modal')
 export default {
-  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
+  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton },
   data () {
     return {
-      forceValue: 0
+      forceValue: 0,
+      refreshing: false
     }
   },
   created () {
@@ -49,64 +57,45 @@ export default {
       this.$store.commit('SET_menu', [i, menu])
       this.$store.commit('SET_infoMenu', this.wxcCellTitle)
       this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails(menu)
+      const details = getDetails(menu, e)
       this.$store.commit('SET_infoPage', details)
-      this.$store.commit('SET_info', e)
     },
     swipe (e) {
-      const page = this.$store.state.Edit.wt4Page
-      if (e.direction === 'up') {
-        this.$store.commit('SET_wt4Page', page + 1)
-        getServer(this, 'all', this.$store.state.Edit.editMenu)
-      } else if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
+      if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
         this.$store.commit('SET_infoMenu', this.wxcCellTitle)
         this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
         this.$store.commit('SET_infoLevel', 1)
       }
+    },
+    fetch () {
+      this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
+      getServer(this, 'all', this.$store.state.Edit.editMenu)
+      modal.toast({ message: '加载下一页', duration: 1 })
+    },
+    longpress (wt4) {
+      modal.toast({ message: '跳转论坛', duration: 1 })
+      this.$store.commit('SET_test', true)
+      this.$store.commit('SET_visible', true)
+      this.$store.commit('SET_menus', ['论坛', '自定义查询'])
+      this.$store.commit('SET_visible', false)
+      this.$store.commit('SET_activeTab', 4)
+      this.$store.commit('SET_menu', [4, '论坛'])
+      // this.$store.commit('SET_menu', [4, '论坛'])
+      // this.$store.commit('SET_activeTab', 4)
+      // this.$store.commit('SET_menus', ['报表', '自定义查询'])
+      // this.$store.commit('SET_isMiniShow', true)
     }
   }
 }
 </script>
 
 <style scoped>
-  .wxc-demo {
-    width: 750px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: #ffffff;
-  }
-  .container {
-    flex: 1;
+  .demo-title {
+    font-size: 30px;
   }
   .demo {
     width: 750px;
-    background-color: #f2f3f4;
-  }
-  .category {
-    margin-top: 40px;
-  }
-  .default {
-    color: #000000;
-  }
-  .active {
-    color: #FFC900;
-  }
-  .red {
-    color: #C3413D;
-  }
-  .image {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
-  }
-  .demo-title {
-    font-size: 30px;
-    color: #333333;
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-bottom: 16px;
+    height: 1250px;
+    margin-top: 91px;
   }
 </style>

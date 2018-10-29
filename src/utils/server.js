@@ -19,10 +19,10 @@ export function getServer (obj, type, menu, value = null) {
         url = 'rule_bj_drg?plat=client'
         break
       case 'ICD9':
-        url = 'rule_bj_icd9?plat=client'
+        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}`
         break
       case 'ICD10':
-        url = 'rule_bj_icd10?plat=client'
+        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}`
         break
       case '报表':
         url = 'wt4_stat_cv?plat=client'
@@ -47,10 +47,6 @@ export function getServer (obj, type, menu, value = null) {
     url = `rule_bj_drg?adrg=${value.code}&plat=client`
   } else if (type === 'wt4') {
     url = 'wt4_2017?plat=client'
-  } else if (type === 'icd10One') {
-    url = `rule_bj_icd10?page=${obj.$store.state.Library.icd10Page + 1}&plat=client`
-  } else if (type === 'icd9One') {
-    url = `rule_bj_icd9?page=${obj.$store.state.Library.icd9Page + 1}&plat=client`
   } else if (type === 'statOne') {
     url = `wt4_stat_cv?plat=client&drg=${value}`
   }
@@ -72,6 +68,7 @@ export function getServer (obj, type, menu, value = null) {
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
             })
+            console.log(res.data)
             setStore(obj, menu, res.data)
           } else {
             obj.info = '- 网络连接失败 -'
@@ -116,6 +113,7 @@ function setStore (obj, menu, rdata) {
       break
     case 'ICD9':
       obj.$store.commit('SET_library_menu', menu)
+      obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
       obj.$store.commit('SET_icd9_rule', rdata.data)
       break
     case 'ICD10':

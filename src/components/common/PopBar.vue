@@ -48,10 +48,13 @@ export default {
       if (['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历'].includes(menu)) {
         this.$store.commit('SET_editMenu', menu)
         this.$store.commit('SET_wt4Page', 1)
+        this.$store.commit('SET_wt4Case', [])
         getServer(this, 'all', menu)
       } else if (menu === '自定义查询') {
       } else if (['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu)) {
         this.$store.commit('SET_library_menu', menu)
+        getServer(this, 'all', menu)
+      } else {
         getServer(this, 'all', menu)
       }
     }

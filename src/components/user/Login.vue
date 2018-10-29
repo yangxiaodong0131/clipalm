@@ -182,6 +182,7 @@ export default {
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 30px;
+    margin-top: 0px;
   }
   .text {
     color: #666666;

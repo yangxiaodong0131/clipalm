@@ -14,34 +14,39 @@
     </div>
     <!-- edit页 -->
     <div class="panel">
-      <Edit v-if="menu[1] == '未入组病历'"></Edit>
+      <Edit v-if="['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历'].includes(menu[1])"></Edit>
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
+      <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
       <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
     <div class="panel">
       <Query v-if="menu[2] == '自定义查询'"></Query>
+      <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
     <div class="wrapper">
-      <Report v-if="menu[3] == '数据展示'"></Report>
-      <Query v-if="menu[3] == '自定义查询'"></Query>
+      <Report v-if="menu[3] == '报表'"></Report>
+      <Query v-else-if="menu[3] == '自定义查询'"></Query>
+      <PopRight v-else></PopRight>
     </div>
     <!-- forum页 -->
     <div class="panel">
-      <Forum v-if="menu[4] == '数据展示'"></Forum>
+      <Forum v-if="menu[4] == '论坛'"></Forum>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>
   <pop-bar></pop-bar>
+  <mini-bar></mini-bar>
   <!-- <pop-up></pop-up> -->
 </div>
 </template>
 
 <script>
   import { WxcTabBar, Utils } from 'weex-ui';
+  import { getServer } from '../utils/server'
   import PopBar from './common/PopBar'
   import PopUp from './common/PopUp'
   import PopRight from './common/PopRight'
@@ -49,13 +54,14 @@
   import User from './user/User'
   import Login from './user/Login'
   import Edit from './edit/Edit'
+  import SingleGroup from './edit/SingleGroup'
   import Library from './library/Library'
   import Report from './stat/Report'
   import Query from './stat/Query'
   import Forum from './forum/Forum'
 
   export default {
-    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, Library,
+    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, SingleGroup, Library,
       Report, Query, Forum, PopRight, MiniBar },
     data: () => ({
       tabs: [{
@@ -66,7 +72,7 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询'],
+          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询', '单条分组'],
           // icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
@@ -107,7 +113,17 @@
     computed: {
       menu () {
         return this.$store.state.Home.menu
-      }
+      },
+      test () {
+        return this.$store.state.Home.test
+      },
+      isShow () {
+        let isShow = false
+        if (this.$store.state.Home.activeTab > 0) {
+          isShow = true
+        }
+        return isShow
+      },
     },
     created () {
       const tabPageHeight = Utils.env.getPageHeight();
@@ -123,24 +139,35 @@
           this.$store.commit('SET_visible', true)
         }
         this.$store.commit('SET_activeTab', i)
+        this.$store.commit('SET_infoPageClear')
         switch (i) {
           case 0:
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
+            this.$store.commit('SET_isMiniShow', false)
             break
           case 1:
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
+            // if (this.$store.state.Edit.wt4Case.length === 0) {
+            //   getServer(this, 'all', '未入组病历')
+            //   this.$store.commit('SET_editMenu', '未入组病历')
+            // }
             break
           case 2:
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
             break
           case 3:
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
             break
           case 4:
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
             break
           default :
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
+            this.$store.commit('SET_isMiniShow', true)
         }
       }
     }
@@ -161,7 +188,7 @@
   }
   .panel {
     width: 750px;
-    height: 1050px;
+    height: 1250px;
     background-color: #C6e2FF;
     align-items: center;
     /* justify-content: center; */
