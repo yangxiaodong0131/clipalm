@@ -54,6 +54,10 @@ export default {
       } else if (['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu)) {
         this.$store.commit('SET_library_menu', menu)
         getServer(this, 'all', menu)
+      } else if (menu === '论坛') {
+        this.$store.commit('SET_post', [])
+        this.$store.commit('SET_forumPage', 1)
+        getServer(this, 'all', '论坛', null)
       } else {
         getServer(this, 'all', menu)
       }

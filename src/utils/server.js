@@ -40,7 +40,11 @@ export function getServer (obj, type, menu, value = null) {
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
       case '论坛':
-        url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
+        if (value) {
+          url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
+        } else {
+          url = `forum?plat=client&lable=&page=${obj.$store.state.Forum.forumPage}`
+        }
     }
   } else if (type === 'adrgOne') {
     url = `rule_bj_adrg?mdc=${value.mdc}&plat=client`
@@ -50,13 +54,13 @@ export function getServer (obj, type, menu, value = null) {
     url = 'wt4_2017?plat=client'
   } else if (type === 'statOne') {
     url = `wt4_stat_cv?plat=client&drg=${value}`
+  } else if (type === 'forumOne') {
+    url = `forum?id=${value.id}`
   }
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      const a = 'sdasdas'
-      // if (e.result === 'success') {
-      if (a === 'success') {
+      if (e.result === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
@@ -163,6 +167,9 @@ function setStore (obj, menu, rdata) {
       data = data.concat(rdata.data)
       obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
       obj.$store.commit('SET_post', data)
+      break
+    case '帖子':
+      obj.$store.commit('SET_forumContent', rdata.data[0])
       break
     case 'info':
       if (rdata.data.length === 1) {

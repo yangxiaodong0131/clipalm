@@ -36,7 +36,7 @@
     <!-- forum页 -->
     <div class="panel">
       <Forum v-if="menu[4] == '论坛'"></Forum>
-      <Content v-if="menu[4] == '帖子内容'"></Content>
+      <Content v-if="menu[4] == '帖子'"></Content>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>

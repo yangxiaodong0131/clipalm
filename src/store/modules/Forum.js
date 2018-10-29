@@ -1,7 +1,8 @@
 const state = {
   type: '',
   post: [],
-  forumPage: 1
+  forumPage: 1,
+  forumContent: {}
 }
 
 const mutations = {
@@ -13,6 +14,9 @@ const mutations = {
   },
   SET_forumPage (state, x) {
     state.forumPage = x
+  },
+  SET_forumContent (state, x) {
+    state.forumContent = x
   }
 }
 
@@ -21,6 +25,7 @@ const actions = {
     commit('SET_forumType')
     commit('SET_post')
     commit('SET_forumPage')
+    commit('SET_forumContent')
   }
 }
 

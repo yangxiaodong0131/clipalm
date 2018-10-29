@@ -1,25 +1,27 @@
 <template>
   <div class="panel">
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
-       <!-- <wxc-special-rich-text :config-list="specialList" @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-special-rich-text> -->
-       <wxc-rich-text :config-list="specialList"
-                   @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
+      <div class="panel" @click="wxcRichTextLinkClick(index)">
+        <wxc-rich-text :config-list="specialList"></wxc-rich-text>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { WxcRichText, WxcSpecialRichText } from 'weex-ui'
-
+import { getServer } from '../../utils/server'
 export default {
   components: { WxcRichText, WxcSpecialRichText },
   data: () => ({
   }),
   computed: {
+    posts () {
+      return this.$store.state.Forum.post
+    },
     specialConfigList () {
       const configs = []
-      const posts = this.$store.state.Forum.post
-      posts.map((x) => {
+      this.posts.map((x) => {
         const config = [
           {
             type: 'tag',
@@ -47,8 +49,14 @@ export default {
   created: function () {
   },
   methods: {
-    wxcRichTextLinkClick (e) {
-      console.log('ss')
+    wxcRichTextLinkClick (i) {
+      // this.$store.commit('SET_isBottomShow', true)
+      // this.$store.commit('SET_visible', false)
+      const menu = '帖子'
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
+      // this.$store.commit('SET_infoMenu', this.wxcCellTitle)
+      // this.$store.commit('SET_infoLevel', 1)
+      getServer(this, 'forumOne', '帖子', this.posts[i])
     }
   }
 }
