@@ -2,6 +2,7 @@
 <div class="homepage">
   <mini-bar></mini-bar>
   <wxc-tab-bar
+    ref="wxcTabBar"
     :tab-titles="tabs"
     :tab-styles="tabStyles"
     title-type="icon"
@@ -112,10 +113,13 @@
     }),
     computed: {
       menu () {
+        if (this.$store.state.Home.showForum) {
+          this.$refs['wxcTabBar'].setPage(4)
+        }
         return this.$store.state.Home.menu
       },
-      test () {
-        return this.$store.state.Home.test
+      showForum () {
+        return this.$store.state.Home.showForum
       },
       isShow () {
         let isShow = false
@@ -125,12 +129,12 @@
         return isShow
       },
     },
-    created () {
+    created: function () {
       const tabPageHeight = Utils.env.getPageHeight();
       // 如果页面没有导航栏，可以用下面这个计算高度的方法
       // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
-      const { tabStyles } = this;
-      this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' };
+      const { tabStyles } = this
+      this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
     },
     methods: {
       wxcTabBarCurrentTabSelected (e) {

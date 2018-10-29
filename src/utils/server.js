@@ -70,7 +70,6 @@ export function getServer (obj, type, menu, value = null) {
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
             })
-            console.log(res.data)
             setStore(obj, menu, res.data)
           } else {
             obj.info = '- 网络连接失败 -'

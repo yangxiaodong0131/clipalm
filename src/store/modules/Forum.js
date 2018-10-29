@@ -1,16 +1,21 @@
 const state = {
-  type: ''
+  type: '',
+  title: ''
 }
 
 const mutations = {
   SET_forumType (state, x) {
     state.type = x
+  },
+  SET_title (state, x) {
+    state.title = x
   }
 }
 
 const actions = {
   someAsyncTask ({ commit }) {
     commit('SET_forumType')
+    commit('SET_title')
   }
 }
 

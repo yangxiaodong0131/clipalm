@@ -82,7 +82,7 @@ export default {
     }
   },
   created: function () {
-    this.test()
+    // this.test()
   },
   methods: {
     login () {
