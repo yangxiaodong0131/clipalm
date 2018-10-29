@@ -1,5 +1,6 @@
 <template>
-  <div class="panel">
+  <web src="http://127.0.0.1:3009/drgwork/clipalm_version" style="width: 1000px; height: 1000px"></web>
+  <!-- <div class="panel">
     <text class="text">掌上医助</text>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
@@ -51,7 +52,7 @@
       <wxc-button type="blue" text="登陆" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
       <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -80,6 +81,9 @@ export default {
         marginTop: '20px'
       }
     }
+  },
+  created: function () {
+    this.test()
   },
   methods: {
     login () {
@@ -122,6 +126,9 @@ export default {
         this.visible = true
       }
     },
+    test () {
+      console.log('dsadasdsadwqeqweqwrqw')
+    },
     NameOnFocus () {
       this.value = '用户名输入中。。。'
       modal.toast({ 'message': 'onfocus', 'duration': 1 })
@@ -141,7 +148,6 @@ export default {
     NameOnReturn () {
       modal.toast({ 'message': 'return.click', 'duration': 1 })
     },
-
     PwdOnFocus () {
       this.value = '密码输入中。。。'
       modal.toast({ 'message': 'onfocus', 'duration': 1 })
