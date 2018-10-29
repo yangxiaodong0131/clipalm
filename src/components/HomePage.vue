@@ -191,10 +191,7 @@
     height: 1250px;
     background-color: #C6e2FF;
     align-items: center;
-    /* justify-content: center; */
     margin-left: 0px;
-    /* border-width: 2px; */
-    /* border-style: solid; */
     border-color: #BBBBBB;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -204,7 +201,6 @@
   }
   .item-container {
     width: 750px;
-    /* background-color: green; */
     align-items: center;
     justify-content: center;
   }

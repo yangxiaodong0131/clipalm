@@ -84,3 +84,10 @@ export default {
     margin-bottom: 30px;
   }
 </style>
+<style scoped>
+.container {
+  margin-top: 91px;
+  width: 750px;
+  height: 1250px;
+}
+</style>
