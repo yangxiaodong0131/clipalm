@@ -7,6 +7,7 @@
                     text-color="#FFFFFF"
                     :left-button="leftButtonShow"
                     :show="isShow"
+                    use-default-return="false"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick">
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
@@ -123,6 +124,9 @@ export default {
             break
           case 3:
             title = '报表'
+            break
+          case 4:
+            title = this.$store.state.Forum.forumMenu
             break
         }
       }

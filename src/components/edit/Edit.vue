@@ -5,7 +5,7 @@
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
-            :label="wt4.drg"
+            :label="wt4.disease_code"
             :has-margin="false"
             @wxcCellClicked="wxcCellClicked(wt4)"
             :extraContent="wt4.extraContent">
@@ -74,16 +74,12 @@ export default {
     },
     longpress (wt4) {
       modal.toast({ message: '跳转论坛', duration: 1 })
-      this.$store.commit('SET_test', true)
-      this.$store.commit('SET_visible', true)
+      this.$store.commit('SET_showForum', true)
       this.$store.commit('SET_menus', ['论坛', '自定义查询'])
-      this.$store.commit('SET_visible', false)
-      this.$store.commit('SET_activeTab', 4)
       this.$store.commit('SET_menu', [4, '论坛'])
-      // this.$store.commit('SET_menu', [4, '论坛'])
-      // this.$store.commit('SET_activeTab', 4)
-      // this.$store.commit('SET_menus', ['报表', '自定义查询'])
-      // this.$store.commit('SET_isMiniShow', true)
+      this.$store.commit('SET_post', [])
+      this.$store.commit('SET_forumPage', 1)
+      getServer(this, 'all', '论坛', wt4)
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <scroller>
+  <scroller class="container">
     <div>
       <text class="title">主要诊断编码(必填)</text>
       <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" :autofocus="true" value="B25.001"/>
@@ -58,30 +58,12 @@
       <textarea placeholder="请输入手术/操作编码，中间以';'分隔，如'B25.901;B25.902" rows='3' name="opers_code"></textarea>
     </div>
     <div>
+      <text>sadfzdsf</text>
       <wxc-button text="提交分组"
         @wxcButtonClicked='submit'></wxc-button>
     </div>
   </scroller>
 </template>
-
-<style scoped>
-  .input {
-    font-size: 30px;
-    height: 50px;
-    width: 800px;
-  }
-  .title{
-    font-size: 40px;
-    height:60;
-    padding: 10;
-    color:ghostwhite;
-    background: gray;
-  }
-.textarea{
-    font-size: 30px;
-    width: 800px;
-}
-</style>
 
 <script>
 import { WxcGridSelect, WxcButton } from 'weex-ui'
@@ -137,3 +119,25 @@ export default {
   }
 }
 </script>
+<style scoped>
+.container {
+  width: 750px;
+  margin-top: 91px;
+}
+  .input {
+    font-size: 30px;
+    height: 50px;
+    width: 800px;
+  }
+.title{
+  font-size: 25px;
+  /* height:60; */
+  /* padding: 10; */
+  /* color:ghostwhite;
+  background: gray; */
+}
+.textarea{
+  /* font-size: 30px; */
+  width: 750px;
+}
+</style>

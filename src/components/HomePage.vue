@@ -2,6 +2,7 @@
 <div class="homepage">
   <mini-bar></mini-bar>
   <wxc-tab-bar
+    ref="wxcTabBar"
     :tab-titles="tabs"
     :tab-styles="tabStyles"
     title-type="icon"
@@ -35,6 +36,7 @@
     <!-- forum页 -->
     <div class="panel">
       <Forum v-if="menu[4] == '论坛'"></Forum>
+      <Content v-if="menu[4] == '帖子'"></Content>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>
@@ -59,10 +61,11 @@
   import Report from './stat/Report'
   import Query from './stat/Query'
   import Forum from './forum/Forum'
+  import Content from './forum/Content'
 
   export default {
     components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar },
+      Report, Query, Forum, PopRight, MiniBar, Content },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -112,10 +115,13 @@
     }),
     computed: {
       menu () {
+        if (this.$store.state.Home.showForum) {
+          this.$refs['wxcTabBar'].setPage(4)
+        }
         return this.$store.state.Home.menu
       },
-      test () {
-        return this.$store.state.Home.test
+      showForum () {
+        return this.$store.state.Home.showForum
       },
       isShow () {
         let isShow = false
@@ -125,12 +131,12 @@
         return isShow
       },
     },
-    created () {
+    created: function () {
       const tabPageHeight = Utils.env.getPageHeight();
       // 如果页面没有导航栏，可以用下面这个计算高度的方法
       // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
-      const { tabStyles } = this;
-      this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' };
+      const { tabStyles } = this
+      this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
     },
     methods: {
       wxcTabBarCurrentTabSelected (e) {

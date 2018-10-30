@@ -112,6 +112,7 @@ export default {
 <style scoped>
   .demo {
     width: 750px;
+    height: 1250px;
     background-color: #f2f3f4;
     margin-top: 91px;
   }

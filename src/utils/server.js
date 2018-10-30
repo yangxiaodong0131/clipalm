@@ -39,7 +39,12 @@ export function getServer (obj, type, menu, value = null) {
       case '高CV病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
-      default:
+      case '论坛':
+        if (value) {
+          url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
+        } else {
+          url = `forum?plat=client&lable=&page=${obj.$store.state.Forum.forumPage}`
+        }
     }
   } else if (type === 'adrgOne') {
     url = `rule_bj_adrg?mdc=${value.mdc}&plat=client`
@@ -49,13 +54,13 @@ export function getServer (obj, type, menu, value = null) {
     url = 'wt4_2017?plat=client'
   } else if (type === 'statOne') {
     url = `wt4_stat_cv?plat=client&drg=${value}`
+  } else if (type === 'forumOne') {
+    url = `forum?id=${value.id}`
   }
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      const a = 'sdasdas'
-      // if (e.result === 'success') {
-      if (a === 'success') {
+      if (e.result === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
@@ -70,7 +75,6 @@ export function getServer (obj, type, menu, value = null) {
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
             })
-            console.log(res.data)
             setStore(obj, menu, res.data)
           } else {
             obj.info = '- 网络连接失败 -'
@@ -157,6 +161,15 @@ function setStore (obj, menu, rdata) {
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
+      break
+    case '论坛':
+      data = obj.$store.state.Forum.post
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
+      obj.$store.commit('SET_post', data)
+      break
+    case '帖子':
+      obj.$store.commit('SET_forumContent', rdata.data[0])
       break
     case 'info':
       if (rdata.data.length === 1) {

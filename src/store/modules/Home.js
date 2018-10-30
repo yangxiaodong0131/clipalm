@@ -13,20 +13,23 @@ const state = {
   infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   isMiniShow: false,
-  test: false
+  showForum: false
 }
 
 const mutations = {
   SET_visible (state, x) {
     state.visible = x
   },
-  SET_test (state, x) {
-    state.test = x
+  SET_showForum (state, x) {
+    state.showForum = x
   },
   SET_activeTab (state, x) {
     state.activeTab = x
   },
   SET_menus (state, x) {
+    if (!x.includes('论坛')) {
+      state.showForum = false
+    }
     state.menus = x
   },
   SET_menu (state, x) {
@@ -91,7 +94,7 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
-    commit('SET_test')
+    commit('SET_showForum')
     commit('SET_visible')
     commit('SET_activeTab')
     commit('SET_menus')
