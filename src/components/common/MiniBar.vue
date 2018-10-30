@@ -124,6 +124,9 @@ export default {
           case 3:
             title = '报表'
             break
+          case 4:
+            title = this.$store.state.Forum.forumMenu
+            break
         }
       }
       return title

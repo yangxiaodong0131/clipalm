@@ -2,6 +2,7 @@ const state = {
   type: '',
   post: [],
   forumPage: 1,
+  forumMenu: '',
   forumContent: {}
 }
 
@@ -16,7 +17,13 @@ const mutations = {
     state.forumPage = x
   },
   SET_forumContent (state, x) {
+    if (x) {
+      state.forumMenu = x.title
+    }
     state.forumContent = x
+  },
+  SET_forumMenu (state, x) {
+    state.forumMenu = x
   }
 }
 
@@ -26,6 +33,7 @@ const actions = {
     commit('SET_post')
     commit('SET_forumPage')
     commit('SET_forumContent')
+    commit('SET_forumMenu')
   }
 }
 

@@ -57,6 +57,7 @@ export default {
       } else if (menu === '论坛') {
         this.$store.commit('SET_post', [])
         this.$store.commit('SET_forumPage', 1)
+        this.$store.commit('SET_forumMenu', menu)
         getServer(this, 'all', '论坛', null)
       } else {
         getServer(this, 'all', menu)

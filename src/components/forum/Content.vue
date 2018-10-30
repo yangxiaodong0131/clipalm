@@ -22,7 +22,6 @@ export default {
   },
   computed: {
     datas () {
-      console.log(this.$store.state.Forum.forumContent.content)
       return this.$store.state.Forum.forumContent.content
     }
   },
