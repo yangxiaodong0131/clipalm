@@ -17,6 +17,8 @@
       版本号：{{serverVersion.version}}
       更新时间：{{serverVersion.datetime}}
       更新日志：{{serverVersion.record}}
+
+      跳过更新请设置 store/modules/Home.js 里面设置version为0.0.1
     </text>
     <wxc-button text="复制下载链接到剪贴板"
           :show="true"
