@@ -5,7 +5,7 @@
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
-            :label="wt4.disease_code"
+            :label="wt4.disease_name"
             :has-margin="false"
             @wxcCellClicked="wxcCellClicked(wt4)"
             :extraContent="wt4.extraContent">
@@ -36,7 +36,7 @@ export default {
       get () {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
           const obj = x
-          obj.extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.disease_code}`
+          obj.extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.drg}`
           return obj
         })
         return data
