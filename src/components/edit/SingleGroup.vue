@@ -124,20 +124,15 @@ export default {
   width: 750px;
   margin-top: 91px;
 }
-  .input {
-    font-size: 30px;
-    height: 50px;
-    width: 800px;
-  }
+.input {
+  font-size: 30px;
+  height: 50px;
+  width: 800px;
+}
 .title{
   font-size: 25px;
-  /* height:60; */
-  /* padding: 10; */
-  /* color:ghostwhite;
-  background: gray; */
 }
 .textarea{
-  /* font-size: 30px; */
   width: 750px;
 }
 </style>
