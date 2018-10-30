@@ -14,7 +14,7 @@ const state = {
   infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   isMiniShow: false,
   showForum: false,
-  version: '0.0.0',
+  version: '0.0.1',
   serverVersion: ''
 }
 
