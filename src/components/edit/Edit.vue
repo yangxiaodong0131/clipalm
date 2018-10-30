@@ -5,7 +5,7 @@
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
-            :label="wt4.drg"
+            :label="wt4.disease_code"
             :has-margin="false"
             @wxcCellClicked="wxcCellClicked(wt4)"
             :extraContent="wt4.extraContent">
