@@ -1,6 +1,5 @@
 <template>
 <div class="homepage" v-if="showNewVersion">
-  123456
   <Version></Version>
 </div>
 <div class="homepage" v-else>
