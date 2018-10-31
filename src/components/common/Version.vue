@@ -58,9 +58,7 @@ export default {
     },
     wxcButtonClicked () {
       modal.toast({ message: '已复制到剪贴板，请打开浏览器粘贴下载', duration: 3 })
-      clipboard.getString(ret => {
-        this.message = `${this.serverVersion.path}`
-      })
+      clipboard.setString(`${this.serverVersion.path}`)
     }
   }
 }
