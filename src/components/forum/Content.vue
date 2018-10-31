@@ -1,11 +1,11 @@
 <template>
   <div class="demo">
       <div class="demo-content">
-        <br/><br/><br/>
         <wxc-cell v-for="(data, index) in datas"
           :key="index"
           :label="data.username"
           :title="data.content"
+          :extraContent="data.datetime"
           :has-arrow="false"
           ></wxc-cell>
       </div>
@@ -22,6 +22,7 @@ export default {
   },
   computed: {
     datas () {
+      console.log(this.$store.state.Forum.forumContent.content)
       return this.$store.state.Forum.forumContent.content
     }
   },
