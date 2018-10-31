@@ -14,8 +14,9 @@ const state = {
   infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   isMiniShow: false,
   showForum: false,
+  // 发布版本修改
   version: '0.0.1',
-  serverVersion: ''
+  serverVersion: { version: '0.0.1' }
 }
 
 const mutations = {
