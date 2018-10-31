@@ -1,6 +1,5 @@
 <template>
 <div class="homepage" v-if="showNewVersion">
-  123456
   <Version></Version>
 </div>
 <div class="homepage" v-else>
@@ -33,7 +32,8 @@
     </div>
     <!-- stat页 -->
     <div class="wrapper">
-      <Report v-if="menu[3] == '报表'"></Report>
+      <Report v-if="menu[3] == '统计分析'"></Report>
+      <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
       <PopRight v-else></PopRight>
     </div>
@@ -64,13 +64,14 @@
   import SingleGroup from './edit/SingleGroup'
   import Library from './library/Library'
   import Report from './stat/Report'
+  import Charts from './stat/Charts'
   import Query from './stat/Query'
   import Forum from './forum/Forum'
   import Content from './forum/Content'
 
   export default {
     components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, Content, Version },
+      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -92,7 +93,7 @@
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: 'DRG',
-          menu: ['报表', '自定义查询'],
+          menu: ['统计分析', '报表', '自定义查询'],
           // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'

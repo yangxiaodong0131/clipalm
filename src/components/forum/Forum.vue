@@ -1,5 +1,5 @@
 <template>
-  <div class="panel">
+  <div class="container">
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
@@ -27,7 +27,7 @@ export default {
             type: 'tag',
             value: x.label,
             style: {
-              fontSize: 24,
+              fontSize: 34,
               color: '#3D3D3D',
               borderColor: '#FFC900',
               backgroundColor: '#FFC900',
@@ -38,7 +38,7 @@ export default {
             type: 'text',
             value: x.title,
             theme: 'black',
-            style: { fontSize: 28 }
+            style: { fontSize: 35 }
           }
         ]
         configs.push(config)
@@ -63,30 +63,25 @@ export default {
 </script>
 
 <style scoped>
-  .wrapper {
-    /* flex-direction: column; */
-    justify-content: center;
-  }
   .panel {
     width: 750px;
     background-color: #f2f3f4;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0px;
-    border-width: 2px;
+    font-size: 30px;
     border-style: solid;
-    border-color: #BBBBBB;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 1px;
+    border-bottom-color: gray;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 30px;
   }
-</style>
-<style scoped>
 .container {
   margin-top: 91px;
   width: 750px;
   height: 1250px;
+  font-size: 30px;
 }
 </style>

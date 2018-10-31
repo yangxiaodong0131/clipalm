@@ -1,6 +1,5 @@
 <template>
   <div class="demo" @swipe="swipe" style="height:1000px;">
-    <text class="demo-title">{{wxcCellTitle}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
@@ -36,7 +35,19 @@ export default {
       get () {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
           const obj = x
-          obj.extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.drg}`
+          switch (this.$store.state.Edit.editMenu) {
+            case '未入组病历':
+              obj.extraContent = `${x.diags_code}`
+              break
+            case 'QY病历':
+              obj.extraContent = `${x.opers_code}`
+              break
+            case '高CV病历':
+              obj.extraContent = `${x.total_expense}元·入组DRG平均费用`
+              break
+            default:
+              obj.extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.drg}`
+          }
           return obj
         })
         return data
