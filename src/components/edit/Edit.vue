@@ -35,18 +35,24 @@ export default {
       get () {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
           const obj = x
+          let extraContent = ``
           switch (this.$store.state.Edit.editMenu) {
             case '未入组病历':
-              obj.extraContent = `${x.diags_code}`
+              extraContent = `${x.diags_code}`
               break
             case 'QY病历':
-              obj.extraContent = `${x.opers_code}`
+              extraContent = `${x.opers_code}`
               break
             case '高CV病历':
-              obj.extraContent = `${x.total_expense}元·入组DRG平均费用`
+              extraContent = `${x.total_expense}元·入组DRG平均费用`
               break
             default:
-              obj.extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.drg}`
+              extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.drg}`
+          }
+          if (extraContent === '') {
+            obj.extraContent = '无'
+          } else {
+            obj.extraContent = extraContent
           }
           return obj
         })
