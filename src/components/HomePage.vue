@@ -1,5 +1,9 @@
 <template>
-<div class="homepage">
+<div class="homepage" v-if="showNewVersion">
+  123456
+  <Version></Version>
+</div>
+<div class="homepage" v-else>
   <mini-bar></mini-bar>
   <wxc-tab-bar
     ref="wxcTabBar"
@@ -48,7 +52,8 @@
 
 <script>
   import { WxcTabBar, Utils } from 'weex-ui';
-  import { getServer } from '../utils/server'
+  import { getServer, getLastVersion } from '../utils/server'
+  import Version from './common/Version'
   import PopBar from './common/PopBar'
   import PopUp from './common/PopUp'
   import PopRight from './common/PopRight'
@@ -65,7 +70,7 @@
 
   export default {
     components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, Content },
+      Report, Query, Forum, PopRight, MiniBar, Content, Version },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -130,6 +135,13 @@
         }
         return isShow
       },
+      showNewVersion () {
+        let show = false
+        if (this.$store.state.Home.version < this.$store.state.Home.serverVersion.version) {
+          show = true
+        }
+        return show
+      }
     },
     created: function () {
       const tabPageHeight = Utils.env.getPageHeight();
@@ -137,8 +149,12 @@
       // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
       const { tabStyles } = this
       this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
+      this.newVersion()
     },
     methods: {
+      newVersion () {
+        getLastVersion(this)
+      },
       wxcTabBarCurrentTabSelected (e) {
         const i = e.page;
         if (i === this.$store.state.Home.activeTab && i !== 0) {

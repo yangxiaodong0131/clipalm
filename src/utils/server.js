@@ -102,6 +102,22 @@ export function compDrg (obj, wt4) {
   })
 }
 
+export function getLastVersion (obj) {
+  stream.fetch({
+    method: 'GET',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/clipalm_last_version`
+  }, res => {
+    if (res.ok) {
+      obj.$store.commit('SET_serverVersion', res.data)
+    } else {
+      obj.info = '- 网络连接失败 -'
+    }
+  })
+}
+
 function setStore (obj, menu, rdata) {
   let data = []
   switch (menu) {

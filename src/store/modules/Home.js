@@ -13,7 +13,9 @@ const state = {
   infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   isMiniShow: false,
-  showForum: false
+  showForum: false,
+  version: '0.0.0',
+  serverVersion: ''
 }
 
 const mutations = {
@@ -89,12 +91,16 @@ const mutations = {
   },
   SET_isMiniShow (state, x) {
     state.isMiniShow = x
+  },
+  SET_serverVersion (state, x) {
+    state.serverVersion = x
   }
 }
 
 const actions = {
   someAsyncTask ({ commit }) {
     commit('SET_showForum')
+    commit('SET_serverVersion')
     commit('SET_visible')
     commit('SET_activeTab')
     commit('SET_menus')
