@@ -49,6 +49,7 @@ export default {
         this.$store.commit('SET_editMenu', menu)
         this.$store.commit('SET_wt4Page', 1)
         this.$store.commit('SET_wt4Case', [])
+        this.$store.commit('SET_wt4Info', '')
         getServer(this, 'all', menu)
       } else if (menu === '自定义查询') {
       } else if (['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu)) {

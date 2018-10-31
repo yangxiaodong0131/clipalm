@@ -60,10 +60,13 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      if (e.result === 'success') {
+      const a = '[]'
+      // if (e.result === 'success') {
+      if (a === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
+        obj.$store.commit('SET_isLoadingShow', true)
         stream.fetch({
           method: 'GET',
           type: 'json',
@@ -119,6 +122,7 @@ export function getLastVersion (obj) {
 }
 
 function setStore (obj, menu, rdata) {
+  obj.$store.commit('SET_isLoadingShow', false)
   let data = []
   switch (menu) {
     case 'MDC':
@@ -159,21 +163,33 @@ function setStore (obj, menu, rdata) {
       obj.$store.commit('SET_statDrg', rdata.data)
       break
     case '未入组病历':
+      if (obj.$store.state.Edit.wt4Page === 1) {
+        obj.$store.commit('SET_wt4Info', rdata.info)
+      }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
     case 'QY病历':
+      if (obj.$store.state.Edit.wt4Page === 1) {
+        obj.$store.commit('SET_wt4Info', rdata.info)
+      }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
     case '低风险死亡病历':
+      if (obj.$store.state.Edit.wt4Page === 1) {
+        obj.$store.commit('SET_wt4Info', rdata.info)
+      }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
     case '高CV病历':
+      if (obj.$store.state.Edit.wt4Page === 1) {
+        obj.$store.commit('SET_wt4Info', rdata.info)
+      }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)

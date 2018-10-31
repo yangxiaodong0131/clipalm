@@ -1,11 +1,12 @@
 <template>
   <div class="demo"
     :show="infoPage.isBottomShow" @swipe="swipe">
-      <wxc-button :text="infoPage.buttonText"
-            v-if="infoPage.isInfoButtonShow"
-            size="full"
-            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-      <div class="demo-content">
+    <list class="list" :show="true">
+      <cell class="cell">
+        <wxc-button :text="infoPage.buttonText"
+              v-if="infoPage.isInfoButtonShow"
+              size="full"
+              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         <wxc-cell v-for="(detail, index) in infoPage.details"
           :key="index"
           :label="detail.label"
@@ -16,9 +17,10 @@
           ></wxc-cell>
         <wxc-grid-select
             :single="true"
-            :cols="2"
+            :cols="1"
             :list="infoPage.gridList"></wxc-grid-select>
-      </div>
+      </cell>
+    </list>
   </div>
 </template>
 <script>
