@@ -1,6 +1,7 @@
 <template>
   <div class="demo" @swipe="swipe" style="height:1000px;">
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
+      <text class="demo-title" v-if="showTitle">{{title}}</text>
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
@@ -59,9 +60,20 @@ export default {
         return data
       }
     },
-    wxcCellTitle: {
+    showTitle: {
       get () {
-        return this.$store.state.Edit.editMenu
+        let show = false
+        if (this.$store.state.Edit.wt4Info !== '') {
+          show = true
+        }
+        console.log(show)
+        return show
+      }
+    },
+    title: {
+      get () {
+        const data = this.$store.state.Edit.wt4Info
+        return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
       }
     }
   },
