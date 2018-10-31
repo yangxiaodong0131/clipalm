@@ -14,7 +14,6 @@
       <div class="col-md-6">
       <text class="title">性别(必填)</text>
       <input type="text" name="SEX" placeholder="请输入性别" class="input" :autofocus="true" v-model="wt4.GENDER"/>
-      </wxc-grid-select>
     </div>
     <div class="col-md-6">
       <text class="title">住院天数(必填)</text>
