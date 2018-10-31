@@ -1,6 +1,5 @@
 <template>
   <div class="demo" @swipe="swipe" style="height:1000px;">
-    <text class="demo-title">{{wxcCellTitle}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
