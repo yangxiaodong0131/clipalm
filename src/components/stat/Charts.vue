@@ -1,6 +1,8 @@
-<!-- <template>
+<template>
   <div class="panel">
-    <wxc-simple-flow :list="testData" :themeColor="themeColor"></wxc-simple-flow>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <!-- <wxc-simple-flow :list="testData" :themeColor="themeColor"></wxc-simple-flow> -->
+    <web src="http://192.168.0.79:3009/charts_page"></web>
   </div>
 </template>
 <script>
@@ -64,4 +66,4 @@ export default {
     padding-right: 15px;
     margin-bottom: 30px;
   }
-</style> -->
+</style>

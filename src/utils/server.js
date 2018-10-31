@@ -24,7 +24,7 @@ export function getServer (obj, type, menu, value = null) {
       case 'ICD10':
         url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}`
         break
-      case '报表':
+      case '统计分析':
         url = 'wt4_stat_cv?plat=client'
         break
       case 'QY病历':
@@ -155,7 +155,7 @@ function setStore (obj, menu, rdata) {
       data = data.concat(rdata.data)
       obj.$store.commit('SET_icd9_rule', data)
       break
-    case '报表':
+    case '统计分析':
       obj.$store.commit('SET_statDrg', rdata.data)
       break
     case '未入组病历':
