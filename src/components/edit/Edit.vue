@@ -66,7 +66,6 @@ export default {
         if (this.$store.state.Edit.wt4Info !== '') {
           show = true
         }
-        console.log(show)
         return show
       }
     },

@@ -12,6 +12,7 @@ const state = {
   infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  isLoadingShow: false,
   isMiniShow: false,
   showForum: false,
   // 发布版本修改
@@ -43,6 +44,9 @@ const mutations = {
   },
   SET_isBottomShow (state, x) {
     state.isBottomShow = x
+  },
+  SET_isLoadingShow (state, x) {
+    state.isLoadingShow = x
   },
   SET_info (state, x) {
     switch (state.infoLevel) {
@@ -109,6 +113,7 @@ const actions = {
     commit('SET_user')
     commit('SET_labelDetails')
     commit('SET_isBottomShow')
+    commit('SET_isLoadingShow')
     commit('SET_info')
     commit('SET_infoMenu')
     commit('SET_infoPage')

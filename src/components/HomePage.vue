@@ -3,6 +3,7 @@
   <Version></Version>
 </div>
 <div class="homepage" v-else>
+  <wxc-loading :show="isLoadingShow" type="default" loading-text="正在查询"></wxc-loading>
   <mini-bar></mini-bar>
   <wxc-tab-bar
     ref="wxcTabBar"
@@ -51,7 +52,7 @@
 </template>
 
 <script>
-  import { WxcTabBar, Utils } from 'weex-ui';
+  import { WxcTabBar, Utils, WxcLoading } from 'weex-ui';
   import { getServer, getLastVersion } from '../utils/server'
   import Version from './common/Version'
   import PopBar from './common/PopBar'
@@ -70,7 +71,7 @@
   import Content from './forum/Content'
 
   export default {
-    components: { WxcTabBar, PopBar, PopUp, User, Login, Edit, SingleGroup, Library,
+    components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
       Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts },
     data: () => ({
       tabs: [{
@@ -135,6 +136,9 @@
           isShow = true
         }
         return isShow
+      },
+      isLoadingShow () {
+        return this.$store.state.Home.isLoadingShow
       },
       showNewVersion () {
         let show = false

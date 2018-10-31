@@ -66,6 +66,7 @@ export function getServer (obj, type, menu, value = null) {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
+        obj.$store.commit('SET_isLoadingShow', true)
         stream.fetch({
           method: 'GET',
           type: 'json',
@@ -121,6 +122,7 @@ export function getLastVersion (obj) {
 }
 
 function setStore (obj, menu, rdata) {
+  obj.$store.commit('SET_isLoadingShow', false)
   let data = []
   switch (menu) {
     case 'MDC':
