@@ -1,42 +1,46 @@
 <template>
   <scroller class="container">
-    <div>
+    <div class="row">
+      <div class="col-md-6">
       <text class="title">主要诊断编码(必填)</text>
       <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" :autofocus="true" value="B25.001"/>
     </div>
-    <div>
+    <div class="col-md-6">
       <text class="title">年龄(必填)</text>
       <input type="number" name="AGE" placeholder="请输入年龄" class="input" :autofocus="true" v-model="wt4.AGE"/>
     </div>
-    <div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
       <text class="title">性别(必填)</text>
-      <wxc-grid-select
-        :single="true"
-        :cols="5"
-        :customStyles="customStyles"
-        :list="testData2"
-        @select="params => onSelect('res3', params)">
+      <input type="text" name="SEX" placeholder="请输入性别" class="input" :autofocus="true" v-model="wt4.GENDER"/>
+    
       </wxc-grid-select>
     </div>
-    <div>
+    <div class="col-md-6">
       <text class="title">住院天数(必填)</text>
       <input type="number" name="ACCTUAL_DAYS" placeholder="请输入住院天数" class="input" :autofocus="true" v-model="wt4.ACCTUAL_DAYS"/>
     </div>
-    <div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
       <text class="title">总费用(必填)</text>
       <input type="text" name="TOTAL_EXPENSE" placeholder="请输入总费用" class="input" :autofocus="true" v-model="wt4.TOTAL_EXPEMSE"/>
     </div>
-    <div>
+    <div class="col-md-6">
       <text class="title">新生儿出生天数</text>
       <input type="number" name="SF0100" placeholder="请输入新生儿出生天数，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0100"/>
     </div>
-    <div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
       <text class="title">新生儿入院体重</text>
       <input type="number" name="SF0102" placeholder="新生儿入院体重，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0102"/>
     </div>
-    <div>
+    <div class="col-md-6">
       <text class="title">呼吸机使用时间</text>
       <input type="number" name="SF0104" placeholder="呼吸机使用时间，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0104"/>
+    </div>
     </div>
     <div>
       <text class="title">出院转归(必填)</text>
@@ -127,12 +131,35 @@ export default {
 .input {
   font-size: 30px;
   height: 50px;
-  width: 800px;
+  width: 350px;
+  border-width: 1px;
+  border-color: #ffffff;
+  border-radius: 40px;
 }
 .title{
   font-size: 25px;
+  /* height:60; */
+  /* padding: 10; */
+  /* color:ghostwhite;
+  background: gray; */
 }
-.textarea{
+.wxc-grid-select{
+  font-size: 20px;
+  height: 50px;
+  width: 50px;
+}
+.row {
   width: 750px;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}
+
+.textarea{
+  font-size: 15px; 
+  width: 750px;
+  border-width: 1px;
+  border-color: #aaa;
+  border-radius: 40px;
 }
 </style>
