@@ -2,7 +2,7 @@
   <div class="container">
     <input type="text" style="height:80;padding:20;" placeholder="输入帖子标题" class="input" :autofocus=true value="" @input="oninput"/>
     <div class="wrapper">
-      <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2"></textarea>
+      <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" :autofocus=true value="" ></textarea>
     </div>
     <wxc-button text="发布"
           size="full"
