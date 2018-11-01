@@ -6,23 +6,38 @@ export function getServer (obj, type, menu, value = null) {
   // type:判断查询全部还是单项
   // menu:判断查询drg类型（mdc、adrg…）
   // value:单项查询条件
+  let version = 'BJ'
+  switch (obj.$store.state.Home.user.data.version) {
+    case 'BJ编码版':
+      version = 'BJ'
+      break
+    case 'CC编码版':
+      version = 'CC'
+      break
+    case 'GB编码版':
+      version = 'GB'
+      break
+    case '术语版':
+      version = 'CN'
+      break
+  }
   let url = null
   if (type === 'all') {
     switch (menu) {
       case 'MDC':
-        url = `rule_bj_mdc?plat=client&version=${obj.$store.state.Library.version}`
+        url = `rule_bj_mdc?plat=client&version=${version}`
         break
       case 'ADRG':
-        url = `rule_bj_adrg?plat=client&version=${obj.$store.state.Library.version}`
+        url = `rule_bj_adrg?plat=client&version=${version}`
         break
       case 'DRG':
-        url = `rule_bj_drg?plat=client&version=${obj.$store.state.Library.version}`
+        url = `rule_bj_drg?plat=client&version=${version}`
         break
       case 'ICD9':
-        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}&version=${obj.$store.state.Library.version}`
+        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}&version=${version}`
         break
       case 'ICD10':
-        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}&version=${obj.$store.state.Library.version}`
+        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}&version=${version}`
         break
       case '统计分析':
         url = 'wt4_stat_cv?plat=client'

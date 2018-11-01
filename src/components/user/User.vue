@@ -48,12 +48,6 @@ export default {
       { title: '机构用户', value: 2 },
       { title: '个人用户', value: 3 }
     ],
-    list_2: [
-      { title: 'BJ编码版', value: 1, checked: true },
-      { title: 'GB编码版', value: 2 },
-      { title: 'CC编码版', value: 3 },
-      { title: '术语版', value: 4 }
-    ],
     customStyles: {
       width: '150px',
       lineSpacing: '12px',
@@ -72,6 +66,18 @@ export default {
     user: {
       get () {
         return this.$store.state.Home.user.data
+      }
+    },
+    list_2: {
+      get () {
+        const versions = {
+          BJ编码版: { title: 'BJ编码版', value: 1 },
+          GB编码版: { title: 'GB编码版', value: 1 },
+          CC编码版: { title: 'CC编码版', value: 1 },
+          术语版: { title: '术语版', value: 4 }
+        }
+        versions[this.$store.state.Home.user.data.clipalm_version].checked = true
+        return Object.values(versions)
       }
     },
     mdcs: {
@@ -100,21 +106,6 @@ export default {
           let version = this.list_2[params.selectIndex].title
           user.clipalm_version = version
           modal.toast({ message: `已设置${version}为默认查询版本`, duration: 1 })
-          switch (version) {
-            case 'BJ编码版':
-              version = 'BJ'
-              break
-            case 'CC编码版':
-              version = 'CC'
-              break
-            case 'GB编码版':
-              version = 'GB'
-              break
-            case '术语版':
-              version = 'CN'
-              break
-          }
-          this.$store.commit('SET_version', version)
           break
       }
       updateUser(this, user)

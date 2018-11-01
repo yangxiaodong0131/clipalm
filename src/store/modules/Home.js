@@ -4,7 +4,7 @@ const state = {
   menus: [],
   menu: ['用户登陆', '数据展示', '数据展示', '数据展示', '数据展示'],
   notice: '未注册用户！',
-  user: { login: false, data: {} },
+  user: { login: false, data: { version: 'BJ编码版' } },
   isBottomShow: false,
   infoLevel: 0,
   infoMenu: '',
