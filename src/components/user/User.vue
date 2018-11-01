@@ -36,11 +36,6 @@ export default {
   name: 'user-doc',
   components: { WxcMinibar, WxcGridSelect, Category },
   data: () => ({
-    list_1: [
-      { title: '专家用户', value: 1, checked: true },
-      { title: '机构用户', value: 2 },
-      { title: '个人用户', value: 3 }
-    ],
     customStyles: {
       width: '150px',
       lineSpacing: '12px',
@@ -59,6 +54,23 @@ export default {
     user: {
       get () {
         return this.$store.state.Home.user.data
+      }
+    },
+    list_1: {
+      get () {
+        const types = {
+          专家用户: { title: '专家用户', value: 1 },
+          机构用户: { title: '机构用户', value: 2 },
+          个人用户: { title: '个人用户', value: 3 }
+        }
+        let serverType = ''
+        if (this.$store.state.Home.user.data.type) {
+          serverType = this.$store.state.Home.user.data.type
+        } else {
+          serverType = '个人用户'
+        }
+        types[serverType].checked = true
+        return Object.values(types)
       }
     },
     list_2: {
@@ -102,9 +114,14 @@ export default {
           user.clipalm_mdc = mdc
           break
         case 'version':
-          let version = this.list_2[params.selectIndex].title
+          const version = this.list_2[params.selectIndex].title
           user.clipalm_version = version
           modal.toast({ message: `已设置${version}为默认查询版本`, duration: 1 })
+          break
+        case 'user':
+          const types = this.list_1[params.selectIndex].title
+          user.type = types
+          // modal.toast({ message: `已设置${types}为默认查询版本`, duration: 1 })
           break
       }
       updateUser(this, user)
