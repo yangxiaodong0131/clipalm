@@ -6,6 +6,7 @@
     </div>
     <wxc-button text="发布"
           size="full"
+          style="width:750px"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
 </template>
@@ -13,6 +14,7 @@
 <script>
 import { WxcRichText, WxcSpecialRichText, WxcButton } from 'weex-ui'
 import { createForum } from '../../utils/server'
+const modal = weex.requireModule('modal')
 export default {
   components: { WxcRichText, WxcSpecialRichText, WxcButton },
   data: () => ({
@@ -37,9 +39,13 @@ export default {
       this.content = event.value
     },
     wxcButtonClicked () {
-      const forum = { username: this.$store.state.Home.user.data.username, label: '123', title: this.title }
-      const ForumContent = { content: this.content, username: this.$store.state.Home.user.data.username }
-      createForum(this, { forum: forum, forum_content: ForumContent })
+      if (this.$store.state.Home.user.login) {
+        const forum = { username: this.$store.state.Home.user.data.username, label: this.$store.state.Forum.forumLabel, title: this.title }
+        const ForumContent = { content: this.content, username: this.$store.state.Home.user.data.username }
+        createForum(this, { forum: forum, forum_content: ForumContent })
+      } else {
+        modal.toast({ message: '请先登录', duration: 1 })
+      }
     }
   }
 }

@@ -7,6 +7,7 @@
     </div>
     <wxc-button text="新建帖子"
           size="full"
+          v-if="showButton"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
 </template>
@@ -47,6 +48,13 @@ export default {
         configs.push(config)
       })
       return configs
+    },
+    showButton () {
+      let show = false
+      if (this.$store.state.Forum.forumLabel !== '') {
+        show = true
+      }
+      return show
     }
   },
   created: function () {

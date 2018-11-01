@@ -107,6 +107,7 @@ export default {
       this.$store.commit('SET_menu', [4, '论坛'])
       this.$store.commit('SET_forumMenu', `关于病案${wt4.b_wt4_v1_id}帖子`)
       this.$store.commit('SET_post', [])
+      this.$store.commit('SET_forumLabel', wt4.b_wt4_v1_id)
       this.$store.commit('SET_forumPage', 1)
       getServer(this, 'all', '论坛', wt4)
     }
