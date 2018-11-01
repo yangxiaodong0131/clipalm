@@ -51,7 +51,11 @@ export default {
       return this.$store.state.Home.infoLevel
     },
     isShow () {
-      return this.$store.state.Home.isMiniShow
+      let show = this.$store.state.Home.isMiniShow
+      if (this.$store.state.Home.menu[0] === '个人信息') {
+        show = true
+      }
+      return show
     },
     wxcCellTitle () {
       return this.$store.state.Edit.editMenu
@@ -114,6 +118,8 @@ export default {
       let title = ' '
       if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
         title = this.infoPage.infoTitle
+      } else if (this.$store.state.Home.menu[0] === '个人信息') {
+        title = '个人信息'
       } else {
         switch (this.$store.state.Home.activeTab) {
           case 1:

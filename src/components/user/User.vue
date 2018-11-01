@@ -1,12 +1,5 @@
 <template>
   <div class="panel">
-    <!--<wxc-minibar :title="user.username"
-      leftButton = ""
-      background-color="#009ff0"
-      text-color="#FFFFFF"
-      right-text="返回登陆"
-      @wxcMinibarRightButtonClicked="minibarRightButtonClick">
-    </wxc-minibar> -->
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
       :single="true"
@@ -126,14 +119,12 @@ export default {
   }
   .panel {
     margin-left: 0px;
-    /* border-width: 2px;
-    border-style: solid; */
     border-color: #BBBBBB;
     padding-top: 0;
     padding-bottom: 15px;
     padding-left: 15px;
     padding-right: 15px;
-    /* margin-bottom: 30px; */
+    margin-top: 91px;
   }
   .text {
     color: #666666;
