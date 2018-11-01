@@ -1,6 +1,6 @@
 const state = {
   visible: false,
-  activeTab: -1,
+  activeTab: 0,
   menus: [],
   menu: ['用户登陆', '数据展示', '数据展示', '数据展示', '数据展示'],
   notice: '未注册用户！',

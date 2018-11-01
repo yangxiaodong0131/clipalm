@@ -153,6 +153,28 @@ export function updateUser (obj, user) {
   })
 }
 
+export function createForum (obj, forum) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/forum`,
+    body: qs.stringify(forum)
+  }, res => {
+    if (res.ok) {
+      obj.$store.commit('SET_showForum', true)
+      obj.$store.commit('SET_menus', ['论坛', '自定义查询'])
+      obj.$store.commit('SET_menu', [4, '论坛'])
+      obj.$store.commit('SET_post', [])
+      obj.$store.commit('SET_forumPage', 1)
+      getServer(obj, 'all', '论坛')
+    } else {
+      obj.info = '- 网络连接失败 -'
+    }
+  })
+}
+
 function setStore (obj, menu, rdata) {
   obj.$store.commit('SET_isLoadingShow', false)
   let data = []

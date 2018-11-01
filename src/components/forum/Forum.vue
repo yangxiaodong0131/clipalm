@@ -5,14 +5,17 @@
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
       </div>
     </div>
+    <wxc-button text="新建帖子"
+          size="full"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
 </template>
 
 <script>
-import { WxcRichText, WxcSpecialRichText } from 'weex-ui'
+import { WxcRichText, WxcSpecialRichText, WxcButton } from 'weex-ui'
 import { getServer } from '../../utils/server'
 export default {
-  components: { WxcRichText, WxcSpecialRichText },
+  components: { WxcRichText, WxcSpecialRichText, WxcButton },
   data: () => ({
   }),
   computed: {
@@ -50,13 +53,12 @@ export default {
   },
   methods: {
     wxcRichTextLinkClick (i) {
-      // this.$store.commit('SET_isBottomShow', true)
-      // this.$store.commit('SET_visible', false)
       const menu = '帖子'
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
-      // this.$store.commit('SET_infoMenu', this.wxcCellTitle)
-      // this.$store.commit('SET_infoLevel', 1)
       getServer(this, 'forumOne', '帖子', this.posts[i])
+    },
+    wxcButtonClicked () {
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])
     }
   }
 }

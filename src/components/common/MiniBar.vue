@@ -118,10 +118,13 @@ export default {
       let title = ' '
       if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
         title = this.infoPage.infoTitle
-      } else if (this.$store.state.Home.menu[0] === '个人信息') {
-        title = '个人信息'
       } else {
         switch (this.$store.state.Home.activeTab) {
+          case 0:
+            if (this.$store.state.Home.menu[0] === '个人信息') {
+              title = '个人信息'
+            }
+            break
           case 1:
             title = this.$store.state.Edit.editMenu
             break
