@@ -16,6 +16,7 @@
     <div class="panel">
       <Login v-if="menu[0] == '用户登陆'"></Login>
       <User v-if="menu[0] == '个人信息'"></User>
+      <Register v-if="menu[0] == '注册用户'"></Register>
     </div>
     <!-- edit页 -->
     <div class="panel">
@@ -62,6 +63,7 @@
   import MiniBar from './common/MiniBar'
   import User from './user/User'
   import Login from './user/Login'
+  import Register from './user/Register'
   import Edit from './edit/Edit'
   import SingleGroup from './edit/SingleGroup'
   import Library from './library/Library'
@@ -74,7 +76,7 @@
 
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New },
+      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register },
     data: () => ({
       tabs: [{
         title: '用户',

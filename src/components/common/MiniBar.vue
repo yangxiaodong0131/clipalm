@@ -52,7 +52,7 @@ export default {
     },
     isShow () {
       let show = this.$store.state.Home.isMiniShow
-      if (this.$store.state.Home.menu[0] === '个人信息') {
+      if (this.$store.state.Home.menu[0] === '个人信息' || this.$store.state.Home.menu[0] === '注册用户') {
         show = true
       }
       return show
@@ -123,6 +123,8 @@ export default {
           case 0:
             if (this.$store.state.Home.menu[0] === '个人信息') {
               title = '个人信息'
+            } else if (this.$store.state.Home.menu[0] === '注册用户') {
+              title = '注册用户'
             }
             break
           case 1:
