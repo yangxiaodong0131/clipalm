@@ -7,7 +7,7 @@ export function getServer (obj, type, menu, value = null) {
   // menu:判断查询drg类型（mdc、adrg…）
   // value:单项查询条件
   let version = 'BJ'
-  switch (obj.$store.state.Home.user.data.version) {
+  switch (obj.$store.state.Home.user.data.clipalm_version) {
     case 'BJ编码版':
       version = 'BJ'
       break
