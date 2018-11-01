@@ -37,7 +37,8 @@
 <script>
 import { WxcMinibar, WxcGridSelect } from 'weex-ui'
 import Category from '../common/category.vue'
-
+import { updateUser } from '../../utils/server'
+const modal = weex.requireModule('modal')
 export default {
   name: 'user-doc',
   components: { WxcMinibar, WxcGridSelect, Category },
@@ -77,7 +78,6 @@ export default {
       get () {
         const arr = this.$store.state.Home.user.data.mdc
         if (arr) {
-          console.log(arr)
           return arr.map((value, index) => { return {'title': 'MDC' + value} })
         }
         return []
@@ -89,8 +89,35 @@ export default {
       this.$store.commit('SET_menu', [0, '用户登陆'])
     },
     onSelect (params, type) {
-      console.log(type)
-      console.log(params)
+      const user = {}
+      switch (type) {
+        case 'mdc':
+          const mdc = this.mdcs[params.selectIndex].title
+          this.$store.commit('SET_mdc', mdc)
+          user.clipalm_mdc = mdc
+          break
+        case 'version':
+          let version = this.list_2[params.selectIndex].title
+          user.clipalm_version = version
+          modal.toast({ message: `已设置${version}为默认查询版本`, duration: 1 })
+          switch (version) {
+            case 'BJ编码版':
+              version = 'BJ'
+              break
+            case 'CC编码版':
+              version = 'CC'
+              break
+            case 'GB编码版':
+              version = 'GB'
+              break
+            case '术语版':
+              version = 'CN'
+              break
+          }
+          this.$store.commit('SET_version', version)
+          break
+      }
+      updateUser(this, user)
     }
   }
 }

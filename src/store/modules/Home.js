@@ -42,6 +42,9 @@ const mutations = {
   SET_user (state, x) {
     state.user = x
   },
+  SET_userData (state, x) {
+    state.user.data = x
+  },
   SET_isBottomShow (state, x) {
     state.isBottomShow = x
   },
@@ -111,6 +114,7 @@ const actions = {
     commit('SET_menus')
     commit('SET_menu')
     commit('SET_user')
+    commit('SET_userData')
     commit('SET_labelDetails')
     commit('SET_isBottomShow')
     commit('SET_isLoadingShow')

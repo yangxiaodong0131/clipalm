@@ -120,7 +120,9 @@ export default {
             title = this.$store.state.Edit.editMenu
             break
           case 2:
-            title = this.$store.state.Library.libraryMenu
+            if (this.$store.state.Library.libraryMenu !== '') {
+              title = `${this.$store.state.Library.libraryMenu}-${this.$store.state.Library.version}版`
+            }
             break
           case 3:
             title = '报表'

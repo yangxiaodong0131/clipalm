@@ -10,19 +10,19 @@ export function getServer (obj, type, menu, value = null) {
   if (type === 'all') {
     switch (menu) {
       case 'MDC':
-        url = 'rule_bj_mdc?plat=client'
+        url = `rule_bj_mdc?plat=client&version=${obj.$store.state.Library.version}`
         break
       case 'ADRG':
-        url = 'rule_bj_adrg?plat=client'
+        url = `rule_bj_adrg?plat=client&version=${obj.$store.state.Library.version}`
         break
       case 'DRG':
-        url = 'rule_bj_drg?plat=client'
+        url = `rule_bj_drg?plat=client&version=${obj.$store.state.Library.version}`
         break
       case 'ICD9':
-        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}`
+        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}&version=${obj.$store.state.Library.version}`
         break
       case 'ICD10':
-        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}`
+        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}&version=${obj.$store.state.Library.version}`
         break
       case '统计分析':
         url = 'wt4_stat_cv?plat=client'
@@ -115,6 +115,23 @@ export function getLastVersion (obj) {
   }, res => {
     if (res.ok) {
       obj.$store.commit('SET_serverVersion', res.data)
+    } else {
+      obj.info = '- 网络连接失败 -'
+    }
+  })
+}
+
+export function updateUser (obj, user) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/drg_admin_user_update`,
+    body: qs.stringify({ drg_admin_user: user, id: obj.$store.state.Home.user.data.id })
+  }, res => {
+    if (res.ok) {
+      obj.$store.commit('SET_userData', res.data.data)
     } else {
       obj.info = '- 网络连接失败 -'
     }
