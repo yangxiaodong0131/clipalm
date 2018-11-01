@@ -53,15 +53,15 @@
     </div>
     <div>
       <text class="title">其他诊断编码</text>
-      <textarea placeholder="请输入其他诊断编码，中间以';'分隔，如'B25.901;B25.902" rows='3' name="diags_code"></textarea>
+      <textarea placeholder="请输入其他诊断编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="diags_code"></textarea>
     </div>
     <div>
       <text class="title">手术/操作编码</text>
-      <textarea placeholder="请输入手术/操作编码，中间以';'分隔，如'B25.901;B25.902" rows='3' name="opers_code"></textarea>
+      <textarea placeholder="请输入手术/操作编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="opers_code"></textarea>
     </div>
     <div>
-      <text>sadfzdsf</text>
       <wxc-button text="提交分组"
+        class="submits"
         @wxcButtonClicked='submit'></wxc-button>
     </div>
   </scroller>
@@ -159,5 +159,10 @@ export default {
   border-width: 1px;
   border-color: #aaa;
   border-radius: 40px;
+}
+.submits{
+  position: relative;
+  left: 23px;
+  top: 1px;
 }
 </style>
