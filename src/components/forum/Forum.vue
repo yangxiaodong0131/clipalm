@@ -7,6 +7,7 @@
     </div>
     <wxc-button text="新建帖子"
           size="full"
+          class="submits"
           v-if="showButton"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
@@ -73,25 +74,31 @@ export default {
 </script>
 
 <style scoped>
-  .panel {
-    width: 750px;
-    background-color: #f2f3f4;
-    font-size: 30px;
-    border-style: solid;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-top-width: 0px;
-    border-bottom-width: 1px;
-    border-bottom-color: gray;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+.panel {
+  width: 750px;
+  background-color: #f2f3f4;
+  font-size: 30px;
+  border-style: solid;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  border-bottom-width: 1px;
+  border-bottom-color: gray;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 .container {
   margin-top: 91px;
   width: 750px;
   height: 1250px;
   font-size: 30px;
+}
+.submits{
+  position: relative;
+  margin-top: 20px;
+  left: 23px;
+  top: 1px;
 }
 </style>

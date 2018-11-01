@@ -6,7 +6,7 @@
     </div>
     <wxc-button text="发布"
           size="full"
-          style="width:750px"
+          class="submits"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
 </template>
@@ -92,5 +92,11 @@ export default {
   border-width: 2px;
   border-style: solid;
   border-color: #FCFCFC;
+}
+.submits{
+  position: relative;
+  margin-top: 20px;
+  left: 23px;
+  top: 1px;
 }
 </style>

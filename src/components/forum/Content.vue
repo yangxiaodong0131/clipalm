@@ -12,6 +12,7 @@
           <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2"></textarea>
         </div>
         <wxc-button text="回复"
+              class="submits"
               size="full"
               @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       </div>
@@ -53,5 +54,14 @@ export default {
     width: 750px;
     background-color: #f2f3f4;
     margin-top: 91px;
+  }
+  .submits{
+    position: relative;
+    margin-top: 20px;
+    left: 23px;
+    top: 1px;
+  }
+  .wrapper{
+    margin-top: 20px;
   }
 </style>
