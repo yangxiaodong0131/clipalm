@@ -6,23 +6,38 @@ export function getServer (obj, type, menu, value = null) {
   // type:判断查询全部还是单项
   // menu:判断查询drg类型（mdc、adrg…）
   // value:单项查询条件
+  let version = 'BJ'
+  switch (obj.$store.state.Home.user.data.clipalm_version) {
+    case 'BJ编码版':
+      version = 'BJ'
+      break
+    case 'CC编码版':
+      version = 'CC'
+      break
+    case 'GB编码版':
+      version = 'GB'
+      break
+    case '术语版':
+      version = 'CN'
+      break
+  }
   let url = null
   if (type === 'all') {
     switch (menu) {
       case 'MDC':
-        url = 'rule_bj_mdc?plat=client'
+        url = `rule_bj_mdc?plat=client&version=${version}`
         break
       case 'ADRG':
-        url = 'rule_bj_adrg?plat=client'
+        url = `rule_bj_adrg?plat=client&version=${version}`
         break
       case 'DRG':
-        url = 'rule_bj_drg?plat=client'
+        url = `rule_bj_drg?plat=client&version=${version}`
         break
       case 'ICD9':
-        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}`
+        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}&version=${version}`
         break
       case 'ICD10':
-        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}`
+        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}&version=${version}`
         break
       case '统计分析':
         url = 'wt4_stat_cv?plat=client'
@@ -115,6 +130,45 @@ export function getLastVersion (obj) {
   }, res => {
     if (res.ok) {
       obj.$store.commit('SET_serverVersion', res.data)
+    } else {
+      obj.info = '- 网络连接失败 -'
+    }
+  })
+}
+
+export function updateUser (obj, user) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/drg_admin_user_update`,
+    body: qs.stringify({ drg_admin_user: user, id: obj.$store.state.Home.user.data.id })
+  }, res => {
+    if (res.ok) {
+      obj.$store.commit('SET_userData', res.data.data)
+    } else {
+      obj.info = '- 网络连接失败 -'
+    }
+  })
+}
+
+export function createForum (obj, forum) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/forum`,
+    body: qs.stringify(forum)
+  }, res => {
+    if (res.ok) {
+      obj.$store.commit('SET_showForum', true)
+      obj.$store.commit('SET_menus', ['论坛', '自定义查询'])
+      obj.$store.commit('SET_menu', [4, '论坛'])
+      obj.$store.commit('SET_post', [])
+      obj.$store.commit('SET_forumPage', 1)
+      getServer(obj, 'all', '论坛')
     } else {
       obj.info = '- 网络连接失败 -'
     }

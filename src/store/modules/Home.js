@@ -1,10 +1,10 @@
 const state = {
   visible: false,
-  activeTab: -1,
+  activeTab: 0,
   menus: [],
   menu: ['用户登陆', '数据展示', '数据展示', '数据展示', '数据展示'],
   notice: '未注册用户！',
-  user: { login: false, data: {} },
+  user: { login: false, data: { clipalm_version: 'BJ编码版' } },
   isBottomShow: false,
   infoLevel: 0,
   infoMenu: '',
@@ -41,6 +41,9 @@ const mutations = {
   },
   SET_user (state, x) {
     state.user = x
+  },
+  SET_userData (state, x) {
+    state.user.data = x
   },
   SET_isBottomShow (state, x) {
     state.isBottomShow = x
@@ -111,6 +114,7 @@ const actions = {
     commit('SET_menus')
     commit('SET_menu')
     commit('SET_user')
+    commit('SET_userData')
     commit('SET_labelDetails')
     commit('SET_isBottomShow')
     commit('SET_isLoadingShow')
