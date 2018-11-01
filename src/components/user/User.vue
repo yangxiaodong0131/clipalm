@@ -76,7 +76,13 @@ export default {
           CC编码版: { title: 'CC编码版', value: 1 },
           术语版: { title: '术语版', value: 4 }
         }
-        versions[this.$store.state.Home.user.data.clipalm_version].checked = true
+        let serverVersion = ''
+        if (this.$store.state.Home.user.data.clipalm_version) {
+          serverVersion = this.$store.state.Home.user.data.clipalm_version
+        } else {
+          serverVersion = 'BJ编码版'
+        }
+        versions[serverVersion].checked = true
         return Object.values(versions)
       }
     },

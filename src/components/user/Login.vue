@@ -107,12 +107,12 @@ export default {
             getServer(this, 'all', 'ICD9')
             this.$store.commit('SET_library_menu', 'MDC')
           } else {
-            this.info = '- 账号或密码错误 -'
-            this.$store.commit('SET_user', { login: false })
+            modal.toast({ 'message': '账号或密码错误', 'duration': 1 })
+            this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
           }
         } else {
-          this.$store.commit('SET_user', { login: false })
-          this.info = '- 网络连接失败 -'
+          this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
+          modal.toast({ 'message': '网络连接失败', 'duration': 1 })
         }
       })
     },

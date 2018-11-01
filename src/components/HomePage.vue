@@ -41,6 +41,7 @@
     <!-- forum页 -->
     <div class="panel">
       <Forum v-if="menu[4] == '论坛'"></Forum>
+      <New v-if="menu[4] == '新建'"></New>
       <Content v-if="menu[4] == '帖子'"></Content>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
@@ -69,10 +70,11 @@
   import Query from './stat/Query'
   import Forum from './forum/Forum'
   import Content from './forum/Content'
+  import New from './forum/New'
 
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts },
+      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -100,7 +102,7 @@
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '论坛',
-          menu: ['论坛', '自定义查询'],
+          menu: ['论坛', '新帖子'],
           // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
