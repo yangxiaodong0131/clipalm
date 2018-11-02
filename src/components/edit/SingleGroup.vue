@@ -53,11 +53,11 @@
     </div>
     <div>
       <text class="title">其他诊断编码</text>
-      <textarea placeholder="请输入其他诊断编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="diags_code"></textarea>
+      <textarea class="textareas" placeholder="请输入其他诊断编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="diags_code"></textarea>
     </div>
     <div>
       <text class="title">手术/操作编码</text>
-      <textarea placeholder="请输入手术/操作编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="opers_code"></textarea>
+      <textarea class="textareas" placeholder="请输入手术/操作编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="opers_code"></textarea>
     </div>
     <div>
       <wxc-button text="提交分组"
@@ -153,16 +153,12 @@ export default {
   padding-bottom: 20px;
 }
 
-.textarea{
-  font-size: 15px;
-  width: 750px;
-  border-width: 1px;
-  border-color: #aaa;
-  border-radius: 40px;
-}
 .submits{
   position: relative;
   left: 23px;
   top: 1px;
+}
+.textareas{
+  font-size: 30px;
 }
 </style>
