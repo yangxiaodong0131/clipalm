@@ -98,6 +98,7 @@ export function getServer (obj, type, menu, value = null) {
             })
             setStore(obj, menu, res.data)
           } else {
+            obj.$store.commit('SET_isLoadingShow', false)
             obj.info = '- 网络连接失败 -'
           }
         })
