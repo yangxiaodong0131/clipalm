@@ -168,8 +168,10 @@
         getLastVersion(this)
       },
       wxcTabBarCurrentTabSelected (e) {
-        this.$store.commit('SET_isLoadingShow', false)
         const i = e.page;
+        if (i !== this.$store.state.Home.activeTab) {
+          this.$store.commit('SET_isLoadingShow', false)
+        }
         if (i === this.$store.state.Home.activeTab && i !== 0) {
           this.$store.commit('SET_visible', true)
         }
