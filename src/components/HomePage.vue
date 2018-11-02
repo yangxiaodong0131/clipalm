@@ -74,6 +74,7 @@
   import Content from './forum/Content'
   import New from './forum/New'
   const storage = weex.requireModule('storage')
+  const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
       Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register },
@@ -170,6 +171,30 @@
           this.$store.commit('SET_menu', [0, '个人信息'])
         }
       })
+      storage.getItem('point', e => {
+        if (e.result === 'success') {
+          this.$store.commit('SET_pointIndex', parseInt(e.data))
+        } else {
+          this.$store.commit('SET_pointIndex', 0)
+        }
+      })
+    },
+    mounted: function () {
+      const point = this.$store.state.Home.point
+      const pointIndex = this.$store.state.Home.pointIndex
+      if (pointIndex === point.length - 1) {
+        modal.confirm({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'cancelTitle': '重新显示提示', 'okTitle': '我知道了' }, function (value) {
+          if (value === '重新显示提示') {
+            storage.setItem('point', 0)
+          } else {
+            storage.setItem('point', pointIndex + 1)
+          }
+        })
+      } else if (point[pointIndex]) {
+        modal.alert({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'okTitle': '我知道了' }, function () {
+          storage.setItem('point', pointIndex + 1)
+        })
+      }
     },
     methods: {
       newVersion () {
