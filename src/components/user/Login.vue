@@ -1,6 +1,5 @@
 <template>
   <div class="panel">
-    <text class="text">掌上医助</text>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
