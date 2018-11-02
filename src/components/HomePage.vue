@@ -33,7 +33,7 @@
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
-    <div class="wrapper">
+    <div class="panel">
       <Report v-if="menu[3] == '统计分析'"></Report>
       <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
@@ -182,22 +182,27 @@
           case 1:
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            // if (this.$store.state.Edit.wt4Case.length === 0) {
-            //   getServer(this, 'all', '未入组病历')
-            //   this.$store.commit('SET_editMenu', '未入组病历')
-            // }
+            this.$store.commit('SET_editMenu', '未入组病历')
+            getServer(this, 'all', '未入组病历')
             break
           case 2:
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
             this.$store.commit('SET_isMiniShow', true)
+            this.$store.commit('SET_library_menu', 'MDC')
+            getServer(this, 'all', 'MDC')
             break
           case 3:
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
             this.$store.commit('SET_isMiniShow', true)
+            this.$store.commit('SET_menu', [i, '统计分析'])
+            getServer(this, 'all', '统计分析')
             break
           case 4:
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
             this.$store.commit('SET_isMiniShow', true)
+            this.$store.commit('SET_forumMenu', '论坛')
+            this.$store.commit('SET_menu', [i, '论坛'])
+            getServer(this, 'all', '论坛', null)
             break
           default :
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
