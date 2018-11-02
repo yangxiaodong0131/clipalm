@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <image style="width:344px;height:280px" src="http://210.75.199.113/images/clipalm.png"></image>
+    <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
