@@ -98,7 +98,7 @@ export default {
         this.$store.commit('SET_icd9_page', this.$store.state.Library.icd9Page + 1)
       }
       getServer(this, 'all', this.menu)
-      modal.toast({ message: '加载下一页', duration: 1 })
+      // modal.toast({ message: '加载下一页', duration: 1 })
     }
   }
 }
