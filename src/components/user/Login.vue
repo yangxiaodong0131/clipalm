@@ -19,6 +19,7 @@
       v-model = 'user.password'
       :default-value='pwd'
       cancel-label='密码'
+      placeholder='密码'
       theme='yellow'
       :bar-style='barStyle'
       @wxcSearchbarInputOnInput="PwdOnInput">
@@ -46,8 +47,10 @@ export default {
     return {
       info: '...',
       value: '输入框内容。。。',
-      name: 'hitb',
-      pwd: '123456',
+      name: '',
+      pwd: '',
+      // name: 'hitb',
+      // pwd: '123456',
       visible: false,
       user: { password: '123456', username: 'hitb', plat: 'client' },
       barStyle: {

@@ -179,22 +179,25 @@
         }
       })
     },
-    mounted: function () {
-      const point = this.$store.state.Home.point
-      const pointIndex = this.$store.state.Home.pointIndex
-      if (pointIndex === point.length - 1) {
-        modal.confirm({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'cancelTitle': '重新显示提示', 'okTitle': '我知道了' }, function (value) {
-          if (value === '重新显示提示') {
-            storage.setItem('point', 0)
-          } else {
-            storage.setItem('point', pointIndex + 1)
-          }
-        })
-      } else if (point[pointIndex]) {
-        modal.alert({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'okTitle': '我知道了' }, function () {
-          storage.setItem('point', pointIndex + 1)
-        })
-      }
+    beforeMount: function () {
+      // const point = this.$store.state.Home.point
+      // const pointIndex = this.$store.state.Home.pointIndex
+      // if (pointIndex === point.length - 1) {
+      //   modal.confirm({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'cancelTitle': '重新显示提示', 'okTitle': '我知道了' }, function (value) {
+      //     if (value === '重新显示提示') {
+      //       storage.setItem('point', 0)
+      //     } else {
+      //       storage.setItem('point', pointIndex + 1)
+      //     }
+      //   })
+      // } else if (pointIndex <= point.length) {
+      //   modal.toast({ 'message': `${pointIndex}`, 'duration': 0.3 })
+      //   modal.alert({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'okTitle': '我知道了' }, function () {
+      //     storage.setItem('point', pointIndex + 1, e => {
+      //       modal.toast({ 'message': `${e.result}`, 'duration': 0.3 })
+      //     })
+      //   })
+      // }
     },
     methods: {
       newVersion () {
