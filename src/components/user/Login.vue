@@ -1,6 +1,8 @@
 <template>
   <div class="panel">
-    <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
+    <div class="row">
+      <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
+    </div>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
@@ -22,7 +24,7 @@
       @wxcSearchbarInputOnInput="PwdOnInput">
     </wxc-searchbar>
     <div class="row">
-      <wxc-button type="blue" text="登录" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+      <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
       <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
     </div>
   </div>
