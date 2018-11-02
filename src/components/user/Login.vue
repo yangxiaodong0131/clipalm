@@ -23,7 +23,7 @@
     </wxc-searchbar>
     <div class="row">
       <wxc-button type="blue" text="登陆" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
-      <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
+      <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
   <Version></Version>
 </div>
 <div class="homepage" v-else>
-  <wxc-loading :show="isLoadingShow" type="default" loading-text="正在查询"></wxc-loading>
+  <wxc-loading :show="isLoadingShow" type="default" interval="3" loading-text="正在查询"></wxc-loading>
   <mini-bar></mini-bar>
   <wxc-tab-bar
     ref="wxcTabBar"
@@ -86,19 +86,22 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询', '单条分组'],
+          // menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询', '单条分组'],
+          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
           // icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '字典',
-          menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9', '自定义查询'],
+          // menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9', '自定义查询'],
+          menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
           // icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: 'DRG',
-          menu: ['统计分析', '报表', '自定义查询'],
+          // menu: ['统计分析', '报表', '自定义查询'],
+          menu: ['统计分析', '报表'],
           // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'

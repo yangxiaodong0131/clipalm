@@ -75,13 +75,16 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      const a = '[]'
-      // if (e.result === 'success') {
-      if (a === 'success') {
+      // const a = '[]'
+      if (e.result === 'success1') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
         obj.$store.commit('SET_isLoadingShow', true)
+        setTimeout(() => {
+          // 正常使用时候直接设置即可，不需setTimeout
+          obj.$store.commit('SET_isLoadingShow', false)
+        }, 30000)
         stream.fetch({
           method: 'GET',
           type: 'json',
