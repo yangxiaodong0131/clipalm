@@ -49,8 +49,8 @@ export default {
       value: '输入框内容。。。',
       name: '',
       pwd: '',
-      // name: 'hitb',
-      // pwd: '123456',
+      name: 'hitb',
+      pwd: '123456',
       visible: false,
       user: { password: '123456', username: 'hitb', plat: 'client' },
       barStyle: {
@@ -76,6 +76,7 @@ export default {
       }, res => {
         if (res.ok) {
           if (res.data.login) {
+            console.log(res.data)
             this.$store.commit('SET_user', res.data)
             this.$router.push('/')
             this.$store.commit('SET_visible', false)
