@@ -45,7 +45,8 @@ function statInfo (data) {
   return result
 }
 function mdcInfo (data) {
-  const gridList = data.icd9_aa.map((x) => {
+  const gridList = {}
+  gridList['非QY小手术'] = data.icd9_aa.map((x) => {
     const obj = {}
     obj.title = x
     return obj
@@ -66,27 +67,27 @@ function mdcInfo (data) {
 }
 function adrgInfo (data) {
   const gridList = {}
-  gridList.icd9aa = data.icd9_aa.map((x) => {
+  gridList['主要诊断'] = data.icd10_aa.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  gridList.icd9bb = data.icd9_bb.map((x) => {
+  gridList['其他诊断'] = data.icd10_bb.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  gridList.icd9bb = data.icd9_bb.map((x) => {
+  gridList['主要手术'] = data.icd9_aa.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  gridList.icd10aa = data.icd10_aa.map((x) => {
+  gridList['主要手术'] = data.icd9_bb.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  gridList.icd10bb = data.icd10_bb.map((x) => {
+  gridList['其他手术'] = data.icd9_bb.map((x) => {
     const obj = {}
     obj.title = x
     return obj
@@ -121,7 +122,8 @@ function drgInfo (data) {
   return result
 }
 function icd10Info (data) {
-  const gridList = data.adrg.map((x) => {
+  const gridList = {}
+  gridList['ADRG'] = data.adrg.map((x) => {
     const obj = {}
     obj.title = x
     return obj
@@ -143,7 +145,8 @@ function icd10Info (data) {
   return result
 }
 function icd9Info (data) {
-  const gridList = data.adrg.map((x) => {
+  const gridList = {}
+  gridList['ADRG'] = data.adrg.map((x) => {
     const obj = {}
     obj.title = x
     return obj
