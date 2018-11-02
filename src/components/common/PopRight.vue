@@ -15,10 +15,16 @@
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
           ></wxc-cell>
-        <wxc-grid-select
-            :single="true"
-            :cols="1"
-            :list="infoPage.gridList"></wxc-grid-select>
+        <div v-for="(gridList, index) in infoPage.gridList"
+              :key="index">
+          <text>{{index}}</text>
+          <wxc-grid-select
+              v-if="Object.keys(gridList).length !== 0"
+              :single="true"
+              :cols="1"
+              :list="gridList"></wxc-grid-select>
+          <text v-else>无</text>
+        </div>
       </cell>
     </list>
   </div>

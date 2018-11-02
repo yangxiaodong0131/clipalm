@@ -74,6 +74,7 @@
   import Content from './forum/Content'
   import New from './forum/New'
   const storage = weex.requireModule('storage')
+  const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
       Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register },
@@ -170,6 +171,30 @@
           this.$store.commit('SET_menu', [0, '个人信息'])
         }
       })
+      storage.getItem('point', e => {
+        if (e.result === 'success') {
+          this.$store.commit('SET_pointIndex', parseInt(e.data))
+        } else {
+          this.$store.commit('SET_pointIndex', 0)
+        }
+      })
+    },
+    mounted: function () {
+      const point = this.$store.state.Home.point
+      const pointIndex = this.$store.state.Home.pointIndex
+      if (pointIndex === point.length - 1) {
+        modal.confirm({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'cancelTitle': '重新显示提示', 'okTitle': '我知道了' }, function (value) {
+          if (value === '重新显示提示') {
+            storage.setItem('point', 0)
+          } else {
+            storage.setItem('point', pointIndex + 1)
+          }
+        })
+      } else if (point[pointIndex]) {
+        modal.alert({ 'message': `Tips: ${point[pointIndex]}`, 'duration': 5, 'okTitle': '我知道了' }, function () {
+          storage.setItem('point', pointIndex + 1)
+        })
+      }
     },
     methods: {
       newVersion () {
@@ -185,22 +210,24 @@
         }
         this.$store.commit('SET_activeTab', i)
         this.$store.commit('SET_infoPageClear')
+        let menu = ''
         switch (i) {
           case 0:
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
             this.$store.commit('SET_isMiniShow', false)
             break
           case 1:
+            menu = this.$store.state.Edit.editMenu
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_editMenu', '未入组病历')
-            getServer(this, 'all', '未入组病历')
+            getServer(this, 'all', menu)
             break
           case 2:
+            menu = this.$store.state.Library.libraryMenu
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_library_menu', 'MDC')
-            getServer(this, 'all', 'MDC')
+            this.$store.commit('SET_menu', [i, menu])
+            getServer(this, 'all', menu)
             break
           case 3:
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
@@ -209,11 +236,11 @@
             getServer(this, 'all', '统计分析')
             break
           case 4:
+            menu = this.$store.state.Forum.forumMenu
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_forumMenu', '论坛')
-            this.$store.commit('SET_menu', [i, '论坛'])
-            getServer(this, 'all', '论坛', null)
+            this.$store.commit('SET_menu', [i, menu])
+            getServer(this, 'all', menu)
             break
           default :
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
