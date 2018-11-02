@@ -5,7 +5,7 @@
 <div class="homepage" v-bind:class="homepage" v-else>
   <wxc-loading :show="isLoadingShow" type="default" interval="3" loading-text="正在查询"></wxc-loading>
   <wxc-tab-bar
-    ref="wxcTabBar"
+    ref="wxc-tab-bar"
     :tab-titles="tabs"
     :tab-styles="tabStyles"
     title-type="icon"
@@ -119,10 +119,16 @@
       }
     }),
     computed: {
+      activeTab () {
+        return this.$store.state.Home.activeTab
+      },
       infoLevel () {
         return this.$store.state.Home.infoLevel
       },
       menu () {
+        if (this.activeTab === 3) {
+          this.setPage(this.activeTab)
+        }
         return this.$store.state.Home.menu
       },
       isLoadingShow () {
@@ -182,7 +188,7 @@
         getLastVersion(this)
       },
       setPage (num) {
-        this.$refs['wxcTabBar'].setPage(num)
+        this.$refs['wxc-tab-bar'].setPage(num)
       },
       wxcTabBarCurrentTabSelected (e) {
         const i = e.page

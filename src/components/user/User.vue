@@ -29,10 +29,16 @@
       :list="mdcs"
       @select="params => onSelect(params, 'mdc')">
     </wxc-grid-select>
+    <wxc-button text="用户报表"
+        :show="true"
+        size="medium"
+        class="submits"
+        @wxcButtonClicked="chart"></wxc-button>
+    <div style="height:20px;"></div>
     <wxc-button text="退出登录"
-          size="full"
-          class="submits"
-          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        size="full"
+        class="submits"
+        @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
 </template>
 
@@ -128,6 +134,11 @@ export default {
   methods: {
     minibarRightButtonClick (e) {
       this.$store.commit('SET_menu', [0, '用户登录'])
+    },
+    chart () {
+      this.$store.commit('SET_activeTab', 3)
+      this.$store.commit('SET_menu', [3, '报表'])
+      this.$store.commit('SET_chartType', '用户报表')
     },
     onSelect (params, type) {
       const user = {}
