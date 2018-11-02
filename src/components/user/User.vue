@@ -24,17 +24,22 @@
       :list="mdcs"
       @select="params => onSelect(params, 'mdc')">
     </wxc-grid-select>
+    <wxc-button text="退出登录"
+          size="full"
+          class="submits"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
 </template>
 
 <script>
-import { WxcMinibar, WxcGridSelect } from 'weex-ui'
+import { WxcMinibar, WxcGridSelect, WxcButton } from 'weex-ui'
 import Category from '../common/category.vue'
 import { updateUser } from '../../utils/server'
 const modal = weex.requireModule('modal')
+const storage = weex.requireModule('storage')
 export default {
   name: 'user-doc',
-  components: { WxcMinibar, WxcGridSelect, Category },
+  components: { WxcMinibar, WxcGridSelect, Category, WxcButton },
   data: () => ({
     customStyles: {
       width: '150px',
@@ -121,10 +126,17 @@ export default {
         case 'user':
           const types = this.list_1[params.selectIndex].title
           user.type = types
-          // modal.toast({ message: `已设置${types}为默认查询版本`, duration: 1 })
           break
       }
       updateUser(this, user)
+    },
+    wxcButtonClicked () {
+      const user = { login: false, data: { clipalm_version: 'BJ编码版' } }
+      this.$store.commit('SET_menu', [0, '用户登陆'])
+      this.$store.commit('SET_user', user)
+      this.$router.push('/')
+      this.$store.commit('SET_visible', false)
+      storage.removeItem('user')
     }
   }
 }

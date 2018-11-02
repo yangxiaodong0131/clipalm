@@ -144,6 +144,24 @@ export default {
         }
       }
       return title
+    },
+    returnMenu () {
+      let menu = ''
+      switch (this.$store.state.Home.activeTab) {
+        case 1:
+          menu = this.$store.state.Edit.editMenu
+          break
+        case 2:
+          menu = this.$store.state.Library.libraryMenu
+          break
+        case 3:
+          menu = '报表'
+          break
+        case 4:
+          menu = '论坛'
+          break
+      }
+      return menu
     }
   },
   methods: {
@@ -152,13 +170,13 @@ export default {
       const level = this.infoLevel - 1
       this.$store.commit('SET_infoLevel', level)
       if (level === 0) {
-        this.$store.commit('SET_menu', [i, this.$store.state.Home.infoMenu])
+        this.$store.commit('SET_menu', [i, this.returnMenu])
       }
       modal.toast({ message: '上一页', duration: 1 })
     },
     minibarRightButtonClick () {
       if (this.infoLevel === 0) {
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
+        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
       }
       this.$store.commit('SET_infoLevel', this.infoLevel + 1)
       modal.toast({ message: '下一页', duration: 1 })

@@ -27,7 +27,7 @@
 import { WxcPopup, WxcCell, WxcButton, WxcGridSelect } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
-
+const modal = weex.requireModule('modal')
 export default {
   components: { WxcPopup, WxcCell, WxcButton, WxcGridSelect },
   data () {
@@ -57,6 +57,24 @@ export default {
           break
       }
       return result
+    },
+    returnMenu () {
+      let menu = ''
+      switch (this.$store.state.Home.activeTab) {
+        case 1:
+          menu = this.$store.state.Edit.editMenu
+          break
+        case 2:
+          menu = this.$store.state.Library.libraryMenu
+          break
+        case 3:
+          menu = '报表'
+          break
+        case 4:
+          menu = '论坛'
+          break
+      }
+      return menu
     }
   },
   methods: {
@@ -98,10 +116,17 @@ export default {
         const i = this.$store.state.Home.activeTab
         if (this.infoLevel === 1) {
           this.$store.commit('SET_infoLevel', 0)
-          this.$store.commit('SET_menu', [i, this.$store.state.Home.infoMenu])
+          this.$store.commit('SET_menu', [i, this.returnMenu])
         } else {
           this.$store.commit('SET_infoLevel', this.infoLevel - 1)
         }
+        modal.toast({ message: '上一页', duration: 1 })
+      } else if (e.direction === 'left') {
+        if (this.infoLevel === 0) {
+          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
+        }
+        this.$store.commit('SET_infoLevel', this.infoLevel + 1)
+        modal.toast({ message: '下一页', duration: 1 })
       }
     },
     LongPress (e) {

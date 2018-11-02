@@ -3,7 +3,7 @@
   <Version></Version>
 </div>
 <div class="homepage" v-else>
-  <wxc-loading :show="isLoadingShow" type="default" loading-text="正在查询"></wxc-loading>
+  <wxc-loading :show="isLoadingShow" type="default" interval="3" loading-text="正在查询"></wxc-loading>
   <mini-bar></mini-bar>
   <wxc-tab-bar
     ref="wxcTabBar"
@@ -33,7 +33,7 @@
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
-    <div class="wrapper">
+    <div class="panel">
       <Report v-if="menu[3] == '统计分析'"></Report>
       <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
@@ -73,7 +73,7 @@
   import Forum from './forum/Forum'
   import Content from './forum/Content'
   import New from './forum/New'
-
+  const storage = weex.requireModule('storage')
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
       Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register },
@@ -86,19 +86,22 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询', '单条分组'],
+          // menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '自定义查询', '单条分组'],
+          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
           // icon: '//gw.alicdn.com/tfs/TB1I2E9OVXXXXbFXVXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '字典',
-          menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9', '自定义查询'],
+          // menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9', '自定义查询'],
+          menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
           // icon: '//gw.alicdn.com/tfs/TB1gUhyPXXXXXX5XXXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: 'DRG',
-          menu: ['统计分析', '报表', '自定义查询'],
+          // menu: ['统计分析', '报表', '自定义查询'],
+          menu: ['统计分析', '报表'],
           // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
@@ -159,6 +162,14 @@
       const { tabStyles } = this
       this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
       this.newVersion()
+      storage.getItem('user', e => {
+        if (e.result === 'success') {
+          const edata = JSON.parse(e.data)
+          this.$store.commit('SET_user', edata)
+          this.$router.push('/')
+          this.$store.commit('SET_menu', [0, '个人信息'])
+        }
+      })
     },
     methods: {
       newVersion () {
@@ -166,6 +177,9 @@
       },
       wxcTabBarCurrentTabSelected (e) {
         const i = e.page;
+        if (i !== this.$store.state.Home.activeTab) {
+          this.$store.commit('SET_isLoadingShow', false)
+        }
         if (i === this.$store.state.Home.activeTab && i !== 0) {
           this.$store.commit('SET_visible', true)
         }
@@ -179,22 +193,27 @@
           case 1:
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            // if (this.$store.state.Edit.wt4Case.length === 0) {
-            //   getServer(this, 'all', '未入组病历')
-            //   this.$store.commit('SET_editMenu', '未入组病历')
-            // }
+            this.$store.commit('SET_editMenu', '未入组病历')
+            getServer(this, 'all', '未入组病历')
             break
           case 2:
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
             this.$store.commit('SET_isMiniShow', true)
+            this.$store.commit('SET_library_menu', 'MDC')
+            getServer(this, 'all', 'MDC')
             break
           case 3:
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
             this.$store.commit('SET_isMiniShow', true)
+            this.$store.commit('SET_menu', [i, '统计分析'])
+            getServer(this, 'all', '统计分析')
             break
           case 4:
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
             this.$store.commit('SET_isMiniShow', true)
+            this.$store.commit('SET_forumMenu', '论坛')
+            this.$store.commit('SET_menu', [i, '论坛'])
+            getServer(this, 'all', '论坛', null)
             break
           default :
             this.$store.commit('SET_menus', this.tabs[0]['menu'])

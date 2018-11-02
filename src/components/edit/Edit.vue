@@ -1,7 +1,7 @@
 <template>
   <div class="demo" @swipe="swipe" style="height:1000px;">
+    <text class="demo-title" v-if="showTitle">{{title}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
-      <text class="demo-title" v-if="showTitle">{{title}}</text>
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
@@ -117,7 +117,13 @@ export default {
 
 <style scoped>
   .demo-title {
-    font-size: 30px;
+    font-size: 28px;
+    background-color: #C6E2FF;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 14px;
+    padding: 10px;
   }
   .demo {
     width: 750px;

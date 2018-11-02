@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <text class="text">掌上医助</text>
+    <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
@@ -22,8 +22,8 @@
       @wxcSearchbarInputOnInput="PwdOnInput">
     </wxc-searchbar>
     <div class="row">
-      <wxc-button type="blue" text="登陆" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
-      <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
+      <wxc-button type="blue" text="登录" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+      <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
     </div>
   </div>
 </template>
@@ -33,6 +33,7 @@ import { WxcButton, WxcSearchbar } from 'weex-ui'
 import { getServer } from '../../utils/server'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
+const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 
@@ -75,11 +76,8 @@ export default {
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_menu', [0, '个人信息'])
             getServer(this, 'all', 'MDC')
-            getServer(this, 'all', 'ADRG')
-            getServer(this, 'all', 'DRG')
-            getServer(this, 'all', 'ICD10')
-            getServer(this, 'all', 'ICD9')
             this.$store.commit('SET_library_menu', 'MDC')
+            storage.setItem('user', JSON.stringify(res.data))
           } else {
             modal.toast({ 'message': '账号或密码错误', 'duration': 1 })
             this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
