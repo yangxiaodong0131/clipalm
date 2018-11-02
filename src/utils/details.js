@@ -65,7 +65,28 @@ function mdcInfo (data) {
   return result
 }
 function adrgInfo (data) {
-  const gridList = data.icd9_aa.map((x) => {
+  const gridList = {}
+  gridList.icd9aa = data.icd9_aa.map((x) => {
+    const obj = {}
+    obj.title = x
+    return obj
+  })
+  gridList.icd9bb = data.icd9_bb.map((x) => {
+    const obj = {}
+    obj.title = x
+    return obj
+  })
+  gridList.icd9bb = data.icd9_bb.map((x) => {
+    const obj = {}
+    obj.title = x
+    return obj
+  })
+  gridList.icd10aa = data.icd10_aa.map((x) => {
+    const obj = {}
+    obj.title = x
+    return obj
+  })
+  gridList.icd10bb = data.icd10_bb.map((x) => {
     const obj = {}
     obj.title = x
     return obj
