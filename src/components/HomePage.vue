@@ -210,22 +210,24 @@
         }
         this.$store.commit('SET_activeTab', i)
         this.$store.commit('SET_infoPageClear')
+        let menu = ''
         switch (i) {
           case 0:
             this.$store.commit('SET_menus', this.tabs[0]['menu'])
             this.$store.commit('SET_isMiniShow', false)
             break
           case 1:
+            menu = this.$store.state.Edit.editMenu
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_editMenu', '未入组病历')
-            getServer(this, 'all', '未入组病历')
+            getServer(this, 'all', menu)
             break
           case 2:
+            menu = this.$store.state.Library.libraryMenu
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_library_menu', 'MDC')
-            getServer(this, 'all', 'MDC')
+            this.$store.commit('SET_menu', [i, menu])
+            getServer(this, 'all', menu)
             break
           case 3:
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
@@ -234,11 +236,11 @@
             getServer(this, 'all', '统计分析')
             break
           case 4:
+            menu = this.$store.state.Forum.forumMenu
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_forumMenu', '论坛')
-            this.$store.commit('SET_menu', [i, '论坛'])
-            getServer(this, 'all', '论坛', null)
+            this.$store.commit('SET_menu', [i, menu])
+            getServer(this, 'all', menu)
             break
           default :
             this.$store.commit('SET_menus', this.tabs[0]['menu'])

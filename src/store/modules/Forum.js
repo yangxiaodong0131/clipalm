@@ -2,7 +2,7 @@ const state = {
   type: '',
   post: [],
   forumPage: 1,
-  forumMenu: '',
+  forumMenu: '论坛',
   forumLabel: '',
   forumContent: {}
 }

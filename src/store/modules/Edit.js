@@ -1,6 +1,6 @@
 const state = {
   wt4Case: [],
-  editMenu: '',
+  editMenu: '未入组病历',
   wt4Page: 1,
   wt4Info: ''
 }
