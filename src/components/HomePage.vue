@@ -73,7 +73,7 @@
   import Forum from './forum/Forum'
   import Content from './forum/Content'
   import New from './forum/New'
-
+  const storage = weex.requireModule('storage')
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
       Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register },
@@ -162,6 +162,14 @@
       const { tabStyles } = this
       this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
       this.newVersion()
+      storage.getItem('user', e => {
+        if (e.result === 'success') {
+          const edata = JSON.parse(e.data)
+          this.$store.commit('SET_user', edata)
+          this.$router.push('/')
+          this.$store.commit('SET_menu', [0, '个人信息'])
+        }
+      })
     },
     methods: {
       newVersion () {
