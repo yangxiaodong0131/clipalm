@@ -98,7 +98,7 @@ export default {
     fetch () {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
       getServer(this, 'all', this.$store.state.Edit.editMenu)
-      modal.toast({ message: '加载下一页', duration: 1 })
+      // modal.toast({ message: '加载下一页', duration: 1 })
     },
     longpress (wt4) {
       modal.toast({ message: '跳转论坛', duration: 1 })

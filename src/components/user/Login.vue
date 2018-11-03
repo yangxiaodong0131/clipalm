@@ -1,6 +1,8 @@
 <template>
   <div class="panel">
-    <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
+    <div class="row">
+      <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
+    </div>
     <wxc-searchbar ref="wxc-searchbar"
       input-type='text'
       v-model = 'user.username'
@@ -17,12 +19,13 @@
       v-model = 'user.password'
       :default-value='pwd'
       cancel-label='密码'
+      placeholder='密码'
       theme='yellow'
       :bar-style='barStyle'
       @wxcSearchbarInputOnInput="PwdOnInput">
     </wxc-searchbar>
     <div class="row">
-      <wxc-button type="blue" text="登录" size="big" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+      <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
       <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
     </div>
   </div>
@@ -44,6 +47,8 @@ export default {
     return {
       info: '...',
       value: '输入框内容。。。',
+      name: '',
+      pwd: '',
       name: 'hitb',
       pwd: '123456',
       visible: false,
@@ -71,11 +76,16 @@ export default {
       }, res => {
         if (res.ok) {
           if (res.data.login) {
+            console.log(res.data)
             this.$store.commit('SET_user', res.data)
             this.$router.push('/')
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_menu', [0, '个人信息'])
             getServer(this, 'all', 'MDC')
+            getServer(this, 'all', 'ADRG')
+            getServer(this, 'all', 'DRG')
+            getServer(this, 'all', 'ICD10')
+            getServer(this, 'all', 'ICD9')
             this.$store.commit('SET_library_menu', 'MDC')
             storage.setItem('user', JSON.stringify(res.data))
           } else {
