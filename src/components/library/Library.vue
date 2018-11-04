@@ -21,7 +21,7 @@
 import { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 export default {
   components: { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
   data () {
