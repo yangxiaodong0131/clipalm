@@ -47,8 +47,8 @@ export default {
     return {
       info: '...',
       value: '输入框内容。。。',
-      name: '',
-      pwd: '',
+      // name: '',
+      // pwd: '',
       name: 'hitb',
       pwd: '123456',
       visible: false,
@@ -76,7 +76,6 @@ export default {
       }, res => {
         if (res.ok) {
           if (res.data.login) {
-            console.log(res.data)
             this.$store.commit('SET_user', res.data)
             this.$router.push('/')
             this.$store.commit('SET_visible', false)
