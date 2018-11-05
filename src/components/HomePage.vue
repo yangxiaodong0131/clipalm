@@ -162,7 +162,7 @@
           const edata = JSON.parse(e.data)
           this.$store.commit('SET_user', edata)
           this.$store.commit('SET_menu', [0, '个人信息'])
-          this.$router.push('/')
+          // this.$router.push('/')
         }
       })
       const tabPageHeight = Utils.env.getPageHeight();

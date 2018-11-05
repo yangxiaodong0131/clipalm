@@ -7,7 +7,7 @@ const state = {
   icd10Rule: [],
   icd10Page: 1,
   icd9Page: 1,
-  libraryMenu: 'MDC',
+  libraryMenu: '',
   // version: 'BJ',
   mdc: ''
 }
