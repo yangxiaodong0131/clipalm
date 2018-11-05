@@ -5,14 +5,31 @@
         <wxc-minibar :title="miniBarTitle"
                     background-color="#009ff0"
                     text-color="#FFFFFF"
-                    :left-button="leftButtonShow"
                     :show="isShow"
+                    left-text="菜单"
                     :use-default-return="false"
-                    @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
-                    @wxcMinibarRightButtonClicked="minibarRightButtonClick">
+                    @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
-          <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon>
+          <!-- <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon> -->
         </wxc-minibar>
+        <wxc-popup popup-color="#FFFFFF" class="popup"
+            :show="isBottomShow"
+            pos="left"
+            width="320"
+            height="200">
+          <wxc-button text="返回首页" class="button"
+            size="medium"
+            @wxcButtonClicked="wxcButtonClicked('返回首页')"></wxc-button>
+          <wxc-button text="上一页" class="button"
+            size="medium"
+            @wxcButtonClicked="wxcButtonClicked('上一页')"></wxc-button>
+          <wxc-button text="下一页" class="button"
+            size="medium"
+            @wxcButtonClicked="wxcButtonClicked('下一页')"></wxc-button>
+          <wxc-button text="跳转论坛" class="button"
+            size="medium"
+            @wxcButtonClicked="wxcButtonClicked('跳转论坛')"></wxc-button>
+          </wxc-popup>
       </div>
     </scroller>
   </div>
@@ -31,17 +48,27 @@
     width: 750px;
     align-items: flex-start;
   }
+  .button {
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+  .popup {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
 
 <script>
-import { WxcMinibar, WxcIcon } from 'weex-ui'
+import { WxcMinibar, WxcIcon, WxcPopup, WxcButton } from 'weex-ui'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcMinibar, WxcIcon },
+  components: { WxcMinibar, WxcIcon, WxcPopup, WxcButton },
   data () {
     return {
       rightButton: '',
-      leftButton: ''
+      leftButton: '',
+      isBottomShow: false
     }
   },
   created () {
@@ -166,20 +193,31 @@ export default {
   },
   methods: {
     minibarLeftButtonClick () {
-      const i = this.$store.state.Home.activeTab
-      const level = this.infoLevel - 1
-      this.$store.commit('SET_infoLevel', level)
-      if (level === 0) {
-        this.$store.commit('SET_menu', [i, this.returnMenu])
-      }
-      modal.toast({ message: '上一页', duration: 1 })
+      this.isBottomShow = true
     },
-    minibarRightButtonClick () {
-      if (this.infoLevel === 0) {
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
+    wxcButtonClicked (e) {
+      switch (e) {
+        case '返回首页':
+          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+          break
+        case '上一页':
+          const i = this.$store.state.Home.activeTab
+          const level = this.infoLevel - 1
+          this.$store.commit('SET_infoLevel', level)
+          if (level === 0) {
+            this.$store.commit('SET_menu', [i, this.returnMenu])
+          }
+          modal.toast({ message: '上一页', duration: 1 })
+          break
+        case '下一页':
+          if (this.infoLevel === 0) {
+            this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
+          }
+          this.$store.commit('SET_infoLevel', this.infoLevel + 1)
+          modal.toast({ message: '下一页', duration: 1 })
+          break
       }
-      this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-      modal.toast({ message: '下一页', duration: 1 })
+      this.isBottomShow = false
     }
   }
 }
