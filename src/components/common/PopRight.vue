@@ -17,7 +17,7 @@
           ></wxc-cell>
         <div v-for="(gridList, index) in infoPage.gridList"
               :key="index">
-          <text>{{index}}</text>
+          <text class="text">{{index}}</text>
           <wxc-grid-select
               v-if="Object.keys(gridList).length !== 0"
               :single="true"
@@ -148,5 +148,8 @@ export default {
     height: 1250px;
     background-color: #f2f3f4;
     margin-top: 91px;
+  }
+  .text {
+    font-size: 35px;
   }
 </style>
