@@ -72,6 +72,7 @@ export default {
       this.$store.commit('SET_info', e)
       this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
+      this.$store.commit('SET_miniBarTitle', `${this.menu}-${e.code}规则详情`)
       this.$store.commit('SET_infoPage', getDetails(`${this.menu}规则详情`, e))
     },
     openBottomPopup () {

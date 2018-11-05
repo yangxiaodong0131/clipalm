@@ -86,6 +86,7 @@ export default {
       this.$store.commit('SET_infoMenu', this.wxcCellTitle)
       this.$store.commit('SET_infoLevel', 1)
       const details = getDetails(menu, e)
+      this.$store.commit('SET_miniBarTitle', `病案ID-${e.b_wt4_v1_id}病案详情`)
       this.$store.commit('SET_infoPage', details)
     },
     swipe (e) {
