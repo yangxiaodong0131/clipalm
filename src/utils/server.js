@@ -25,13 +25,13 @@ export function getServer (obj, type, menu, value = null) {
   if (type === 'all') {
     switch (menu) {
       case 'MDC':
-        url = `rule_bj_mdc?plat=client&version=${version}`
+        url = `rule_bj_mdc?plat=client&version=${version}&page=${obj.$store.state.Library.mdcPage}`
         break
       case 'ADRG':
-        url = `rule_bj_adrg?plat=client&version=${version}`
+        url = `rule_bj_adrg?plat=client&version=${version}&page=${obj.$store.state.Library.adrgPage}`
         break
       case 'DRG':
-        url = `rule_bj_drg?plat=client&version=${version}`
+        url = `rule_bj_drg?plat=client&version=${version}&page=${obj.$store.state.Library.drgPage}`
         break
       case 'ICD9':
         url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}&version=${version}`
@@ -72,6 +72,7 @@ export function getServer (obj, type, menu, value = null) {
   } else if (type === 'forumOne') {
     url = `forum?id=${value.id}`
   }
+  console.log(url)
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
@@ -188,30 +189,36 @@ function setStore (obj, menu, rdata) {
       break
     case 'ADRG':
       obj.$store.commit('SET_library_menu', menu)
-      obj.$store.commit('SET_adrg_rule', rdata.data)
+      data = obj.$store.state.Library.adrgRule
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_libraryPage', ['ADRG', parseInt(rdata.page)])
+      obj.$store.commit('SET_adrg_rule', data)
       break
     case 'DRG':
       obj.$store.commit('SET_library_menu', menu)
-      obj.$store.commit('SET_drg_rule', rdata.data)
+      data = obj.$store.state.Library.drgRule
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_libraryPage', ['DRG', parseInt(rdata.page)])
+      obj.$store.commit('SET_drg_rule', data)
       break
     case 'ICD9':
       obj.$store.commit('SET_library_menu', menu)
-      obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
+      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
       obj.$store.commit('SET_icd9_rule', rdata.data)
       break
     case 'ICD10':
       obj.$store.commit('SET_library_menu', menu)
-      obj.$store.commit('SET_icd10_page', parseInt(rdata.page))
+      obj.$store.commit('SET_libraryPage', ['ICD10', parseInt(rdata.page)])
       obj.$store.commit('SET_icd10_rule', rdata.data)
       break
     case 'icd10One':
-      obj.$store.commit('SET_icd10_page', parseInt(rdata.page))
+      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
       data = obj.$store.state.Library.icd10Rule
       data = data.concat(rdata.data)
       obj.$store.commit('SET_icd10_rule', data)
       break
     case 'icd9One':
-      obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
+      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
       data = obj.$store.state.Library.icd9Rule
       data = data.concat(rdata.data)
       obj.$store.commit('SET_icd9_rule', data)
@@ -254,7 +261,7 @@ function setStore (obj, menu, rdata) {
     case '论坛':
       data = obj.$store.state.Forum.post
       data = data.concat(rdata.data)
-      obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
+      // obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
       obj.$store.commit('SET_post', data)
       break
     case '帖子':
