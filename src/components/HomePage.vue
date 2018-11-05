@@ -136,10 +136,6 @@
     }),
     computed: {
       menu () {
-        if (this.$store.state.Home.showForum) {
-          this.$refs['wxcTabBar'].setPage(4)
-        }
-        // console.log(this.$store.state.Home.menu[2] === '')
         return this.$store.state.Home.menu
       },
       showForum () {
@@ -206,18 +202,23 @@
       //   })
       // }
     },
+    mounted: function () {
+      if (this.$store.state.Home.user.login) {
+        this.setPage(2)
+      }
+    },
     methods: {
       newVersion () {
         getLastVersion(this)
+      },
+      setPage (num) {
+        this.$refs['wxcTabBar'].setPage(num)
       },
       wxcTabBarCurrentTabSelected (e) {
         const i = e.page;
         if (i !== this.$store.state.Home.activeTab) {
           this.$store.commit('SET_isLoadingShow', false)
         }
-        // if (i === this.$store.state.Home.activeTab && i !== 0) {
-        //   this.$store.commit('SET_visible', true)
-        // }
         this.$store.commit('SET_activeTab', i)
         this.$store.commit('SET_infoPageClear')
         let menu = ''
