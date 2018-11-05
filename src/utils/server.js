@@ -40,7 +40,7 @@ export function getServer (obj, type, menu, value = null) {
         url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}&version=${version}`
         break
       case '统计分析':
-        url = 'wt4_stat_cv?plat=client'
+        url = `wt4_stat_cv?plat=client&page=${obj.$store.state.Stat.statPage}`
         break
       case 'QY病历':
         url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}`
@@ -72,7 +72,6 @@ export function getServer (obj, type, menu, value = null) {
   } else if (type === 'forumOne') {
     url = `forum?id=${value.id}`
   }
-  console.log(url)
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
@@ -224,12 +223,16 @@ function setStore (obj, menu, rdata) {
       obj.$store.commit('SET_icd9_rule', data)
       break
     case '统计分析':
-      obj.$store.commit('SET_statDrg', rdata.data)
+      console.log(rdata)
+      obj.$store.commit('SET_statPage', parseInt(rdata.page))
+      data = obj.$store.state.Stat.statDrg
+      data = data.concat(rdata.data)
+      obj.$store.commit('SET_statDrg', data)
       break
     case '未入组病历':
-      if (obj.$store.state.Edit.wt4Page === 1) {
-        obj.$store.commit('SET_wt4Info', rdata.info)
-      }
+      // if (obj.$store.state.Edit.wt4Page === 1) {
+      //   obj.$store.commit('SET_wt4Info', rdata.info)
+      // }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
