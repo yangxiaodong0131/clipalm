@@ -96,6 +96,7 @@ export default {
           const drg = this.infoPage.info[detail.title]
           this.$store.commit('SET_infoLevel', this.infoLevel + 1)
           this.$store.commit('SET_infoPage', details)
+          this.$store.commit('SET_miniBarTitle', `入组DRG-${drg}分析详情`)
           getServer(this, 'statOne', 'info', drg)
           break
         default:

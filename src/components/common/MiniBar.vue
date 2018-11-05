@@ -6,6 +6,7 @@
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :show="isShow"
+                    left-button=""
                     right-text="菜单"
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick">
@@ -17,15 +18,21 @@
             pos="right"
             width="320"
             height="200">
+          </wxc-cell>
+          <wxc-button text="前进" class="button"
+            size="medium"
+            :disabled="rightButtonShow"
+            @wxcButtonClicked="wxcButtonClicked('前进')"></wxc-button>
+          <br/><br/><br/>
+          <wxc-button text="后退" class="button"
+            size="medium"
+            :disabled="leftButtonShow"
+            @wxcButtonClicked="wxcButtonClicked('后退')"></wxc-button>
+          <br/><br/><br/>
           <wxc-button text="返回首页" class="button"
             size="medium"
             @wxcButtonClicked="wxcButtonClicked('返回首页')"></wxc-button>
-          <wxc-button text="前进" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('前进')"></wxc-button>
-          <wxc-button text="后退" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('后退')"></wxc-button>
+          <br/><br/><br/>
           <wxc-button text="跳转论坛" class="button"
             size="medium"
             @wxcButtonClicked="wxcButtonClicked('跳转论坛')"></wxc-button>
@@ -60,10 +67,10 @@
 </style>
 
 <script>
-import { WxcMinibar, WxcIcon, WxcPopup, WxcButton } from 'weex-ui'
-const modal = weex.requireModule('modal')
+import { WxcMinibar, WxcIcon, WxcPopup, WxcButton, WxcCell } from 'weex-ui'
+// const modal = weex.requireModule('modal')
 export default {
-  components: { WxcMinibar, WxcIcon, WxcPopup, WxcButton },
+  components: { WxcMinibar, WxcIcon, WxcPopup, WxcButton, WxcCell },
   data () {
     return {
       rightButton: '',
@@ -124,52 +131,24 @@ export default {
           info = ''
           break
       }
-      let show = false
+      let disabled = false
       if (info === '') {
-        show = false
+        disabled = true
       } else {
-        show = true
+        disabled = false
       }
-      return show
+      return disabled
     },
     leftButtonShow () {
-      let show = ''
+      let disabled = false
       if (this.infoLevel === 0) {
-        show = ''
-      } else {
-        show = 'https://gw.alicdn.com/tfs/TB1cAYsbv2H8KJjy0FcXXaDlFXa-30-53.png'
+        disabled = true
+      } else if (this.$store.state.Home.infoPage1.info === '') {
+        disabled = true
       }
-      return show
+      return disabled
     },
     miniBarTitle () {
-      // let title = ' '
-      // if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
-      //   title = this.infoPage.infoTitle
-      // } else {
-      //   switch (this.$store.state.Home.activeTab) {
-      //     case 0:
-      //       if (this.$store.state.Home.menu[0] === '个人信息') {
-      //         title = '个人信息'
-      //       } else if (this.$store.state.Home.menu[0] === '注册用户') {
-      //         title = '注册用户'
-      //       }
-      //       break
-      //     case 1:
-      //       title = this.$store.state.Edit.editMenu
-      //       break
-      //     case 2:
-      //       if (this.$store.state.Library.libraryMenu !== '') {
-      //         title = `${this.$store.state.Library.libraryMenu}-${this.$store.state.Home.user.data.clipalm_version}`
-      //       }
-      //       break
-      //     case 3:
-      //       title = '报表'
-      //       break
-      //     case 4:
-      //       title = this.$store.state.Forum.forumMenu
-      //       break
-      //   }
-      // }
       return this.$store.state.Home.miniBarTitle
     },
     returnMenu () {
@@ -201,20 +180,26 @@ export default {
           this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
           break
         case '前进':
+          if (this.infoLevel < 4) {
+            this.$store.commit('SET_infoLevel', this.infoLevel + 1)
+            switch (this.$store.state.Home.activeTab) {
+              case 1:
+                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
+                break
+              case 2:
+                console.log([this.$store.state.Home.activeTab, '规则详情'])
+                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
+                break
+            }
+          }
+          break
+        case '后退':
           const i = this.$store.state.Home.activeTab
           const level = this.infoLevel - 1
           this.$store.commit('SET_infoLevel', level)
           if (level === 0) {
             this.$store.commit('SET_menu', [i, this.returnMenu])
           }
-          modal.toast({ message: '前进', duration: 1 })
-          break
-        case '后退':
-          if (this.infoLevel === 0) {
-            this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
-          }
-          this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-          modal.toast({ message: '后退', duration: 1 })
           break
       }
       this.isBottomShow = false
