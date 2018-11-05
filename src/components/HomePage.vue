@@ -157,20 +157,20 @@
       }
     },
     created: function () {
+      storage.getItem('user', e => {
+        if (e.result === 'success') {
+          const edata = JSON.parse(e.data)
+          this.$store.commit('SET_user', edata)
+          this.$store.commit('SET_menu', [0, '个人信息'])
+          this.$router.push('/')
+        }
+      })
       const tabPageHeight = Utils.env.getPageHeight();
       // 如果页面没有导航栏，可以用下面这个计算高度的方法
       // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
       const { tabStyles } = this
       this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
       this.newVersion()
-      storage.getItem('user', e => {
-        if (e.result === 'success') {
-          const edata = JSON.parse(e.data)
-          this.$store.commit('SET_user', edata)
-          this.$router.push('/')
-          this.$store.commit('SET_menu', [0, '个人信息'])
-        }
-      })
       storage.getItem('point', e => {
         if (e.result === 'success') {
           this.$store.commit('SET_pointIndex', parseInt(e.data))
