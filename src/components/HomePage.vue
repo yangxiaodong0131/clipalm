@@ -24,12 +24,14 @@
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
+      <HomeMenu v-else-if="menu[1] === ''"></HomeMenu>
       <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
     <div class="panel">
       <Query v-if="menu[2] == '自定义查询'"></Query>
       <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
+      <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
@@ -37,6 +39,7 @@
       <Report v-if="menu[3] == '统计分析'"></Report>
       <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
+      <HomeMenu v-else-if="menu[3] === ''"></HomeMenu>
       <PopRight v-else></PopRight>
     </div>
     <!-- forum页 -->
@@ -44,10 +47,11 @@
       <Forum v-if="menu[4] == '论坛'"></Forum>
       <New v-if="menu[4] == '新建帖子'"></New>
       <Content v-if="menu[4] == '帖子'"></Content>
+      <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
       <Query v-if="menu[4] == '自定义查询'"></Query>
     </div>
   </wxc-tab-bar>
-  <pop-bar></pop-bar>
+  <!-- <pop-bar></pop-bar> -->
   <mini-bar></mini-bar>
   <!-- <pop-up></pop-up> -->
 </div>
@@ -61,6 +65,7 @@
   import PopUp from './common/PopUp'
   import PopRight from './common/PopRight'
   import MiniBar from './common/MiniBar'
+  import HomeMenu from './common/HomeMenu'
   import User from './user/User'
   import Login from './user/Login'
   import Register from './user/Register'
@@ -77,7 +82,7 @@
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register },
+      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register, HomeMenu },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -126,13 +131,15 @@
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10
-      }
+      },
+      test: ''
     }),
     computed: {
       menu () {
         if (this.$store.state.Home.showForum) {
           this.$refs['wxcTabBar'].setPage(4)
         }
+        // console.log(this.$store.state.Home.menu[2] === '')
         return this.$store.state.Home.menu
       },
       showForum () {
@@ -162,7 +169,7 @@
           const edata = JSON.parse(e.data)
           this.$store.commit('SET_user', edata)
           this.$store.commit('SET_menu', [0, '个人信息'])
-          this.$router.push('/')
+          // this.$router.push('/')
         }
       })
       const tabPageHeight = Utils.env.getPageHeight();
@@ -208,9 +215,9 @@
         if (i !== this.$store.state.Home.activeTab) {
           this.$store.commit('SET_isLoadingShow', false)
         }
-        if (i === this.$store.state.Home.activeTab && i !== 0) {
-          this.$store.commit('SET_visible', true)
-        }
+        // if (i === this.$store.state.Home.activeTab && i !== 0) {
+        //   this.$store.commit('SET_visible', true)
+        // }
         this.$store.commit('SET_activeTab', i)
         this.$store.commit('SET_infoPageClear')
         let menu = ''
@@ -223,6 +230,8 @@
             menu = this.$store.state.Edit.editMenu
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             this.$store.commit('SET_isMiniShow', true)
+            this.$store.commit('SET_menu', [i, menu])
+            this.$store.commit('SET_miniBarTitle', '病案')
             getServer(this, 'all', menu)
             break
           case 2:
@@ -230,12 +239,15 @@
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
             this.$store.commit('SET_isMiniShow', true)
             this.$store.commit('SET_menu', [i, menu])
+            this.$store.commit('SET_miniBarTitle', `字典`)
             // getServer(this, 'all', menu)
             break
           case 3:
+            menu = this.$store.state.Stat.statMenu
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_menu', [i, '统计分析'])
+            this.$store.commit('SET_miniBarTitle', 'DRG分析')
+            this.$store.commit('SET_menu', [i, menu])
             // getServer(this, 'all', '统计分析')
             break
           case 4:
@@ -243,6 +255,7 @@
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
             this.$store.commit('SET_isMiniShow', true)
             this.$store.commit('SET_menu', [i, menu])
+            this.$store.commit('SET_miniBarTitle')
             // getServer(this, 'all', menu)
             break
           default :

@@ -15,6 +15,7 @@ const state = {
   isLoadingShow: false,
   isMiniShow: false,
   showForum: false,
+  miniBarTitle: ' ',
   point: ['点击底部标签可显示菜单', '点击任意条目可进入条目详情', '病案页长按可进入论坛', '页面左滑右滑可前进后退', '页面上滑加载下一页'],
   pointIndex: 0,
   // 发布版本修改
@@ -23,6 +24,9 @@ const state = {
 }
 
 const mutations = {
+  SET_miniBarTitle (state, x) {
+    state.miniBarTitle = x
+  },
   SET_pointIndex (state, x) {
     state.pointIndex = x
   },
@@ -112,6 +116,7 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
+    commit('SET_miniBarTitle')
     commit('SET_pointIndex')
     commit('SET_showForum')
     commit('SET_serverVersion')
