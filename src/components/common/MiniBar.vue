@@ -115,35 +115,35 @@ export default {
       return show
     },
     miniBarTitle () {
-      let title = ' '
-      if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
-        title = this.infoPage.infoTitle
-      } else {
-        switch (this.$store.state.Home.activeTab) {
-          case 0:
-            if (this.$store.state.Home.menu[0] === '个人信息') {
-              title = '个人信息'
-            } else if (this.$store.state.Home.menu[0] === '注册用户') {
-              title = '注册用户'
-            }
-            break
-          case 1:
-            title = this.$store.state.Edit.editMenu
-            break
-          case 2:
-            if (this.$store.state.Library.libraryMenu !== '') {
-              title = `${this.$store.state.Library.libraryMenu}-${this.$store.state.Home.user.data.clipalm_version}`
-            }
-            break
-          case 3:
-            title = '报表'
-            break
-          case 4:
-            title = this.$store.state.Forum.forumMenu
-            break
-        }
-      }
-      return title
+      // let title = ' '
+      // if (this.infoPage.infoTitle !== '' && this.infoLevel > 0) {
+      //   title = this.infoPage.infoTitle
+      // } else {
+      //   switch (this.$store.state.Home.activeTab) {
+      //     case 0:
+      //       if (this.$store.state.Home.menu[0] === '个人信息') {
+      //         title = '个人信息'
+      //       } else if (this.$store.state.Home.menu[0] === '注册用户') {
+      //         title = '注册用户'
+      //       }
+      //       break
+      //     case 1:
+      //       title = this.$store.state.Edit.editMenu
+      //       break
+      //     case 2:
+      //       if (this.$store.state.Library.libraryMenu !== '') {
+      //         title = `${this.$store.state.Library.libraryMenu}-${this.$store.state.Home.user.data.clipalm_version}`
+      //       }
+      //       break
+      //     case 3:
+      //       title = '报表'
+      //       break
+      //     case 4:
+      //       title = this.$store.state.Forum.forumMenu
+      //       break
+      //   }
+      // }
+      return this.$store.state.Home.miniBarTitle
     },
     returnMenu () {
       let menu = ''
