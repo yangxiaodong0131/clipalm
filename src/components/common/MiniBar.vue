@@ -6,26 +6,26 @@
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :show="isShow"
-                    left-text="菜单"
+                    right-text="菜单"
                     :use-default-return="false"
-                    @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
+                    @wxcMinibarRightButtonClicked="minibarRightButtonClick">
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
           <!-- <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon> -->
         </wxc-minibar>
         <wxc-popup popup-color="#FFFFFF" class="popup"
             :show="isBottomShow"
-            pos="left"
+            pos="right"
             width="320"
             height="200">
           <wxc-button text="返回首页" class="button"
             size="medium"
             @wxcButtonClicked="wxcButtonClicked('返回首页')"></wxc-button>
-          <wxc-button text="上一页" class="button"
+          <wxc-button text="前进" class="button"
             size="medium"
-            @wxcButtonClicked="wxcButtonClicked('上一页')"></wxc-button>
-          <wxc-button text="下一页" class="button"
+            @wxcButtonClicked="wxcButtonClicked('前进')"></wxc-button>
+          <wxc-button text="后退" class="button"
             size="medium"
-            @wxcButtonClicked="wxcButtonClicked('下一页')"></wxc-button>
+            @wxcButtonClicked="wxcButtonClicked('后退')"></wxc-button>
           <wxc-button text="跳转论坛" class="button"
             size="medium"
             @wxcButtonClicked="wxcButtonClicked('跳转论坛')"></wxc-button>
@@ -192,7 +192,7 @@ export default {
     }
   },
   methods: {
-    minibarLeftButtonClick () {
+    minibarRightButtonClick () {
       this.isBottomShow = true
     },
     wxcButtonClicked (e) {
@@ -200,21 +200,21 @@ export default {
         case '返回首页':
           this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
           break
-        case '上一页':
+        case '前进':
           const i = this.$store.state.Home.activeTab
           const level = this.infoLevel - 1
           this.$store.commit('SET_infoLevel', level)
           if (level === 0) {
             this.$store.commit('SET_menu', [i, this.returnMenu])
           }
-          modal.toast({ message: '上一页', duration: 1 })
+          modal.toast({ message: '前进', duration: 1 })
           break
-        case '下一页':
+        case '后退':
           if (this.infoLevel === 0) {
             this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
           }
           this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-          modal.toast({ message: '下一页', duration: 1 })
+          modal.toast({ message: '后退', duration: 1 })
           break
       }
       this.isBottomShow = false
