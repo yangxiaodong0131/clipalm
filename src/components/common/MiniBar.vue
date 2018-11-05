@@ -6,6 +6,7 @@
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :show="isShow"
+                    left-button=""
                     right-text="菜单"
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick">
@@ -17,15 +18,21 @@
             pos="right"
             width="320"
             height="200">
+          </wxc-cell>
+          <wxc-button text="前进" class="button"
+            size="medium"
+            :disabled="rightButtonShow"
+            @wxcButtonClicked="wxcButtonClicked('前进')"></wxc-button>
+          <br/><br/><br/>
+          <wxc-button text="后退" class="button"
+            size="medium"
+            :disabled="leftButtonShow"
+            @wxcButtonClicked="wxcButtonClicked('后退')"></wxc-button>
+          <br/><br/><br/>
           <wxc-button text="返回首页" class="button"
             size="medium"
             @wxcButtonClicked="wxcButtonClicked('返回首页')"></wxc-button>
-          <wxc-button text="前进" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('前进')"></wxc-button>
-          <wxc-button text="后退" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('后退')"></wxc-button>
+          <br/><br/><br/>
           <wxc-button text="跳转论坛" class="button"
             size="medium"
             @wxcButtonClicked="wxcButtonClicked('跳转论坛')"></wxc-button>
@@ -60,10 +67,10 @@
 </style>
 
 <script>
-import { WxcMinibar, WxcIcon, WxcPopup, WxcButton } from 'weex-ui'
+import { WxcMinibar, WxcIcon, WxcPopup, WxcButton, WxcCell } from 'weex-ui'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcMinibar, WxcIcon, WxcPopup, WxcButton },
+  components: { WxcMinibar, WxcIcon, WxcPopup, WxcButton, WxcCell },
   data () {
     return {
       rightButton: '',
@@ -124,22 +131,22 @@ export default {
           info = ''
           break
       }
-      let show = false
+      let disabled = false
       if (info === '') {
-        show = false
+        disabled = true
       } else {
-        show = true
+        disabled = false
       }
-      return show
+      return disabled
     },
     leftButtonShow () {
-      let show = ''
+      let disabled = false
       if (this.infoLevel === 0) {
-        show = ''
-      } else {
-        show = 'https://gw.alicdn.com/tfs/TB1cAYsbv2H8KJjy0FcXXaDlFXa-30-53.png'
+        disabled = true
+      } else if (this.$store.state.Home.infoPage1.info === '') {
+        disabled = true
       }
-      return show
+      return disabled
     },
     miniBarTitle () {
       return this.$store.state.Home.miniBarTitle
@@ -173,10 +180,18 @@ export default {
           this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
           break
         case '前进':
-          if (this.infoLevel === 0) {
-            this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
+          if (this.infoLevel < 4) {
+            this.$store.commit('SET_infoLevel', this.infoLevel + 1)
+            switch (this.$store.state.Home.activeTab) {
+              case 1:
+                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
+                break
+              case 2:
+                console.log([this.$store.state.Home.activeTab, '规则详情'])
+                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
+                break
+            }
           }
-          this.$store.commit('SET_infoLevel', this.infoLevel + 1)
           break
         case '后退':
           const i = this.$store.state.Home.activeTab
