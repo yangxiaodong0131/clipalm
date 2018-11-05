@@ -104,11 +104,14 @@ export default {
       }
     },
     wxcButtonClicked () {
+      let menu = ''
       switch (this.infoPage.infoTitle) {
         case 'MDC规则详情':
+          menu = 'ADRG'
           getServer(this, 'adrgOne', 'ADRG', this.infoPage.info)
           break
         case 'ADRG规则详情':
+          menu = 'DRG'
           getServer(this, 'drgOne', 'DRG', this.infoPage.info)
           break
         default :
@@ -116,7 +119,8 @@ export default {
       }
       this.$store.commit('SET_infoLevel', 0)
       this.$store.commit('SET_isBottomShow', false)
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, this.$store.state.Home.infoMenu])
+      this.$store.commit('SET_library_menu', menu)
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
     },
     swipe (e) {
       if (e.direction === 'right') {

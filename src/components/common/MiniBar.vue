@@ -15,6 +15,7 @@
         </wxc-minibar>
         <wxc-popup popup-color="#FFFFFF" class="popup"
             :show="isBottomShow"
+            @wxcPopupOverlayClicked="popupOverlayBottomClick"
             pos="right"
             width="320"
             height="200">
@@ -202,6 +203,9 @@ export default {
           }
           break
       }
+      this.isBottomShow = false
+    },
+    popupOverlayBottomClick () {
       this.isBottomShow = false
     }
   }

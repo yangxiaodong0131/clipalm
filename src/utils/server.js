@@ -95,7 +95,7 @@ export function getServer (obj, type, menu, value = null) {
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
             })
-            setStore(obj, menu, res.data)
+            setStore(obj, menu, type, res.data)
           } else {
             obj.$store.commit('SET_isLoadingShow', false)
             obj.info = '- 网络连接失败 -'
@@ -178,7 +178,7 @@ export function createForum (obj, forum) {
   })
 }
 
-function setStore (obj, menu, rdata) {
+function setStore (obj, menu, type, rdata) {
   obj.$store.commit('SET_isLoadingShow', false)
   let data = []
   switch (menu) {
@@ -189,15 +189,23 @@ function setStore (obj, menu, rdata) {
     case 'ADRG':
       obj.$store.commit('SET_library_menu', menu)
       data = obj.$store.state.Library.adrgRule
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_libraryPage', ['ADRG', parseInt(rdata.page)])
+      if (type === 'adrgOne') {
+        data = rdata.data
+        obj.$store.commit('SET_libraryPage', ['ADRG', 1])
+      } else {
+        data = data.concat(rdata.data)
+      }
       obj.$store.commit('SET_adrg_rule', data)
       break
     case 'DRG':
       obj.$store.commit('SET_library_menu', menu)
       data = obj.$store.state.Library.drgRule
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_libraryPage', ['DRG', parseInt(rdata.page)])
+      if (type === 'adrgOne') {
+        data = rdata.data
+        obj.$store.commit('SET_libraryPage', ['DRG', 1])
+      } else {
+        data = data.concat(rdata.data)
+      }
       obj.$store.commit('SET_drg_rule', data)
       break
     case 'ICD9':
