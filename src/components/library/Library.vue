@@ -68,9 +68,6 @@ export default {
   },
   methods: {
     wxcIndexlistItemClicked (e) {
-      if (['MDC', 'ADRG', 'DRG'].includes(this.menu)) {
-        e = e.item
-      }
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e)
       this.$store.commit('SET_infoLevel', 1)

@@ -105,7 +105,7 @@
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
-          title: 'DRG',
+          title: 'DRG分析',
           // menu: ['统计分析', '报表', '自定义查询'],
           menu: ['统计分析', '报表'],
           // icon: '//gw.alicdn.com/tfs/TB1N1.6OVXXXXXqaXXXXXXXXXXX-45-45.png',
@@ -221,6 +221,7 @@
         }
         this.$store.commit('SET_activeTab', i)
         this.$store.commit('SET_infoPageClear')
+        this.$store.commit('SET_miniBarTitle', this.tabs[e.page]['title'])
         let menu = ''
         switch (i) {
           case 0:
@@ -232,7 +233,6 @@
             this.$store.commit('SET_menus', this.tabs[1]['menu'])
             this.$store.commit('SET_isMiniShow', true)
             this.$store.commit('SET_menu', [i, menu])
-            this.$store.commit('SET_miniBarTitle', '病案')
             getServer(this, 'all', menu)
             break
           case 2:
@@ -240,14 +240,12 @@
             this.$store.commit('SET_menus', this.tabs[2]['menu'])
             this.$store.commit('SET_isMiniShow', true)
             this.$store.commit('SET_menu', [i, menu])
-            this.$store.commit('SET_miniBarTitle', `字典`)
             // getServer(this, 'all', menu)
             break
           case 3:
             menu = this.$store.state.Stat.statMenu
             this.$store.commit('SET_menus', this.tabs[3]['menu'])
             this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_miniBarTitle', 'DRG分析')
             this.$store.commit('SET_menu', [i, menu])
             // getServer(this, 'all', '统计分析')
             break
@@ -256,7 +254,6 @@
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
             this.$store.commit('SET_isMiniShow', true)
             this.$store.commit('SET_menu', [i, menu])
-            this.$store.commit('SET_miniBarTitle')
             // getServer(this, 'all', menu)
             break
           default :
