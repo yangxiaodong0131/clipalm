@@ -2,6 +2,7 @@
   <div class="panel">
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
+      class="gridSelect"
       :single="true"
       :cols="5"
       :customStyles="customStyles"
@@ -10,6 +11,7 @@
     </wxc-grid-select>
     <category title="--选择字典版本--"></category>
     <wxc-grid-select
+      class="gridSelect"
       :single="true"
       :cols="5"
       :customStyles="customStyles"
@@ -18,6 +20,7 @@
     </wxc-grid-select>
     <category title="--选择MDC修订--"></category>
     <wxc-grid-select
+      class="gridSelect"
       :single="true"
       :cols="5"
       :customStyles="customStyles"
@@ -42,8 +45,8 @@ export default {
   components: { WxcMinibar, WxcGridSelect, Category, WxcButton },
   data: () => ({
     customStyles: {
+      lineSpacing: '14px',
       width: '150px',
-      lineSpacing: '12px',
       height: '60px',
       icon: '',
       color: '#333333',
@@ -52,7 +55,7 @@ export default {
       borderColor: '#666666',
       checkedBorderColor: '#ffb200',
       backgroundColor: '#ffffff',
-      checkedBackgroundColor: '#1E90FF'
+      checkedBackgroundColor: '#1E90FF',
     }
   }),
   computed: {
@@ -162,5 +165,9 @@ export default {
   .text {
     color: #666666;
     font-size: 32px;
+  }
+  .gridSelect {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 </style>
