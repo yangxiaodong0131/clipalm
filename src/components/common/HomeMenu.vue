@@ -5,21 +5,15 @@
       :text="menu"
       type="white"
       @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
-    <!-- <wxc-cell
-        :label="menu"
-        :title="menu"
-        :has-arrow="false"
-        :has-margin="true"
-        @wxcCellClicked="wxcCellClicked(menu)"></wxc-cell> -->
   </div>
 </template>
 
 <script>
-import { WxcPopup, WxcCell, Utils, WxcButton } from 'weex-ui'
+import { Utils, WxcButton } from 'weex-ui'
 import { getServer } from '../../utils/server'
 
 export default {
-  components: { WxcPopup, WxcCell, WxcButton },
+  components: { WxcButton },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120

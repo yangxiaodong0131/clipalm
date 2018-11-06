@@ -142,7 +142,6 @@ export default {
     },
     LongPress (e) {
       this.a = '2'
-      console.log(e)
     }
   }
 }

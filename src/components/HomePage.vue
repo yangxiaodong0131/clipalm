@@ -29,10 +29,9 @@
     </div>
     <!-- library页 -->
     <div class="panel">
-      <Query v-if="menu[2] == '自定义查询'"></Query>
+      <Library v-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
       <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
       <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
-      <Library v-else></Library>
     </div>
     <!-- stat页 -->
     <div class="panel">
@@ -179,6 +178,7 @@
       })
     },
     beforeMount: function () {
+      this.$store.commit('SET_activeTab', 2)
       // const point = this.$store.state.Home.point
       // const pointIndex = this.$store.state.Home.pointIndex
       // if (pointIndex === point.length - 1) {
@@ -202,7 +202,6 @@
       if (this.$store.state.Home.user.login) {
         this.setPage(2)
       }
-      this.$store.commit('SET_activeTab', 2)
     },
     methods: {
       newVersion () {

@@ -34,9 +34,6 @@ export default {
     }
   },
   methods: {
-    wxcCellClicked (e) {
-      console.log(e)
-    },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e.item)
