@@ -80,10 +80,10 @@ export function getServer (obj, type, menu, value = null) {
         setStore(obj, menu, edata)
       } else {
         obj.$store.commit('SET_isLoadingShow', true)
-        setTimeout(() => {
-          // 正常使用时候直接设置即可，不需setTimeout
-          obj.$store.commit('SET_isLoadingShow', false)
-        }, 30000)
+        // setTimeout(() => {
+        //   // 正常使用时候直接设置即可，不需setTimeout
+        //   obj.$store.commit('SET_isLoadingShow', false)
+        // }, 30000)
         stream.fetch({
           method: 'GET',
           type: 'json',
@@ -231,7 +231,6 @@ function setStore (obj, menu, type, rdata) {
       obj.$store.commit('SET_icd9_rule', data)
       break
     case '统计分析':
-      console.log(rdata)
       obj.$store.commit('SET_statPage', parseInt(rdata.page))
       data = obj.$store.state.Stat.statDrg
       data = data.concat(rdata.data)

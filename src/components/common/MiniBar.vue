@@ -13,8 +13,8 @@
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
           <image src="http://210.75.199.113/images/left.png"
                  slot="left"
-                 style="height: 32px;width: 32px;"
-                 v-if="rightButtonShow"></image>
+                 v-if="leftButtonShow"
+                 style="height: 32px;width: 32px;"></image>
           <image src="http://210.75.199.113/images/home.png"
                  slot="right"
                  style="height: 32px;width: 32px;"></image>
@@ -153,13 +153,13 @@ export default {
       return disabled
     },
     leftButtonShow () {
-      let disabled = false
+      let show = false
       if (this.infoLevel === 0) {
-        disabled = true
-      } else if (this.$store.state.Home.infoPage1.info === '') {
-        disabled = true
+        show = false
+      } else {
+        show = true
       }
-      return disabled
+      return show
     },
     miniBarTitle () {
       return this.$store.state.Home.miniBarTitle
