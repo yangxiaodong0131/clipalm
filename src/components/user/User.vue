@@ -55,7 +55,7 @@ export default {
       borderColor: '#666666',
       checkedBorderColor: '#ffb200',
       backgroundColor: '#ffffff',
-      checkedBackgroundColor: '#1E90FF',
+      checkedBackgroundColor: '#1E90FF'
     }
   }),
   computed: {
