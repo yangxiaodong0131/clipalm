@@ -74,7 +74,9 @@ export default {
         } else {
           serverType = '个人用户'
         }
-        types[serverType].checked = true
+        if (types[serverType]) {
+          types[serverType].checked = true
+        }
         return Object.values(types)
       }
     },
@@ -92,7 +94,9 @@ export default {
         } else {
           serverVersion = 'BJ编码版'
         }
-        versions[serverVersion].checked = true
+        if (versions[serverVersion]) {
+          versions[serverVersion].checked = true
+        }
         return Object.values(versions)
       }
     },
