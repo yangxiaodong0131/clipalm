@@ -33,7 +33,7 @@
 import { WxcPopup, WxcCell, WxcButton, WxcGridSelect } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 export default {
   components: { WxcPopup, WxcCell, WxcButton, WxcGridSelect },
   data () {
@@ -133,13 +133,11 @@ export default {
         } else {
           this.$store.commit('SET_infoLevel', this.infoLevel - 1)
         }
-        modal.toast({ message: '上一页', duration: 1 })
       } else if (e.direction === 'left') {
         if (this.infoLevel === 0) {
           this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
         }
         this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-        modal.toast({ message: '下一页', duration: 1 })
       }
     },
     LongPress (e) {

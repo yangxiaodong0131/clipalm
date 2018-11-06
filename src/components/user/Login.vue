@@ -79,6 +79,7 @@ export default {
             this.$store.commit('SET_user', res.data)
             this.$router.push('/')
             this.$store.commit('SET_visible', false)
+            this.$store.commit('SET_miniBarTitle', '个人信息')
             this.$store.commit('SET_menu', [0, '个人信息'])
             getServer(this, 'all', 'MDC')
             getServer(this, 'all', 'ADRG')

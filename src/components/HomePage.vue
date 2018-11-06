@@ -93,7 +93,8 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
+          // menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
+          menu: ['未入组病历', '低风险死亡病历', '高CV病历', '单条分组'],
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
@@ -132,7 +133,6 @@
     }),
     computed: {
       menu () {
-        console.log(this.$store.state.Home.menu[4])
         return this.$store.state.Home.menu
       },
       showForum () {
@@ -162,7 +162,6 @@
           const edata = JSON.parse(e.data)
           this.$store.commit('SET_user', edata)
           this.$store.commit('SET_menu', [0, '个人信息'])
-          // this.$router.push('/')
         }
       })
       const tabPageHeight = Utils.env.getPageHeight();
@@ -203,6 +202,7 @@
       if (this.$store.state.Home.user.login) {
         this.setPage(2)
       }
+      this.$store.commit('SET_activeTab', 2)
     },
     methods: {
       newVersion () {
