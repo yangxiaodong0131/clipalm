@@ -43,6 +43,7 @@ export default {
       this.$store.commit('SET_visible', false)
       const i = this.$store.state.Home.activeTab
       this.$store.commit('SET_menu', [i, menu])
+      this.$store.commit('SET_miniBarTitle', `${menu}`)
       if (['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历', '单条分组'].includes(menu)) {
         this.$store.commit('SET_editMenu', menu)
         this.$store.commit('SET_wt4Page', 1)

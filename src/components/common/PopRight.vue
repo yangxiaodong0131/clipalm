@@ -109,10 +109,12 @@ export default {
         case 'MDC规则详情':
           menu = 'ADRG'
           getServer(this, 'adrgOne', 'ADRG', this.infoPage.info)
+          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
         case 'ADRG规则详情':
           menu = 'DRG'
           getServer(this, 'drgOne', 'DRG', this.infoPage.info)
+          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
         default :
           break

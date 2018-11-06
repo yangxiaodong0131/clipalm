@@ -7,11 +7,12 @@
                     text-color="#FFFFFF"
                     :show="isShow"
                     left-button=""
-                    right-text="菜单"
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick">
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
-          <!-- <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon> -->
+          <image src="http://210.75.199.113/images/menu.png"
+                 slot="right"
+                 style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
         <wxc-popup popup-color="#FFFFFF" class="popup"
             :show="isBottomShow"
