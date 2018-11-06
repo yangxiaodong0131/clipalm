@@ -6,13 +6,15 @@
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :show="isShow"
+                    left-button=""
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
           <image src="http://210.75.199.113/images/left.png"
                  slot="left"
-                 style="height: 32px;width: 32px;"></image>
+                 style="height: 32px;width: 32px;"
+                 v-if="rightButtonShow"></image>
           <image src="http://210.75.199.113/images/home.png"
                  slot="right"
                  style="height: 32px;width: 32px;"></image>
@@ -119,28 +121,34 @@ export default {
     },
     rightButtonShow () {
       let info = ''
-      switch (this.infoLevel) {
-        case 0:
-          info = this.$store.state.Home.infoPage1.info
-          break
-        case 1:
-          info = this.$store.state.Home.infoPage2.info
-          break
-        case 2:
-          info = this.$store.state.Home.infoPage3.info
-          break
-        case 3:
-          info = this.$store.state.Home.infoPage4.info
-          break
-        case 4:
-          info = ''
-          break
-      }
+      const menu = this.$store.state.Home.menu
+      const activeTab = this.$store.state.Home.activeTab
       let disabled = false
-      if (info === '') {
-        disabled = true
-      } else {
+      if (menu[activeTab] === '') {
         disabled = false
+      } else {
+        switch (this.infoLevel) {
+          case 0:
+            info = this.$store.state.Home.infoPage1.info
+            break
+          case 1:
+            info = this.$store.state.Home.infoPage2.info
+            break
+          case 2:
+            info = this.$store.state.Home.infoPage3.info
+            break
+          case 3:
+            info = this.$store.state.Home.infoPage4.info
+            break
+          case 4:
+            info = ''
+            break
+        }
+        if (info === '') {
+          disabled = true
+        } else {
+          disabled = false
+        }
       }
       return disabled
     },
@@ -181,7 +189,6 @@ export default {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
     },
     minibarLeftButtonClick () {
-      console.log('===')
       const i = this.$store.state.Home.activeTab
       const level = this.infoLevel - 1
       this.$store.commit('SET_infoLevel', level)
