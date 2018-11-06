@@ -186,7 +186,11 @@ export default {
   methods: {
     minibarRightButtonClick () {
       // this.isBottomShow = true
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+      if (this.$store.state.Home.activeTab === 0) {
+        this.$store.commit('SET_menu', [0, '用户登陆'])
+      } else {
+        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+      }
       this.$store.commit('SET_infoLevel', 0)
       switch (this.$store.state.Home.activeTab) {
         case 0:
