@@ -251,6 +251,7 @@
           case 4:
             if (this.$store.state.Home.activeTab !== 4) {
               this.$store.commit('SET_miniBarTitle', `${this.$store.state.Home.miniBarTitle}-帖子`)
+              this.$store.commit('SET_forumLabel', `${this.$store.state.Home.miniBarTitle}`)
             }
             menu = this.$store.state.Forum.forumMenu
             this.$store.commit('SET_menus', this.tabs[4]['menu'])
