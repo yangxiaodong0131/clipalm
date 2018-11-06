@@ -64,9 +64,9 @@ export default {
     list_1: {
       get () {
         const types = {
-          专家用户: { title: '专家用户', value: 1 },
-          机构用户: { title: '机构用户', value: 2, disabled: 'true' },
-          个人用户: { title: '个人用户', value: 3, disabled: 'true' }
+          专家用户: { title: '专家用户', value: 1 }
+          // 机构用户: { title: '机构用户', value: 2, disabled: 'true' },
+          // 个人用户: { title: '个人用户', value: 3, disabled: 'true' }
         }
         let serverType = ''
         if (this.$store.state.Home.user.data.type) {
@@ -82,9 +82,9 @@ export default {
       get () {
         const versions = {
           BJ编码版: { title: 'BJ编码版', value: 1 },
-          GB编码版: { title: 'GB编码版', value: 1 },
-          CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
-          术语版: { title: '术语版', value: 4, disabled: 'true' }
+          GB编码版: { title: 'GB编码版', value: 1 }
+          // CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
+          // 术语版: { title: '术语版', value: 4, disabled: 'true' }
         }
         let serverVersion = ''
         if (this.$store.state.Home.user.data.clipalm_version) {
