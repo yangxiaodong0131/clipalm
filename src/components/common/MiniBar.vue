@@ -187,48 +187,50 @@ export default {
     minibarRightButtonClick () {
       // this.isBottomShow = true
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+      this.$store.commit('SET_infoLevel', 0)
+      switch (this.$store.state.Home.activeTab) {
+        case 0:
+          this.$store.commit('SET_miniBarTitle', '用户')
+          break
+        case 1:
+          this.$store.commit('SET_miniBarTitle', '病案')
+          break
+        case 2:
+          this.$store.commit('SET_miniBarTitle', '字典')
+          break
+        case 3:
+          this.$store.commit('SET_miniBarTitle', 'DRG分析')
+          break
+        case 4:
+          this.$store.commit('SET_miniBarTitle', '论坛')
+          break
+      }
     },
     minibarLeftButtonClick () {
       const i = this.$store.state.Home.activeTab
       const level = this.infoLevel - 1
+      switch (this.$store.state.Home.activeTab) {
+        case 0:
+          this.$store.commit('SET_miniBarTitle', '用户')
+          break
+        case 1:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Edit.editMenu)
+          break
+        case 2:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Library.libraryMenu)
+          break
+        case 3:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Stat.statMenu)
+          break
+        case 4:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Forum.forumMenu)
+          break
+      }
       this.$store.commit('SET_infoLevel', level)
       if (level === 0) {
         this.$store.commit('SET_menu', [i, this.returnMenu])
       }
-    },
-    wxcButtonClicked (e) {
-      // switch (e) {
-      //  case '返回首页':
-      //    this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
-      //    break
-      //  case '前进':
-      //    if (this.infoLevel < 4) {
-      //      this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-      //      switch (this.$store.state.Home.activeTab) {
-      //        case 1:
-      //          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
-      //          break
-      //        case 2:
-      //          console.log([this.$store.state.Home.activeTab, '规则详情'])
-      //          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
-      //          break
-      //      }
-      //    }
-      //    break
-      //  case '后退':
-      //    const i = this.$store.state.Home.activeTab
-      //    const level = this.infoLevel - 1
-      //    this.$store.commit('SET_infoLevel', level)
-      //    if (level === 0) {
-      //      this.$store.commit('SET_menu', [i, this.returnMenu])
-      //    }
-      //    break
-      // }
-      // this.isBottomShow = false
     }
-    // popupOverlayBottomClick () {
-    //   this.isBottomShow = false
-    // }
   }
 }
 </script>
