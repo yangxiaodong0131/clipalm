@@ -6,15 +6,18 @@
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :show="isShow"
-                    left-button=""
                     :use-default-return="false"
-                    @wxcMinibarRightButtonClicked="minibarRightButtonClick">
+                    @wxcMinibarRightButtonClicked="minibarRightButtonClick"
+                    @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
           <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
-          <image src="http://210.75.199.113/images/menu.png"
+          <image src="http://210.75.199.113/images/left.png"
+                 slot="left"
+                 style="height: 32px;width: 32px;"></image>
+          <image src="http://210.75.199.113/images/home.png"
                  slot="right"
                  style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
-        <wxc-popup popup-color="#FFFFFF" class="popup"
+        <!-- <wxc-popup popup-color="#FFFFFF" class="popup"
             :show="isBottomShow"
             @wxcPopupOverlayClicked="popupOverlayBottomClick"
             pos="right"
@@ -38,7 +41,7 @@
           <wxc-button text="跳转论坛" class="button"
             size="medium"
             @wxcButtonClicked="wxcButtonClicked('跳转论坛')"></wxc-button>
-          </wxc-popup>
+          </wxc-popup> -->
       </div>
     </scroller>
   </div>
@@ -174,41 +177,51 @@ export default {
   },
   methods: {
     minibarRightButtonClick () {
-      this.isBottomShow = true
+      // this.isBottomShow = true
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+    },
+    minibarLeftButtonClick () {
+      console.log('===')
+      const i = this.$store.state.Home.activeTab
+      const level = this.infoLevel - 1
+      this.$store.commit('SET_infoLevel', level)
+      if (level === 0) {
+        this.$store.commit('SET_menu', [i, this.returnMenu])
+      }
     },
     wxcButtonClicked (e) {
-      switch (e) {
-        case '返回首页':
-          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
-          break
-        case '前进':
-          if (this.infoLevel < 4) {
-            this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-            switch (this.$store.state.Home.activeTab) {
-              case 1:
-                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
-                break
-              case 2:
-                console.log([this.$store.state.Home.activeTab, '规则详情'])
-                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
-                break
-            }
-          }
-          break
-        case '后退':
-          const i = this.$store.state.Home.activeTab
-          const level = this.infoLevel - 1
-          this.$store.commit('SET_infoLevel', level)
-          if (level === 0) {
-            this.$store.commit('SET_menu', [i, this.returnMenu])
-          }
-          break
-      }
-      this.isBottomShow = false
-    },
-    popupOverlayBottomClick () {
-      this.isBottomShow = false
+      // switch (e) {
+      //  case '返回首页':
+      //    this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+      //    break
+      //  case '前进':
+      //    if (this.infoLevel < 4) {
+      //      this.$store.commit('SET_infoLevel', this.infoLevel + 1)
+      //      switch (this.$store.state.Home.activeTab) {
+      //        case 1:
+      //          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
+      //          break
+      //        case 2:
+      //          console.log([this.$store.state.Home.activeTab, '规则详情'])
+      //          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
+      //          break
+      //      }
+      //    }
+      //    break
+      //  case '后退':
+      //    const i = this.$store.state.Home.activeTab
+      //    const level = this.infoLevel - 1
+      //    this.$store.commit('SET_infoLevel', level)
+      //    if (level === 0) {
+      //      this.$store.commit('SET_menu', [i, this.returnMenu])
+      //    }
+      //    break
+      // }
+      // this.isBottomShow = false
     }
+    // popupOverlayBottomClick () {
+    //   this.isBottomShow = false
+    // }
   }
 }
 </script>
