@@ -131,7 +131,6 @@
     }),
     computed: {
       menu () {
-        modal.toast({ message: this.$store.state.Home.menu[4] === '帖子内容', duration: 1 })
         return this.$store.state.Home.menu
       },
       showForum () {

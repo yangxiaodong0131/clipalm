@@ -16,7 +16,7 @@
 <script>
 import { WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
 import { getServer } from '../../utils/server'
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 export default {
   components: { WxcSpecialRichText, WxcButton, WxcRichText },
   data: () => ({
@@ -64,7 +64,6 @@ export default {
   methods: {
     wxcRichTextLinkClick (i) {
       const menu = '帖子内容'
-      modal.toast({ message: [this.$store.state.Home.activeTab, menu], duration: 1 })
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
       getServer(this, 'forumOne', '帖子', this.posts[i])
       this.$store.commit('SET_activeTab', 4)
