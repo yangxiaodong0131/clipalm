@@ -91,8 +91,7 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          // menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
-          menu: ['未入组病历', '低风险死亡病历', '高CV病历', '单条分组'],
+          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
@@ -154,10 +153,10 @@
         return show
       },
       height () {
-        const { tabStyles } = this
-        const tabPageHeight = weex.config.env.deviceHeight
-        const height = (tabPageHeight - tabStyles.height) + 'px'
-        return height
+        // const { tabStyles } = this
+        // const tabPageHeight = weex.config.env.deviceHeight
+        // const height = (tabPageHeight - tabStyles.height) + 'px'
+        return '1250px'
       },
       homepage () {
         const style = {

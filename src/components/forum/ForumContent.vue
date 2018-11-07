@@ -40,7 +40,7 @@ export default {
     wxcButtonClicked () {
       if (this.$store.state.Home.user.login) {
         const ForumContent = { forum_id: this.$store.state.Forum.forumContent.id, content: this.content, username: this.$store.state.Home.user.data.username }
-        createForum(this, { forum_all: { forum_content: ForumContent }}, 'reply')
+        createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply')
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
       }
