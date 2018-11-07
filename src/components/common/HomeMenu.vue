@@ -38,23 +38,28 @@ export default {
       const i = this.$store.state.Home.activeTab
       this.$store.commit('SET_menu', [i, menu])
       this.$store.commit('SET_miniBarTitle', `${menu}`)
-      if (['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历', '单条分组'].includes(menu)) {
-        this.$store.commit('SET_editMenu', menu)
-        this.$store.commit('SET_wt4Page', 1)
-        this.$store.commit('SET_wt4Case', [])
-        this.$store.commit('SET_wt4Info', '')
-        getServer(this, 'all', menu)
-      } else if (menu === '自定义查询') {
-      } else if (['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu)) {
-        this.$store.commit('SET_library_menu', menu)
-        getServer(this, 'all', menu)
-      } else if (menu === '论坛') {
-        this.$store.commit('SET_post', [])
-        this.$store.commit('SET_forumPage', 1)
-        this.$store.commit('SET_forumMenu', menu)
-        getServer(this, 'all', '论坛', null)
-      } else {
-        getServer(this, 'all', menu)
+      switch (i) {
+        case 1:
+          this.$store.commit('SET_editMenu', menu)
+          this.$store.commit('SET_wt4Page', 1)
+          this.$store.commit('SET_wt4Case', [])
+          this.$store.commit('SET_wt4Info', '')
+          getServer(this, 'all', menu)
+          break
+        case 2:
+          this.$store.commit('SET_library_menu', menu)
+          getServer(this, 'all', menu)
+          break
+        case 3:
+          this.$store.commit('SET_statMenu', menu)
+          getServer(this, 'all', menu)
+          break
+        case 4:
+          this.$store.commit('SET_forumMenu', menu)
+          getServer(this, 'all', menu)
+          break
+        default:
+          getServer(this, 'all', menu)
       }
     }
   }

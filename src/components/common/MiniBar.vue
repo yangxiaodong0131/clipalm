@@ -95,10 +95,10 @@ export default {
           menu = this.$store.state.Library.libraryMenu
           break
         case 3:
-          menu = '报表'
+          menu = this.$store.state.Stat.statMenu
           break
         case 4:
-          menu = '论坛'
+          menu = this.$store.state.Forum.forumMenu
           break
       }
       return menu
@@ -156,6 +156,7 @@ export default {
       }
       this.$store.commit('SET_infoLevel', level)
       if (level === 0) {
+        console.log([i, this.returnMenu])
         this.$store.commit('SET_menu', [i, this.returnMenu])
       }
     }
