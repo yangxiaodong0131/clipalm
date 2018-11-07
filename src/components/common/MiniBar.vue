@@ -17,33 +17,9 @@
                  style="height: 32px;width: 32px;"></image>
           <image src="http://210.75.199.113/images/home.png"
                  slot="right"
+                 v-if="homeButtonShow"
                  style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
-        <!-- <wxc-popup popup-color="#FFFFFF" class="popup"
-            :show="isBottomShow"
-            @wxcPopupOverlayClicked="popupOverlayBottomClick"
-            pos="right"
-            width="320"
-            height="200">
-          </wxc-cell>
-          <wxc-button text="前进" class="button"
-            size="medium"
-            :disabled="rightButtonShow"
-            @wxcButtonClicked="wxcButtonClicked('前进')"></wxc-button>
-          <br/><br/><br/>
-          <wxc-button text="后退" class="button"
-            size="medium"
-            :disabled="leftButtonShow"
-            @wxcButtonClicked="wxcButtonClicked('后退')"></wxc-button>
-          <br/><br/><br/>
-          <wxc-button text="返回首页" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('返回首页')"></wxc-button>
-          <br/><br/><br/>
-          <wxc-button text="跳转论坛" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('跳转论坛')"></wxc-button>
-          </wxc-popup> -->
       </div>
     </scroller>
   </div>
@@ -181,16 +157,23 @@ export default {
           break
       }
       return menu
+    },
+    homeButtonShow () {
+      let show = true
+      if (this.$store.state.Home.activeTab === 0) {
+        show = false
+      }
+      return show
     }
   },
   methods: {
     minibarRightButtonClick () {
       // this.isBottomShow = true
-      if (this.$store.state.Home.activeTab === 0) {
-        this.$store.commit('SET_menu', [0, '用户登陆'])
-      } else {
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
-      }
+      // if (this.$store.state.Home.activeTab === 0) {
+      //   this.$store.commit('SET_menu', [0, '用户登陆'])
+      // } else {
+      //   this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+      // }
       this.$store.commit('SET_infoLevel', 0)
       switch (this.$store.state.Home.activeTab) {
         case 0:
