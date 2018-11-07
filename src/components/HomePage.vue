@@ -269,6 +269,7 @@
     bottom: 0;
     left: 0;
     background-color: #cccccc;
+    height: 1110px;
   }
   .panel {
     width: 750px;
