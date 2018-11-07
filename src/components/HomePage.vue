@@ -87,30 +87,30 @@
       tabs: [{
         title: '用户',
         menu:  ['用户登录', '个人信息'],
-        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+        icon: 'http://210.75.199.113/images/user.png',
+        activeIcon: 'http://210.75.199.113/images/user_fill.png'
         }, {
           title: '病案',
           menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          icon: 'http://210.75.199.113/images/edit.png',
+          activeIcon: 'http://210.75.199.113/images/edit_fill.png'
         }, {
           title: '字典',
           // menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9', '自定义查询'],
           menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          icon: 'http://210.75.199.113/images/library.png',
+          activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
           // menu: ['统计分析', '报表', '自定义查询'],
           menu: ['统计分析', '报表'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          icon: 'http://210.75.199.113/images/stat.png',
+          activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
           title: '论坛',
           menu: ['论坛'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          icon: 'http://210.75.199.113/images/forum.png',
+          activeIcon: 'http://210.75.199.113/images/forum_fill.png'
         }],
       tabStyles: {
         bgColor: '#FFFFFF',
@@ -118,8 +118,8 @@
         activeTitleColor: '#3D3D3D',
         activeBgColor: '#FFFFFF',
         isActiveTitleBold: true,
-        iconWidth: 70,
-        iconHeight: 70,
+        iconWidth: 54,
+        iconHeight: 54,
         width: 160,
         height: 90,
         fontSize: 24,
