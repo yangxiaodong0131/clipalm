@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-    <div style="height:100px">
-    </div>
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>

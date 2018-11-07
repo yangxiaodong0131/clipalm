@@ -2,6 +2,7 @@ const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
 const urlConfig = require('../utils/config.js')
 const qs = require('qs')
+const modal = weex.requireModule('modal')
 export function getServer (obj, type, menu, value = null) {
   // type:判断查询全部还是单项
   // menu:判断查询drg类型（mdc、adrg…）
@@ -156,8 +157,7 @@ export function updateUser (obj, user) {
   })
 }
 
-export function createForum (obj, forum) {
-  console.log(forum)
+export function createForum (obj, forum, type) {
   stream.fetch({
     method: 'POST',
     type: 'json',
@@ -173,6 +173,13 @@ export function createForum (obj, forum) {
       obj.$store.commit('SET_post', [])
       obj.$store.commit('SET_forumPage', 1)
       getServer(obj, 'all', '论坛')
+      switch (type) {
+        case 'reply':
+          modal.toast({ message: '回复成功', duration: 1 })
+          break
+        default:
+          modal.toast({ message: '帖子创建成功', duration: 1 })
+      }
     } else {
       obj.info = '- 网络连接失败 -'
     }
