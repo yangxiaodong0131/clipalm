@@ -75,7 +75,7 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      if (e.result === 'success') {
+      if (e.result === 'success!') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
@@ -157,6 +157,7 @@ export function updateUser (obj, user) {
 }
 
 export function createForum (obj, forum) {
+  console.log(forum)
   stream.fetch({
     method: 'POST',
     type: 'json',

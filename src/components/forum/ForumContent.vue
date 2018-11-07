@@ -6,8 +6,7 @@
             :label="data.username"
             :title="data.content"
             :extraContent="data.datetime"
-            :has-margin="false"
-            @wxcCellClicked="wxcCellClicked(wt4)">
+            :has-margin="false">
           </wxc-cell>
         </cell>
       </list>

@@ -49,10 +49,10 @@
 </style>
 
 <script>
-import { WxcMinibar, WxcIcon, WxcPopup, WxcButton, WxcCell } from 'weex-ui'
+import { WxcMinibar } from 'weex-ui'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcMinibar, WxcIcon, WxcPopup, WxcButton, WxcCell },
+  components: { WxcMinibar },
   data () {
     return {
       rightButton: '',

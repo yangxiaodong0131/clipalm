@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <div style="height:100px">
+    </div>
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
@@ -14,10 +16,11 @@
 </template>
 
 <script>
-import { WxcRichText, WxcSpecialRichText, WxcButton } from 'weex-ui'
+import { WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
 import { getServer } from '../../utils/server'
+const modal = weex.requireModule('modal')
 export default {
-  components: { WxcRichText, WxcSpecialRichText, WxcButton },
+  components: { WxcSpecialRichText, WxcButton, WxcRichText },
   data: () => ({
   }),
   computed: {
@@ -62,9 +65,11 @@ export default {
   },
   methods: {
     wxcRichTextLinkClick (i) {
-      const menu = '帖子'
+      const menu = '帖子内容'
+      modal.toast({ message: [this.$store.state.Home.activeTab, menu], duration: 1 })
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
       getServer(this, 'forumOne', '帖子', this.posts[i])
+      this.$store.commit('SET_activeTab', 4)
     },
     wxcButtonClicked () {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])

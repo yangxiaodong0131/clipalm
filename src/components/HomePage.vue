@@ -44,8 +44,8 @@
     <!-- forum页 -->
     <div class="panel">
       <New v-if="menu[4] === '新建帖子'"></New>
+      <ForumContent v-else-if="menu[4] === '帖子内容'"></ForumContent>
       <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
-      <Content v-else-if="menu[4] === '帖子'"></Content>
       <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
@@ -73,14 +73,14 @@
   import Report from './stat/Report'
   import Charts from './stat/Charts'
   import Query from './stat/Query'
+  import ForumContent from './forum/ForumContent'
   import Forum from './forum/Forum'
-  import Content from './forum/Content'
   import New from './forum/New'
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register, HomeMenu },
+      Report, Query, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, Register, HomeMenu },
     data: () => ({
       // icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
       // activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
@@ -131,6 +131,7 @@
     }),
     computed: {
       menu () {
+        modal.toast({ message: this.$store.state.Home.menu[4] === '帖子内容', duration: 1 })
         return this.$store.state.Home.menu
       },
       showForum () {
@@ -198,9 +199,9 @@
       // }
     },
     mounted: function () {
-      if (this.$store.state.Home.user.login) {
-        this.setPage(2)
-      }
+      // if (this.$store.state.Home.user.login) {
+      //   this.setPage(2)
+      // }
     },
     methods: {
       newVersion () {
@@ -237,11 +238,11 @@
               miniBarTitle = `${this.$store.state.Forum.forumHead}-帖子`
               this.$store.commit('SET_forumLabel', `${this.$store.state.Home.miniBarTitle}`)
               menu = '论坛'
-              getServer(this, 'all', menu)
             } else {
               miniBarTitle = this.$store.state.Home.miniBarTitle
               menu = `${this.$store.state.Forum.forumMenu}`
             }
+            getServer(this, 'all', menu)
             this.$store.commit('SET_forumMenu', menu)
             break
         }
