@@ -269,10 +269,7 @@ function setStore (obj, menu, type, rdata) {
       obj.$store.commit('SET_wt4Case', data)
       break
     case '论坛':
-      data = obj.$store.state.Forum.post
-      data = data.concat(rdata.data)
-      // obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
-      obj.$store.commit('SET_post', data)
+      obj.$store.commit('SET_post', rdata.data)
       break
     case '帖子':
       obj.$store.commit('SET_forumContent', rdata.data[0])

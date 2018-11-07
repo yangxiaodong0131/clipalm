@@ -239,7 +239,8 @@
               menu = '论坛'
               getServer(this, 'all', menu)
             } else {
-              menu = `${this.$store.state.Home.miniBarTitle}-帖子`
+              miniBarTitle = this.$store.state.Home.miniBarTitle
+              menu = `${this.$store.state.Forum.forumMenu}`
             }
             break
         }
