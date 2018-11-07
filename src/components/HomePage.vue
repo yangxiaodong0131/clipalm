@@ -43,11 +43,10 @@
     </div>
     <!-- forum页 -->
     <div class="panel">
-      <Forum v-if="menu[4] == '论坛'"></Forum>
-      <New v-if="menu[4] == '新建帖子'"></New>
-      <Content v-if="menu[4] == '帖子'"></Content>
-      <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
-      <Query v-if="menu[4] == '自定义查询'"></Query>
+      <New v-if="menu[4] === '新建帖子'"></New>
+      <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
+      <Content v-else-if="menu[4] === '帖子'"></Content>
+      <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
   <!-- <pop-bar></pop-bar> -->
@@ -234,16 +233,19 @@
             break
           case 4:
             if (this.$store.state.Home.activeTab !== 4) {
-              miniBarTitle = `${this.$store.state.Home.miniBarTitle}-帖子`
+              this.$store.commit('SET_forumHead', this.$store.state.Home.miniBarTitle)
+              miniBarTitle = `${this.$store.state.Forum.forumHead}-帖子`
               this.$store.commit('SET_forumLabel', `${this.$store.state.Home.miniBarTitle}`)
               menu = '论坛'
+              getServer(this, 'all', menu)
+            } else {
+              menu = `${this.$store.state.Home.miniBarTitle}-帖子`
             }
-            this.$store.commit('SET_forumMenu', '论坛')
-            getServer(this, 'all', menu)
             break
         }
+        console.log(menu)
         this.$store.commit('SET_menu', [i, menu])
-        if (menu != '') {
+        if (menu != '' && i !== 4) {
           miniBarTitle = menu
         }
         this.$store.commit('SET_miniBarTitle', miniBarTitle)

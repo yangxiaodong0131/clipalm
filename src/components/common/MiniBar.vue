@@ -73,9 +73,6 @@ export default {
       }
       return show
     },
-    wxcCellTitle () {
-      return this.$store.state.Edit.editMenu
-    },
     infoPage () {
       let result = {}
       switch (this.infoLevel) {
