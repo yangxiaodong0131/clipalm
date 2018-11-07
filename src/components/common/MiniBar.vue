@@ -10,7 +10,6 @@
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="minibarRightButtonClick"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
-          <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
           <image src="http://210.75.199.113/images/left.png"
                  slot="left"
                  v-if="leftButtonShow"
@@ -68,9 +67,9 @@ export default {
       return this.$store.state.Home.infoLevel
     },
     isShow () {
-      let show = this.$store.state.Home.isMiniShow
-      if (this.$store.state.Home.menu[0] === '个人信息' || this.$store.state.Home.menu[0] === '注册用户') {
-        show = true
+      let show = true
+      if (this.$store.state.Home.menu[0] === '登录') {
+        show = false
       }
       return show
     },
