@@ -29,10 +29,9 @@
     </div>
     <!-- library页 -->
     <div class="panel">
-      <Query v-if="menu[2] == '自定义查询'"></Query>
+      <Library v-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
       <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
       <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
-      <Library v-else></Library>
     </div>
     <!-- stat页 -->
     <div class="panel">
@@ -44,11 +43,10 @@
     </div>
     <!-- forum页 -->
     <div class="panel">
-      <Forum v-if="menu[4] == '论坛'"></Forum>
-      <New v-if="menu[4] == '新建帖子'"></New>
-      <Content v-if="menu[4] == '帖子'"></Content>
-      <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
-      <Query v-if="menu[4] == '自定义查询'"></Query>
+      <New v-if="menu[4] === '新建帖子'"></New>
+      <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
+      <Content v-else-if="menu[4] === '帖子'"></Content>
+      <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
   <!-- <pop-bar></pop-bar> -->
@@ -88,12 +86,13 @@
       // activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       tabs: [{
         title: '用户',
-        menu: [],
+        menu:  ['用户登录', '个人信息'],
         icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
+          // menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
+          menu: ['未入组病历', '低风险死亡病历', '高CV病历', '单条分组'],
           icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
           activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
@@ -161,7 +160,6 @@
           const edata = JSON.parse(e.data)
           this.$store.commit('SET_user', edata)
           this.$store.commit('SET_menu', [0, '个人信息'])
-          // this.$router.push('/')
         }
       })
       const tabPageHeight = Utils.env.getPageHeight();
@@ -179,6 +177,7 @@
       })
     },
     beforeMount: function () {
+      this.$store.commit('SET_activeTab', 2)
       // const point = this.$store.state.Home.point
       // const pointIndex = this.$store.state.Home.pointIndex
       // if (pointIndex === point.length - 1) {
@@ -212,50 +211,50 @@
       },
       wxcTabBarCurrentTabSelected (e) {
         const i = e.page;
-        if (i !== this.$store.state.Home.activeTab) {
-          this.$store.commit('SET_isLoadingShow', false)
-        }
-        this.$store.commit('SET_activeTab', i)
-        this.$store.commit('SET_infoPageClear')
-        this.$store.commit('SET_miniBarTitle', this.tabs[e.page]['title'])
+        this.$store.commit('SET_menus', this.tabs[i]['menu'])
         let menu = ''
+        let miniBarTitle = ''
         switch (i) {
           case 0:
-            this.$store.commit('SET_menus', this.tabs[0]['menu'])
-            this.$store.commit('SET_isMiniShow', false)
+            menu = '个人信息'
+            miniBarTitle = this.tabs[e.page]['title']
             break
           case 1:
             menu = this.$store.state.Edit.editMenu
-            this.$store.commit('SET_menus', this.tabs[1]['menu'])
-            this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_menu', [i, menu])
-            getServer(this, 'all', menu)
+            miniBarTitle = this.tabs[e.page]['title']
             break
           case 2:
             menu = this.$store.state.Library.libraryMenu
-            this.$store.commit('SET_menus', this.tabs[2]['menu'])
-            this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_menu', [i, menu])
-            // getServer(this, 'all', menu)
+            miniBarTitle = this.tabs[e.page]['title']
             break
           case 3:
             menu = this.$store.state.Stat.statMenu
-            this.$store.commit('SET_menus', this.tabs[3]['menu'])
-            this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_menu', [i, menu])
-            // getServer(this, 'all', '统计分析')
+            miniBarTitle = this.tabs[e.page]['title']
             break
           case 4:
-            menu = this.$store.state.Forum.forumMenu
-            this.$store.commit('SET_menus', this.tabs[4]['menu'])
-            this.$store.commit('SET_isMiniShow', true)
-            this.$store.commit('SET_menu', [i, menu])
-            // getServer(this, 'all', menu)
+            if (this.$store.state.Home.activeTab !== 4) {
+              this.$store.commit('SET_forumHead', this.$store.state.Home.miniBarTitle)
+              miniBarTitle = `${this.$store.state.Forum.forumHead}-帖子`
+              this.$store.commit('SET_forumLabel', `${this.$store.state.Home.miniBarTitle}`)
+              menu = '论坛'
+              getServer(this, 'all', menu)
+            } else {
+              miniBarTitle = this.$store.state.Home.miniBarTitle
+              menu = `${this.$store.state.Forum.forumMenu}`
+            }
+            this.$store.commit('SET_forumMenu', menu)
             break
-          default :
-            this.$store.commit('SET_menus', this.tabs[0]['menu'])
-            this.$store.commit('SET_isMiniShow', true)
         }
+        this.$store.commit('SET_menu', [i, menu])
+        if (menu != '' && i !== 4) {
+          miniBarTitle = menu
+        }
+        this.$store.commit('SET_miniBarTitle', miniBarTitle)
+        // 设定loading查询隐藏
+        if (i !== this.$store.state.Home.activeTab && this.$store.state.Home.isLoadingShow == true) {
+          this.$store.commit('SET_isLoadingShow', false)
+        }
+        this.$store.commit('SET_activeTab', i)
       }
     }
   };
@@ -272,6 +271,7 @@
     bottom: 0;
     left: 0;
     background-color: #cccccc;
+    height: 1110px;
   }
   .panel {
     width: 750px;

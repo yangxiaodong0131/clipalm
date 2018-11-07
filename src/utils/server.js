@@ -75,15 +75,15 @@ export function getServer (obj, type, menu, value = null) {
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
-      if (e.result === 'success!') {
+      if (e.result === 'success') {
         const edata = JSON.parse(e.data)
         setStore(obj, menu, edata)
       } else {
         obj.$store.commit('SET_isLoadingShow', true)
-        setTimeout(() => {
-          // 正常使用时候直接设置即可，不需setTimeout
-          obj.$store.commit('SET_isLoadingShow', false)
-        }, 30000)
+        // setTimeout(() => {
+        //   // 正常使用时候直接设置即可，不需setTimeout
+        //   obj.$store.commit('SET_isLoadingShow', false)
+        // }, 30000)
         stream.fetch({
           method: 'GET',
           type: 'json',
@@ -95,7 +95,7 @@ export function getServer (obj, type, menu, value = null) {
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
             })
-            setStore(obj, menu, res.data)
+            setStore(obj, menu, type, res.data)
           } else {
             obj.$store.commit('SET_isLoadingShow', false)
             obj.info = '- 网络连接失败 -'
@@ -178,7 +178,7 @@ export function createForum (obj, forum) {
   })
 }
 
-function setStore (obj, menu, rdata) {
+function setStore (obj, menu, type, rdata) {
   obj.$store.commit('SET_isLoadingShow', false)
   let data = []
   switch (menu) {
@@ -189,15 +189,23 @@ function setStore (obj, menu, rdata) {
     case 'ADRG':
       obj.$store.commit('SET_library_menu', menu)
       data = obj.$store.state.Library.adrgRule
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_libraryPage', ['ADRG', parseInt(rdata.page)])
+      if (type === 'adrgOne') {
+        data = rdata.data
+        obj.$store.commit('SET_libraryPage', ['ADRG', 1])
+      } else {
+        data = data.concat(rdata.data)
+      }
       obj.$store.commit('SET_adrg_rule', data)
       break
     case 'DRG':
       obj.$store.commit('SET_library_menu', menu)
       data = obj.$store.state.Library.drgRule
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_libraryPage', ['DRG', parseInt(rdata.page)])
+      if (type === 'adrgOne') {
+        data = rdata.data
+        obj.$store.commit('SET_libraryPage', ['DRG', 1])
+      } else {
+        data = data.concat(rdata.data)
+      }
       obj.$store.commit('SET_drg_rule', data)
       break
     case 'ICD9':
@@ -223,7 +231,6 @@ function setStore (obj, menu, rdata) {
       obj.$store.commit('SET_icd9_rule', data)
       break
     case '统计分析':
-      console.log(rdata)
       obj.$store.commit('SET_statPage', parseInt(rdata.page))
       data = obj.$store.state.Stat.statDrg
       data = data.concat(rdata.data)
@@ -262,10 +269,7 @@ function setStore (obj, menu, rdata) {
       obj.$store.commit('SET_wt4Case', data)
       break
     case '论坛':
-      data = obj.$store.state.Forum.post
-      data = data.concat(rdata.data)
-      // obj.$store.commit('SET_icd9_page', parseInt(rdata.page))
-      obj.$store.commit('SET_post', data)
+      obj.$store.commit('SET_post', rdata.data)
       break
     case '帖子':
       obj.$store.commit('SET_forumContent', rdata.data[0])

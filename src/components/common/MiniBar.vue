@@ -7,36 +7,18 @@
                     text-color="#FFFFFF"
                     :show="isShow"
                     left-button=""
-                    right-text="菜单"
                     :use-default-return="false"
-                    @wxcMinibarRightButtonClicked="minibarRightButtonClick">
-          <!-- <wxc-icon slot="left" name="back" v-if="rightButtonShow"></wxc-icon> -->
-          <!-- <wxc-icon slot="right" name="more" v-if="rightButtonShow"></wxc-icon> -->
+                    @wxcMinibarRightButtonClicked="minibarRightButtonClick"
+                    @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
+          <image src="http://210.75.199.113/images/left.png"
+                 slot="left"
+                 v-if="leftButtonShow"
+                 style="height: 32px;width: 32px;"></image>
+          <image src="http://210.75.199.113/images/home.png"
+                 slot="right"
+                 v-if="homeButtonShow"
+                 style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
-        <wxc-popup popup-color="#FFFFFF" class="popup"
-            :show="isBottomShow"
-            pos="right"
-            width="320"
-            height="200">
-          </wxc-cell>
-          <wxc-button text="前进" class="button"
-            size="medium"
-            :disabled="rightButtonShow"
-            @wxcButtonClicked="wxcButtonClicked('前进')"></wxc-button>
-          <br/><br/><br/>
-          <wxc-button text="后退" class="button"
-            size="medium"
-            :disabled="leftButtonShow"
-            @wxcButtonClicked="wxcButtonClicked('后退')"></wxc-button>
-          <br/><br/><br/>
-          <wxc-button text="返回首页" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('返回首页')"></wxc-button>
-          <br/><br/><br/>
-          <wxc-button text="跳转论坛" class="button"
-            size="medium"
-            @wxcButtonClicked="wxcButtonClicked('跳转论坛')"></wxc-button>
-          </wxc-popup>
       </div>
     </scroller>
   </div>
@@ -85,68 +67,20 @@ export default {
       return this.$store.state.Home.infoLevel
     },
     isShow () {
-      let show = this.$store.state.Home.isMiniShow
-      if (this.$store.state.Home.menu[0] === '个人信息' || this.$store.state.Home.menu[0] === '注册用户') {
-        show = true
+      let show = true
+      if (this.$store.state.Home.menu[0] === '登录') {
+        show = false
       }
       return show
     },
-    wxcCellTitle () {
-      return this.$store.state.Edit.editMenu
-    },
-    infoPage () {
-      let result = {}
-      switch (this.infoLevel) {
-        case 1:
-          result = this.$store.state.Home.infoPage1
-          break
-        case 2:
-          result = this.$store.state.Home.infoPage2
-          break
-        case 3:
-          result = this.$store.state.Home.infoPage3
-          break
-        case 4:
-          result = this.$store.state.Home.infoPage4
-          break
-      }
-      return result
-    },
-    rightButtonShow () {
-      let info = ''
-      switch (this.infoLevel) {
-        case 0:
-          info = this.$store.state.Home.infoPage1.info
-          break
-        case 1:
-          info = this.$store.state.Home.infoPage2.info
-          break
-        case 2:
-          info = this.$store.state.Home.infoPage3.info
-          break
-        case 3:
-          info = this.$store.state.Home.infoPage4.info
-          break
-        case 4:
-          info = ''
-          break
-      }
-      let disabled = false
-      if (info === '') {
-        disabled = true
-      } else {
-        disabled = false
-      }
-      return disabled
-    },
     leftButtonShow () {
-      let disabled = false
+      let show = false
       if (this.infoLevel === 0) {
-        disabled = true
-      } else if (this.$store.state.Home.infoPage1.info === '') {
-        disabled = true
+        show = false
+      } else {
+        show = true
       }
-      return disabled
+      return show
     },
     miniBarTitle () {
       return this.$store.state.Home.miniBarTitle
@@ -161,48 +95,70 @@ export default {
           menu = this.$store.state.Library.libraryMenu
           break
         case 3:
-          menu = '报表'
+          menu = this.$store.state.Stat.statMenu
           break
         case 4:
-          menu = '论坛'
+          menu = this.$store.state.Forum.forumMenu
           break
       }
       return menu
+    },
+    homeButtonShow () {
+      let show = true
+      if (this.$store.state.Home.activeTab === 0) {
+        show = false
+      }
+      return show
     }
   },
   methods: {
     minibarRightButtonClick () {
-      this.isBottomShow = true
-    },
-    wxcButtonClicked (e) {
-      switch (e) {
-        case '返回首页':
-          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
+      const i = this.$store.state.Home.activeTab
+      this.$store.commit('SET_infoLevel', 0)
+      this.$store.commit('SET_menu', [i, ''])
+      switch (i) {
+        case 0:
+          this.$store.commit('SET_miniBarTitle', '用户')
           break
-        case '前进':
-          if (this.infoLevel < 4) {
-            this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-            switch (this.$store.state.Home.activeTab) {
-              case 1:
-                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
-                break
-              case 2:
-                console.log([this.$store.state.Home.activeTab, '规则详情'])
-                this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
-                break
-            }
-          }
+        case 1:
+          this.$store.commit('SET_miniBarTitle', '病案')
           break
-        case '后退':
-          const i = this.$store.state.Home.activeTab
-          const level = this.infoLevel - 1
-          this.$store.commit('SET_infoLevel', level)
-          if (level === 0) {
-            this.$store.commit('SET_menu', [i, this.returnMenu])
-          }
+        case 2:
+          this.$store.commit('SET_miniBarTitle', '字典')
+          break
+        case 3:
+          this.$store.commit('SET_miniBarTitle', 'DRG分析')
+          break
+        case 4:
+          this.$store.commit('SET_miniBarTitle', '论坛')
           break
       }
-      this.isBottomShow = false
+    },
+    minibarLeftButtonClick () {
+      const i = this.$store.state.Home.activeTab
+      const level = this.infoLevel - 1
+      switch (this.$store.state.Home.activeTab) {
+        case 0:
+          this.$store.commit('SET_miniBarTitle', '用户')
+          break
+        case 1:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Edit.editMenu)
+          break
+        case 2:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Library.libraryMenu)
+          break
+        case 3:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Stat.statMenu)
+          break
+        case 4:
+          this.$store.commit('SET_miniBarTitle', this.$store.state.Forum.forumMenu)
+          break
+      }
+      this.$store.commit('SET_infoLevel', level)
+      if (level === 0) {
+        console.log([i, this.returnMenu])
+        this.$store.commit('SET_menu', [i, this.returnMenu])
+      }
     }
   }
 }

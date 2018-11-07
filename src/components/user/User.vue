@@ -2,6 +2,7 @@
   <div class="panel">
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
+      class="gridSelect"
       :single="true"
       :cols="5"
       :customStyles="customStyles"
@@ -10,6 +11,7 @@
     </wxc-grid-select>
     <category title="--选择字典版本--"></category>
     <wxc-grid-select
+      class="gridSelect"
       :single="true"
       :cols="5"
       :customStyles="customStyles"
@@ -18,6 +20,7 @@
     </wxc-grid-select>
     <category title="--选择MDC修订--"></category>
     <wxc-grid-select
+      class="gridSelect"
       :single="true"
       :cols="5"
       :customStyles="customStyles"
@@ -42,8 +45,8 @@ export default {
   components: { WxcMinibar, WxcGridSelect, Category, WxcButton },
   data: () => ({
     customStyles: {
+      lineSpacing: '14px',
       width: '150px',
-      lineSpacing: '12px',
       height: '60px',
       icon: '',
       color: '#333333',
@@ -64,9 +67,9 @@ export default {
     list_1: {
       get () {
         const types = {
-          专家用户: { title: '专家用户', value: 1 },
-          机构用户: { title: '机构用户', value: 2 },
-          个人用户: { title: '个人用户', value: 3 }
+          专家用户: { title: '专家用户', value: 1 }
+          // 机构用户: { title: '机构用户', value: 2, disabled: 'true' },
+          // 个人用户: { title: '个人用户', value: 3, disabled: 'true' }
         }
         let serverType = ''
         if (this.$store.state.Home.user.data.type) {
@@ -74,7 +77,9 @@ export default {
         } else {
           serverType = '个人用户'
         }
-        types[serverType].checked = true
+        if (types[serverType]) {
+          types[serverType].checked = true
+        }
         return Object.values(types)
       }
     },
@@ -82,9 +87,9 @@ export default {
       get () {
         const versions = {
           BJ编码版: { title: 'BJ编码版', value: 1 },
-          GB编码版: { title: 'GB编码版', value: 1 },
-          CC编码版: { title: 'CC编码版', value: 1 },
-          术语版: { title: '术语版', value: 4 }
+          GB编码版: { title: 'GB编码版', value: 1 }
+          // CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
+          // 术语版: { title: '术语版', value: 4, disabled: 'true' }
         }
         let serverVersion = ''
         if (this.$store.state.Home.user.data.clipalm_version) {
@@ -92,7 +97,9 @@ export default {
         } else {
           serverVersion = 'BJ编码版'
         }
-        versions[serverVersion].checked = true
+        if (versions[serverVersion]) {
+          versions[serverVersion].checked = true
+        }
         return Object.values(versions)
       }
     },
@@ -136,7 +143,14 @@ export default {
       this.$store.commit('SET_user', user)
       this.$router.push('/')
       this.$store.commit('SET_visible', false)
-      storage.removeItem('user')
+      // 清空所有缓存
+      storage.getAllKeys(event => {
+        if (event.result === 'success') {
+          event.data.map((key) => {
+            storage.removeItem(key)
+          })
+        }
+      })
     }
   }
 }
@@ -158,5 +172,14 @@ export default {
   .text {
     color: #666666;
     font-size: 32px;
+  }
+  .gridSelect {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .submits{
+    position: relative;
+    left: 23px;
+    top: 1px;
   }
 </style>

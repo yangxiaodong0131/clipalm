@@ -5,6 +5,7 @@
           <wxc-cell :label="stat.code"
               @wxcCellClicked="wxcIndexlistItemClicked(stat)"
               :has-margin="false"
+              :has-arrow="true"
               :extraContent="stat.desc"></wxc-cell>
         </cell>
       </list>
@@ -34,16 +35,13 @@ export default {
     }
   },
   methods: {
-    wxcCellClicked (e) {
-      console.log(e)
-    },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_isBottomShow', true)
-      this.$store.commit('SET_info', e.item)
+      this.$store.commit('SET_info', e)
       this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '分析详情'])
       this.$store.commit('SET_infoMenu', '统计分析')
-      this.$store.commit('SET_infoPage', getDetails(`分析详情`, e.item))
+      this.$store.commit('SET_infoPage', getDetails(`分析详情`, e))
     },
     swipe (e) {
       if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {

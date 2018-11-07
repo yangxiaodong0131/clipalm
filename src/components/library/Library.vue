@@ -1,15 +1,11 @@
 <template>
-  <!-- <div class="container" v-if="['MDC', 'ADRG', 'DRG'].includes(menu)">
-      <wxc-indexlist :normal-list="rules"
-                    @wxcIndexlistItemClicked="wxcIndexlistItemClicked"
-                    :show-index="true"></wxc-indexlist>
-  </div> -->
   <div class="container">
       <list class="list" @loadmore="fetch" loadmoreoffset="30000">
         <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
           <wxc-cell :label="rule.code"
                     @wxcCellClicked="wxcIndexlistItemClicked(rule)"
                     :has-margin="false"
+                    :has-arrow="true"
                     :extraContent="rule.desc"></wxc-cell>
         </cell>
       </list>
@@ -17,12 +13,12 @@
 </template>
 
 <script>
-import { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading } from 'weex-ui'
+import { WxcCell } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell, WxcLoading, WxcPartLoading },
+  components: { WxcCell },
   data () {
     return {
       // isBottomShow: false,
@@ -103,7 +99,7 @@ export default {
           this.$store.commit('SET_libraryPage', ['ICD9', this.$store.state.Library.icd9Page + 1])
           break
       }
-      modal.toast({ message: `${this.$store.state.Library.adrgPage}`, duration: 1 })
+      // modal.toast({ message: `${this.$store.state.Library.adrgPage}`, duration: 1 })
       if (this.menu !== 'MDC') {
         getServer(this, 'all', this.menu)
       }

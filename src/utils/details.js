@@ -176,30 +176,32 @@ const info = {
 
 export function getDetails (menu, data) {
   let result = info
-  switch (menu) {
-    case '病案详情':
-      result = caseInfo(data)
-      break
-    case '分析详情':
-      result = statInfo(data)
-      break
-    case 'MDC规则详情':
-      result = mdcInfo(data)
-      break
-    case 'ADRG规则详情':
-      result = adrgInfo(data)
-      break
-    case 'DRG规则详情':
-      result = drgInfo(data)
-      break
-    case 'ICD10规则详情':
-      result = icd10Info(data)
-      break
-    case 'ICD9规则详情':
-      result = icd9Info(data)
-      break
-    default:
-      break
+  if (data) {
+    switch (menu) {
+      case '病案详情':
+        result = caseInfo(data)
+        break
+      case '分析详情':
+        result = statInfo(data)
+        break
+      case 'MDC规则详情':
+        result = mdcInfo(data)
+        break
+      case 'ADRG规则详情':
+        result = adrgInfo(data)
+        break
+      case 'DRG规则详情':
+        result = drgInfo(data)
+        break
+      case 'ICD10规则详情':
+        result = icd10Info(data)
+        break
+      case 'ICD9规则详情':
+        result = icd9Info(data)
+        break
+      default:
+        break
+    }
   }
   return result
 }

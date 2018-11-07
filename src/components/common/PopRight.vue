@@ -11,7 +11,35 @@
           :key="index"
           :label="detail.label"
           :title="infoPage.info[detail.title]"
+          :has-arrow="true"
+          v-if="infoLevel === 0"
+          @LongPress="LongPress(detail)"
+          @wxcCellClicked="wxcCellClicked(detail)"
+          ></wxc-cell>
+        <wxc-cell v-for="(detail, index) in infoPage.details"
+          :key="index"
+          :label="detail.label"
+          :title="infoPage.info[detail.title]"
+          :has-arrow="true"
+          v-if="infoLevel === 1 && detail.label === '入组DRG'"
+          @LongPress="LongPress(detail)"
+          @wxcCellClicked="wxcCellClicked(detail)"
+          ></wxc-cell>
+        <wxc-cell v-for="(detail, index) in infoPage.details"
+          :key="index"
+          :label="detail.label"
+          :title="infoPage.info[detail.title]"
           :has-arrow="false"
+          v-if="infoLevel === 1 && detail.label !== '入组DRG'"
+          @LongPress="LongPress(detail)"
+          @wxcCellClicked="wxcCellClicked(detail)"
+          ></wxc-cell>
+        <wxc-cell v-for="(detail, index) in infoPage.details"
+          :key="index"
+          :label="detail.label"
+          :title="infoPage.info[detail.title]"
+          :has-arrow="false"
+          v-if="infoLevel === 2"
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
           ></wxc-cell>
@@ -33,7 +61,7 @@
 import { WxcPopup, WxcCell, WxcButton, WxcGridSelect } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 export default {
   components: { WxcPopup, WxcCell, WxcButton, WxcGridSelect },
   data () {
@@ -104,19 +132,25 @@ export default {
       }
     },
     wxcButtonClicked () {
+      let menu = ''
       switch (this.infoPage.infoTitle) {
         case 'MDC规则详情':
+          menu = 'ADRG'
           getServer(this, 'adrgOne', 'ADRG', this.infoPage.info)
+          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
         case 'ADRG规则详情':
+          menu = 'DRG'
           getServer(this, 'drgOne', 'DRG', this.infoPage.info)
+          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
         default :
           break
       }
       this.$store.commit('SET_infoLevel', 0)
       this.$store.commit('SET_isBottomShow', false)
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, this.$store.state.Home.infoMenu])
+      this.$store.commit('SET_library_menu', menu)
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
     },
     swipe (e) {
       if (e.direction === 'right') {
@@ -127,18 +161,15 @@ export default {
         } else {
           this.$store.commit('SET_infoLevel', this.infoLevel - 1)
         }
-        modal.toast({ message: '上一页', duration: 1 })
       } else if (e.direction === 'left') {
         if (this.infoLevel === 0) {
           this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
         }
         this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-        modal.toast({ message: '下一页', duration: 1 })
       }
     },
     LongPress (e) {
       this.a = '2'
-      console.log(e)
     }
   }
 }

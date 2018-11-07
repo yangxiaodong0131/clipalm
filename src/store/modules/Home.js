@@ -13,7 +13,6 @@ const state = {
   infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   isLoadingShow: false,
-  isMiniShow: false,
   showForum: false,
   miniBarTitle: ' ',
   point: ['点击底部标签可显示菜单', '点击任意条目可进入条目详情', '病案页长按可进入论坛', '页面左滑右滑可前进后退', '页面上滑加载下一页'],
@@ -106,9 +105,6 @@ const mutations = {
   SET_infoLevel (state, x) {
     state.infoLevel = x
   },
-  SET_isMiniShow (state, x) {
-    state.isMiniShow = x
-  },
   SET_serverVersion (state, x) {
     state.serverVersion = x
   }
@@ -133,7 +129,6 @@ const actions = {
     commit('SET_infoMenu')
     commit('SET_infoPage')
     commit('SET_infoLevel')
-    commit('SET_isMiniShow')
     commit('SET_infoPageClear')
   }
 }
