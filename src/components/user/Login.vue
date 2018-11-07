@@ -119,7 +119,7 @@ export default {
   .panel {
     flex-direction: column;
     justify-content: center;
-    height: 750;
+    /* height: 750; */
     margin-left: 0px;
     /* border-width: 2px; */
     /* border-style: solid; */
@@ -129,7 +129,7 @@ export default {
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 30px;
-    margin-top: 0px;
+    margin-top: 201px;
   }
   .text {
     color: #666666;

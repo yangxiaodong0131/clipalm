@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import { WxcRichText, WxcSpecialRichText, WxcButton } from 'weex-ui'
+import { WxcButton } from 'weex-ui'
 import { createForum } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcRichText, WxcSpecialRichText, WxcButton },
+  components: { WxcButton },
   data: () => ({
-    title: '',
-    content: ''
+    title: '123456',
+    content: '1548789'
   }),
   computed: {
     posts () {
@@ -42,7 +42,7 @@ export default {
       if (this.$store.state.Home.user.login) {
         const forum = { username: this.$store.state.Home.user.data.username, label: this.$store.state.Forum.forumLabel, title: this.title }
         const ForumContent = { content: this.content, username: this.$store.state.Home.user.data.username }
-        createForum(this, { forum: forum, forum_content: ForumContent })
+        createForum(this, { forum_all: { forum: forum, forum_content: ForumContent } }, 'create')
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
       }

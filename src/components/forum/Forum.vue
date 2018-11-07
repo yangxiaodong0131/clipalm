@@ -14,10 +14,11 @@
 </template>
 
 <script>
-import { WxcRichText, WxcSpecialRichText, WxcButton } from 'weex-ui'
+import { WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
 import { getServer } from '../../utils/server'
+// const modal = weex.requireModule('modal')
 export default {
-  components: { WxcRichText, WxcSpecialRichText, WxcButton },
+  components: { WxcSpecialRichText, WxcButton, WxcRichText },
   data: () => ({
   }),
   computed: {
@@ -62,9 +63,10 @@ export default {
   },
   methods: {
     wxcRichTextLinkClick (i) {
-      const menu = '帖子'
+      const menu = '帖子内容'
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
       getServer(this, 'forumOne', '帖子', this.posts[i])
+      this.$store.commit('SET_activeTab', 4)
     },
     wxcButtonClicked () {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])

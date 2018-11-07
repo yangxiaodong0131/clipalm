@@ -2,7 +2,7 @@
 <div class="homepage" v-if="showNewVersion">
   <Version></Version>
 </div>
-<div class="homepage" v-else>
+<div class="homepage" v-bind:style="homepage" v-else>
   <wxc-loading :show="isLoadingShow" type="default" interval="3" loading-text="正在查询"></wxc-loading>
   <mini-bar></mini-bar>
   <wxc-tab-bar
@@ -13,13 +13,13 @@
     duration="10"
     @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
     <!-- user页 -->
-    <div class="panel">
+    <div class="panel" v-bind:style="panel">
       <Login v-if="menu[0] == '用户登陆'"></Login>
       <User v-if="menu[0] == '个人信息'"></User>
       <Register v-if="menu[0] == '注册用户'"></Register>
     </div>
     <!-- edit页 -->
-    <div class="panel">
+    <div class="panel" v-bind:style="panel">
       <Edit v-if="['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历'].includes(menu[1])"></Edit>
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
@@ -28,13 +28,13 @@
       <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
-    <div class="panel">
+    <div class="panel" v-bind:style="panel">
       <Library v-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
       <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
       <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
     </div>
     <!-- stat页 -->
-    <div class="panel">
+    <div class="panel" v-bind:style="panel">
       <Report v-if="menu[3] == '统计分析'"></Report>
       <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
@@ -42,10 +42,10 @@
       <PopRight v-else></PopRight>
     </div>
     <!-- forum页 -->
-    <div class="panel">
+    <div class="panel" v-bind:style="panel">
       <New v-if="menu[4] === '新建帖子'"></New>
+      <ForumContent v-else-if="menu[4] === '帖子内容'"></ForumContent>
       <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
-      <Content v-else-if="menu[4] === '帖子'"></Content>
       <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
@@ -73,45 +73,44 @@
   import Report from './stat/Report'
   import Charts from './stat/Charts'
   import Query from './stat/Query'
+  import ForumContent from './forum/ForumContent'
   import Forum from './forum/Forum'
-  import Content from './forum/Content'
   import New from './forum/New'
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, PopBar, WxcLoading, PopUp, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, Content, Version, Charts, New, Register, HomeMenu },
+      Report, Query, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, Register, HomeMenu },
     data: () => ({
       // icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
       // activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
       tabs: [{
         title: '用户',
         menu:  ['用户登录', '个人信息'],
-        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+        icon: 'http://210.75.199.113/images/user.png',
+        activeIcon: 'http://210.75.199.113/images/user_fill.png'
         }, {
           title: '病案',
-          // menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
-          menu: ['未入组病历', '低风险死亡病历', '高CV病历', '单条分组'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
+          icon: 'http://210.75.199.113/images/edit.png',
+          activeIcon: 'http://210.75.199.113/images/edit_fill.png'
         }, {
           title: '字典',
           // menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9', '自定义查询'],
           menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          icon: 'http://210.75.199.113/images/library.png',
+          activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
           // menu: ['统计分析', '报表', '自定义查询'],
           menu: ['统计分析', '报表'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          icon: 'http://210.75.199.113/images/stat.png',
+          activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
           title: '论坛',
           menu: ['论坛'],
-          icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-          activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+          icon: 'http://210.75.199.113/images/forum.png',
+          activeIcon: 'http://210.75.199.113/images/forum_fill.png'
         }],
       tabStyles: {
         bgColor: '#FFFFFF',
@@ -119,10 +118,10 @@
         activeTitleColor: '#3D3D3D',
         activeBgColor: '#FFFFFF',
         isActiveTitleBold: true,
-        iconWidth: 70,
-        iconHeight: 70,
+        iconWidth: 54,
+        iconHeight: 54,
         width: 160,
-        height: 120,
+        height: 90,
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10
@@ -152,6 +151,25 @@
           show = true
         }
         return show
+      },
+      height () {
+        // const { tabStyles } = this
+        // const tabPageHeight = weex.config.env.deviceHeight
+        // const height = (tabPageHeight - tabStyles.height) + 'px'
+        return '1250px'
+      },
+      homepage () {
+        const style = {
+          height: this.height,
+        }
+        return style
+      },
+      panel () {
+        const style = {
+          width: '750px',
+          height: this.height,
+        }
+        return style
       }
     },
     created: function () {
@@ -198,9 +216,9 @@
       // }
     },
     mounted: function () {
-      if (this.$store.state.Home.user.login) {
-        this.setPage(2)
-      }
+      // if (this.$store.state.Home.user.login) {
+      //   this.setPage(2)
+      // }
     },
     methods: {
       newVersion () {
@@ -237,11 +255,11 @@
               miniBarTitle = `${this.$store.state.Forum.forumHead}-帖子`
               this.$store.commit('SET_forumLabel', `${this.$store.state.Home.miniBarTitle}`)
               menu = '论坛'
-              getServer(this, 'all', menu)
             } else {
               miniBarTitle = this.$store.state.Home.miniBarTitle
               menu = `${this.$store.state.Forum.forumMenu}`
             }
+            getServer(this, 'all', menu)
             this.$store.commit('SET_forumMenu', menu)
             break
         }
@@ -271,11 +289,9 @@
     bottom: 0;
     left: 0;
     background-color: #cccccc;
-    height: 1110px;
   }
   .panel {
     width: 750px;
-    height: 1250px;
     background-color: #C6e2FF;
     align-items: center;
     margin-left: 0px;

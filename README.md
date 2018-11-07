@@ -57,7 +57,7 @@ keytool -genkey -alias hitb.keystore -keyalg RSA -validity 1000 -keystore hitb.k
 
 keytool -list -v -keystore .\hitb.keystore
 
-jarsigner -verbose -keystore hitb.keystore -signedjar clipalm.apk app-release-unsigned.apk hitb.keystore
+jarsigner -verbose -keystore hitb.keystore   -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp  -signedjar clipalm.apk app-release-unsigned.apk hitb.keystore
 
 #### 修改App名称
 
