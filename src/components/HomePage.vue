@@ -242,6 +242,7 @@
               miniBarTitle = this.$store.state.Home.miniBarTitle
               menu = `${this.$store.state.Forum.forumMenu}`
             }
+            this.$store.commit('SET_forumMenu', menu)
             break
         }
         this.$store.commit('SET_menu', [i, menu])
@@ -250,7 +251,7 @@
         }
         this.$store.commit('SET_miniBarTitle', miniBarTitle)
         // 设定loading查询隐藏
-        if (i !== this.$store.state.Home.activeTab) {
+        if (i !== this.$store.state.Home.activeTab && this.$store.state.Home.isLoadingShow == true) {
           this.$store.commit('SET_isLoadingShow', false)
         }
         this.$store.commit('SET_activeTab', i)
