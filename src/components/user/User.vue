@@ -143,7 +143,14 @@ export default {
       this.$store.commit('SET_user', user)
       this.$router.push('/')
       this.$store.commit('SET_visible', false)
-      storage.removeItem('user')
+      // 清空所有缓存
+      storage.getAllKeys(event => {
+        if (event.result === 'success') {
+          event.data.map((key) => {
+            storage.removeItem(key)
+          })
+        }
+      })
     }
   }
 }
@@ -169,5 +176,10 @@ export default {
   .gridSelect {
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  .submits{
+    position: relative;
+    left: 23px;
+    top: 1px;
   }
 </style>
