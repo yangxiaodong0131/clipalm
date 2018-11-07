@@ -73,57 +73,6 @@ export default {
       }
       return show
     },
-    infoPage () {
-      let result = {}
-      switch (this.infoLevel) {
-        case 1:
-          result = this.$store.state.Home.infoPage1
-          break
-        case 2:
-          result = this.$store.state.Home.infoPage2
-          break
-        case 3:
-          result = this.$store.state.Home.infoPage3
-          break
-        case 4:
-          result = this.$store.state.Home.infoPage4
-          break
-      }
-      return result
-    },
-    rightButtonShow () {
-      let info = ''
-      const menu = this.$store.state.Home.menu
-      const activeTab = this.$store.state.Home.activeTab
-      let disabled = false
-      if (menu[activeTab] === '') {
-        disabled = false
-      } else {
-        switch (this.infoLevel) {
-          case 0:
-            info = this.$store.state.Home.infoPage1.info
-            break
-          case 1:
-            info = this.$store.state.Home.infoPage2.info
-            break
-          case 2:
-            info = this.$store.state.Home.infoPage3.info
-            break
-          case 3:
-            info = this.$store.state.Home.infoPage4.info
-            break
-          case 4:
-            info = ''
-            break
-        }
-        if (info === '') {
-          disabled = true
-        } else {
-          disabled = false
-        }
-      }
-      return disabled
-    },
     leftButtonShow () {
       let show = false
       if (this.infoLevel === 0) {
@@ -164,14 +113,10 @@ export default {
   },
   methods: {
     minibarRightButtonClick () {
-      // this.isBottomShow = true
-      // if (this.$store.state.Home.activeTab === 0) {
-      //   this.$store.commit('SET_menu', [0, '用户登陆'])
-      // } else {
-      //   this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, ''])
-      // }
+      const i = this.$store.state.Home.activeTab
       this.$store.commit('SET_infoLevel', 0)
-      switch (this.$store.state.Home.activeTab) {
+      this.$store.commit('SET_menu', [i, ''])
+      switch (i) {
         case 0:
           this.$store.commit('SET_miniBarTitle', '用户')
           break

@@ -243,7 +243,6 @@
             }
             break
         }
-        console.log(menu)
         this.$store.commit('SET_menu', [i, menu])
         if (menu != '' && i !== 4) {
           miniBarTitle = menu
