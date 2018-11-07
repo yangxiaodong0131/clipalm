@@ -7,6 +7,7 @@
           <wxc-cell
             :label="wt4.disease_name"
             :has-margin="false"
+            :has-arrow="true"
             @wxcCellClicked="wxcCellClicked(wt4)"
             :extraContent="wt4.extraContent">
           </wxc-cell>

@@ -5,6 +5,7 @@
           <wxc-cell :label="stat.code"
               @wxcCellClicked="wxcIndexlistItemClicked(stat)"
               :has-margin="false"
+              :has-arrow="true"
               :extraContent="stat.desc"></wxc-cell>
         </cell>
       </list>
