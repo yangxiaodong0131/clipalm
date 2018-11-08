@@ -125,6 +125,7 @@ export default {
 .container {
   width: 750px;
   margin-top: 91px;
+  margin-bottom: 91px;
 }
 .input {
   font-size: 30px;
@@ -152,7 +153,9 @@ export default {
   justify-content: space-around;
   padding-bottom: 20px;
 }
-
+.sub {
+  margin-top: 150px;
+}
 .textarea{
   font-size: 15px;
   width: 750px;
