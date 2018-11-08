@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-bind:style="panel">
+  <scroller class="container" v-bind:style="panel">
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
@@ -10,7 +10,7 @@
           class="submits"
           v-if="showButton"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-  </div>
+  </scroller>
 </template>
 
 <script>
@@ -73,6 +73,7 @@ export default {
       const menu = '帖子内容'
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
       getServer(this, 'forumOne', '帖子', this.posts[i])
+      this.$store.commit('SET_forumIndex', i)
       this.$store.commit('SET_activeTab', 4)
     },
     wxcButtonClicked () {
@@ -105,7 +106,6 @@ export default {
 }
 .submits{
   position: relative;
-  margin-top: 20px;
   left: 23px;
   top: 1px;
 }

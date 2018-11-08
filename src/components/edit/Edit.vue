@@ -8,6 +8,7 @@
             :label="wt4.disease_name"
             :has-margin="false"
             :has-arrow="true"
+            :arrow-icon="arrowSrc"
             @wxcCellClicked="wxcCellClicked(wt4)"
             :extraContent="wt4.extraContent">
           </wxc-cell>
@@ -27,6 +28,7 @@ export default {
   data () {
     return {
       forceValue: 0,
+      arrowSrc: 'http://210.75.199.113/images/more.png',
       refreshing: false
     }
   },
@@ -45,7 +47,7 @@ export default {
             case 'QY病历':
               extraContent = `${x.opers_code}`
               break
-            case '高CV病历':
+            case '费用异常病历':
               extraContent = `${x.total_expense}元·入组DRG平均费用`
               break
             default:
