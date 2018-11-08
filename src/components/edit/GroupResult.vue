@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-bind:style="panel">
     <div class="demo">
       <text class="demo-title"></text>
       <wxc-cell v-for="(date, index) in result"
@@ -32,6 +32,13 @@ export default {
       get () {
         return this.$store.state.Edit.groupResult
       }
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   methods: {
@@ -77,7 +84,6 @@ export default {
   .container {
     margin-top: 91px;
     width: 750px;
-    height: 1250px;
     background-color: #FFFFFF;
   }
   .demo-title {

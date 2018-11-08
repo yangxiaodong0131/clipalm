@@ -2,7 +2,7 @@
 <div class="homepage" v-if="showNewVersion">
   <Version></Version>
 </div>
-<div class="homepage" v-bind:style="homepage" v-else>
+<div class="homepage" v-bind:class="homepage" v-else>
   <wxc-loading :show="isLoadingShow" type="default" interval="3" loading-text="正在查询"></wxc-loading>
   <mini-bar></mini-bar>
   <wxc-tab-bar
@@ -13,14 +13,14 @@
     duration="10"
     @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
     <!-- user页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <Login v-if="menu[0] == '用户登陆'"></Login>
       <User v-if="menu[0] == '个人信息'"></User>
       <Register v-if="menu[0] == '注册用户'"></Register>
     </div>
     <!-- edit页 -->
-    <div class="panel" v-bind:style="panel">
-      <Edit v-if="['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历'].includes(menu[1])"></Edit>
+    <div class="panel" v-bind:class="panel">
+      <Edit v-if="['未入组病历', '低风险死亡病历', '费用异常病历', 'QY病历'].includes(menu[1])"></Edit>
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
@@ -28,21 +28,21 @@
       <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <Library v-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
       <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
       <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
     </div>
     <!-- stat页 -->
-    <div class="panel" v-bind:style="panel">
-      <Report v-if="menu[3] == '统计分析'"></Report>
+    <div class="panel" v-bind:class="panel">
+      <Report v-if="['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)'].includes(menu[3])"></Report>
       <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
       <HomeMenu v-else-if="menu[3] === ''"></HomeMenu>
       <PopRight v-else></PopRight>
     </div>
     <!-- forum页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <New v-if="menu[4] === '新建帖子'"></New>
       <ForumContent v-else-if="menu[4] === '帖子内容'"></ForumContent>
       <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
@@ -91,7 +91,7 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '高CV病历', '单条分组'],
+          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '费用异常病历', '单条分组'],
           icon: 'http://210.75.199.113/images/edit.png',
           activeIcon: 'http://210.75.199.113/images/edit_fill.png'
         }, {
@@ -102,8 +102,7 @@
           activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
-          // menu: ['统计分析', '报表', '自定义查询'],
-          menu: ['统计分析', '报表'],
+          menu: ['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)', '报表'],
           icon: 'http://210.75.199.113/images/stat.png',
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
@@ -121,7 +120,7 @@
         iconWidth: 54,
         iconHeight: 54,
         width: 160,
-        height: 90,
+        height: 100,
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10
@@ -153,10 +152,10 @@
         return show
       },
       height () {
-        // const { tabStyles } = this
-        // const tabPageHeight = weex.config.env.deviceHeight
-        // const height = (tabPageHeight - tabStyles.height) + 'px'
-        return '1250px'
+        const { tabStyles } = this
+        const tabPageHeight = weex.config.env.deviceHeight
+        const height = (tabPageHeight - tabStyles.height) + 'px'
+        return height
       },
       homepage () {
         const style = {
@@ -178,6 +177,7 @@
           const edata = JSON.parse(e.data)
           this.$store.commit('SET_user', edata)
           this.$store.commit('SET_menu', [0, '个人信息'])
+          this.$store.commit('SET_userMenu', '个人信息')
         }
       })
       const tabPageHeight = Utils.env.getPageHeight();
@@ -234,7 +234,7 @@
         let miniBarTitle = ''
         switch (i) {
           case 0:
-            menu = '个人信息'
+            menu = this.$store.state.Home.userMenu
             miniBarTitle = this.tabs[e.page]['title']
             break
           case 1:

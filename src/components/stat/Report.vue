@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-bind:style="panel">
       <list class="list" @loadmore="fetch" loadmoreoffset="30000">
         <cell class="cell" v-for="(stat, index) in stats" v-bind:key="index">
           <wxc-cell :label="stat.code"
@@ -32,6 +32,13 @@ export default {
       get () {
         return this.$store.state.Stat.statDrg
       }
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   methods: {
@@ -68,6 +75,5 @@ export default {
 .container {
   margin-top: 91px;
   width: 750px;
-  height: 1250px;
 }
 </style>

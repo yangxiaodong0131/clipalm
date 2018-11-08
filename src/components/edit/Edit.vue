@@ -1,5 +1,5 @@
 <template>
-  <div class="demo" @swipe="swipe" style="height:1000px;">
+  <div class="demo" @swipe="swipe" v-bind:style="panel">
     <text class="demo-title" v-if="showTitle">{{title}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
@@ -47,7 +47,7 @@ export default {
             case 'QY病历':
               extraContent = `${x.opers_code}`
               break
-            case '高CV病历':
+            case '费用异常病历':
               extraContent = `${x.total_expense}元·入组DRG平均费用`
               break
             default:
@@ -77,6 +77,13 @@ export default {
         const data = this.$store.state.Edit.wt4Info
         return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
       }
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   methods: {
@@ -131,7 +138,6 @@ export default {
   }
   .demo {
     width: 750px;
-    height: 1250px;
     margin-top: 91px;
   }
 </style>

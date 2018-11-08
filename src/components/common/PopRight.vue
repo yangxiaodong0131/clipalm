@@ -1,6 +1,7 @@
 <template>
   <div class="demo"
-    :show="infoPage.isBottomShow" @swipe="swipe">
+    :show="infoPage.isBottomShow" @swipe="swipe"
+    v-bind:style="panel">
     <list class="list" :show="true">
       <cell class="cell">
         <wxc-button :text="infoPage.buttonText"
@@ -43,9 +44,13 @@
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
           ></wxc-cell>
-        <div v-for="(gridList, index) in infoPage.gridList"
+        <div v-if="infoPage.infoTitle === '病案详情'">
+          <text class="title">分组日志</text>
+          <wxc-simple-flow :list="infoPage.gridList['分组日志']" :themeColor="themeColor"></wxc-simple-flow>
+        </div>
+        <div v-else v-for="(gridList, index) in infoPage.gridList"
               :key="index">
-          <text class="text">{{index}}</text>
+          <text class="title">{{index}}</text>
           <wxc-grid-select
               v-if="Object.keys(gridList).length !== 0"
               :single="true"
@@ -58,16 +63,22 @@
   </div>
 </template>
 <script>
-import { WxcCell, WxcButton } from 'weex-ui'
+import { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell, WxcButton },
+  components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow },
   data () {
     return {
-      a: '1'
-      // isBottomShow: false
+      themeColor: {
+        lineColor: '#bf280b',
+        pointInnerColor: '#b95048',
+        pointBorderColor: '#bf280b',
+        highlightTitleColor: '#bf280b',
+        highlightPointInnerColor: '#bf280b',
+        highlightPointBorderColor: '#d46262'
+      }
     }
   },
   computed: {
@@ -109,6 +120,13 @@ export default {
           break
       }
       return menu
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   methods: {
@@ -177,11 +195,14 @@ export default {
 <style scoped>
   .demo {
     width: 750px;
-    height: 1250px;
     background-color: #f2f3f4;
     margin-top: 91px;
   }
   .text {
+    font-size: 35px;
+  }
+  .title {
+    text-align: center;
     font-size: 35px;
   }
 </style>

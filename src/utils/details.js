@@ -1,10 +1,15 @@
 function caseInfo (data) {
+  const gridList = {}
+  gridList['分组日志'] = data.log.map((x) => {
+    const obj = { date: '', desc: '', highlight: false, title: x }
+    return obj
+  })
   const result = {
     info: data,
     infoTitle: '病案详情',
     isInfoButtonShow: false,
     buttonText: ``,
-    gridList: [],
+    gridList: gridList,
     details: [
       {'label': '入组DRG', 'title': 'drg'},
       {'label': '病案ID', 'title': 'b_wt4_v1_id'},
@@ -19,8 +24,7 @@ function caseInfo (data) {
       {'label': '新生儿天数', 'title': 'sf0100'},
       {'label': '新生儿体重', 'title': 'sf0102'},
       {'label': '呼吸机使用时间', 'title': 'sf0104'},
-      {'label': '出院转归', 'title': 'sf0108'},
-      {'label': '分组日志', 'title': 'log'}]
+      {'label': '出院转归', 'title': 'sf0108'}]
   }
   return result
 }
@@ -46,9 +50,8 @@ function statInfo (data) {
 }
 function mdcInfo (data) {
   const gridList = {}
-  gridList['非QY小手术'] = data.icd9_aa.map((x) => {
-    const obj = {}
-    obj.title = x
+  gridList['非QY小手术规则'] = data.icd9_aa.map((x) => {
+    const obj = { title: x }
     return obj
   })
   const result = {
@@ -67,27 +70,22 @@ function mdcInfo (data) {
 }
 function adrgInfo (data) {
   const gridList = {}
-  gridList['主要诊断'] = data.icd10_aa.map((x) => {
+  gridList['主要诊断规则'] = data.icd10_aa.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  gridList['其他诊断'] = data.icd10_bb.map((x) => {
+  gridList['其他诊断规则'] = data.icd10_bb.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  gridList['主要手术'] = data.icd9_aa.map((x) => {
+  gridList['主要手术规则'] = data.icd9_aa.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  gridList['主要手术'] = data.icd9_bb.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  gridList['其他手术'] = data.icd9_bb.map((x) => {
+  gridList['其他手术规则'] = data.icd9_bb.map((x) => {
     const obj = {}
     obj.title = x
     return obj
@@ -123,7 +121,7 @@ function drgInfo (data) {
 }
 function icd10Info (data) {
   const gridList = {}
-  gridList['ADRG'] = data.adrg.map((x) => {
+  gridList['ADRG规则'] = data.adrg.map((x) => {
     const obj = {}
     obj.title = x
     return obj
@@ -146,7 +144,7 @@ function icd10Info (data) {
 }
 function icd9Info (data) {
   const gridList = {}
-  gridList['ADRG'] = data.adrg.map((x) => {
+  gridList['ADRG规则'] = data.adrg.map((x) => {
     const obj = {}
     obj.title = x
     return obj

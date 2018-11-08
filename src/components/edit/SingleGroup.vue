@@ -168,4 +168,7 @@ export default {
   left: 23px;
   top: 1px;
 }
+.sub {
+  margin-top: 70px;
+}
 </style>

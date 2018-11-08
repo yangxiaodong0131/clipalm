@@ -1,5 +1,5 @@
 <template>
-  <div class="demo">
+  <div class="demo" v-bind:style="panel">
     <wxc-button class="submits"
       v-for="(menu, index) in menus" :key="index"
       :text="menu"
@@ -25,6 +25,13 @@ export default {
     },
     menus () {
       return this.$store.state.Home.menus
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   methods: {
@@ -51,6 +58,8 @@ export default {
           getServer(this, 'all', menu)
           break
         case 3:
+          this.$store.commit('SET_statDrg', [])
+          this.$store.commit('SET_statPage', 1)
           this.$store.commit('SET_statMenu', menu)
           getServer(this, 'all', menu)
           break
@@ -77,7 +86,6 @@ export default {
   }
   .demo {
     width: 750px;
-    height: 1250px;
     margin-top: 140px;
   }
   .row {

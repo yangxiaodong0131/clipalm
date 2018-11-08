@@ -1,5 +1,7 @@
 <template>
-  <div class="panel">
+  <div class="panel" v-bind:style="panel">
+    <category title="--用户名--"></category>
+    <text class="red" slot="title" style="">{{user.username}}</text>
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
       class="gridSelect"
@@ -35,14 +37,14 @@
 </template>
 
 <script>
-import { WxcMinibar, WxcGridSelect, WxcButton } from 'weex-ui'
+import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
 import { updateUser } from '../../utils/server'
 const modal = weex.requireModule('modal')
 const storage = weex.requireModule('storage')
 export default {
   name: 'user-doc',
-  components: { WxcMinibar, WxcGridSelect, Category, WxcButton },
+  components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell },
   data: () => ({
     customStyles: {
       lineSpacing: '14px',
@@ -111,6 +113,16 @@ export default {
         }
         return []
       }
+    },
+    panel: {
+      get () {
+        const tabPageHeight = weex.config.env.deviceHeight
+        const style = {
+          width: '750px',
+          height: tabPageHeight
+        }
+        return style
+      }
     }
   },
   methods: {
@@ -157,17 +169,12 @@ export default {
 </script>
 
 <style scoped>
-  .wrapper {
-    justify-content: center;
-  }
   .panel {
     margin-left: 0px;
     border-color: #BBBBBB;
     padding-top: 0;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
     margin-top: 91px;
+    background-color: #C6e2FF;
   }
   .text {
     color: #666666;
@@ -181,5 +188,17 @@ export default {
     position: relative;
     left: 23px;
     top: 1px;
+  }
+  .red{
+    text-align: left;
+  }
+  .demo-title {
+    font-size: 28px;
+    background-color: #C6E2FF;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 14px;
+    padding: 10px;
   }
 </style>

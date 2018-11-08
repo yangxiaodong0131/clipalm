@@ -3,49 +3,56 @@
     <div class="row">
       <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
     </div>
-    <wxc-searchbar ref="wxc-searchbar"
-      input-type='text'
-      v-model = 'user.username'
-      :default-value='name'
-      cancel-label='用户名'
-      placeholder='用户名'
-      theme='yellow'
-      :bar-style='barStyle'
-      @wxcSearchbarInputOnInput="NameOnInput">
-    </wxc-searchbar>
+    <div v-bind:style="panel">
+      <wxc-searchbar ref="wxc-searchbar"
+        input-type='text'
+        v-model = 'user.username'
+        :default-value='name'
+        cancel-label='用户名'
+        placeholder='用户名'
+        theme='yellow'
+        :bar-style='barStyle'
+        @wxcSearchbarInputOnInput="NameOnInput">
+      </wxc-searchbar>
 
-    <wxc-searchbar ref="wxc-searchbar"
-      input-type='password'
-      v-model = 'user.password'
-      :default-value='pwd'
-      cancel-label='密码'
-      placeholder='密码'
-      theme='yellow'
-      :bar-style='barStyle'
-      @wxcSearchbarInputOnInput="PwdOnInput">
-    </wxc-searchbar>
-    <div class="row">
-      <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
-      <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
+      <wxc-searchbar ref="wxc-searchbar"
+        input-type='password'
+        v-model = 'user.password'
+        :default-value='pwd'
+        cancel-label='密码'
+        placeholder='密码'
+        theme='yellow'
+        :bar-style='barStyle'
+        @wxcSearchbarInputOnInput="PwdOnInput">
+      </wxc-searchbar>
+      <div class="row">
+        <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+        <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
+      </div>
+      <wxc-cell :has-arrow="false"
+                    :cell-style="cellStyle"
+                    :has-top-border="false"
+                    :auto-accessible="false">
+        <text class="red" slot="title" style="">{{loginResult}}</text>
+      </wxc-cell>
     </div>
   </div>
 </template>
 
 <script>
-import { WxcButton, WxcSearchbar } from 'weex-ui'
-import { getServer } from '../../utils/server'
+import { WxcButton, WxcSearchbar, WxcCell } from 'weex-ui'
+// import { getServer } from '../../utils/server'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
-const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 
 export default {
   name: 'login-page',
-  components: { WxcButton, WxcSearchbar },
+  components: { WxcButton, WxcSearchbar, WxcCell },
   data () {
     return {
-      info: '...',
+      loginResult: '',
       value: '输入框内容。。。',
       // name: '',
       // pwd: '',
@@ -58,7 +65,22 @@ export default {
       },
       btnStyle: {
         marginTop: '20px'
+      },
+      cellStyle: {
+        backgroundColor: '#C6e2FF',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        color: '#FFFFFF'
       }
+    }
+  },
+  computed: {
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   created: function () {
@@ -81,7 +103,8 @@ export default {
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_miniBarTitle', '个人信息')
             this.$store.commit('SET_menu', [0, '个人信息'])
-            getServer(this, 'all', 'MDC')
+            this.$store.commit('SET_userMenu', '个人信息')
+            // getServer(this, 'all', 'MDC')
             // getServer(this, 'all', 'ADRG')
             // getServer(this, 'all', 'DRG')
             // getServer(this, 'all', 'ICD10')
@@ -89,12 +112,22 @@ export default {
             // this.$store.commit('SET_library_menu', 'MDC')
             storage.setItem('user', JSON.stringify(res.data))
           } else {
-            modal.toast({ 'message': '账号或密码错误', 'duration': 1 })
+            this.loginResult = '账号或密码错误'
             this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
           }
         } else {
+          this.loginResult = '网络连接失败'
           this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
-          modal.toast({ 'message': '网络连接失败', 'duration': 1 })
+        }
+        if (!this.$store.state.Home.user.login) {
+          // 清空所有缓存
+          storage.getAllKeys(event => {
+            if (event.result === 'success') {
+              event.data.map((key) => {
+                storage.removeItem(key)
+              })
+            }
+          })
         }
       })
     },
