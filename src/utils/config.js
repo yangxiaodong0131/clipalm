@@ -12,9 +12,9 @@ module.exports = {
   router: 'expert'
 }
 
-// 服务器配置
-module.exports = {
-  http: 'http://www.jiankanglaifu.com',
-  port: '80',
-  router: 'drgwork/expert'
-}
+// // 服务器配置
+// module.exports = {
+//   http: 'http://www.jiankanglaifu.com',
+//   port: '80',
+//   router: 'drgwork/expert'
+// }

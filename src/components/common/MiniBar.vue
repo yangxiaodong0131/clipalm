@@ -83,7 +83,11 @@ export default {
       return show
     },
     miniBarTitle () {
-      return this.$store.state.Home.miniBarTitle
+      let title = this.$store.state.Home.miniBarTitle
+      if (this.$store.state.Home.activeTab === 0 && this.$store.state.Home.user.login) {
+        title = '个人信息'
+      }
+      return title
     },
     returnMenu () {
       let menu = ''
