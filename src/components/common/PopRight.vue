@@ -31,6 +31,11 @@
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
           ></wxc-cell>
+        <wxc-button :text="infoPage.buttonText"
+              v-if="infoPage.isInfoButtonShow"
+              size="big"
+              class="btns"
+              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         <wxc-cell v-for="(detail, index) in infoPage.details"
           :key="index"
           :label="detail.label"
@@ -53,11 +58,6 @@
               :cols="1"
               :list="gridList"></wxc-grid-select>
           <text v-else>无</text>
-        <wxc-button :text="infoPage.buttonText"
-              v-if="infoPage.isInfoButtonShow"
-              size="big"
-              class="btns"
-              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         </div>
       </cell>
     </list>
