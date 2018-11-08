@@ -28,24 +28,29 @@
       <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
       <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
     </div>
+    <wxc-cell :has-arrow="false"
+                  :cell-style="cellStyle"
+                  :has-top-border="false"
+                  :auto-accessible="false">
+      <text class="red" slot="title" style="">{{loginResult}}</text>
+    </wxc-cell>
   </div>
 </template>
 
 <script>
-import { WxcButton, WxcSearchbar } from 'weex-ui'
+import { WxcButton, WxcSearchbar, WxcCell } from 'weex-ui'
 import { getServer } from '../../utils/server'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
-const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 
 export default {
   name: 'login-page',
-  components: { WxcButton, WxcSearchbar },
+  components: { WxcButton, WxcSearchbar, WxcCell },
   data () {
     return {
-      info: '...',
+      loginResult: '',
       value: '输入框内容。。。',
       // name: '',
       // pwd: '',
@@ -58,8 +63,16 @@ export default {
       },
       btnStyle: {
         marginTop: '20px'
+      },
+      cellStyle: {
+        backgroundColor: '#C6e2FF',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        color: '#FFFFFF'
       }
     }
+  },
+  computed: {
   },
   created: function () {
     // this.test()
@@ -89,12 +102,12 @@ export default {
             // this.$store.commit('SET_library_menu', 'MDC')
             storage.setItem('user', JSON.stringify(res.data))
           } else {
-            modal.toast({ 'message': '账号或密码错误', 'duration': 1 })
+            this.loginResult = '账号或密码错误'
             this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
           }
         } else {
+          this.loginResult = '网络连接失败'
           this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
-          modal.toast({ 'message': '网络连接失败', 'duration': 1 })
         }
       })
     },
