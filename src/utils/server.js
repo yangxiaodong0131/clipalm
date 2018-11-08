@@ -58,7 +58,7 @@ export function getServer (obj, type, menu, value = null) {
       case '低风险死亡病历':
         url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}`
         break
-      case '高CV病历':
+      case '费用异常病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
       case '论坛':
@@ -87,17 +87,13 @@ export function getServer (obj, type, menu, value = null) {
         setStore(obj, menu, type, edata)
       } else {
         obj.$store.commit('SET_isLoadingShow', true)
-        // setTimeout(() => {
-        //   // 正常使用时候直接设置即可，不需setTimeout
-        //   obj.$store.commit('SET_isLoadingShow', false)
-        // }, 30000)
         stream.fetch({
           method: 'GET',
           type: 'json',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
           responseType: 'json',
           url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
-        }, res => {
+        }, function (res) {
           if (res.ok) {
             storage.setItem(url, JSON.stringify(res.data), e => {
               console.log('storage success')
@@ -105,7 +101,7 @@ export function getServer (obj, type, menu, value = null) {
             setStore(obj, menu, type, res.data)
           } else {
             obj.$store.commit('SET_isLoadingShow', false)
-            obj.info = '- 网络连接失败 -'
+            modal.toast({ message: '- 网络连接失败 -', duration: 1 })
           }
         })
       }
@@ -277,7 +273,7 @@ function setStore (obj, menu, type, rdata) {
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
-    case '高CV病历':
+    case '费用异常病历':
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
