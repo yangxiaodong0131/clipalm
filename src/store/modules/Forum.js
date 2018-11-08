@@ -5,10 +5,14 @@ const state = {
   forumHead: '',
   forumMenu: '',
   forumLabel: '',
+  forumIndex: null,
   forumContent: {}
 }
 
 const mutations = {
+  SET_forumIndex (state, x) {
+    state.forumIndex = x
+  },
   SET_forumHead (state, x) {
     state.forumHead = x
   },
@@ -37,7 +41,8 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
-    commit('forumHead')
+    commit('SET_forumIndex')
+    commit('SET_forumHead')
     commit('SET_forumType')
     commit('SET_post')
     commit('SET_forumPage')

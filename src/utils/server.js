@@ -173,17 +173,17 @@ export function createForum (obj, forum, type) {
     body: qs.stringify(forum)
   }, res => {
     if (res.ok) {
-      obj.$store.commit('SET_showForum', true)
-      obj.$store.commit('SET_menus', ['论坛', '自定义查询'])
-      obj.$store.commit('SET_menu', [4, '论坛'])
-      obj.$store.commit('SET_post', [])
-      obj.$store.commit('SET_forumPage', 1)
       getServer(obj, 'all', '论坛')
       switch (type) {
         case 'reply':
           modal.toast({ message: '回复成功', duration: 1 })
           break
         default:
+          obj.$store.commit('SET_showForum', true)
+          obj.$store.commit('SET_menus', ['论坛', '自定义查询'])
+          obj.$store.commit('SET_menu', [4, '论坛'])
+          obj.$store.commit('SET_post', [])
+          obj.$store.commit('SET_forumPage', 1)
           modal.toast({ message: '帖子创建成功', duration: 1 })
       }
     } else {

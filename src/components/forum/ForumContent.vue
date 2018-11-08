@@ -19,18 +19,24 @@
 </template>
 <script>
 import { WxcPopup, WxcCell, WxcButton } from 'weex-ui'
-import { createForum } from '../../utils/server'
+import { createForum, getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
   components: { WxcPopup, WxcCell, WxcButton },
   data () {
     return {
-      content: '123'
+      content: '123123'
     }
   },
   computed: {
+    posts () {
+      return this.$store.state.Forum.post
+    },
     datas () {
       return this.$store.state.Forum.forumContent.content
+    },
+    forumIndex () {
+      return this.$store.state.Forum.forumIndex
     }
   },
   methods: {
@@ -41,6 +47,8 @@ export default {
       if (this.$store.state.Home.user.login) {
         const ForumContent = { forum_id: this.$store.state.Forum.forumContent.id, content: this.content, username: this.$store.state.Home.user.data.username }
         createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply')
+        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子内容'])
+        getServer(this, 'forumOne', '帖子', this.posts[this.forumIndex])
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
       }

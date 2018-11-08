@@ -73,6 +73,7 @@ export default {
       const menu = '帖子内容'
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
       getServer(this, 'forumOne', '帖子', this.posts[i])
+      this.$store.commit('SET_forumIndex', i)
       this.$store.commit('SET_activeTab', 4)
     },
     wxcButtonClicked () {
