@@ -4,6 +4,7 @@ const state = {
   menus: [],
   menu: ['用户登陆', '数据展示', '数据展示', '数据展示', '数据展示'],
   notice: '未注册用户！',
+  userMenu: '用户登录',
   user: { login: false, data: { clipalm_version: 'BJ编码版' } },
   isBottomShow: false,
   infoLevel: 0,
@@ -23,6 +24,9 @@ const state = {
 }
 
 const mutations = {
+  SET_userMenu (state, x) {
+    state.userMenu = x
+  },
   SET_miniBarTitle (state, x) {
     state.miniBarTitle = x
   },
@@ -112,6 +116,7 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
+    commit('SET_userMenu')
     commit('SET_miniBarTitle')
     commit('SET_pointIndex')
     commit('SET_showForum')

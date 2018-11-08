@@ -49,9 +49,9 @@
       function createQRCode (url) {
         var $QR = document.querySelector('#qrcode')
         var QR = qrcode(0, 'L')
-        url += '?_wx_tpl=' + url
-        $QR.setAttribute('href', url)
-        QR.addData(url)
+        // url += '?_wx_tpl=' + url
+        // $QR.setAttribute('href', url)
+        // QR.addData(url)
         QR.make()
         $QR.innerHTML = QR.createImgTag(6, 12)
       }
