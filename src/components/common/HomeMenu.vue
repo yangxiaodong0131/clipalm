@@ -58,6 +58,8 @@ export default {
           getServer(this, 'all', menu)
           break
         case 3:
+          this.$store.commit('SET_statDrg', [])
+          this.$store.commit('SET_statPage', 1)
           this.$store.commit('SET_statMenu', menu)
           getServer(this, 'all', menu)
           break
