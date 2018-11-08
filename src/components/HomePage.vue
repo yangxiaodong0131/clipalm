@@ -2,7 +2,7 @@
 <div class="homepage" v-if="showNewVersion">
   <Version></Version>
 </div>
-<div class="homepage" v-bind:style="homepage" v-else>
+<div class="homepage" v-bind:class="homepage" v-else>
   <wxc-loading :show="isLoadingShow" type="default" interval="3" loading-text="正在查询"></wxc-loading>
   <mini-bar></mini-bar>
   <wxc-tab-bar
@@ -13,13 +13,13 @@
     duration="10"
     @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
     <!-- user页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <Login v-if="menu[0] == '用户登陆'"></Login>
       <User v-if="menu[0] == '个人信息'"></User>
       <Register v-if="menu[0] == '注册用户'"></Register>
     </div>
     <!-- edit页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <Edit v-if="['未入组病历', '低风险死亡病历', '高CV病历', 'QY病历'].includes(menu[1])"></Edit>
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
@@ -28,13 +28,13 @@
       <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <Library v-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
       <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
       <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
     </div>
     <!-- stat页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <Report v-if="menu[3] == '统计分析'"></Report>
       <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
@@ -42,7 +42,7 @@
       <PopRight v-else></PopRight>
     </div>
     <!-- forum页 -->
-    <div class="panel" v-bind:style="panel">
+    <div class="panel" v-bind:class="panel">
       <New v-if="menu[4] === '新建帖子'"></New>
       <ForumContent v-else-if="menu[4] === '帖子内容'"></ForumContent>
       <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
@@ -121,7 +121,7 @@
         iconWidth: 54,
         iconHeight: 54,
         width: 160,
-        height: 90,
+        height: 100,
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10
@@ -153,10 +153,10 @@
         return show
       },
       height () {
-        // const { tabStyles } = this
-        // const tabPageHeight = weex.config.env.deviceHeight
-        // const height = (tabPageHeight - tabStyles.height) + 'px'
-        return '1250px'
+        const { tabStyles } = this
+        const tabPageHeight = weex.config.env.deviceHeight
+        const height = (tabPageHeight - tabStyles.height) + 'px'
+        return height
       },
       homepage () {
         const style = {

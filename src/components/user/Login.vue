@@ -73,6 +73,14 @@ export default {
     }
   },
   computed: {
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        width: '750px',
+        height: tabPageHeight
+      }
+      return style
+    }
   },
   created: function () {
     // this.test()

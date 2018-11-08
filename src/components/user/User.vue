@@ -1,5 +1,5 @@
 <template>
-  <div class="panel">
+  <div class="panel" v-bind:style="panel">
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
       class="gridSelect"
@@ -111,6 +111,16 @@ export default {
         }
         return []
       }
+    },
+    panel: {
+      get () {
+        const tabPageHeight = weex.config.env.deviceHeight
+        const style = {
+          width: '750px',
+          height: tabPageHeight
+        }
+        return style
+      }
     }
   },
   methods: {
@@ -164,10 +174,8 @@ export default {
     margin-left: 0px;
     border-color: #BBBBBB;
     padding-top: 0;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
     margin-top: 91px;
+    background-color: #C6e2FF;
   }
   .text {
     color: #666666;

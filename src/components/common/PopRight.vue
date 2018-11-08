@@ -58,12 +58,12 @@
   </div>
 </template>
 <script>
-import { WxcCell, WxcButton } from 'weex-ui'
+import { WxcCell, WxcButton, WxcGridSelect } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell, WxcButton },
+  components: { WxcCell, WxcButton, WxcGridSelect },
   data () {
     return {
       a: '1'
