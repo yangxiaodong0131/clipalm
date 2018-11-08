@@ -178,6 +178,7 @@
           const edata = JSON.parse(e.data)
           this.$store.commit('SET_user', edata)
           this.$store.commit('SET_menu', [0, '个人信息'])
+          this.$store.commit('SET_userMenu', '个人信息')
         }
       })
       const tabPageHeight = Utils.env.getPageHeight();
@@ -234,7 +235,7 @@
         let miniBarTitle = ''
         switch (i) {
           case 0:
-            menu = '个人信息'
+            menu = this.$store.state.Home.userMenu
             miniBarTitle = this.tabs[e.page]['title']
             break
           case 1:

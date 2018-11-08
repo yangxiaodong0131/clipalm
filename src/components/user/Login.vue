@@ -103,6 +103,7 @@ export default {
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_miniBarTitle', '个人信息')
             this.$store.commit('SET_menu', [0, '个人信息'])
+            this.$store.commit('SET_userMenu', '个人信息')
             // getServer(this, 'all', 'MDC')
             // getServer(this, 'all', 'ADRG')
             // getServer(this, 'all', 'DRG')
