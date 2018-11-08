@@ -5,7 +5,6 @@
           <wxc-cell :label="rule.code"
                     @wxcCellClicked="wxcIndexlistItemClicked(rule)"
                     :has-margin="false"
-                    :arrow-icon="arrowSrc"
                     :has-arrow="true"
                     :arrow-icon="arrawSrc"
                     :extraContent="rule.desc"></wxc-cell>
