@@ -78,7 +78,7 @@ export function getServer (obj, type, menu, value = null) {
     storage.getItem(url, e => {
       if (e.result === 'success!') {
         const edata = JSON.parse(e.data)
-        setStore(obj, menu, edata)
+        setStore(obj, menu, type, edata)
       } else {
         obj.$store.commit('SET_isLoadingShow', true)
         // setTimeout(() => {
@@ -227,51 +227,39 @@ function setStore (obj, menu, type, rdata) {
       obj.$store.commit('SET_icd10_rule', rdata.data)
       break
     case 'icd10One':
-      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
       data = obj.$store.state.Library.icd10Rule
+      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
       data = data.concat(rdata.data)
       obj.$store.commit('SET_icd10_rule', data)
       break
     case 'icd9One':
-      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
       data = obj.$store.state.Library.icd9Rule
+      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
       data = data.concat(rdata.data)
       obj.$store.commit('SET_icd9_rule', data)
       break
     case '统计分析':
-      obj.$store.commit('SET_statPage', parseInt(rdata.page))
       data = obj.$store.state.Stat.statDrg
+      obj.$store.commit('SET_statPage', parseInt(rdata.page))
       data = data.concat(rdata.data)
       obj.$store.commit('SET_statDrg', data)
       break
     case '未入组病历':
-      // if (obj.$store.state.Edit.wt4Page === 1) {
-      //   obj.$store.commit('SET_wt4Info', rdata.info)
-      // }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
     case 'QY病历':
-      if (obj.$store.state.Edit.wt4Page === 1) {
-        obj.$store.commit('SET_wt4Info', rdata.info)
-      }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
     case '低风险死亡病历':
-      if (obj.$store.state.Edit.wt4Page === 1) {
-        obj.$store.commit('SET_wt4Info', rdata.info)
-      }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
     case '高CV病历':
-      if (obj.$store.state.Edit.wt4Page === 1) {
-        obj.$store.commit('SET_wt4Info', rdata.info)
-      }
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
