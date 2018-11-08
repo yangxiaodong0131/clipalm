@@ -7,6 +7,7 @@
                     :has-margin="false"
                     :arrow-icon="arrowSrc"
                     :has-arrow="true"
+                    :arrow-icon="arrawSrc"
                     :extraContent="rule.desc"></wxc-cell>
         </cell>
       </list>
@@ -25,8 +26,8 @@ export default {
       // isBottomShow: false,
       height: 400,
       // info: {},
-      arrowSrc: 'http://210.75.199.113/images/more.png',
-      isShow: false
+      isShow: false,
+      arrawSrc: 'http://210.75.199.113/images/more.png'
     }
   },
   computed: {
