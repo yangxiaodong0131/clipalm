@@ -39,7 +39,7 @@
 
 <script>
 import { WxcButton, WxcSearchbar, WxcCell } from 'weex-ui'
-import { getServer } from '../../utils/server'
+// import { getServer } from '../../utils/server'
 const qs = require('qs')
 const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
@@ -94,7 +94,7 @@ export default {
             this.$store.commit('SET_visible', false)
             this.$store.commit('SET_miniBarTitle', '个人信息')
             this.$store.commit('SET_menu', [0, '个人信息'])
-            getServer(this, 'all', 'MDC')
+            // getServer(this, 'all', 'MDC')
             // getServer(this, 'all', 'ADRG')
             // getServer(this, 'all', 'DRG')
             // getServer(this, 'all', 'ICD10')
@@ -108,6 +108,16 @@ export default {
         } else {
           this.loginResult = '网络连接失败'
           this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
+        }
+        if (!this.$store.state.Home.user.login) {
+          // 清空所有缓存
+          storage.getAllKeys(event => {
+            if (event.result === 'success') {
+              event.data.map((key) => {
+                storage.removeItem(key)
+              })
+            }
+          })
         }
       })
     },
