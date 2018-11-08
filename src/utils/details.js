@@ -85,11 +85,6 @@ function adrgInfo (data) {
     obj.title = x
     return obj
   })
-  gridList['主要手术'] = data.icd9_bb.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
   gridList['其他手术'] = data.icd9_bb.map((x) => {
     const obj = {}
     obj.title = x
