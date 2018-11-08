@@ -1,6 +1,7 @@
 <template>
   <div class="demo"
-    :show="infoPage.isBottomShow" @swipe="swipe">
+    :show="infoPage.isBottomShow" @swipe="swipe"
+    v-bind:style="panel">
     <list class="list" :show="true">
       <cell class="cell">
         <wxc-button :text="infoPage.buttonText"
@@ -119,6 +120,13 @@ export default {
           break
       }
       return menu
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   methods: {
@@ -187,7 +195,6 @@ export default {
 <style scoped>
   .demo {
     width: 750px;
-    height: 1250px;
     background-color: #f2f3f4;
     margin-top: 91px;
   }

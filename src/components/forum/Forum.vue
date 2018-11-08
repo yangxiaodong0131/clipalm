@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-bind:style="panel">
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
@@ -57,6 +57,13 @@ export default {
         show = true
       }
       return show
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   created: function () {
@@ -94,7 +101,6 @@ export default {
 .container {
   margin-top: 91px;
   width: 750px;
-  height: 1250px;
   font-size: 30px;
 }
 .submits{

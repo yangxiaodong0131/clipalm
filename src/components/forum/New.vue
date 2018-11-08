@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-bind:style="panel">
     <input type="text" style="height:80;padding:20;" placeholder="输入帖子标题" class="input" :autofocus=true value="" @input="oninput"/>
     <div class="wrapper">
       <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" :autofocus=true value="" ></textarea>
@@ -27,6 +27,13 @@ export default {
     },
     specialConfigList () {
       return ''
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   created: function () {
@@ -70,7 +77,6 @@ export default {
 .container {
   margin-top: 91px;
   width: 750px;
-  height: 1250px;
   font-size: 30px;
 }
 .input {
