@@ -4,10 +4,6 @@
     v-bind:style="panel">
     <list class="list" :show="true">
       <cell class="cell">
-        <wxc-button :text="infoPage.buttonText"
-              v-if="infoPage.isInfoButtonShow"
-              size="full"
-              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         <wxc-cell v-for="(detail, index) in infoPage.details"
           :key="index"
           :label="detail.label"
@@ -57,6 +53,11 @@
               :cols="1"
               :list="gridList"></wxc-grid-select>
           <text v-else>无</text>
+        <wxc-button :text="infoPage.buttonText"
+              v-if="infoPage.isInfoButtonShow"
+              size="big"
+              class="btns"
+              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         </div>
       </cell>
     </list>
@@ -204,5 +205,8 @@ export default {
   .title {
     text-align: center;
     font-size: 35px;
+  }
+  .btns {
+    margin-left: 200px;
   }
 </style>
