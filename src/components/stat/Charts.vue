@@ -18,7 +18,7 @@ export default {
   computed: {
     url: {
       get () {
-        return `${urlConfig.http}:${urlConfig.port}/charts_page`
+        return `${urlConfig.http}:${urlConfig.port}/drgwork/charts_page`
       }
     }
   },
