@@ -1,23 +1,20 @@
-// hitb项目配置
+// // 开发配置
 // module.exports = {
-//   http: 'http://192.168.0.79', // 开发地址
-//   // http: 'http://www.jiankanglaifu.com', //服务器地址
-//   port: '80'.
-//   router: 'hospitals'
+//   http: 'http://192.168.99.120',
+//   port: '3009',
+//   router: 'expert'
 // }
 
-// drgwork配置
+// 开发配置
 module.exports = {
-  // http: 'http://192.168.99.120', // 开发地址
-  // http: 'http://192.168.0.79', // 开发地址
-  http: 'http://210.75.199.113', // 服务器地址
+  http: 'http://192.168.0.79',
   port: '3009',
   router: 'expert'
 }
 
-// drgwork代理测试配置
-// module.exports = {
-//   http: 'http://www.jiankanglaifu.com/drgwork', //测试服务器地址
-//   port: '80', //测试服务器地址
-//   router: 'drgwork/expert'
-// }
+// 服务器配置
+module.exports = {
+  http: 'http://www.jiankanglaifu.com',
+  port: '80',
+  router: 'drgwork/expert'
+}
