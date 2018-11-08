@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <scroller class="container">
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
@@ -10,7 +10,7 @@
           class="submits"
           v-if="showButton"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-  </div>
+  </scroller>
 </template>
 
 <script>

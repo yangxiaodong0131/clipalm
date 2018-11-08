@@ -6,6 +6,7 @@
                     @wxcCellClicked="wxcIndexlistItemClicked(rule)"
                     :has-margin="false"
                     :has-arrow="true"
+                    :arrow-icon="arrawSrc"
                     :extraContent="rule.desc"></wxc-cell>
         </cell>
       </list>
@@ -24,7 +25,8 @@ export default {
       // isBottomShow: false,
       height: 400,
       // info: {},
-      isShow: false
+      isShow: false,
+      arrawSrc: 'http://210.75.199.113/images/more.png'
     }
   },
   computed: {

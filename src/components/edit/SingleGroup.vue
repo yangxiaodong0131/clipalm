@@ -59,7 +59,7 @@
       <text class="title">手术/操作编码</text>
       <textarea placeholder="请输入手术/操作编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="opers_code"></textarea>
     </div>
-    <div>
+    <div class="sub">
       <wxc-button text="提交分组"
         class="submits"
         @wxcButtonClicked='submit'></wxc-button>
@@ -125,6 +125,7 @@ export default {
 .container {
   width: 750px;
   margin-top: 91px;
+  margin-bottom: 91px;
 }
 .input {
   font-size: 30px;
@@ -152,7 +153,9 @@ export default {
   justify-content: space-around;
   padding-bottom: 20px;
 }
-
+.sub {
+  margin-top: 150px;
+}
 .textarea{
   font-size: 15px;
   width: 750px;

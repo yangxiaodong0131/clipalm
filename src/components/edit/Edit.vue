@@ -8,6 +8,7 @@
             :label="wt4.disease_name"
             :has-margin="false"
             :has-arrow="true"
+            :arrow-icon="arrawSrc"
             @wxcCellClicked="wxcCellClicked(wt4)"
             :extraContent="wt4.extraContent">
           </wxc-cell>
@@ -27,7 +28,8 @@ export default {
   data () {
     return {
       forceValue: 0,
-      refreshing: false
+      refreshing: false,
+      arrawSrc: 'http://210.75.199.113/images/more.png'
     }
   },
   created () {
