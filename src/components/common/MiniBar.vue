@@ -68,7 +68,7 @@ export default {
     },
     isShow () {
       let show = true
-      if (this.$store.state.Home.menu[0] === '登录') {
+      if (this.$store.state.Home.user.login === false) {
         show = false
       }
       return show
