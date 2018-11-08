@@ -43,7 +43,7 @@ export function getServer (obj, type, menu, value = null) {
       case '统计分析(字母增序)':
         url = `wt4_stat_cv?plat=client&page=${obj.$store.state.Stat.statPage}`
         break
-      case '统计分析(费用CV增序)':
+      case '统计分析(费用CV降序)':
         url = `wt4_stat_cv?plat=client&page=${obj.$store.state.Stat.statPage}&order=cv`
         break
       case '统计分析(平均费用增序)':
@@ -250,7 +250,7 @@ function setStore (obj, menu, type, rdata) {
       data = data.concat(rdata.data)
       obj.$store.commit('SET_statDrg', data)
       break
-    case '统计分析(费用CV增序)':
+    case '统计分析(费用CV降序)':
       data = obj.$store.state.Stat.statDrg
       obj.$store.commit('SET_statPage', parseInt(rdata.page))
       data = data.concat(rdata.data)

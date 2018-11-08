@@ -35,7 +35,7 @@
     </div>
     <!-- stat页 -->
     <div class="panel" v-bind:class="panel">
-      <Report v-if="['统计分析(字母增序)', '统计分析(费用CV增序)', '统计分析(平均费用增序)'].includes(menu[3])"></Report>
+      <Report v-if="['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)'].includes(menu[3])"></Report>
       <Charts v-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
       <HomeMenu v-else-if="menu[3] === ''"></HomeMenu>
@@ -102,7 +102,7 @@
           activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
-          menu: ['统计分析(字母增序)', '统计分析(费用CV增序)', '统计分析(平均费用增序)', '报表'],
+          menu: ['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)', '报表'],
           icon: 'http://210.75.199.113/images/stat.png',
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
