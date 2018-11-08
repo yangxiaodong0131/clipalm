@@ -3,37 +3,39 @@
     <div class="row">
       <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
     </div>
-    <wxc-searchbar ref="wxc-searchbar"
-      input-type='text'
-      v-model = 'user.username'
-      :default-value='name'
-      cancel-label='用户名'
-      placeholder='用户名'
-      theme='yellow'
-      :bar-style='barStyle'
-      @wxcSearchbarInputOnInput="NameOnInput">
-    </wxc-searchbar>
+    <div v-bind:style="panel">
+      <wxc-searchbar ref="wxc-searchbar"
+        input-type='text'
+        v-model = 'user.username'
+        :default-value='name'
+        cancel-label='用户名'
+        placeholder='用户名'
+        theme='yellow'
+        :bar-style='barStyle'
+        @wxcSearchbarInputOnInput="NameOnInput">
+      </wxc-searchbar>
 
-    <wxc-searchbar ref="wxc-searchbar"
-      input-type='password'
-      v-model = 'user.password'
-      :default-value='pwd'
-      cancel-label='密码'
-      placeholder='密码'
-      theme='yellow'
-      :bar-style='barStyle'
-      @wxcSearchbarInputOnInput="PwdOnInput">
-    </wxc-searchbar>
-    <div class="row">
-      <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
-      <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
+      <wxc-searchbar ref="wxc-searchbar"
+        input-type='password'
+        v-model = 'user.password'
+        :default-value='pwd'
+        cancel-label='密码'
+        placeholder='密码'
+        theme='yellow'
+        :bar-style='barStyle'
+        @wxcSearchbarInputOnInput="PwdOnInput">
+      </wxc-searchbar>
+      <div class="row">
+        <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+        <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
+      </div>
+      <wxc-cell :has-arrow="false"
+                    :cell-style="cellStyle"
+                    :has-top-border="false"
+                    :auto-accessible="false">
+        <text class="red" slot="title" style="">{{loginResult}}</text>
+      </wxc-cell>
     </div>
-    <wxc-cell :has-arrow="false"
-                  :cell-style="cellStyle"
-                  :has-top-border="false"
-                  :auto-accessible="false">
-      <text class="red" slot="title" style="">{{loginResult}}</text>
-    </wxc-cell>
   </div>
 </template>
 
@@ -76,7 +78,6 @@ export default {
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
       const style = {
-        width: '750px',
         height: tabPageHeight
       }
       return style
