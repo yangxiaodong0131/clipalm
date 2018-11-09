@@ -64,7 +64,6 @@ export default {
         return data
       }
     },
-    // getServer(this, 'all', menu)
     showTitle: {
       get () {
         let show = false
@@ -80,17 +79,23 @@ export default {
         return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
       }
     },
-    panel () {
-      const tabPageHeight = weex.config.env.deviceHeight
-      const style = {
-        height: tabPageHeight
+    panel: {
+      get () {
+        const tabPageHeight = weex.config.env.deviceHeight
+        const style = {
+          height: tabPageHeight
+        }
+        return style
       }
-      return style
     }
   },
   methods: {
     getData () {
-      console.log(this.wt4Case)
+      const i = this.$store.state.Home.activeTab
+      const menu = this.$store.state.Home.menu[i]
+      if (this.wt4Case.length === 0) {
+        getServer(this, 'all', menu)
+      }
     },
     wxcCellClicked (e) {
       this.$store.commit('SET_visible', false)

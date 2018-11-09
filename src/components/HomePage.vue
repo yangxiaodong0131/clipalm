@@ -18,33 +18,32 @@
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
-      <text class="title" style="font-size:200px;">{{['未入组病历', '低风险死亡病历', '费用异常病历', 'QY病历'].includes(menu[1])}}</text>
       <HomeMenu v-if="menu[1] === '菜单'"></HomeMenu>
       <Edit v-else-if="['未入组病历', '低风险死亡病历', '费用异常病历', 'QY病历'].includes(menu[1])"></Edit>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
       <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
-    <!-- <div class="panel" v-bind:class="panel">
-      <Library v-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
+    <div class="panel" v-bind:class="panel">
+      <HomeMenu v-if="menu[2] === '菜单'"></HomeMenu>
+      <Library v-else-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
       <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
-      <HomeMenu v-else-if="menu[2] === ''"></HomeMenu>
-    </div> -->
+    </div>
     <!-- stat页 -->
-    <!-- <div class="panel" v-bind:class="panel">
-      <Report v-if="['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)'].includes(menu[3])"></Report>
-      <Charts v-if="menu[3] == '报表'"></Charts>
+    <div class="panel" v-bind:class="panel">
+      <HomeMenu v-if="menu[3] === '菜单'"></HomeMenu>
+      <Report v-else-if="['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)'].includes(menu[3])"></Report>
+      <Charts v-else-if="menu[3] == '报表'"></Charts>
       <Query v-else-if="menu[3] == '自定义查询'"></Query>
-      <HomeMenu v-else-if="menu[3] === ''"></HomeMenu>
       <PopRight v-else></PopRight>
-    </div> -->
+    </div>
     <!-- forum页 -->
-    <!-- <div class="panel" v-bind:class="panel">
+    <div class="panel" v-bind:class="panel">
       <New v-if="menu[4] === '新建帖子'"></New>
       <ForumContent v-else-if="menu[4] === '帖子内容'"></ForumContent>
       <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
       <Forum v-else></Forum>
-    </div> -->
+    </div>
   </wxc-tab-bar>
   <mini-bar></mini-bar>
 </div>

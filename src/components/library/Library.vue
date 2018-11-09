@@ -29,6 +29,9 @@ export default {
       arrawSrc: 'http://210.75.199.113/images/more.png'
     }
   },
+  created () {
+    this.getData()
+  },
   computed: {
     menu: {
       get () {
@@ -76,6 +79,13 @@ export default {
   updated: function () {
   },
   methods: {
+    getData () {
+      const i = this.$store.state.Home.activeTab
+      const menu = this.$store.state.Home.menu[i]
+      if (this.rules.length === 0) {
+        getServer(this, 'all', menu)
+      }
+    },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_isBottomShow', true)
       this.$store.commit('SET_info', e)
