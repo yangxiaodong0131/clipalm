@@ -55,7 +55,7 @@ export function getServer (obj, type, menu, value = null) {
       case '未入组病历':
         url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}`
         break
-      case '低风险死亡病历':
+      case '质量异常病历':
         url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}`
         break
       case '费用异常病历':
@@ -268,7 +268,7 @@ function setStore (obj, menu, type, rdata) {
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)
       break
-    case '低风险死亡病历':
+    case '质量异常病历':
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
       obj.$store.commit('SET_wt4Case', data)

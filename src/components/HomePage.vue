@@ -20,7 +20,7 @@
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
-      <Edit v-if="['未入组病历', '低风险死亡病历', '费用异常病历', 'QY病历'].includes(menu[1])"></Edit>
+      <Edit v-if="['未入组病历', '质量异常病历', '费用异常病历', 'QY病历'].includes(menu[1])"></Edit>
       <Edit v-else-if="menu[1] == '数据展示'"></Edit>
       <Query v-else-if="menu[1] == '自定义查询'"></Query>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
@@ -91,7 +91,7 @@
         activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '费用异常病历', '单条分组'],
+          menu: ['未入组病历', 'QY病历', '质量异常病历', '费用异常病历', '单条分组'],
           icon: 'http://210.75.199.113/images/edit.png',
           activeIcon: 'http://210.75.199.113/images/edit_fill.png'
         }, {
