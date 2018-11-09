@@ -8,7 +8,7 @@
                     :show="isShow"
                     left-button=""
                     :use-default-return="false"
-                    @wxcMinibarRightButtonClicked="minibarRightButtonClick"
+                    @wxcMinibarRightButtonClicked="homeButtonClick"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
           <image src="http://210.75.199.113/images/left.png"
                  slot="left"
@@ -23,30 +23,6 @@
     </scroller>
   </div>
 </template>
-
-<style scoped>
-  .wxc-demo {
-    position: absolute;
-    top: 0;
-    background-color: #FFFFFF;
-  }
-  .scroller {
-    flex: 1;
-  }
-  .demo {
-    width: 750px;
-    align-items: flex-start;
-  }
-  .button {
-    margin-top: 10px;
-    margin-left: 30px;
-  }
-  .popup {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
 
 <script>
 import { WxcMinibar } from 'weex-ui'
@@ -116,27 +92,9 @@ export default {
     }
   },
   methods: {
-    minibarRightButtonClick () {
+    homeButtonClick () {
       const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_menu', [i, ''])
-      switch (i) {
-        case 0:
-          this.$store.commit('SET_miniBarTitle', '用户')
-          break
-        case 1:
-          this.$store.commit('SET_miniBarTitle', '病案')
-          break
-        case 2:
-          this.$store.commit('SET_miniBarTitle', '字典')
-          break
-        case 3:
-          this.$store.commit('SET_miniBarTitle', 'DRG分析')
-          break
-        case 4:
-          this.$store.commit('SET_miniBarTitle', '论坛')
-          break
-      }
+      this.$store.commit('SET_menu', [i, '菜单'])
     },
     minibarLeftButtonClick () {
       const i = this.$store.state.Home.activeTab
@@ -167,3 +125,27 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .wxc-demo {
+    position: absolute;
+    top: 0;
+    background-color: #FFFFFF;
+  }
+  .scroller {
+    flex: 1;
+  }
+  .demo {
+    width: 750px;
+    align-items: flex-start;
+  }
+  .button {
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+  .popup {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
