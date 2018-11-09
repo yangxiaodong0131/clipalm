@@ -35,33 +35,35 @@ export default {
   computed: {
     menu: {
       get () {
-        return this.$store.state.Library.libraryMenu
+        const i = this.$store.state.Home.activeTab
+        const menu = this.$store.state.Home.menu[i]
+        return menu
       }
     },
     rules: {
       get () {
-        let data = []
-        switch (this.menu) {
-          case 'MDC':
-            data = this.$store.state.Library.mdcRule
-            break
-          case 'ADRG':
-            data = this.$store.state.Library.adrgRule
-            break
-          case 'DRG':
-            data = this.$store.state.Library.drgRule
-            break
-          case 'ICD10':
-            data = this.$store.state.Library.icd10Rule
-            break
-          case 'ICD9':
-            data = this.$store.state.Library.icd9Rule
-            break
-          default:
-            data = []
-            break
-        }
-        return data
+        // let data = []
+        // switch (this.menu) {
+        //   case 'MDC':
+        //     data = this.$store.state.Library.mdcRule
+        //     break
+        //   case 'ADRG':
+        //     data = this.$store.state.Library.adrgRule
+        //     break
+        //   case 'DRG':
+        //     data = this.$store.state.Library.drgRule
+        //     break
+        //   case 'ICD10':
+        //     data = this.$store.state.Library.icd10Rule
+        //     break
+        //   case 'ICD9':
+        //     data = this.$store.state.Library.icd9Rule
+        //     break
+        //   default:
+        //     data = []
+        //     break
+        // }
+        return this.$store.state.Library.rule
       }
     },
     container: {
@@ -108,20 +110,21 @@ export default {
       }
     },
     fetch () {
-      switch (this.menu) {
-        case 'ADRG':
-          this.$store.commit('SET_libraryPage', ['ADRG', this.$store.state.Library.adrgPage + 1])
-          break
-        case 'DRG':
-          this.$store.commit('SET_libraryPage', ['DRG', this.$store.state.Library.drgPage + 1])
-          break
-        case 'ICD10':
-          this.$store.commit('SET_libraryPage', ['ICD10', this.$store.state.Library.icd10Page + 1])
-          break
-        case 'ICD9':
-          this.$store.commit('SET_libraryPage', ['ICD9', this.$store.state.Library.icd9Page + 1])
-          break
-      }
+      // switch (this.menu) {
+      //   case 'ADRG':
+      //     this.$store.commit('SET_libraryPage', ['ADRG', this.$store.state.Library.adrgPage + 1])
+      //     break
+      //   case 'DRG':
+      //     this.$store.commit('SET_libraryPage', ['DRG', this.$store.state.Library.drgPage + 1])
+      //     break
+      //   case 'ICD10':
+      //     this.$store.commit('SET_libraryPage', ['ICD10', this.$store.state.Library.icd10Page + 1])
+      //     break
+      //   case 'ICD9':
+      //     this.$store.commit('SET_libraryPage', ['ICD9', this.$store.state.Library.icd9Page + 1])
+      //     break
+      // }
+      this.$store.commit('SET_libraryPage', this.$store.state.Library.page + 1)
       // modal.toast({ message: `${this.$store.state.Library.adrgPage}`, duration: 1 })
       if (this.menu !== 'MDC') {
         getServer(this, 'all', this.menu)

@@ -26,19 +26,19 @@ export function getServer (obj, type, menu, value = null) {
   if (type === 'all') {
     switch (menu) {
       case 'MDC':
-        url = `rule_bj_mdc?plat=client&version=${version}&page=${obj.$store.state.Library.mdcPage}`
+        url = `rule_bj_mdc?plat=client&version=${version}&page=${obj.$store.state.Library.page}`
         break
       case 'ADRG':
-        url = `rule_bj_adrg?plat=client&version=${version}&page=${obj.$store.state.Library.adrgPage}`
+        url = `rule_bj_adrg?plat=client&version=${version}&page=${obj.$store.state.Library.page}`
         break
       case 'DRG':
-        url = `rule_bj_drg?plat=client&version=${version}&page=${obj.$store.state.Library.drgPage}`
+        url = `rule_bj_drg?plat=client&version=${version}&page=${obj.$store.state.Library.page}`
         break
       case 'ICD9':
-        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.icd9Page}&version=${version}`
+        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.page}&version=${version}`
         break
       case 'ICD10':
-        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.icd10Page}&version=${version}`
+        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.page}&version=${version}`
         break
       case '统计分析(字母增序)':
         url = `wt4_stat_cv?plat=client&page=${obj.$store.state.Stat.statPage}`
@@ -193,40 +193,44 @@ function setStore (obj, menu, type, rdata) {
   let data = []
   switch (menu) {
     case 'MDC':
-      obj.$store.commit('SET_library_menu', menu)
-      obj.$store.commit('SET_mdc_rule', rdata.data)
+      // obj.$store.commit('SET_library_menu', menu)
+      // obj.$store.commit('SET_mdc_rule', rdata.data)
+      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
+      obj.$store.commit('SET_rule', rdata.data)
       break
     case 'ADRG':
-      obj.$store.commit('SET_library_menu', menu)
-      data = obj.$store.state.Library.adrgRule
-      if (type === 'adrgOne') {
-        data = rdata.data
-        obj.$store.commit('SET_libraryPage', ['ADRG', 1])
-      } else {
-        data = data.concat(rdata.data)
-      }
-      obj.$store.commit('SET_adrg_rule', data)
+      // obj.$store.commit('SET_library_menu', menu)
+      // data = obj.$store.state.Library.adrgRule
+      // if (type === 'adrgOne') {
+      //   data = rdata.data
+      //   obj.$store.commit('SET_libraryPage', ['ADRG', 1])
+      // } else {
+      //   data = data.concat(rdata.data)
+      // }
+      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
+      obj.$store.commit('SET_rule', rdata.data)
+      // obj.$store.commit('SET_adrg_rule', data)
       break
     case 'DRG':
-      obj.$store.commit('SET_library_menu', menu)
-      data = obj.$store.state.Library.drgRule
-      if (type === 'adrgOne') {
-        data = rdata.data
-        obj.$store.commit('SET_libraryPage', ['DRG', 1])
-      } else {
-        data = data.concat(rdata.data)
-      }
-      obj.$store.commit('SET_drg_rule', data)
+      // obj.$store.commit('SET_library_menu', menu)
+      // data = obj.$store.state.Library.drgRule
+      // if (type === 'adrgOne') {
+      //   data = rdata.data
+      //   obj.$store.commit('SET_libraryPage', ['DRG', 1])
+      // } else {
+      //   data = data.concat(rdata.data)
+      // }
+      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
+      obj.$store.commit('SET_rule', rdata.data)
+      // obj.$store.commit('SET_rule', data)
       break
     case 'ICD9':
-      obj.$store.commit('SET_library_menu', menu)
-      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
-      obj.$store.commit('SET_icd9_rule', rdata.data)
+      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
+      obj.$store.commit('SET_rule', rdata.data)
       break
     case 'ICD10':
-      obj.$store.commit('SET_library_menu', menu)
-      obj.$store.commit('SET_libraryPage', ['ICD10', parseInt(rdata.page)])
-      obj.$store.commit('SET_icd10_rule', rdata.data)
+      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
+      obj.$store.commit('SET_rule', rdata.data)
       break
     case 'icd10One':
       data = obj.$store.state.Library.icd10Rule
