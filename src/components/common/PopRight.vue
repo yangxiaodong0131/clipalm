@@ -8,35 +8,7 @@
           :key="index"
           :label="detail.label"
           :title="infoPage.info[detail.title]"
-          :has-arrow="true"
-          v-if="infoLevel === 0"
-          @LongPress="LongPress(detail)"
-          @wxcCellClicked="wxcCellClicked(detail)"
-          ></wxc-cell>
-        <wxc-cell v-for="(detail, index) in infoPage.details"
-          :key="index"
-          :label="detail.label"
-          :title="infoPage.info[detail.title]"
-          :has-arrow="true"
-          v-if="infoLevel === 1 && detail.label === '入组DRG'"
-          @LongPress="LongPress(detail)"
-          @wxcCellClicked="wxcCellClicked(detail)"
-          ></wxc-cell>
-        <wxc-cell v-for="(detail, index) in infoPage.details"
-          :key="index"
-          :label="detail.label"
-          :title="infoPage.info[detail.title]"
-          :has-arrow="false"
-          v-if="infoLevel === 1 && detail.label !== '入组DRG'"
-          @LongPress="LongPress(detail)"
-          @wxcCellClicked="wxcCellClicked(detail)"
-          ></wxc-cell>
-        <wxc-cell v-for="(detail, index) in infoPage.details"
-          :key="index"
-          :label="detail.label"
-          :title="infoPage.info[detail.title]"
-          :has-arrow="false"
-          v-if="infoLevel === 2"
+          :has-arrow="detail.hasArrow"
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
           ></wxc-cell>
@@ -52,13 +24,14 @@
               :single="true"
               :cols="1"
               :list="gridList"></wxc-grid-select>
-          <text v-else>无</text>
+          <text class="title" style="font-size: 20px;" v-else >无</text>
+        </div>
         <wxc-button :text="infoPage.buttonText"
               v-if="infoPage.isInfoButtonShow"
               size="big"
               class="btns"
               @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-        </div>
+        <div style="height:200px"></div>
       </cell>
     </list>
   </div>
