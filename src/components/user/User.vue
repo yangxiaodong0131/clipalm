@@ -152,6 +152,7 @@ export default {
     wxcButtonClicked () {
       const user = { login: false, data: { clipalm_version: 'BJ编码版' } }
       this.$store.commit('SET_menu', [0, '用户登陆'])
+      this.$store.commit('SET_userMenu', '用户登陆')
       this.$store.commit('SET_user', user)
       this.$router.push('/')
       this.$store.commit('SET_visible', false)
