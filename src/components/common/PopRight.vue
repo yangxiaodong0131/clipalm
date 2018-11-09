@@ -9,6 +9,7 @@
           :label="detail.label"
           :title="infoPage.info[detail.title]"
           :has-arrow="true"
+          :arrow-icon="arrawSrc"
           v-if="infoLevel === 0"
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
@@ -18,6 +19,7 @@
           :label="detail.label"
           :title="infoPage.info[detail.title]"
           :has-arrow="true"
+          :arrow-icon="arrawSrc"
           v-if="infoLevel === 1 && detail.label === '入组DRG'"
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
@@ -78,7 +80,8 @@ export default {
         pointBorderColor: '#bf280b',
         highlightTitleColor: '#bf280b',
         highlightPointInnerColor: '#bf280b',
-        highlightPointBorderColor: '#d46262'
+        highlightPointBorderColor: '#d46262',
+        arrawSrc: 'http://210.75.199.113/images/more.png'
       }
     }
   },

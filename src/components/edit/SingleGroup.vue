@@ -1,5 +1,5 @@
 <template>
-  <scroller class="container">
+  <scroller class="container" v-bind:style="panel">
     <div class="row">
       <div class="col-md-6">
       <text class="title">主要诊断编码(必填)</text>
@@ -98,6 +98,15 @@ export default {
       { title: '其他' }],
     testData2: [{ title: '男', checked: true }, { title: '女' }]
   }),
+  computed: {
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
+    }
+  },
   methods: {
     // {selectIndex, checked, checkedList}
     onSelect (res, a) {
@@ -125,7 +134,6 @@ export default {
 .container {
   width: 750px;
   margin-top: 91px;
-  margin-bottom: 91px;
 }
 .input {
   font-size: 30px;
@@ -153,9 +161,6 @@ export default {
   justify-content: space-around;
   padding-bottom: 20px;
 }
-.sub {
-  margin-top: 150px;
-}
 .textarea{
   font-size: 15px;
   width: 750px;
@@ -166,9 +171,6 @@ export default {
 .submits{
   position: relative;
   left: 23px;
-  top: 1px;
-}
-.sub {
   margin-top: 70px;
 }
 </style>
