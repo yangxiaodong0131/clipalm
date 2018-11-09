@@ -64,6 +64,7 @@
         class="submits"
         @wxcButtonClicked='submit'></wxc-button>
     </div>
+    <div style="height:400px"></div>
   </scroller>
 </template>
 
