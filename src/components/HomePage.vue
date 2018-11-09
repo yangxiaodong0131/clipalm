@@ -223,12 +223,13 @@
       wxcTabBarCurrentTabSelected (e) {
         const i = e.page
         const menus = this.tabs[i].menu
-        const activeMenu = this.$store.state.Home.activeMenu[i]
-        let menu = menus[activeMenu]
-        // 解决多页面问题
-        if (activeMenu === -1) {
-          menu = '菜单'
-        }
+        const menu = this.$store.state.Home.menu[i]
+        // const activeMenu = this.$store.state.Home.activeMenu[i]
+        // let menu = menus[activeMenu]
+        // // 解决多页面问题
+        // if (menu === -1) {
+        //   menu = '菜单'
+        // }
         this.$store.commit('SET_activeTab', i)
         this.$store.commit('SET_menus', menus)
         this.$store.commit('SET_menu', [i, menu])

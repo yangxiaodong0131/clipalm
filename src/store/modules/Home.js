@@ -2,8 +2,8 @@ const state = {
   visible: false,
   activeTab: 0,
   menus: [],
-  menu: ['用户登录', '菜单', '数据展示', '数据展示', '数据展示'],
-  activeMenu: [0, -1, -1, -1, -1],
+  // 各个页面默认菜单
+  menu: ['用户登录', '菜单', '菜单', '菜单', '菜单'],
   notice: '未注册用户！',
   user: { login: false, data: { clipalm_version: 'BJ编码版' } },
   isBottomShow: false,

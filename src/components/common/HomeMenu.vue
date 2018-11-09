@@ -4,7 +4,7 @@
       v-for="(menu, index) in menus" :key="index"
       :text="menu"
       type="white"
-      @wxcButtonClicked="wxcButtonClicked(menu, index)"></wxc-button>
+      @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
   </div>
 </template>
 
@@ -40,9 +40,8 @@ export default {
     popupOverlayBottomClick () {
       this.$store.commit('SET_visible', false)
     },
-    wxcButtonClicked (menu, index) {
+    wxcButtonClicked (menu) {
       console.log(menu)
-      console.log(index)
       console.log('======================')
       const i = this.$store.state.Home.activeTab
       // const menus = this.tabs[i].menu
@@ -55,9 +54,9 @@ export default {
       // this.$store.commit('SET_activeTab', i)
       // this.$store.commit('SET_menus', menus)
       this.$store.commit('SET_menu', [i, menu])
-      this.$store.commit('SET_activeMenu', [i, index])
-      console.log(this.$store.state.Home.menu)
-      console.log(this.$store.state.Home.activeMenu)
+      // this.$store.commit('SET_activeMenu', [i, index])
+      // console.log(this.$store.state.Home.menu)
+      // console.log(this.$store.state.Home.activeMenu)
       // const i = this.$store.state.Home.activeTab
       // console.log(menu)
       // console.log(index)
