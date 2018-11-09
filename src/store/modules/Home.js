@@ -2,9 +2,9 @@ const state = {
   visible: false,
   activeTab: 0,
   menus: [],
-  menu: ['用户登陆', '数据展示', '数据展示', '数据展示', '数据展示'],
+  menu: ['用户登录', '菜单', '数据展示', '数据展示', '数据展示'],
+  activeMenu: [0, -1, -1, -1, -1],
   notice: '未注册用户！',
-  userMenu: '用户登录',
   user: { login: false, data: { clipalm_version: 'BJ编码版' } },
   isBottomShow: false,
   infoLevel: 0,
@@ -50,6 +50,9 @@ const mutations = {
   },
   SET_menu (state, x) {
     state.menu.splice(x[0], 1, x[1])
+  },
+  SET_activeMenu (state, x) {
+    state.activeMenu.splice(x[0], 1, x[1])
   },
   SET_user (state, x) {
     state.user = x
@@ -116,6 +119,7 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
+    commit('SET_activeMenu')
     commit('SET_userMenu')
     commit('SET_miniBarTitle')
     commit('SET_pointIndex')

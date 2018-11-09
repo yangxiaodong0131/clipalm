@@ -83,11 +83,11 @@ export default {
       return show
     },
     miniBarTitle () {
-      let title = this.$store.state.Home.miniBarTitle
-      if (this.$store.state.Home.activeTab === 0 && this.$store.state.Home.user.login) {
-        title = '个人信息'
-      }
-      return title
+      // let title = this.$store.state.Home.miniBarTitle
+      // if (this.$store.state.Home.activeTab === 0 && this.$store.state.Home.user.login) {
+      //   title = '个人信息'
+      // }
+      return this.$store.state.Home.miniBarTitle
     },
     returnMenu () {
       let menu = ''

@@ -62,7 +62,7 @@ export default {
             modal.toast({ 'message': res.data.log, 'duration': 1 })
           } else {
             modal.toast({ 'message': '账号注册成功', 'duration': 3 })
-            this.$store.commit('SET_menu', [i, '用户登陆'])
+            this.$store.commit('SET_menu', [i, '用户登录'])
           }
         } else {
           this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })

@@ -99,17 +99,8 @@ export default {
         if (res.ok) {
           if (res.data.login) {
             this.$store.commit('SET_user', res.data)
-            this.$router.push('/')
-            this.$store.commit('SET_visible', false)
-            this.$store.commit('SET_miniBarTitle', '个人信息')
-            this.$store.commit('SET_menu', [0, '个人信息'])
-            this.$store.commit('SET_userMenu', '个人信息')
-            // getServer(this, 'all', 'MDC')
-            // getServer(this, 'all', 'ADRG')
-            // getServer(this, 'all', 'DRG')
-            // getServer(this, 'all', 'ICD10')
-            // getServer(this, 'all', 'ICD9')
-            // this.$store.commit('SET_library_menu', 'MDC')
+            this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '个人信息'])
+            this.$store.commit('SET_activeMenu', [this.$store.state.Home.activeTab, 1])
             storage.setItem('user', JSON.stringify(res.data))
           } else {
             this.loginResult = '账号或密码错误'

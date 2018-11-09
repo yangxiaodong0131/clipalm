@@ -33,6 +33,7 @@ export default {
     }
   },
   created () {
+    this.getData()
   },
   computed: {
     wt4Case: {
@@ -63,6 +64,7 @@ export default {
         return data
       }
     },
+    // getServer(this, 'all', menu)
     showTitle: {
       get () {
         let show = false
@@ -87,6 +89,9 @@ export default {
     }
   },
   methods: {
+    getData () {
+      console.log(this.wt4Case)
+    },
     wxcCellClicked (e) {
       this.$store.commit('SET_visible', false)
       this.$store.commit('SET_isBottomShow', true)
