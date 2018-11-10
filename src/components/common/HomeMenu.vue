@@ -19,6 +19,9 @@ export default {
     }
   },
   computed: {
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
     menus () {
       return this.$store.state.Home.menus
     },
@@ -32,8 +35,18 @@ export default {
   },
   methods: {
     wxcButtonClicked (menu) {
-      const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_menu', [i, menu])
+      switch (this.activeTab) {
+        case 1:
+          this.$store.commit('SET_wt4Case', [])
+          break
+        case 2:
+          this.$store.commit('SET_rule', [])
+          break
+        case 3:
+          this.$store.commit('SET_statDrg', [])
+          break
+      }
+      this.$store.commit('SET_menu', [this.activeTab, menu])
     }
   }
 }

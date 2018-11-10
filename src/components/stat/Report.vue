@@ -46,7 +46,9 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       const menu = this.$store.state.Home.menu[i]
-      getServer(this, i, menu)
+      if (this.stats.length === 0) {
+        getServer(this, i, menu)
+      }
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)

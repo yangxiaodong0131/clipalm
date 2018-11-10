@@ -77,6 +77,7 @@ export default {
   },
   methods: {
     homeButtonClick () {
+      this.$store.commit('SET_infoLevel', 0)
       this.$store.commit('SET_menu', [this.activeTab, '菜单'])
     },
     minibarLeftButtonClick () {

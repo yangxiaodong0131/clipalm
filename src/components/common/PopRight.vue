@@ -91,40 +91,17 @@ export default {
       switch (this.infoPage.infoTitle) {
         case 'MDC规则详情':
           menu = 'ADRG'
-          getServer(this, 'adrgOne', 'ADRG', this.infoPage.info)
-          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
         case 'ADRG规则详情':
           menu = 'DRG'
-          getServer(this, 'drgOne', 'DRG', this.infoPage.info)
-          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
-        default :
+        default:
           break
       }
+      getServer(this, this.activeTab, menu, this.infoPage.info)
       this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_library_menu', menu)
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
+      this.$store.commit('SET_menu', [this.activeTab, menu])
     }
-    // swipe (e) {
-    //   if (e.direction === 'right') {
-    //     const i = this.$store.state.Home.activeTab
-    //     if (this.infoLevel === 1) {
-    //       this.$store.commit('SET_infoLevel', 0)
-    //       this.$store.commit('SET_menu', [i, this.returnMenu])
-    //     } else {
-    //       this.$store.commit('SET_infoLevel', this.infoLevel - 1)
-    //     }
-    //   } else if (e.direction === 'left') {
-    //     if (this.infoLevel === 0) {
-    //       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
-    //     }
-    //     this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-    //   }
-    // },
-    // LongPress (e) {
-    //   this.a = '2'
-    // }
   }
 }
 </script>

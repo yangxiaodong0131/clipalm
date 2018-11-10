@@ -82,7 +82,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `rule_bj_adrg?plat=client&page=1&mdc=${value.mdc}&version=${version}`
         break
       case 'DRG':
-        url = `rule_bj_drg?plat=client&page=1&adrg=${value.mdc}&version=${version}`
+        url = `rule_bj_drg?plat=client&page=1&adrg=${value.code}&version=${version}`
         break
       case 'statInfo':
         url = `wt4_stat_cv?plat=client&order=code&drg=${value}`
