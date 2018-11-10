@@ -62,7 +62,8 @@ export default {
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
-      this.$store.commit('SET_infoPage', getDetails(`${this.menu}规则详情`, e))
+      const details = getDetails(`${this.menu}规则详情`, e)
+      this.$store.commit('SET_info', details)
     },
     fetch () {
       if (this.menu !== 'MDC') {

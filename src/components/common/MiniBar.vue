@@ -39,12 +39,18 @@ export default {
   created () {
   },
   computed: {
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
+    menu () {
+      return this.$store.state.Home.menu[this.activeTab]
+    },
     infoLevel () {
-      return this.$store.state.Home.infoLevel
+      return this.$store.state.Home.infoLevel[this.activeTab]
     },
     isShow () {
       let show = true
-      if (this.$store.state.Home.user.login === false) {
+      if (this.activeTab === 0 && this.menu === '用户登录') {
         show = false
       }
       return show
@@ -59,33 +65,11 @@ export default {
       return show
     },
     miniBarTitle () {
-      // let title = this.$store.state.Home.miniBarTitle
-      // if (this.$store.state.Home.activeTab === 0 && this.$store.state.Home.user.login) {
-      //   title = '个人信息'
-      // }
       return this.$store.state.Home.miniBarTitle
-    },
-    returnMenu () {
-      let menu = ''
-      switch (this.$store.state.Home.activeTab) {
-        case 1:
-          menu = this.$store.state.Edit.editMenu
-          break
-        case 2:
-          menu = this.$store.state.Library.libraryMenu
-          break
-        case 3:
-          menu = this.$store.state.Stat.statMenu
-          break
-        case 4:
-          menu = this.$store.state.Forum.forumMenu
-          break
-      }
-      return menu
     },
     homeButtonShow () {
       let show = true
-      if (this.$store.state.Home.activeTab === 0) {
+      if (this.activeTab === 0) {
         show = false
       }
       return show
@@ -93,34 +77,10 @@ export default {
   },
   methods: {
     homeButtonClick () {
-      const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_menu', [i, '菜单'])
+      this.$store.commit('SET_menu', [this.activeTab, '菜单'])
     },
     minibarLeftButtonClick () {
-      // const i = this.$store.state.Home.activeTab
-      const level = this.infoLevel - 1
-      // switch (this.$store.state.Home.activeTab) {
-      //   case 0:
-      //     this.$store.commit('SET_miniBarTitle', '用户')
-      //     break
-      //   case 1:
-      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Edit.editMenu)
-      //     break
-      //   case 2:
-      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Library.libraryMenu)
-      //     break
-      //   case 3:
-      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Stat.statMenu)
-      //     break
-      //   case 4:
-      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Forum.forumMenu)
-      //     break
-      // }
-      this.$store.commit('SET_infoLevel', level)
-      // if (level === 0) {
-      //   console.log([i, this.returnMenu])
-      //   this.$store.commit('SET_menu', [i, this.returnMenu])
-      // }
+      this.$store.commit('SET_infoLevel', this.infoLevel - 1)
     }
   }
 }

@@ -18,20 +18,20 @@
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
-      <PopRight v-if="infoLevel > 0"></PopRight>
+      <PopRight v-if="infoLevel[1] > 0"></PopRight>
       <HomeMenu v-else-if="menu[1] === '菜单'"></HomeMenu>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
       <Edit v-else></Edit>
     </div>
     <!-- library页 -->
     <div class="panel" v-bind:class="panel">
-      <PopRight v-if="infoLevel > 0"></PopRight>
+      <PopRight v-if="infoLevel[2] > 0"></PopRight>
       <HomeMenu v-else-if="menu[2] === '菜单'"></HomeMenu>
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
     <div class="panel" v-bind:class="panel">
-      <PopRight v-if="infoLevel > 0"></PopRight>
+      <PopRight v-if="infoLevel[3] > 0"></PopRight>
       <HomeMenu v-else-if="menu[3] === '菜单'"></HomeMenu>
       <Charts v-else-if="menu[3] == '报表'"></Charts>
       <Report v-else></Report>
@@ -57,7 +57,6 @@
   import HomeMenu from './common/HomeMenu'
   import User from './user/User'
   import Login from './user/Login'
-  import Register from './user/Register'
   import Edit from './edit/Edit'
   import SingleGroup from './edit/SingleGroup'
   import Library from './library/Library'
@@ -70,7 +69,7 @@
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, Library,
-      Report, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, Register, HomeMenu },
+      Report, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, HomeMenu },
     data: () => ({
       tabs: [{
         title: '用户',

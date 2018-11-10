@@ -1,3 +1,4 @@
+import { getDetails } from './details'
 const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
@@ -83,6 +84,9 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'DRG':
         url = `rule_bj_drg?plat=client&page=1&adrg=${value.mdc}&version=${version}`
         break
+      case 'statInfo':
+        url = `wt4_stat_cv?plat=client&order=code&drg=${value}`
+        break
       case '论坛':
         url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
         break
@@ -165,10 +169,19 @@ function setStore (obj, activeTab, menu, rdata) {
   let data = []
   switch (activeTab) {
     case 1:
-      data = obj.$store.state.Edit.wt4Case
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_wt4Info', rdata.info)
-      obj.$store.commit('SET_wt4Case', data)
+      switch (menu) {
+        case 'statInfo':
+          obj.$store.commit('SET_infoLevel')
+          const details = getDetails('分析详情', rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        default:
+          data = obj.$store.state.Edit.wt4Case
+          data = data.concat(rdata.data)
+          obj.$store.commit('SET_wt4Info', rdata.info)
+          obj.$store.commit('SET_wt4Case', data)
+          break
+      }
       break
     case 2:
       data = obj.$store.state.Library.rule

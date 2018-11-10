@@ -3,16 +3,18 @@ const state = {
   menus: [],
   // 各个页面默认菜单
   menu: ['用户登录', '菜单', '菜单', '菜单', '菜单'],
+  // infoLevel: 0,
+  infoPages: [],
+  infoLevel: [0, 0, 0, 0, 0],
   user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },
-  isBottomShow: false,
-  infoLevel: 0,
-  infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+
+  // infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  // infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  // infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
+  // infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   isLoadingShow: false,
   showForum: false,
-  miniBarTitle: ' ',
+  // miniBarTitle: ' ',
   // 发布版本修改
   version: '0.0.1',
   serverVersion: { version: '0.0.1' }
@@ -32,9 +34,6 @@ const mutations = {
     state.activeTab = x
   },
   SET_menus (state, x) {
-    if (!x.includes('论坛')) {
-      state.showForum = false
-    }
     state.menus = x
   },
   SET_menu (state, x) {
@@ -46,54 +45,36 @@ const mutations = {
   SET_userData (state, x) {
     state.user.data = x
   },
-  SET_isBottomShow (state, x) {
-    state.isBottomShow = x
-  },
   SET_isLoadingShow (state, x) {
     state.isLoadingShow = x
   },
   SET_info (state, x) {
-    switch (state.infoLevel) {
-      case 1:
-        state.infoPage1.info = x
-        break
-      case 2:
-        state.infoPage2.info = x
-        break
-      case 3:
-        state.infoPage3.info = x
-        break
-      case 4:
-        state.infoPage4.info = x
-        break
+    const info = state.infoPages[state.activeTab]
+    if (info) {
+      info.push(x)
+      state.infoPages[state.activeTab] = info
+      state.infoLevel[state.activeTab] = info.length
+    } else {
+      state.infoPages[state.activeTab] = [x]
+      state.infoLevel[state.activeTab] = 1
     }
   },
-  SET_infoPageClear (state) {
-    const clear = { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false }
-    state.infoLevel = 0
-    state.infoPage1 = clear
-    state.infoPage2 = clear
-    state.infoPage3 = clear
-    state.infoPage4 = clear
-  },
-  SET_infoPage (state, x) {
-    switch (state.infoLevel) {
-      case 1:
-        state.infoPage1 = x
+  SET_infoLevel (state, x = null) {
+    const level = state.infoLevel[state.activeTab]
+    switch (x) {
+      case null:
+        x = level + 1
         break
-      case 2:
-        state.infoPage2 = x
+      case 0:
+        state.infoPages[state.activeTab] = []
         break
-      case 3:
-        state.infoPage3 = x
-        break
-      case 4:
-        state.infoPage4 = x
+      default:
+        if (x < level) {
+          state.infoPages[state.activeTab].splice(-1, 1)
+        }
         break
     }
-  },
-  SET_infoLevel (state, x) {
-    state.infoLevel = x
+    state.infoLevel.splice(state.activeTab, 1, x)
   },
   SET_serverVersion (state, x) {
     state.serverVersion = x
@@ -111,12 +92,11 @@ const actions = {
     commit('SET_menu')
     commit('SET_user')
     commit('SET_userData')
-    commit('SET_isBottomShow')
     commit('SET_isLoadingShow')
     commit('SET_info')
-    commit('SET_infoPage')
+    // commit('SET_infoPage')
     commit('SET_infoLevel')
-    commit('SET_infoPageClear')
+    // commit('SET_infoPageClear')
   }
 }
 

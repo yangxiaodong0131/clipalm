@@ -49,8 +49,6 @@ export default {
   data () {
     return {
       value: '输入框内容。。。',
-      // name: '',
-      // pwd: '',
       name: 'hitb',
       pwd: '123456',
       visible: false,
