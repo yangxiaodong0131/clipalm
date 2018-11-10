@@ -1,6 +1,6 @@
 const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
-const urlConfig = require('../utils/config.js')
+const urlConfig = require('./config.js')
 const qs = require('qs')
 const modal = weex.requireModule('modal')
 export function getServer (obj, activeTab, menu, value = null) {
@@ -115,23 +115,6 @@ export function getServer (obj, activeTab, menu, value = null) {
   }
 }
 
-export function compDrg (obj, wt4) {
-  stream.fetch({
-    method: 'POST',
-    type: 'json',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-    responseType: 'json',
-    url: `127.0.0.1:3001/comp_drg`,
-    body: qs.stringify({ params: wt4 })
-  }, res => {
-    if (res.ok) {
-      console.log(res.data)
-    } else {
-      obj.info = '- 网络连接失败 -'
-    }
-  })
-}
-
 export function getLastVersion (obj) {
   stream.fetch({
     method: 'GET',
@@ -200,6 +183,7 @@ function setStore (obj, activeTab, menu, rdata) {
     case 1:
       data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
+      obj.$store.commit('SET_wt4Info', rdata.info)
       obj.$store.commit('SET_wt4Case', data)
       break
     case 2:
