@@ -1,8 +1,9 @@
 const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
+const modal = weex.requireModule('modal')
 const urlConfig = require('./config.js')
 const qs = require('qs')
-const modal = weex.requireModule('modal')
+
 export function getServer (obj, activeTab, menu, value = null) {
   // activeTab:页面
   // menu:判断查询菜单
@@ -125,23 +126,6 @@ export function getLastVersion (obj) {
   }, res => {
     if (res.ok) {
       obj.$store.commit('SET_serverVersion', res.data)
-    } else {
-      obj.info = '- 网络连接失败 -'
-    }
-  })
-}
-
-export function updateUser (obj, user) {
-  stream.fetch({
-    method: 'POST',
-    type: 'json',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-    responseType: 'json',
-    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/drg_admin_user_update`,
-    body: qs.stringify({ drg_admin_user: user, id: obj.$store.state.Home.user.data.id })
-  }, res => {
-    if (res.ok) {
-      obj.$store.commit('SET_userData', res.data.data)
     } else {
       obj.info = '- 网络连接失败 -'
     }

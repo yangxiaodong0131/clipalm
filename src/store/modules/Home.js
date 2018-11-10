@@ -3,7 +3,7 @@ const state = {
   menus: [],
   // 各个页面默认菜单
   menu: ['用户登录', '菜单', '菜单', '菜单', '菜单'],
-  user: { login: false, data: { clipalm_version: 'BJ编码版' } },
+  user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },
   isBottomShow: false,
   infoLevel: 0,
   infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
@@ -39,9 +39,6 @@ const mutations = {
   },
   SET_menu (state, x) {
     state.menu.splice(x[0], 1, x[1])
-  },
-  SET_activeMenu (state, x) {
-    state.activeMenu.splice(x[0], 1, x[1])
   },
   SET_user (state, x) {
     state.user = x
@@ -105,7 +102,6 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit }) {
-    commit('SET_activeMenu')
     commit('SET_userMenu')
     commit('SET_miniBarTitle')
     commit('SET_showForum')

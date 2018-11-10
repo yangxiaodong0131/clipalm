@@ -41,18 +41,13 @@
 
 <script>
 import { WxcButton, WxcSearchbar, WxcCell } from 'weex-ui'
-// import { getServer } from '../../utils/server'
-const qs = require('qs')
-const stream = weex.requireModule('stream')
-const storage = weex.requireModule('storage')
-const urlConfig = require('../../utils/config.js')
+import { userLogin } from '../../utils/user'
 
 export default {
   name: 'login-page',
   components: { WxcButton, WxcSearchbar, WxcCell },
   data () {
     return {
-      loginResult: '',
       value: '输入框内容。。。',
       // name: '',
       // pwd: '',
@@ -81,46 +76,14 @@ export default {
         height: tabPageHeight
       }
       return style
+    },
+    loginResult () {
+      return this.$store.state.Home.user.loginResult
     }
-  },
-  created: function () {
-    // this.test()
   },
   methods: {
     login () {
-      stream.fetch({
-        method: 'POST',
-        type: 'json',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-        responseType: 'json',
-        url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/login`,
-        body: qs.stringify({ params: this.user })
-      }, res => {
-        if (res.ok) {
-          if (res.data.login) {
-            this.$store.commit('SET_user', res.data)
-            this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '个人信息'])
-            this.$store.commit('SET_activeMenu', [this.$store.state.Home.activeTab, 1])
-            storage.setItem('user', JSON.stringify(res.data))
-          } else {
-            this.loginResult = '账号或密码错误'
-            this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
-          }
-        } else {
-          this.loginResult = '网络连接失败'
-          this.$store.commit('SET_user', { login: false, data: { clipalm_version: 'BJ编码版' } })
-        }
-        if (!this.$store.state.Home.user.login) {
-          // 清空所有缓存
-          storage.getAllKeys(event => {
-            if (event.result === 'success') {
-              event.data.map((key) => {
-                storage.removeItem(key)
-              })
-            }
-          })
-        }
-      })
+      userLogin(this, this.user)
     },
     register () {
       const i = this.$store.state.Home.activeTab

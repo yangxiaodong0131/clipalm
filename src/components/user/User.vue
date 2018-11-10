@@ -39,9 +39,9 @@
 <script>
 import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
-import { updateUser } from '../../utils/server'
+import { userLogout, updateUser } from '../../utils/user'
 const modal = weex.requireModule('modal')
-const storage = weex.requireModule('storage')
+
 export default {
   name: 'user-doc',
   components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell },
@@ -150,20 +150,7 @@ export default {
       updateUser(this, user)
     },
     wxcButtonClicked () {
-      const user = { login: false, data: { clipalm_version: 'BJ编码版' } }
-      this.$store.commit('SET_menu', [0, '用户登录'])
-      this.$store.commit('SET_userMenu', '用户登录')
-      this.$store.commit('SET_user', user)
-      this.$router.push('/')
-      this.$store.commit('SET_visible', false)
-      // 清空所有缓存
-      storage.getAllKeys(event => {
-        if (event.result === 'success') {
-          event.data.map((key) => {
-            storage.removeItem(key)
-          })
-        }
-      })
+      userLogout(this)
     }
   }
 }

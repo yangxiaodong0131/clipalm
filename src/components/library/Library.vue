@@ -58,18 +58,11 @@ export default {
   methods: {
     getData () {
       const i = this.$store.state.Home.activeTab
-      const menu = this.$store.state.Home.menu[i]
-      getServer(this, i, menu)
+      getServer(this, i, this.menu)
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_infoPage', getDetails(`${this.menu}规则详情`, e))
-    },
-    openBottomPopup () {
-      this.$store.commit('SET_isBottomShow', true)
-    },
-    popupOverlayBottomClick () {
-      this.$store.commit('SET_isBottomShow', false)
     },
     fetch () {
       if (this.menu !== 'MDC') {

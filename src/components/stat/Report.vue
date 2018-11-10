@@ -55,12 +55,6 @@ export default {
     fetch () {
       this.$store.commit('SET_statPage', this.$store.state.Stat.statPage + 1)
       getServer(this, 'all', '统计分析')
-    },
-    openBottomPopup () {
-      this.isBottomShow = true
-    },
-    popupOverlayBottomClick () {
-      this.isBottomShow = false
     }
   }
 }
