@@ -3,18 +3,11 @@ const state = {
   menus: [],
   // 各个页面默认菜单
   menu: ['用户登录', '菜单', '菜单', '菜单', '菜单'],
-  // infoLevel: 0,
-  infoPages: [],
+  infoPages: [[], [], [], [], []],
   infoLevel: [0, 0, 0, 0, 0],
   user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },
-
-  // infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  // infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  // infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
-  // infoPage4: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   isLoadingShow: false,
   showForum: false,
-  // miniBarTitle: ' ',
   // 发布版本修改
   version: '0.0.1',
   serverVersion: { version: '0.0.1' }
@@ -59,7 +52,7 @@ const mutations = {
       state.infoLevel[state.activeTab] = 1
     }
   },
-  SET_infoLevel (state, x = null) {
+  SET_infoLevel (state, x) {
     const level = state.infoLevel[state.activeTab]
     switch (x) {
       case null:
@@ -94,9 +87,7 @@ const actions = {
     commit('SET_userData')
     commit('SET_isLoadingShow')
     commit('SET_info')
-    // commit('SET_infoPage')
     commit('SET_infoLevel')
-    // commit('SET_infoPageClear')
   }
 }
 

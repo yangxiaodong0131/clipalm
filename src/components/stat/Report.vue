@@ -50,7 +50,8 @@ export default {
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
-      this.$store.commit('SET_infoPage', getDetails(`分析详情`, e))
+      const details = getDetails('分析详情', e)
+      this.$store.commit('SET_info', details)
     },
     fetch () {
       this.$store.commit('SET_statPage', this.$store.state.Stat.statPage + 1)

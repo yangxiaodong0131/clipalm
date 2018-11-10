@@ -1,6 +1,6 @@
 <template>
   <div class="demo"
-    :show="infoPage.isBottomShow" @swipe="swipe"
+    @swipe="swipe"
     v-bind:style="panel">
     <list class="list" :show="true">
       <cell class="cell">
@@ -61,7 +61,11 @@ export default {
       return this.$store.state.Home.infoLevel[this.activeTab] - 1
     },
     infoPage () {
-      return this.$store.state.Home.infoPages[this.activeTab][this.infoLevel - 0]
+      let infoPage = this.$store.state.Home.infoPages[this.activeTab][this.infoLevel]
+      if (!infoPage) {
+        infoPage = {}
+      }
+      return infoPage
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight

@@ -171,7 +171,7 @@ function setStore (obj, activeTab, menu, rdata) {
     case 1:
       switch (menu) {
         case 'statInfo':
-          obj.$store.commit('SET_infoLevel')
+          obj.$store.commit('SET_infoLevel', 2)
           const details = getDetails('分析详情', rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
