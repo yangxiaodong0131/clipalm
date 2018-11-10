@@ -2,7 +2,7 @@
   <div class="demo" @swipe="swipe" v-bind:style="panel">
     <text class="demo-title">{{title}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
-      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
+      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
             :label="wt4.disease_name"
@@ -95,6 +95,9 @@ export default {
     fetch () {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
       getServer(this, 'all', this.$store.state.Edit.editMenu)
+    },
+    test () {
+      console.log('dasdas')
     }
   }
 }

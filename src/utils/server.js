@@ -90,8 +90,12 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '论坛':
         url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
         break
+      case '帖子':
+        url = `forum?id=${value.id}`
+        break
     }
   }
+  console.log(url)
   if (url) {
     // 先取storage
     storage.getItem(url, e => {

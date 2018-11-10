@@ -38,10 +38,10 @@
     </div>
     <!-- forum页 -->
     <div class="panel" v-bind:class="panel">
-      <New v-if="menu[4] === '新建帖子'"></New>
-      <ForumContent v-else-if="menu[4] === '帖子内容'"></ForumContent>
-      <HomeMenu v-else-if="menu[4] === ''"></HomeMenu>
-      <Forum v-else></Forum>
+      <Forum v-if="menu[4] === '论坛'"></Forum>
+      <HomeMenu v-else-if="menu[4] === '菜单'"></HomeMenu>
+      <New v-else-if="menu[4] === '新建帖子'"></New>
+      <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent>
     </div>
   </wxc-tab-bar>
   <mini-bar></mini-bar>
@@ -93,7 +93,7 @@
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
           title: '论坛',
-          menu: ['论坛'],
+          menu: ['帖子列表'],
           icon: 'http://210.75.199.113/images/forum.png',
           activeIcon: 'http://210.75.199.113/images/forum_fill.png'
         }],
@@ -169,9 +169,6 @@
     },
     mounted: function () {
       this.wxcTabBarCurrentTabSelected({ page: 0 })
-      // if (this.$store.state.Home.user.login) {
-      //   this.setPage(2)
-      // }
     },
     methods: {
       newVersion () {
@@ -184,9 +181,16 @@
         const i = e.page
         const menus = this.tabs[i].menu
         const menu = this.$store.state.Home.menu[i]
+        const activeTab = this.$store.state.Home.activeTab
         this.$store.commit('SET_activeTab', i)
         this.$store.commit('SET_menus', menus)
         this.$store.commit('SET_menu', [i, menu])
+        // 论坛
+        if (i === 4) {
+          this.$store.commit('SET_menu', [i, '论坛'])
+          this.$store.commit('SET_forumLabel', this.$store.state.Home.menu[activeTab])
+          getServer(this, i, menu, this.$store.state.Home.menu[activeTab])
+        }
       }
     }
   };
