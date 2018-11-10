@@ -3,11 +3,13 @@ const storage = weex.requireModule('storage')
 const urlConfig = require('../utils/config.js')
 const qs = require('qs')
 const modal = weex.requireModule('modal')
-export function getServer (obj, type, menu, value = null) {
-  // type:判断查询全部还是单项
-  // menu:判断查询drg类型（mdc、adrg…）
-  // value:单项查询条件
-  let version = 'BJ'
+export function getServer (obj, activeTab, menu, value = null) {
+  // activeTab:页面
+  // menu:判断查询菜单
+  // value:查询条件
+  let version = ''
+  let year = ''
+  let url = ''
   switch (obj.$store.state.Home.user.data.clipalm_version) {
     case 'BJ编码版':
       version = 'BJ'
@@ -21,34 +23,17 @@ export function getServer (obj, type, menu, value = null) {
     case '术语版':
       version = 'CN'
       break
+    default:
+      version = 'BJ'
+      break
   }
-  let url = null
-  if (type === 'all') {
+  if (obj.$store.state.Home.user.data.clipalm_year) {
+    year = obj.$store.state.Home.user.data.clipalm_year
+  } else {
+    year = '2017'
+  }
+  if (value === null) {
     switch (menu) {
-      case 'MDC':
-        url = `rule_bj_mdc?plat=client&version=${version}&page=${obj.$store.state.Library.page}`
-        break
-      case 'ADRG':
-        url = `rule_bj_adrg?plat=client&version=${version}&page=${obj.$store.state.Library.page}`
-        break
-      case 'DRG':
-        url = `rule_bj_drg?plat=client&version=${version}&page=${obj.$store.state.Library.page}`
-        break
-      case 'ICD9':
-        url = `rule_bj_icd9?plat=client&page=${obj.$store.state.Library.page}&version=${version}`
-        break
-      case 'ICD10':
-        url = `rule_bj_icd10?plat=client&page=${obj.$store.state.Library.page}&version=${version}`
-        break
-      case '统计分析(字母增序)':
-        url = `wt4_stat_cv?plat=client&page=${obj.$store.state.Stat.statPage}`
-        break
-      case '统计分析(费用CV降序)':
-        url = `wt4_stat_cv?plat=client&page=${obj.$store.state.Stat.statPage}&order=cv`
-        break
-      case '统计分析(平均费用增序)':
-        url = `wt4_stat_cv?plat=client&page=${obj.$store.state.Stat.statPage}&order=fee`
-        break
       case 'QY病历':
         url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}`
         break
@@ -61,31 +46,53 @@ export function getServer (obj, type, menu, value = null) {
       case '费用异常病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
+      case 'MDC':
+        url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'ADRG':
+        url = `rule_bj_adrg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'DRG':
+        url = `rule_bj_drg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'ICD9':
+        url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'ICD10':
+        url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case '统计分析(字母增序)':
+        url = `wt4_stat_cv?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
+        break
+      case '统计分析(费用CV降序)':
+        url = `wt4_stat_cv?plat=client&order=cv&page=${obj.$store.state.Stat.statPage}`
+        break
+      case '统计分析(平均费用增序)':
+        url = `wt4_stat_cv?plat=client&order=fee&page=${obj.$store.state.Stat.statPage}`
+        break
       case '论坛':
-        if (value) {
-          url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
-        } else {
-          url = `forum?plat=client&lable=&page=${obj.$store.state.Forum.forumPage}`
-        }
+        url = `forum?plat=client&lable=&page=${obj.$store.state.Forum.forumPage}`
+        break
     }
-  } else if (type === 'adrgOne') {
-    url = `rule_bj_adrg?mdc=${value.mdc}&plat=client`
-  } else if (type === 'drgOne') {
-    url = `rule_bj_drg?adrg=${value.code}&plat=client`
-  } else if (type === 'wt4') {
-    url = 'wt4_2017?plat=client'
-  } else if (type === 'statOne') {
-    url = `wt4_stat_cv?plat=client&drg=${value}`
-  } else if (type === 'forumOne') {
-    url = `forum?id=${value.id}`
+  } else {
+    switch (menu) {
+      case 'ADRG':
+        url = `rule_bj_adrg?plat=client&page=1&mdc=${value.mdc}&version=${version}`
+        break
+      case 'DRG':
+        url = `rule_bj_drg?plat=client&page=1&adrg=${value.mdc}&version=${version}`
+        break
+      case '论坛':
+        url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
+        break
+    }
   }
-  console.log(url)
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
       if (e.result === 'success!') {
         const edata = JSON.parse(e.data)
-        setStore(obj, menu, type, edata)
+        setStore(obj, menu, 'type', edata)
       } else {
         obj.$store.commit('SET_isLoadingShow', true)
         stream.fetch({
@@ -96,10 +103,8 @@ export function getServer (obj, type, menu, value = null) {
           url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
         }, function (res) {
           if (res.ok) {
-            storage.setItem(url, JSON.stringify(res.data), e => {
-              console.log('storage success')
-            })
-            setStore(obj, menu, type, res.data)
+            storage.setItem(url, JSON.stringify(res.data))
+            setStore(obj, activeTab, menu, res.data)
           } else {
             obj.$store.commit('SET_isLoadingShow', false)
             modal.toast({ message: '- 网络连接失败 -', duration: 1 })
@@ -189,112 +194,34 @@ export function createForum (obj, forum, type) {
   })
 }
 
-function setStore (obj, menu, type, rdata) {
-  obj.$store.commit('SET_isLoadingShow', false)
+function setStore (obj, activeTab, menu, rdata) {
   let data = []
-  switch (menu) {
-    case 'MDC':
-      // obj.$store.commit('SET_library_menu', menu)
-      // obj.$store.commit('SET_mdc_rule', rdata.data)
-      // obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
-      obj.$store.commit('SET_rule', rdata.data)
-      break
-    case 'ADRG':
-      // obj.$store.commit('SET_library_menu', menu)
-      // data = obj.$store.state.Library.adrgRule
-      // if (type === 'adrgOne') {
-      //   data = rdata.data
-      //   obj.$store.commit('SET_libraryPage', ['ADRG', 1])
-      // } else {
-      //   data = data.concat(rdata.data)
-      // }
-      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
-      obj.$store.commit('SET_rule', rdata.data)
-      // obj.$store.commit('SET_adrg_rule', data)
-      break
-    case 'DRG':
-      // obj.$store.commit('SET_library_menu', menu)
-      // data = obj.$store.state.Library.drgRule
-      // if (type === 'adrgOne') {
-      //   data = rdata.data
-      //   obj.$store.commit('SET_libraryPage', ['DRG', 1])
-      // } else {
-      //   data = data.concat(rdata.data)
-      // }
-      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
-      obj.$store.commit('SET_rule', rdata.data)
-      // obj.$store.commit('SET_rule', data)
-      break
-    case 'ICD9':
-      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
-      obj.$store.commit('SET_rule', rdata.data)
-      break
-    case 'ICD10':
-      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
-      obj.$store.commit('SET_rule', rdata.data)
-      break
-    case 'icd10One':
-      data = obj.$store.state.Library.icd10Rule
-      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
+  switch (activeTab) {
+    case 1:
+      data = obj.$store.state.Edit.wt4Case
       data = data.concat(rdata.data)
-      obj.$store.commit('SET_icd10_rule', data)
+      obj.$store.commit('SET_wt4Case', data)
       break
-    case 'icd9One':
-      data = obj.$store.state.Library.icd9Rule
-      obj.$store.commit('SET_libraryPage', ['ICD9', parseInt(rdata.page)])
+    case 2:
+      data = obj.$store.state.Library.rule
       data = data.concat(rdata.data)
-      obj.$store.commit('SET_icd9_rule', data)
+      obj.$store.commit('SET_rule', rdata.data)
       break
-    case '统计分析(字母增序)':
+    case 3:
       data = obj.$store.state.Stat.statDrg
-      obj.$store.commit('SET_statPage', parseInt(rdata.page))
       data = data.concat(rdata.data)
-      obj.$store.commit('SET_statDrg', data)
+      obj.$store.commit('SET_statDrg', rdata.data)
       break
-    case '统计分析(费用CV降序)':
-      data = obj.$store.state.Stat.statDrg
-      obj.$store.commit('SET_statPage', parseInt(rdata.page))
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_statDrg', data)
-      break
-    case '统计分析(平均费用增序)':
-      data = obj.$store.state.Stat.statDrg
-      obj.$store.commit('SET_statPage', parseInt(rdata.page))
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_statDrg', data)
-      break
-    case '未入组病历':
-      data = obj.$store.state.Edit.wt4Case
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_wt4Case', data)
-      break
-    case 'QY病历':
-      data = obj.$store.state.Edit.wt4Case
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_wt4Case', data)
-      break
-    case '低风险死亡病历':
-      data = obj.$store.state.Edit.wt4Case
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_wt4Case', data)
-      break
-    case '费用异常病历':
-      data = obj.$store.state.Edit.wt4Case
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_wt4Case', data)
-      break
-    case '论坛':
-      obj.$store.commit('SET_post', rdata.data)
-      break
-    case '帖子':
-      obj.$store.commit('SET_forumContent', rdata.data[0])
-      break
-    case 'info':
-      if (rdata.data.length === 1) {
-        obj.$store.commit('SET_info', rdata.data[0])
+    case 4:
+      switch (menu) {
+        case '论坛':
+          obj.$store.commit('SET_post', rdata.data)
+          break
+        case '帖子':
+          obj.$store.commit('SET_forumContent', rdata.data[0])
+          break
       }
       break
-    default:
-      break
   }
+  obj.$store.commit('SET_isLoadingShow', false)
 }

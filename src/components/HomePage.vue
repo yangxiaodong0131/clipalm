@@ -179,13 +179,13 @@
       const { tabStyles } = this
       this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
       this.newVersion()
-      storage.getItem('point', e => {
-        if (e.result === 'success') {
-          this.$store.commit('SET_pointIndex', parseInt(e.data))
-        } else {
-          this.$store.commit('SET_pointIndex', 0)
-        }
-      })
+      // storage.getItem('point', e => {
+      //   if (e.result === 'success') {
+      //     this.$store.commit('SET_pointIndex', parseInt(e.data))
+      //   } else {
+      //     this.$store.commit('SET_pointIndex', 0)
+      //   }
+      // })
     },
     beforeMount: function () {
       // this.$store.commit('SET_activeTab', 0)

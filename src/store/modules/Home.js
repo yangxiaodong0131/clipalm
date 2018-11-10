@@ -1,14 +1,11 @@
 const state = {
-  visible: false,
   activeTab: 0,
   menus: [],
   // 各个页面默认菜单
   menu: ['用户登录', '菜单', '菜单', '菜单', '菜单'],
-  notice: '未注册用户！',
   user: { login: false, data: { clipalm_version: 'BJ编码版' } },
   isBottomShow: false,
   infoLevel: 0,
-  infoMenu: '',
   infoPage1: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage2: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
   infoPage3: { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false },
@@ -16,8 +13,6 @@ const state = {
   isLoadingShow: false,
   showForum: false,
   miniBarTitle: ' ',
-  point: ['点击底部标签可显示菜单', '点击任意条目可进入条目详情', '病案页长按可进入论坛', '页面左滑右滑可前进后退', '页面上滑加载下一页'],
-  pointIndex: 0,
   // 发布版本修改
   version: '0.0.1',
   serverVersion: { version: '0.0.1' }
@@ -29,12 +24,6 @@ const mutations = {
   },
   SET_miniBarTitle (state, x) {
     state.miniBarTitle = x
-  },
-  SET_pointIndex (state, x) {
-    state.pointIndex = x
-  },
-  SET_visible (state, x) {
-    state.visible = x
   },
   SET_showForum (state, x) {
     state.showForum = x
@@ -82,9 +71,6 @@ const mutations = {
         break
     }
   },
-  SET_infoMenu (state, x) {
-    state.infoMenu = x
-  },
   SET_infoPageClear (state) {
     const clear = { info: '', details: [], infoTitle: '', gridList: [], buttonText: '', isBottomShow: false, isInfoButtonShow: false }
     state.infoLevel = 0
@@ -122,20 +108,16 @@ const actions = {
     commit('SET_activeMenu')
     commit('SET_userMenu')
     commit('SET_miniBarTitle')
-    commit('SET_pointIndex')
     commit('SET_showForum')
     commit('SET_serverVersion')
-    commit('SET_visible')
     commit('SET_activeTab')
     commit('SET_menus')
     commit('SET_menu')
     commit('SET_user')
     commit('SET_userData')
-    commit('SET_labelDetails')
     commit('SET_isBottomShow')
     commit('SET_isLoadingShow')
     commit('SET_info')
-    commit('SET_infoMenu')
     commit('SET_infoPage')
     commit('SET_infoLevel')
     commit('SET_infoPageClear')
