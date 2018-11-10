@@ -18,10 +18,10 @@
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
-      <HomeMenu v-if="menu[1] === '菜单'"></HomeMenu>
+      <PopRight v-if="infoLevel > 0"></PopRight>
+      <HomeMenu v-else-if="menu[1] === '菜单'"></HomeMenu>
       <Edit v-else-if="['未入组病历', '低风险死亡病历', '费用异常病历', 'QY病历'].includes(menu[1])"></Edit>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
-      <PopRight v-else></PopRight>
     </div>
     <!-- library页 -->
     <div class="panel" v-bind:class="panel">
@@ -119,6 +119,9 @@
       test: ''
     }),
     computed: {
+      infoLevel () {
+        return this.$store.state.Home.infoLevel
+      },
       menu () {
         console.log(this.$store.state.Home.menu)
         return this.$store.state.Home.menu

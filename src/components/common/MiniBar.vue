@@ -97,30 +97,30 @@ export default {
       this.$store.commit('SET_menu', [i, '菜单'])
     },
     minibarLeftButtonClick () {
-      const i = this.$store.state.Home.activeTab
+      // const i = this.$store.state.Home.activeTab
       const level = this.infoLevel - 1
-      switch (this.$store.state.Home.activeTab) {
-        case 0:
-          this.$store.commit('SET_miniBarTitle', '用户')
-          break
-        case 1:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Edit.editMenu)
-          break
-        case 2:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Library.libraryMenu)
-          break
-        case 3:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Stat.statMenu)
-          break
-        case 4:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Forum.forumMenu)
-          break
-      }
+      // switch (this.$store.state.Home.activeTab) {
+      //   case 0:
+      //     this.$store.commit('SET_miniBarTitle', '用户')
+      //     break
+      //   case 1:
+      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Edit.editMenu)
+      //     break
+      //   case 2:
+      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Library.libraryMenu)
+      //     break
+      //   case 3:
+      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Stat.statMenu)
+      //     break
+      //   case 4:
+      //     this.$store.commit('SET_miniBarTitle', this.$store.state.Forum.forumMenu)
+      //     break
+      // }
       this.$store.commit('SET_infoLevel', level)
-      if (level === 0) {
-        console.log([i, this.returnMenu])
-        this.$store.commit('SET_menu', [i, this.returnMenu])
-      }
+      // if (level === 0) {
+      //   console.log([i, this.returnMenu])
+      //   this.$store.commit('SET_menu', [i, this.returnMenu])
+      // }
     }
   }
 }

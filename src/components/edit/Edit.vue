@@ -1,6 +1,6 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
-    <text class="demo-title" v-if="showTitle">{{title}}</text>
+    <text class="demo-title">{{title}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
         <div class="panel" @longpress="longpress(wt4)">
@@ -41,7 +41,7 @@ export default {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
           const obj = x
           let extraContent = ``
-          switch (this.$store.state.Edit.editMenu) {
+          switch (this.$store.state.Home.menu[1]) {
             case '未入组病历':
               extraContent = `${x.diags_code}`
               break
@@ -62,15 +62,6 @@ export default {
           return obj
         })
         return data
-      }
-    },
-    showTitle: {
-      get () {
-        let show = false
-        if (this.$store.state.Edit.wt4Info !== '') {
-          show = true
-        }
-        return show
       }
     },
     title: {
@@ -96,15 +87,14 @@ export default {
       getServer(this, 'all', menu)
     },
     wxcCellClicked (e) {
-      this.$store.commit('SET_visible', false)
-      this.$store.commit('SET_isBottomShow', true)
-      const i = this.$store.state.Home.activeTab
+      // this.$store.commit('SET_isBottomShow', true)
       const menu = '病案详情'
-      this.$store.commit('SET_menu', [i, menu])
-      this.$store.commit('SET_infoMenu', this.wxcCellTitle)
+      // const i = this.$store.state.Home.activeTab
+      // this.$store.commit('SET_menu', [i, menu])
+      // this.$store.commit('SET_infoMenu', this.wxcCellTitle)
       this.$store.commit('SET_infoLevel', 1)
       const details = getDetails(menu, e)
-      this.$store.commit('SET_miniBarTitle', `病案ID-${e.b_wt4_v1_id}病案详情`)
+      // this.$store.commit('SET_miniBarTitle', `病案ID-${e.b_wt4_v1_id}病案详情`)
       this.$store.commit('SET_infoPage', details)
     },
     swipe (e) {
