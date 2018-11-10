@@ -25,17 +25,16 @@
     </div>
     <!-- library页 -->
     <div class="panel" v-bind:class="panel">
-      <HomeMenu v-if="menu[2] === '菜单'"></HomeMenu>
+      <PopRight v-if="infoLevel > 0"></PopRight>
+      <HomeMenu v-else-if="menu[2] === '菜单'"></HomeMenu>
       <Library v-else-if="['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'].includes(menu[2])"></Library>
-      <PopRight v-else-if="menu[2] == '规则详情'"></PopRight>
     </div>
     <!-- stat页 -->
     <div class="panel" v-bind:class="panel">
-      <HomeMenu v-if="menu[3] === '菜单'"></HomeMenu>
+      <PopRight v-if="infoLevel > 0"></PopRight>
+      <HomeMenu v-else-if="menu[3] === '菜单'"></HomeMenu>
       <Report v-else-if="['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)'].includes(menu[3])"></Report>
       <Charts v-else-if="menu[3] == '报表'"></Charts>
-      <Query v-else-if="menu[3] == '自定义查询'"></Query>
-      <PopRight v-else></PopRight>
     </div>
     <!-- forum页 -->
     <div class="panel" v-bind:class="panel">
@@ -64,7 +63,6 @@
   import Library from './library/Library'
   import Report from './stat/Report'
   import Charts from './stat/Charts'
-  import Query from './stat/Query'
   import ForumContent from './forum/ForumContent'
   import Forum from './forum/Forum'
   import New from './forum/New'
@@ -72,7 +70,7 @@
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, Library,
-      Report, Query, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, Register, HomeMenu },
+      Report, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, Register, HomeMenu },
     data: () => ({
       // icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
       // activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'

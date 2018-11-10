@@ -22,9 +22,7 @@ export default {
   components: { WxcCell },
   data () {
     return {
-      // isBottomShow: false,
       height: 400,
-      // info: {},
       isShow: false,
       arrawSrc: 'http://210.75.199.113/images/more.png'
     }
@@ -47,9 +45,7 @@ export default {
     },
     container: {
       get () {
-        // const { tabStyles } = this
         const tabPageHeight = weex.config.env.deviceHeight
-        // let height = (tabPageHeight - tabStyles.height) + 'px'
         const style = {
           height: tabPageHeight
         }
@@ -66,11 +62,7 @@ export default {
       getServer(this, 'all', menu)
     },
     wxcIndexlistItemClicked (e) {
-      this.$store.commit('SET_isBottomShow', true)
-      this.$store.commit('SET_info', e)
       this.$store.commit('SET_infoLevel', 1)
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '规则详情'])
-      this.$store.commit('SET_miniBarTitle', `${this.menu}-${e.code}规则详情`)
       this.$store.commit('SET_infoPage', getDetails(`${this.menu}规则详情`, e))
     },
     openBottomPopup () {
@@ -79,31 +71,9 @@ export default {
     popupOverlayBottomClick () {
       this.$store.commit('SET_isBottomShow', false)
     },
-    swipe (e) {
-      if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
-        this.$store.commit('SET_infoMenu', '规则详情')
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, this.menu])
-        this.$store.commit('SET_infoLevel', 1)
-      }
-    },
     fetch () {
-      // switch (this.menu) {
-      //   case 'ADRG':
-      //     this.$store.commit('SET_libraryPage', ['ADRG', this.$store.state.Library.adrgPage + 1])
-      //     break
-      //   case 'DRG':
-      //     this.$store.commit('SET_libraryPage', ['DRG', this.$store.state.Library.drgPage + 1])
-      //     break
-      //   case 'ICD10':
-      //     this.$store.commit('SET_libraryPage', ['ICD10', this.$store.state.Library.icd10Page + 1])
-      //     break
-      //   case 'ICD9':
-      //     this.$store.commit('SET_libraryPage', ['ICD9', this.$store.state.Library.icd9Page + 1])
-      //     break
-      // }
-      this.$store.commit('SET_libraryPage', this.$store.state.Library.page + 1)
-      // modal.toast({ message: `${this.$store.state.Library.adrgPage}`, duration: 1 })
       if (this.menu !== 'MDC') {
+        this.$store.commit('SET_libraryPage', this.$store.state.Library.page + 1)
         getServer(this, 'all', this.menu)
       }
     }

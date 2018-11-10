@@ -87,27 +87,13 @@ export default {
       getServer(this, 'all', menu)
     },
     wxcCellClicked (e) {
-      // this.$store.commit('SET_isBottomShow', true)
-      const menu = '病案详情'
-      // const i = this.$store.state.Home.activeTab
-      // this.$store.commit('SET_menu', [i, menu])
-      // this.$store.commit('SET_infoMenu', this.wxcCellTitle)
       this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails(menu, e)
-      // this.$store.commit('SET_miniBarTitle', `病案ID-${e.b_wt4_v1_id}病案详情`)
+      const details = getDetails('病案详情', e)
       this.$store.commit('SET_infoPage', details)
-    },
-    swipe (e) {
-      if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
-        this.$store.commit('SET_infoMenu', this.wxcCellTitle)
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
-        this.$store.commit('SET_infoLevel', 1)
-      }
     },
     fetch () {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
       getServer(this, 'all', this.$store.state.Edit.editMenu)
-      // modal.toast({ message: '加载下一页', duration: 1 })
     },
     longpress (wt4) {
       modal.toast({ message: '跳转论坛', duration: 1 })
