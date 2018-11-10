@@ -79,6 +79,7 @@ export function getServer (obj, type, menu, value = null) {
   } else if (type === 'forumOne') {
     url = `forum?id=${value.id}`
   }
+  console.log(url)
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
@@ -195,7 +196,7 @@ function setStore (obj, menu, type, rdata) {
     case 'MDC':
       // obj.$store.commit('SET_library_menu', menu)
       // obj.$store.commit('SET_mdc_rule', rdata.data)
-      obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
+      // obj.$store.commit('SET_libraryPage', parseInt(rdata.page))
       obj.$store.commit('SET_rule', rdata.data)
       break
     case 'ADRG':

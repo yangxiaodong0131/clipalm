@@ -46,9 +46,7 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       const menu = this.$store.state.Home.menu[i]
-      if (this.stats.length === 0) {
-        getServer(this, 'all', menu)
-      }
+      getServer(this, 'all', menu)
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_isBottomShow', true)

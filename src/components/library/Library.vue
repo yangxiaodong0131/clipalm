@@ -42,27 +42,6 @@ export default {
     },
     rules: {
       get () {
-        // let data = []
-        // switch (this.menu) {
-        //   case 'MDC':
-        //     data = this.$store.state.Library.mdcRule
-        //     break
-        //   case 'ADRG':
-        //     data = this.$store.state.Library.adrgRule
-        //     break
-        //   case 'DRG':
-        //     data = this.$store.state.Library.drgRule
-        //     break
-        //   case 'ICD10':
-        //     data = this.$store.state.Library.icd10Rule
-        //     break
-        //   case 'ICD9':
-        //     data = this.$store.state.Library.icd9Rule
-        //     break
-        //   default:
-        //     data = []
-        //     break
-        // }
         return this.$store.state.Library.rule
       }
     },
@@ -84,9 +63,7 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       const menu = this.$store.state.Home.menu[i]
-      if (this.rules.length === 0) {
-        getServer(this, 'all', menu)
-      }
+      getServer(this, 'all', menu)
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_isBottomShow', true)

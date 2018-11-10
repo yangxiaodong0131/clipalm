@@ -93,9 +93,7 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       const menu = this.$store.state.Home.menu[i]
-      if (this.wt4Case.length === 0) {
-        getServer(this, 'all', menu)
-      }
+      getServer(this, 'all', menu)
     },
     wxcCellClicked (e) {
       this.$store.commit('SET_visible', false)
