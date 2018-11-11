@@ -70,7 +70,7 @@
 
 <script>
 import { WxcGridSelect, WxcButton } from 'weex-ui'
-import { compDrg } from '../../utils/server'
+import { compDrg } from '../../utils/comp'
 const modal = weex.requireModule('modal')
 export default {
   components: { WxcGridSelect, WxcButton },

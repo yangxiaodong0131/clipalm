@@ -1,6 +1,6 @@
 const state = {
   statDrg: [],
-  statMenu: '',
+  chartType: '报表',
   statPage: 1
 }
 
@@ -8,8 +8,8 @@ const mutations = {
   SET_statDrg (state, x) {
     state.statDrg = x
   },
-  SET_statMenu (state, x) {
-    state.statMenu = x
+  SET_chartType (state, x) {
+    state.chartType = x
   },
   SET_statPage (state, x) {
     state.statPage = x
@@ -19,7 +19,7 @@ const mutations = {
 const actions = {
   someAsyncTask ({ commit }) {
     commit('SET_statDrg')
-    commit('SET_statMenu')
+    commit('SET_chartType')
     commit('SET_statPage')
   }
 }

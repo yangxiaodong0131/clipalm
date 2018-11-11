@@ -29,19 +29,25 @@
       :list="mdcs"
       @select="params => onSelect(params, 'mdc')">
     </wxc-grid-select>
+    <wxc-button text="用户报表"
+        :show="true"
+        size="medium"
+        class="submits"
+        @wxcButtonClicked="chart"></wxc-button>
+    <div style="height:20px;"></div>
     <wxc-button text="退出登录"
-          size="full"
-          class="submits"
-          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        size="full"
+        class="submits"
+        @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </div>
 </template>
 
 <script>
 import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
-import { updateUser } from '../../utils/server'
+import { userLogout, updateUser } from '../../utils/user'
 const modal = weex.requireModule('modal')
-const storage = weex.requireModule('storage')
+
 export default {
   name: 'user-doc',
   components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell },
@@ -127,7 +133,12 @@ export default {
   },
   methods: {
     minibarRightButtonClick (e) {
-      this.$store.commit('SET_menu', [0, '用户登陆'])
+      this.$store.commit('SET_menu', [0, '用户登录'])
+    },
+    chart () {
+      this.$store.commit('SET_activeTab', 3)
+      this.$store.commit('SET_menu', [3, '报表'])
+      this.$store.commit('SET_chartType', '用户报表')
     },
     onSelect (params, type) {
       const user = {}
@@ -150,20 +161,7 @@ export default {
       updateUser(this, user)
     },
     wxcButtonClicked () {
-      const user = { login: false, data: { clipalm_version: 'BJ编码版' } }
-      this.$store.commit('SET_menu', [0, '用户登陆'])
-      this.$store.commit('SET_userMenu', '用户登陆')
-      this.$store.commit('SET_user', user)
-      this.$router.push('/')
-      this.$store.commit('SET_visible', false)
-      // 清空所有缓存
-      storage.getAllKeys(event => {
-        if (event.result === 'success') {
-          event.data.map((key) => {
-            storage.removeItem(key)
-          })
-        }
-      })
+      userLogout(this)
     }
   }
 }

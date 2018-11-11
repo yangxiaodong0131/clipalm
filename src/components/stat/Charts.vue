@@ -16,9 +16,18 @@ export default {
     }
   },
   computed: {
+    chartType: {
+      get () {
+        return this.$store.state.Stat.chartType
+      }
+    },
     url: {
       get () {
-        return `${urlConfig.http}:${urlConfig.port}/drgwork/charts_page`
+        let u = `${urlConfig.http}:${urlConfig.port}/drgwork/charts_page`
+        if (this.chartType === '用户报表') {
+          u = `${urlConfig.http}:${urlConfig.port}/drgwork/user_charts_page`
+        }
+        return u
       }
     }
   },

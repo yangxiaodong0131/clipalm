@@ -8,7 +8,6 @@
     <wxc-button text="新建帖子"
           size="full"
           class="submits"
-          v-if="showButton"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
   </scroller>
 </template>
@@ -22,8 +21,14 @@ export default {
   data: () => ({
   }),
   computed: {
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
     posts () {
       return this.$store.state.Forum.post
+    },
+    forumLabel () {
+      return this.$store.state.Forum.forumLabel
     },
     specialConfigList () {
       const configs = []
@@ -51,13 +56,6 @@ export default {
       })
       return configs
     },
-    showButton () {
-      let show = false
-      if (this.$store.state.Forum.forumLabel !== '') {
-        show = true
-      }
-      return show
-    },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
       const style = {
@@ -66,15 +64,13 @@ export default {
       return style
     }
   },
-  created: function () {
+  created () {
   },
   methods: {
     wxcRichTextLinkClick (i) {
-      const menu = '帖子内容'
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
-      getServer(this, 'forumOne', '帖子', this.posts[i])
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
       this.$store.commit('SET_forumIndex', i)
-      this.$store.commit('SET_activeTab', 4)
+      getServer(this, this.activeTab, '帖子', this.posts[i])
     },
     wxcButtonClicked () {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])

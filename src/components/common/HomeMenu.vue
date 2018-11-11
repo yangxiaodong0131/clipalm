@@ -10,7 +10,6 @@
 
 <script>
 import { Utils, WxcButton } from 'weex-ui'
-import { getServer } from '../../utils/server'
 
 export default {
   components: { WxcButton },
@@ -20,8 +19,8 @@ export default {
     }
   },
   computed: {
-    visible () {
-      return this.$store.state.Home.visible
+    activeTab () {
+      return this.$store.state.Home.activeTab
     },
     menus () {
       return this.$store.state.Home.menus
@@ -32,44 +31,25 @@ export default {
         height: tabPageHeight
       }
       return style
+    },
+    user () {
+      return this.$store.state.Home.user
     }
   },
   methods: {
-    wxcRichTextLinkClick () {
-    },
-    popupOverlayBottomClick () {
-      this.$store.commit('SET_visible', false)
-    },
     wxcButtonClicked (menu) {
-      this.$store.commit('SET_visible', false)
-      const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_menu', [i, menu])
-      this.$store.commit('SET_miniBarTitle', `${menu}`)
-      switch (i) {
+      switch (this.activeTab) {
         case 1:
-          this.$store.commit('SET_editMenu', menu)
-          this.$store.commit('SET_wt4Page', 1)
           this.$store.commit('SET_wt4Case', [])
-          this.$store.commit('SET_wt4Info', '')
-          getServer(this, 'all', menu)
           break
         case 2:
-          this.$store.commit('SET_library_menu', menu)
-          getServer(this, 'all', menu)
+          this.$store.commit('SET_rule', [])
           break
         case 3:
           this.$store.commit('SET_statDrg', [])
-          this.$store.commit('SET_statPage', 1)
-          this.$store.commit('SET_statMenu', menu)
-          getServer(this, 'all', menu)
           break
-        case 4:
-          this.$store.commit('SET_forumMenu', menu)
-          getServer(this, 'all', menu)
-          break
-        default:
-          getServer(this, 'all', menu)
       }
+      this.$store.commit('SET_menu', [this.activeTab, menu])
     }
   }
 }

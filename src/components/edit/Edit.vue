@@ -1,8 +1,8 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
-    <text class="demo-title" v-if="showTitle">{{title}}</text>
+    <text class="demo-title">{{title}}</text>
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
-      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index">
+      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
             :label="wt4.disease_name"
@@ -22,7 +22,6 @@
 import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading, WxcButton } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
-const modal = weex.requireModule('modal')
 export default {
   components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton },
   data () {
@@ -33,6 +32,7 @@ export default {
     }
   },
   created () {
+    this.getData()
   },
   computed: {
     wt4Case: {
@@ -40,7 +40,7 @@ export default {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
           const obj = x
           let extraContent = ``
-          switch (this.$store.state.Edit.editMenu) {
+          switch (this.$store.state.Home.menu[1]) {
             case '未入组病历':
               extraContent = `${x.diags_code}`
               break
@@ -63,64 +63,41 @@ export default {
         return data
       }
     },
-    showTitle: {
-      get () {
-        let show = false
-        if (this.$store.state.Edit.wt4Info !== '') {
-          show = true
-        }
-        return show
-      }
-    },
     title: {
       get () {
         const data = this.$store.state.Edit.wt4Info
         return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
       }
     },
-    panel () {
-      const tabPageHeight = weex.config.env.deviceHeight
-      const style = {
-        height: tabPageHeight
+    panel: {
+      get () {
+        const tabPageHeight = weex.config.env.deviceHeight
+        const style = {
+          height: tabPageHeight
+        }
+        return style
       }
-      return style
     }
   },
   methods: {
-    wxcCellClicked (e) {
-      this.$store.commit('SET_visible', false)
-      this.$store.commit('SET_isBottomShow', true)
+    getData () {
       const i = this.$store.state.Home.activeTab
-      const menu = '病案详情'
-      this.$store.commit('SET_menu', [i, menu])
-      this.$store.commit('SET_infoMenu', this.wxcCellTitle)
-      this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails(menu, e)
-      this.$store.commit('SET_miniBarTitle', `病案ID-${e.b_wt4_v1_id}病案详情`)
-      this.$store.commit('SET_infoPage', details)
-    },
-    swipe (e) {
-      if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
-        this.$store.commit('SET_infoMenu', this.wxcCellTitle)
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '病案详情'])
-        this.$store.commit('SET_infoLevel', 1)
+      const menu = this.$store.state.Home.menu[i]
+      if (this.wt4Case.length === 0) {
+        getServer(this, i, menu)
       }
+    },
+    wxcCellClicked (e) {
+      this.$store.commit('SET_infoLevel', 1)
+      const details = getDetails('病案详情', e)
+      this.$store.commit('SET_info', details)
     },
     fetch () {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
       getServer(this, 'all', this.$store.state.Edit.editMenu)
-      // modal.toast({ message: '加载下一页', duration: 1 })
     },
-    longpress (wt4) {
-      modal.toast({ message: '跳转论坛', duration: 1 })
-      this.$store.commit('SET_showForum', true)
-      this.$store.commit('SET_menus', ['论坛', '自定义查询'])
-      this.$store.commit('SET_menu', [4, '论坛'])
-      this.$store.commit('SET_forumMenu', `关于病案${wt4.b_wt4_v1_id}帖子`)
-      this.$store.commit('SET_post', [])
-      this.$store.commit('SET_forumLabel', wt4.b_wt4_v1_id)
-      this.$store.commit('SET_forumPage', 1)
-      getServer(this, 'all', '论坛', wt4)
+    test () {
+      console.log('dasdas')
     }
   }
 }
