@@ -95,7 +95,6 @@ export function getServer (obj, activeTab, menu, value = null) {
         break
     }
   }
-  console.log(url)
   if (url) {
     // 先取storage
     storage.getItem(url, e => {
@@ -156,8 +155,7 @@ export function createForum (obj, forum, type) {
           modal.toast({ message: '回复成功', duration: 1 })
           break
         default:
-          obj.$store.commit('SET_showForum', true)
-          obj.$store.commit('SET_menus', ['论坛', '自定义查询'])
+          // obj.$store.commit('SET_menus', ['论坛', '自定义查询'])
           obj.$store.commit('SET_menu', [4, '论坛'])
           obj.$store.commit('SET_post', [])
           obj.$store.commit('SET_forumPage', 1)

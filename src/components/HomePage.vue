@@ -20,6 +20,7 @@
     <div class="panel" v-bind:class="panel">
       <PopRight v-if="infoLevel[1] > 0"></PopRight>
       <HomeMenu v-else-if="menu[1] === '菜单'"></HomeMenu>
+      <Introduce v-else-if="menu[1] === '介绍'"></Introduce>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
       <Edit v-else></Edit>
     </div>
@@ -27,12 +28,14 @@
     <div class="panel" v-bind:class="panel">
       <PopRight v-if="infoLevel[2] > 0"></PopRight>
       <HomeMenu v-else-if="menu[2] === '菜单'"></HomeMenu>
+      <Introduce v-else-if="menu[2] === '介绍'"></Introduce>
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
     <div class="panel" v-bind:class="panel">
       <PopRight v-if="infoLevel[3] > 0"></PopRight>
       <HomeMenu v-else-if="menu[3] === '菜单'"></HomeMenu>
+      <Introduce v-else-if="menu[3] === '介绍'"></Introduce>
       <Charts v-else-if="menu[3] == '报表'"></Charts>
       <Report v-else></Report>
     </div>
@@ -40,6 +43,7 @@
     <div class="panel" v-bind:class="panel">
       <Forum v-if="menu[4] === '论坛'"></Forum>
       <HomeMenu v-else-if="menu[4] === '菜单'"></HomeMenu>
+      <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
       <New v-else-if="menu[4] === '新建帖子'"></New>
       <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent>
     </div>
@@ -55,21 +59,22 @@
   import PopRight from './common/PopRight'
   import MiniBar from './common/MiniBar'
   import HomeMenu from './common/HomeMenu'
-  import User from './user/User'
-  import Login from './user/Login'
+  import Introduce from './common/Introduce'
   import Edit from './edit/Edit'
   import SingleGroup from './edit/SingleGroup'
-  import Library from './library/Library'
-  import Report from './stat/Report'
-  import Charts from './stat/Charts'
   import ForumContent from './forum/ForumContent'
   import Forum from './forum/Forum'
   import New from './forum/New'
+  import Library from './library/Library'
+  import Report from './stat/Report'
+  import Charts from './stat/Charts'
+  import User from './user/User'
+  import Login from './user/Login'
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, Library,
-      Report, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, HomeMenu },
+      Report, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, HomeMenu, Introduce },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -150,12 +155,14 @@
       }
     },
     created: function () {
+      this.newVersion()
       storage.getItem('user', e => {
         if (e.result === 'success') {
           const edata = JSON.parse(e.data)
           this.$store.commit('SET_user', edata)
           this.$store.commit('SET_menu', [0, '个人信息'])
-          this.$store.commit('SET_userMenu', '个人信息')
+        } else {
+          this.$store.commit('SET_menu_all', ['用户登录', '介绍', '介绍', '介绍', '介绍'])
         }
       })
       const tabPageHeight = Utils.env.getPageHeight();
@@ -163,7 +170,6 @@
       // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
       const { tabStyles } = this
       this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' }
-      this.newVersion()
     },
     beforeMount: function () {
     },
@@ -186,8 +192,9 @@
         this.$store.commit('SET_menus', menus)
         this.$store.commit('SET_menu', [i, menu])
         // 论坛
-        if (i === 4) {
-          this.$store.commit('SET_menu', [i, '论坛'])
+        if (i === 4 && menu === '介绍') {
+          this.$store.commit('SET_menu', [i, menu])
+        } else if (i === 4) {
           this.$store.commit('SET_forumLabel', this.$store.state.Home.menu[activeTab])
           getServer(this, i, menu, this.$store.state.Home.menu[activeTab])
         }

@@ -7,27 +7,23 @@ const state = {
   infoLevel: [0, 0, 0, 0, 0],
   user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },
   isLoadingShow: false,
-  showForum: false,
   // 发布版本修改
   version: '0.0.1',
   serverVersion: { version: '0.0.1' }
 }
 
 const mutations = {
-  SET_userMenu (state, x) {
-    state.userMenu = x
-  },
   SET_miniBarTitle (state, x) {
     state.miniBarTitle = x
-  },
-  SET_showForum (state, x) {
-    state.showForum = x
   },
   SET_activeTab (state, x) {
     state.activeTab = x
   },
   SET_menus (state, x) {
     state.menus = x
+  },
+  SET_menu_all (state, x) {
+    state.menu = x
   },
   SET_menu (state, x) {
     state.menu.splice(x[0], 1, x[1])
@@ -78,12 +74,12 @@ const actions = {
   someAsyncTask ({ commit }) {
     commit('SET_userMenu')
     commit('SET_miniBarTitle')
-    commit('SET_showForum')
     commit('SET_serverVersion')
     commit('SET_activeTab')
     commit('SET_menus')
     commit('SET_menu')
     commit('SET_user')
+    commit('SET_menu_all')
     commit('SET_userData')
     commit('SET_isLoadingShow')
     commit('SET_info')

@@ -15,8 +15,8 @@ export function userLogin (obj, user) {
     if (res.ok) {
       if (res.data.login) {
         obj.$store.commit('SET_user', res.data)
-        obj.$store.commit('SET_menu', [0, '个人信息'])
         storage.setItem('user', JSON.stringify(res.data))
+        obj.$store.commit('SET_menu_all', ['个人信息', '菜单', '菜单', '菜单', '论坛'])
       } else {
         obj.$store.commit('SET_user', { loginResult: '账号或密码错误', login: false, data: { clipalm_version: 'BJ编码版' } })
       }
@@ -32,12 +32,13 @@ export function userLogin (obj, user) {
           })
         }
       })
+      obj.$store.commit('SET_menu_all', ['用户登录', '介绍', '介绍', '介绍', '介绍'])
     }
   })
 }
 
 export function userLogout (obj) {
-  obj.$store.commit('SET_menu', [0, '用户登录'])
+  obj.$store.commit('SET_menu_all', ['用户登录', '介绍', '介绍', '介绍', '介绍'])
   obj.$store.commit('SET_user', { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } })
   // 清空所有缓存
   storage.getAllKeys(event => {
