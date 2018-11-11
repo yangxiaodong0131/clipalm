@@ -2,7 +2,7 @@ const state = {
   activeTab: 0,
   menus: [],
   // 各个页面默认菜单
-  menu: ['用户登录', '菜单', '菜单', '菜单', '论坛'],
+  menu: ['用户登录', '菜单', '菜单', '菜单', '帖子列表'],
   infoPages: [[], [], [], [], []],
   infoLevel: [0, 0, 0, 0, 0],
   user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },

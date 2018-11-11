@@ -10,7 +10,7 @@
         </wxc-cell>
       </cell>
     </list>
-    <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2"></textarea>
+    <textarea class="textarea" placeholder="输入帖子内容" :autofocus=true value="" ></textarea>
     <wxc-button text="回复"
       class="submits"
       size="full"
@@ -19,7 +19,7 @@
 </template>
 <script>
 import { WxcPopup, WxcCell, WxcButton } from 'weex-ui'
-import { createForum, getServer } from '../../utils/server'
+import { createForum } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
   components: { WxcPopup, WxcCell, WxcButton },
@@ -29,6 +29,9 @@ export default {
     }
   },
   computed: {
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
     posts () {
       return this.$store.state.Forum.post
     },
@@ -46,9 +49,7 @@ export default {
     wxcButtonClicked () {
       if (this.$store.state.Home.user.login) {
         const ForumContent = { forum_id: this.$store.state.Forum.forumContent.id, content: this.content, username: this.$store.state.Home.user.data.username }
-        createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply')
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子内容'])
-        getServer(this, 'forumOne', '帖子', this.posts[this.forumIndex])
+        createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply', this.activeTab)
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
       }

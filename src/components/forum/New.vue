@@ -25,6 +25,9 @@ export default {
     posts () {
       return ''
     },
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
     specialConfigList () {
       return ''
     },
@@ -49,7 +52,7 @@ export default {
       if (this.$store.state.Home.user.login) {
         const forum = { username: this.$store.state.Home.user.data.username, label: this.$store.state.Forum.forumLabel, title: this.title }
         const ForumContent = { content: this.content, username: this.$store.state.Home.user.data.username }
-        createForum(this, { forum_all: { forum: forum, forum_content: ForumContent } }, 'create')
+        createForum(this, { forum_all: { forum: forum, forum_content: ForumContent } }, 'create', this.activeTab)
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
       }
