@@ -19,6 +19,7 @@ import { getServer } from '../../utils/server'
 export default {
   components: { WxcIndexlist, WxcPopup, WxcCell },
   created: function () {
+    this.getData()
   },
   data () {
     return {
@@ -42,30 +43,21 @@ export default {
     }
   },
   methods: {
-    wxcIndexlistItemClicked (e) {
-      this.$store.commit('SET_isBottomShow', true)
-      this.$store.commit('SET_info', e)
-      this.$store.commit('SET_infoLevel', 1)
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '分析详情'])
-      this.$store.commit('SET_infoMenu', '统计分析')
-      this.$store.commit('SET_infoPage', getDetails(`分析详情`, e))
-    },
-    swipe (e) {
-      if (e.direction === 'left' && this.$store.state.Home.infoPage1.info !== '') {
-        this.$store.commit('SET_infoMenu', '分析详情')
-        this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '分析详情'])
-        this.$store.commit('SET_infoLevel', 1)
+    getData () {
+      const i = this.$store.state.Home.activeTab
+      const menu = this.$store.state.Home.menu[i]
+      if (this.stats.length === 0) {
+        getServer(this, i, menu)
       }
+    },
+    wxcIndexlistItemClicked (e) {
+      this.$store.commit('SET_infoLevel', 1)
+      const details = getDetails('分析详情', e)
+      this.$store.commit('SET_info', details)
     },
     fetch () {
       this.$store.commit('SET_statPage', this.$store.state.Stat.statPage + 1)
       getServer(this, 'all', '统计分析')
-    },
-    openBottomPopup () {
-      this.isBottomShow = true
-    },
-    popupOverlayBottomClick () {
-      this.isBottomShow = false
     }
   }
 }

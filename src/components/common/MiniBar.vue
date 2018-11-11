@@ -8,7 +8,7 @@
                     :show="isShow"
                     left-button=""
                     :use-default-return="false"
-                    @wxcMinibarRightButtonClicked="minibarRightButtonClick"
+                    @wxcMinibarRightButtonClicked="homeButtonClick"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
           <image src="http://210.75.199.113/images/left.png"
                  slot="left"
@@ -23,6 +23,69 @@
     </scroller>
   </div>
 </template>
+
+<script>
+import { WxcMinibar } from 'weex-ui'
+// const modal = weex.requireModule('modal')
+export default {
+  components: { WxcMinibar },
+  data () {
+    return {
+      rightButton: '',
+      leftButton: '',
+      isBottomShow: false
+    }
+  },
+  created () {
+  },
+  computed: {
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
+    menu () {
+      return this.$store.state.Home.menu[this.activeTab]
+    },
+    infoLevel () {
+      return this.$store.state.Home.infoLevel[this.activeTab]
+    },
+    isShow () {
+      let show = true
+      if (this.activeTab === 0 && this.menu === '用户登录') {
+        show = false
+      }
+      return show
+    },
+    leftButtonShow () {
+      let show = false
+      if (this.infoLevel === 0) {
+        show = false
+      } else {
+        show = true
+      }
+      return show
+    },
+    miniBarTitle () {
+      return this.$store.state.Home.miniBarTitle
+    },
+    homeButtonShow () {
+      let show = true
+      if (this.activeTab === 0) {
+        show = false
+      }
+      return show
+    }
+  },
+  methods: {
+    homeButtonClick () {
+      this.$store.commit('SET_infoLevel', 0)
+      this.$store.commit('SET_menu', [this.activeTab, '菜单'])
+    },
+    minibarLeftButtonClick () {
+      this.$store.commit('SET_infoLevel', this.infoLevel - 1)
+    }
+  }
+}
+</script>
 
 <style scoped>
   .wxc-demo {
@@ -47,123 +110,3 @@
     justify-content: center;
   }
 </style>
-
-<script>
-import { WxcMinibar } from 'weex-ui'
-// const modal = weex.requireModule('modal')
-export default {
-  components: { WxcMinibar },
-  data () {
-    return {
-      rightButton: '',
-      leftButton: '',
-      isBottomShow: false
-    }
-  },
-  created () {
-  },
-  computed: {
-    infoLevel () {
-      return this.$store.state.Home.infoLevel
-    },
-    isShow () {
-      let show = true
-      if (this.$store.state.Home.user.login === false) {
-        show = false
-      }
-      return show
-    },
-    leftButtonShow () {
-      let show = false
-      if (this.infoLevel === 0) {
-        show = false
-      } else {
-        show = true
-      }
-      return show
-    },
-    miniBarTitle () {
-      let title = this.$store.state.Home.miniBarTitle
-      if (this.$store.state.Home.activeTab === 0 && this.$store.state.Home.user.login) {
-        title = '个人信息'
-      }
-      return title
-    },
-    returnMenu () {
-      let menu = ''
-      switch (this.$store.state.Home.activeTab) {
-        case 1:
-          menu = this.$store.state.Edit.editMenu
-          break
-        case 2:
-          menu = this.$store.state.Library.libraryMenu
-          break
-        case 3:
-          menu = this.$store.state.Stat.statMenu
-          break
-        case 4:
-          menu = this.$store.state.Forum.forumMenu
-          break
-      }
-      return menu
-    },
-    homeButtonShow () {
-      let show = true
-      if (this.$store.state.Home.activeTab === 0) {
-        show = false
-      }
-      return show
-    }
-  },
-  methods: {
-    minibarRightButtonClick () {
-      const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_menu', [i, ''])
-      switch (i) {
-        case 0:
-          this.$store.commit('SET_miniBarTitle', '用户')
-          break
-        case 1:
-          this.$store.commit('SET_miniBarTitle', '病案')
-          break
-        case 2:
-          this.$store.commit('SET_miniBarTitle', '字典')
-          break
-        case 3:
-          this.$store.commit('SET_miniBarTitle', 'DRG分析')
-          break
-        case 4:
-          this.$store.commit('SET_miniBarTitle', '论坛')
-          break
-      }
-    },
-    minibarLeftButtonClick () {
-      const i = this.$store.state.Home.activeTab
-      const level = this.infoLevel - 1
-      switch (this.$store.state.Home.activeTab) {
-        case 0:
-          this.$store.commit('SET_miniBarTitle', '用户')
-          break
-        case 1:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Edit.editMenu)
-          break
-        case 2:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Library.libraryMenu)
-          break
-        case 3:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Stat.statMenu)
-          break
-        case 4:
-          this.$store.commit('SET_miniBarTitle', this.$store.state.Forum.forumMenu)
-          break
-      }
-      this.$store.commit('SET_infoLevel', level)
-      if (level === 0) {
-        console.log([i, this.returnMenu])
-        this.$store.commit('SET_menu', [i, this.returnMenu])
-      }
-    }
-  }
-}
-</script>

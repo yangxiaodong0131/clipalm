@@ -1,6 +1,6 @@
 <template>
   <div class="demo"
-    :show="infoPage.isBottomShow" @swipe="swipe"
+    @swipe="swipe"
     v-bind:style="panel">
     <list class="list" :show="true">
       <cell class="cell">
@@ -39,8 +39,6 @@
 <script>
 import { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow } from 'weex-ui'
 import { getServer } from '../../utils/server'
-import { getDetails } from '../../utils/details'
-// const modal = weex.requireModule('modal')
 export default {
   components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow },
   data () {
@@ -56,44 +54,18 @@ export default {
     }
   },
   computed: {
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
     infoLevel () {
-      return this.$store.state.Home.infoLevel
+      return this.$store.state.Home.infoLevel[this.activeTab] - 1
     },
     infoPage () {
-      let result = {}
-      switch (this.infoLevel) {
-        case 1:
-          result = this.$store.state.Home.infoPage1
-          break
-        case 2:
-          result = this.$store.state.Home.infoPage2
-          break
-        case 3:
-          result = this.$store.state.Home.infoPage3
-          break
-        case 4:
-          result = this.$store.state.Home.infoPage4
-          break
+      let infoPage = this.$store.state.Home.infoPages[this.activeTab][this.infoLevel]
+      if (!infoPage) {
+        infoPage = {}
       }
-      return result
-    },
-    returnMenu () {
-      let menu = ''
-      switch (this.$store.state.Home.activeTab) {
-        case 1:
-          menu = this.$store.state.Edit.editMenu
-          break
-        case 2:
-          menu = this.$store.state.Library.libraryMenu
-          break
-        case 3:
-          menu = '报表'
-          break
-        case 4:
-          menu = '论坛'
-          break
-      }
-      return menu
+      return infoPage
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
@@ -104,20 +76,11 @@ export default {
     }
   },
   methods: {
-    wxcRichTextLinkClick () {
-    },
-    popupOverlayBottomClick () {
-      this.$store.commit('SET_isBottomShow', false)
-    },
     wxcCellClicked (detail) {
       switch (detail.label) {
         case '入组DRG':
-          const details = getDetails('分析详情', this.infoPage.info)
           const drg = this.infoPage.info[detail.title]
-          this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-          this.$store.commit('SET_infoPage', details)
-          this.$store.commit('SET_miniBarTitle', `入组DRG-${drg}分析详情`)
-          getServer(this, 'statOne', 'info', drg)
+          getServer(this, this.activeTab, 'statInfo', drg)
           break
         default:
           break
@@ -128,40 +91,16 @@ export default {
       switch (this.infoPage.infoTitle) {
         case 'MDC规则详情':
           menu = 'ADRG'
-          getServer(this, 'adrgOne', 'ADRG', this.infoPage.info)
-          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
         case 'ADRG规则详情':
           menu = 'DRG'
-          getServer(this, 'drgOne', 'DRG', this.infoPage.info)
-          this.$store.commit('SET_miniBarTitle', `${menu}`)
           break
-        default :
+        default:
           break
       }
+      getServer(this, this.activeTab, menu, this.infoPage.info)
       this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_isBottomShow', false)
-      this.$store.commit('SET_library_menu', menu)
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, menu])
-    },
-    swipe (e) {
-      if (e.direction === 'right') {
-        const i = this.$store.state.Home.activeTab
-        if (this.infoLevel === 1) {
-          this.$store.commit('SET_infoLevel', 0)
-          this.$store.commit('SET_menu', [i, this.returnMenu])
-        } else {
-          this.$store.commit('SET_infoLevel', this.infoLevel - 1)
-        }
-      } else if (e.direction === 'left') {
-        if (this.infoLevel === 0) {
-          this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '详情'])
-        }
-        this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-      }
-    },
-    LongPress (e) {
-      this.a = '2'
+      this.$store.commit('SET_menu', [this.activeTab, menu])
     }
   }
 }
