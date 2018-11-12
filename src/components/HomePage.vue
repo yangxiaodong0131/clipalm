@@ -80,8 +80,8 @@
       tabs: [{
         title: '用户',
         menu:  ['用户登录', '个人信息'],
-        icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-        activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+        icon: 'http://210.75.199.113/images/user.png',
+        activeIcon: 'http://210.75.199.113/images/user_fill.png'
         }, {
           title: '病案',
           menu: ['未入组病历', 'QY病历', '低风险死亡病历', '费用异常病历', '单条分组'],

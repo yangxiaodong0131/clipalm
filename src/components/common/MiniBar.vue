@@ -50,7 +50,9 @@ export default {
     },
     isShow () {
       let show = true
-      if (this.activeTab === 0 && this.menu === '用户登录') {
+      if (this.menu === '介绍') {
+        show = false
+      } else if (this.activeTab === 0 && this.menu === '用户登录') {
         show = false
       }
       return show
