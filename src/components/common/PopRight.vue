@@ -5,6 +5,7 @@
     <list class="list" :show="true">
       <cell class="cell">
         <wxc-cell v-for="(detail, index) in infoPage.details"
+          v-if="infoPage.info[detail.title]"
           :key="index"
           :label="detail.label"
           :title="infoPage.info[detail.title]"
