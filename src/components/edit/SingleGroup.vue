@@ -126,7 +126,12 @@ export default {
       console.log(e)
     },
     submit () {
-      compDrg(this, this.wt4)
+      compDrg(this, this.wt4, this.$store.state.Home.activeTab)
+      // const details = getDetails('分组结果', this.wt4)
+      // this.$store.commit('SET_groupResult', this.wt4)
+      // const menu = '分组结果'
+      // const i = this.$store.state.Home.activeTab
+      // this.$store.commit('SET_menu', [i, menu])
     }
   }
 }

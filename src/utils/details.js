@@ -174,6 +174,18 @@ function icd9Info (data) {
   }
   return result
 }
+function compResultInfo (data) {
+  const result = {
+    info: data,
+    infoTitle: '分组结果',
+    isInfoButtonShow: false,
+    buttonText: ``,
+    details: [
+      {'label': '入组DRG', 'title': 'drg', 'hasArrow': false},
+      {'label': '分组日志', 'title': 'log', 'hasArrow': false}]
+  }
+  return result
+}
 const info = {
   infoTitle: '',
   isInfoButtonShow: false,
@@ -183,11 +195,15 @@ const info = {
 }
 
 export function getDetails (menu, data) {
+  console.log(data)
   let result = info
   if (data) {
     switch (menu) {
       case '病案详情':
         result = caseInfo(data)
+        break
+      case '分组结果':
+        result = compResultInfo(data)
         break
       case '分析详情':
         result = statInfo(data)

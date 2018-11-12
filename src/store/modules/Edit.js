@@ -14,6 +14,9 @@ const mutations = {
   },
   SET_wt4Info (state, x) {
     state.wt4Info = x
+  },
+  SET_groupResult (state, x) {
+    state.groupResult = x
   }
 }
 
@@ -22,6 +25,7 @@ const actions = {
     commit('SET_wt4Case')
     commit('SET_wt4Page')
     commit('SET_wt4Info')
+    commit('SET_groupResult')
   }
 }
 
