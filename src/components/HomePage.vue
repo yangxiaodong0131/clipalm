@@ -41,7 +41,6 @@
     </div>
     <!-- forum页 -->
     <div class="panel" v-bind:class="panel">
-      <text style="font-size:100px">{{menu[4]}}</text>
       <Forum v-if="menu[4] === '帖子列表'"></Forum>
       <HomeMenu v-else-if="menu[4] === '菜单'"></HomeMenu>
       <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
