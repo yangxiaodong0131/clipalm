@@ -1,5 +1,6 @@
 <template>
   <scroller class="container" v-bind:style="panel">
+    <div style="height:20px"></div>
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
@@ -23,6 +24,9 @@ export default {
   computed: {
     activeTab () {
       return this.$store.state.Home.activeTab
+    },
+    menu () {
+      return this.$store.state.Home.menu[this.activeTab]
     },
     posts () {
       return this.$store.state.Forum.post
@@ -65,8 +69,15 @@ export default {
     }
   },
   created () {
+    this.getData()
   },
   methods: {
+    getData () {
+      const i = this.$store.state.Home.activeTab
+      if (this.posts.length === 0) {
+        getServer(this, i, '帖子列表', { category: this.menu })
+      }
+    },
     wxcRichTextLinkClick (i) {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
       this.$store.commit('SET_forumIndex', i)
@@ -74,6 +85,10 @@ export default {
     },
     wxcButtonClicked () {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])
+    },
+    menuClicked (menu) {
+      this.$store.commit('SET_forumCategory', menu)
+      // console.log(menu)
     }
   }
 }

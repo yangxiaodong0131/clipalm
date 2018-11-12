@@ -73,7 +73,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_cv?plat=client&order=fee&page=${obj.$store.state.Stat.statPage}`
         break
       case '帖子列表':
-        url = `forum?plat=client&lable=&page=${obj.$store.state.Forum.forumPage}`
+        url = `forum?plat=client&lable=`
         break
     }
   } else {
@@ -88,7 +88,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_cv?plat=client&order=code&drg=${value}`
         break
       case '帖子列表':
-        url = `forum?plat=client&lable=${value.b_wt4_v1_id}&page=${obj.$store.state.Forum.forumPage}`
+        url = `forum?plat=client&lable=${value.b_wt4_v1_id}&username=${value.username}&category=${value.category}`
         break
       case '帖子':
         url = `forum?id=${value.id}`
@@ -153,7 +153,6 @@ export function createForum (obj, forum, type, activeTab) {
         case 'reply':
           modal.toast({ message: '回复成功', duration: 1 })
           obj.$store.commit('SET_menu', [activeTab, '帖子'])
-          console.log(activeTab)
           getServer(obj, activeTab, '帖子', res.data)
           break
         default:
@@ -203,7 +202,6 @@ function setStore (obj, activeTab, menu, rdata) {
           obj.$store.commit('SET_post', rdata.data)
           break
         case '帖子':
-          console.log(rdata.data[0])
           obj.$store.commit('SET_forumContent', rdata.data[0])
           break
       }

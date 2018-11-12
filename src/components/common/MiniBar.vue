@@ -26,6 +26,7 @@
 
 <script>
 import { WxcMinibar } from 'weex-ui'
+import { getServer } from '../../utils/server'
 // const modal = weex.requireModule('modal')
 export default {
   components: { WxcMinibar },
@@ -81,6 +82,9 @@ export default {
     homeButtonClick () {
       this.$store.commit('SET_infoLevel', 0)
       this.$store.commit('SET_menu', [this.activeTab, '菜单'])
+      if (this.activeTab === 4) {
+        getServer(this, this.activeTab, '帖子列表', { username: this.$store.state.Home.user.data.username })
+      }
     },
     minibarLeftButtonClick () {
       this.$store.commit('SET_infoLevel', this.infoLevel - 1)
