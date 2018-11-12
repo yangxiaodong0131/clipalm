@@ -1,5 +1,5 @@
 <template>
-  <div class="panel" v-bind:style="panel">
+  <div v-bind:style="panel">
     <div v-if="activeTab === 1">
       <text class="text">
       病案说明
@@ -90,9 +90,6 @@ export default {
 }
 </script>
 <style scoped>
-  .panel {
-    margin-top: 91px;
-  }
   .text {
     font-size: 25px;
   }
