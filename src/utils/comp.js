@@ -1,7 +1,7 @@
 const stream = weex.requireModule('stream')
 const urlConfig = require('./config.js')
 const qs = require('qs')
-export function compDrg (obj, wt4) {
+export function compDrg (obj, wt4, i) {
   stream.fetch({
     method: 'POST',
     type: 'json',
@@ -11,7 +11,8 @@ export function compDrg (obj, wt4) {
     body: qs.stringify(wt4)
   }, res => {
     if (res.ok) {
-      console.log(res.data)
+      obj.$store.commit('SET_groupResult', res.data)
+      obj.$store.commit('SET_menu', [i, '分组结果'])
     } else {
       obj.info = '- 网络连接失败 -'
     }
