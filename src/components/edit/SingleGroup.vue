@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6">
       <text class="title">主要诊断编码(必填)</text>
-      <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" :autofocus="true" value="B25.001"/>
+      <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" :autofocus="true" value="B25.000y001+J17.1*"/>
     </div>
     <div class="col-md-6">
       <text class="title">年龄(必填)</text>
@@ -88,7 +88,7 @@ export default {
       backgroundColor: '#ffffff',
       checkedBackgroundColor: '#ffb200'
     },
-    wt4: { B_WT4_V1_ID: -1, DISEASE_CODE: 'B25.001', AGE: '12', GENDER: '男', SF0100: -1, SF0102: -1, SF0108: -1, SF0104: -1, ACCTUAL_DAYS: 1, TOTAL_EXPEMSE: 1234.5, diages_code: '', oeprs_code: '' },
+    wt4: { B_WT4_V1_ID: -1, DISEASE_CODE: 'B25.000y001+J17.1*', AGE: '12', GENDER: '男', SF0100: -1, SF0102: -1, SF0108: -1, SF0104: -1, ACCTUAL_DAYS: 1, TOTAL_EXPENSE: 1234.5, diages_code: [], oeprs_code: [] },
     testData1: [
       { title: '缺失' },
       { title: '医嘱离院' },

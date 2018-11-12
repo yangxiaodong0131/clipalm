@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div v-bind:style="panel">
     <div v-if="activeTab === 1">
-      <text>
+      <text class="text">
       病案说明
       病案模块主要分为入组异常病案查询及分析，单条分组，自定义病案查询，三个模块。
       1.入组异常病案查询
@@ -33,7 +33,7 @@
       </text>
     </div>
     <div v-if="activeTab === 2">
-      <text>
+      <text class="text">
       字典说明
       提供现阶段临床上使用的所有疾病编码，肿瘤编码，DRG编码，病理编码等等，并提供编码的历史修订记录，可切换各版本。
       DRG字典
@@ -45,7 +45,7 @@
       </text>
     </div>
     <div v-if="activeTab === 3">
-      <text>
+      <text class="text">
       DRG分析
       运用DRG对病历进行分组，从而进行分析。对不同的用户提供定制不同的分析文案。可以将数据进行同期对比，环比等等，各不同机构同样提供对比。
       3.1 专家用户
@@ -57,7 +57,7 @@
       </text>
     </div>
     <div v-if="activeTab === 4">
-      <text style="font-size:200px">
+      <text class="text">
        论坛说明
       </text>
     </div>
@@ -65,13 +65,12 @@
 </template>
 
 <script>
-import { Utils, WxcButton } from 'weex-ui'
+import { } from 'weex-ui'
 
 export default {
-  components: { WxcButton },
+  components: { },
   data () {
     return {
-      height: Utils.env.getPageHeight() - 120
     }
   },
   computed: {
@@ -91,26 +90,7 @@ export default {
 }
 </script>
 <style scoped>
-  .demo-title {
-    font-size: 28px;
-    background-color: #C6E2FF;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 14px;
-    padding: 10px;
-  }
-  .demo {
-    width: 750px;
-    margin-top: 140px;
-  }
-  .row {
-    width: 750px;
-  }
-  .submits{
-    position: relative;
-    left: 23px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+  .text {
+    font-size: 25px;
   }
 </style>
