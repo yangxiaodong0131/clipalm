@@ -50,6 +50,10 @@ function statInfo (data) {
 }
 function mdcInfo (data) {
   const gridList = {}
+  const infoList = data.adrg.map((x) => {
+    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'ADRG', all: x}
+    return obj
+  })
   gridList['非QY小手术规则'] = data.icd9_aa.map((x) => {
     const obj = { title: x }
     return obj
@@ -57,8 +61,9 @@ function mdcInfo (data) {
   const result = {
     info: data,
     infoTitle: 'MDC规则详情',
-    isInfoButtonShow: true,
-    buttonText: `${data.code}-ADRG规则`,
+    infoListTitle: 'ADRG列表',
+    isInfoListShow: true,
+    infoList: infoList,
     gridList: gridList,
     details: [
       {'label': '编码', 'title': 'code', 'hasArrow': false},
@@ -70,6 +75,10 @@ function mdcInfo (data) {
 }
 function adrgInfo (data) {
   const gridList = {}
+  const infoList = data.drg.map((x) => {
+    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'DRG', all: x}
+    return obj
+  })
   gridList['主要诊断规则'] = data.icd10_aa.map((x) => {
     const obj = {}
     obj.title = x
@@ -93,8 +102,9 @@ function adrgInfo (data) {
   const result = {
     info: data,
     infoTitle: 'ADRG规则详情',
-    isInfoButtonShow: true,
-    buttonText: `${data.code}-DRG规则`,
+    isInfoListShow: true,
+    infoListTitle: 'DRG列表',
+    infoList: infoList,
     gridList: gridList,
     details: [
       {'label': '编码', 'title': 'code', 'hasArrow': false},

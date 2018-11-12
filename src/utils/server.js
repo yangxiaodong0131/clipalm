@@ -6,6 +6,7 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
+  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
@@ -80,6 +81,12 @@ export function getServer (obj, activeTab, menu, value = null) {
     switch (menu) {
       case 'ADRG':
         url = `rule_bj_adrg?plat=client&page=1&mdc=${value.mdc}&version=${version}`
+        break
+      case 'ADRG规则详情':
+        url = `rule_bj_adrg?plat=client&page=1&code=${value.code}&version=${version}`
+        break
+      case 'DRG规则详情':
+        url = `rule_bj_drg?plat=client&page=1&code=${value.code}&version=${version}`
         break
       case 'DRG':
         url = `rule_bj_drg?plat=client&page=1&adrg=${value.code}&version=${version}`
@@ -170,12 +177,14 @@ export function createForum (obj, forum, type, activeTab) {
 
 function setStore (obj, activeTab, menu, rdata) {
   let data = []
+  let details = {}
+  const infoLevel = obj.$store.state.Home.infoLevel
   switch (activeTab) {
     case 1:
       switch (menu) {
         case 'statInfo':
           obj.$store.commit('SET_infoLevel', 2)
-          const details = getDetails('分析详情', rdata.data[0])
+          details = getDetails('分析详情', rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         default:
@@ -187,9 +196,23 @@ function setStore (obj, activeTab, menu, rdata) {
       }
       break
     case 2:
-      data = obj.$store.state.Library.rule
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_rule', rdata.data)
+      switch (menu) {
+        case 'ADRG规则详情':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        case 'DRG规则详情':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        default:
+          data = obj.$store.state.Library.rule
+          data = data.concat(rdata.data)
+          obj.$store.commit('SET_rule', rdata.data)
+          break
+      }
       break
     case 3:
       data = obj.$store.state.Stat.statDrg

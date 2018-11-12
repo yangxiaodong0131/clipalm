@@ -6,7 +6,7 @@
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
       </div>
     </div>
-    <wxc-button text="新建帖子"
+    <wxc-button text="发帖"
           size="full"
           class="submits"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
