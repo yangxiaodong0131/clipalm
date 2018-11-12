@@ -42,12 +42,11 @@
     </div>
     <!-- forum页 -->
     <div class="panel" v-bind:class="panel">
-      <text style="font-size:100px">{{menu[4]}}</text>
-      <Forum v-if="menu[4] === '帖子列表'"></Forum>
-      <HomeMenu v-else-if="menu[4] === '菜单'"></HomeMenu>
+      <HomeMenu v-if="menu[4] === '菜单'"></HomeMenu>
       <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
       <New v-else-if="menu[4] === '新建帖子'"></New>
       <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent>
+      <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
   <mini-bar></mini-bar>
@@ -101,7 +100,7 @@
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
           title: '论坛',
-          menu: ['帖子列表'],
+          menu: ['用户', '病案', '字典', 'DRG分析'],
           icon: 'http://210.75.199.113/images/forum.png',
           activeIcon: 'http://210.75.199.113/images/forum_fill.png'
         }],
@@ -123,6 +122,9 @@
     computed: {
       activeTab () {
         return this.$store.state.Home.activeTab
+      },
+      user () {
+        return this.$store.state.Home.user
       },
       infoLevel () {
         return this.$store.state.Home.infoLevel
@@ -206,7 +208,7 @@
         } else if (i === 4) {
           this.$store.commit('SET_menu', [i, menu])
           this.$store.commit('SET_forumLabel', this.$store.state.Home.menu[activeTab])
-          getServer(this, i, menu, this.$store.state.Home.menu[activeTab])
+          getServer(this, i, '帖子列表', { username: this.user.data.username })
         }
       }
     }

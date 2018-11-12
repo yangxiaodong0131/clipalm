@@ -5,6 +5,7 @@
     <list class="list" :show="true">
       <cell class="cell">
         <wxc-cell v-for="(detail, index) in infoPage.details"
+          v-if="infoPage.info[detail.title]"
           :key="index"
           :label="detail.label"
           :title="infoPage.info[detail.title]"
@@ -26,11 +27,16 @@
               :list="gridList"></wxc-grid-select>
           <text class="title" style="font-size: 20px;" v-else >无</text>
         </div>
-        <wxc-button :text="infoPage.buttonText"
-              v-if="infoPage.isInfoButtonShow"
-              size="big"
-              class="btns"
-              @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <div>
+          <text class="title">{{infoPage.infoListTitle}}</text>
+          <wxc-cell v-for="(info, index) in infoPage.infoList"
+            :key="index"
+            :label="info.label"
+            :title="info.title"
+            :has-arrow="info.hasArrow"
+            @wxcCellClicked="wxcCellClicked2(info)">
+          </wxc-cell>
+        </div>
         <div style="height:200px"></div>
       </cell>
     </list>
@@ -86,21 +92,16 @@ export default {
           break
       }
     },
-    wxcButtonClicked () {
-      let menu = ''
-      switch (this.infoPage.infoTitle) {
-        case 'MDC规则详情':
-          menu = 'ADRG'
-          break
-        case 'ADRG规则详情':
-          menu = 'DRG'
-          break
-        default:
-          break
-      }
-      getServer(this, this.activeTab, menu, this.infoPage.info)
-      this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_menu', [this.activeTab, menu])
+    wxcCellClicked2 (e) {
+      // console.log(e.all)
+      // this.$store.commit('SET_infoLevel', 1)
+      // const details = getDetails(`${e.menu}规则详情`, e.all)
+      // this.$store.commit('SET_info', details)
+      // // console.log(e)
+      // let menu = ''
+      getServer(this, this.activeTab, `${e.menu}规则详情`, e.all)
+      // this.$store.commit('SET_infoLevel', 0)
+      // this.$store.commit('SET_menu', [this.activeTab, menu])
     }
   }
 }
