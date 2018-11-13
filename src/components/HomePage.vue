@@ -58,7 +58,6 @@
   import { getServer, getLastVersion } from '../utils/server'
   import Version from './common/Version'
   import PopRight from './common/PopRight'
-  import MiniBar from './common/MiniBar'
   import HomeMenu from './common/HomeMenu'
   import Introduce from './common/Introduce'
   import Edit from './edit/Edit'
@@ -76,7 +75,7 @@
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, GroupResult, Library,
-      Report, Forum, PopRight, MiniBar, ForumContent, Version, Charts, New, HomeMenu, Introduce },
+      Report, Forum, PopRight, ForumContent, Version, Charts, New, HomeMenu, Introduce },
     data: () => ({
       tabs: [{
         title: '用户',
@@ -100,7 +99,7 @@
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
           title: '论坛',
-          menu: ['用户', '病案', '字典', 'DRG分析'],
+          menu: ['用户反馈', '病案讨论', '字典交流', 'DRG分析', '论坛建议'],
           icon: 'http://210.75.199.113/images/forum.png',
           activeIcon: 'http://210.75.199.113/images/forum_fill.png'
         }],
