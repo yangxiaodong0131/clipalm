@@ -1,26 +1,29 @@
 <template>
   <div class="demo" v-bind:style="panel">
-    <wxc-button class="submits"
-      v-for="(menu, index) in menus" :key="index"
-      :text="menu"
-      type="white"
-      @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
-    <div v-if="activeTab === 4 && menu === '菜单'">
-      <text class="title">我的帖子</text>
-      <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="`rich-${index}`">
-        <div class="panel" @click="wxcRichTextLinkClick(index)">
-          <wxc-rich-text :config-list="specialList"></wxc-rich-text>
+    <div class="panel">
+      <wxc-button class="submits"
+        v-for="(menu, index) in menus" :key="index"
+        :text="menu"
+        type="white"
+        @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
+      <div v-if="activeTab === 4 && menu === '菜单'">
+        <text class="title">我的帖子</text>
+        <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="`rich-${index}`">
+          <div @click="wxcRichTextLinkClick(index)">
+            <wxc-rich-text :config-list="specialList"></wxc-rich-text>
+          </div>
         </div>
       </div>
     </div>
+    <mini-bar :title="menu"></mini-bar>
   </div>
 </template>
 
 <script>
 import { Utils, WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
-
+import MiniBar from '../common/MiniBar.vue'
 export default {
-  components: { WxcButton, WxcSpecialRichText, WxcRichText },
+  components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120
@@ -109,23 +112,15 @@ export default {
   }
   .demo {
     width: 750px;
-    margin-top: 140px;
+    /* margin-top: 21px; */
   }
-  .row {
-    width: 750px;
-  }
-  .submits{
+  .submits {
     position: relative;
     left: 23px;
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  .title {
-    text-align: center;
-    font-size: 35px;
-    background-color: #f2f3f4;
-  }
-  .text {
-    font-size: 35px;
+  .panel {
+    margin-top: 140px;
   }
 </style>

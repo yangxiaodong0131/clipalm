@@ -1,15 +1,16 @@
 <template>
   <div class="container" v-bind:class="container">
-      <list class="list" @loadmore="fetch" loadmoreoffset="30000">
-        <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
-          <wxc-cell :label="rule.code"
-                    @wxcCellClicked="wxcIndexlistItemClicked(rule)"
-                    :has-margin="false"
-                    :has-arrow="true"
-                    :arrow-icon="arrawSrc"
-                    :extraContent="rule.desc"></wxc-cell>
-        </cell>
-      </list>
+    <list class="list" @loadmore="fetch" loadmoreoffset="30000">
+      <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
+        <wxc-cell :label="rule.code"
+                  @wxcCellClicked="wxcIndexlistItemClicked(rule)"
+                  :has-margin="false"
+                  :has-arrow="true"
+                  :arrow-icon="arrawSrc"
+                  :extraContent="rule.desc"></wxc-cell>
+      </cell>
+    </list>
+    <mini-bar :title="menu"></mini-bar>
   </div>
 </template>
 
@@ -17,9 +18,10 @@
 import { WxcCell } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
+import MiniBar from '../common/MiniBar.vue'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell },
+  components: { WxcCell, MiniBar },
   data () {
     return {
       height: 400,
@@ -77,8 +79,10 @@ export default {
 }
 </script>
 <style scoped>
-.container {
-  margin-top: 91px;
-  width: 750px;
-}
+  .container {
+    width: 750px;
+  }
+  .list {
+    margin-top: 91px;
+  }
 </style>
