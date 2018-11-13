@@ -9,19 +9,25 @@
                   :arrow-icon="arrawSrc"
                   :extraContent="rule.desc"></wxc-cell>
       </cell>
+      <cell style="height:200px">
+        <wxc-button text="加载更多"
+          class="submits"
+          size="big"
+          @wxcButtonClicked="fetch"></wxc-button>
+      </cell>
     </list>
     <mini-bar :title="menu"></mini-bar>
   </div>
 </template>
 
 <script>
-import { WxcCell } from 'weex-ui'
+import { WxcCell, WxcButton } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell, MiniBar },
+  components: { WxcCell, MiniBar, WxcButton },
   data () {
     return {
       height: 400,
@@ -33,11 +39,14 @@ export default {
     this.getData()
   },
   computed: {
+    activeTab: {
+      get () {
+        return this.$store.state.Home.activeTab
+      }
+    },
     menu: {
       get () {
-        const i = this.$store.state.Home.activeTab
-        const menu = this.$store.state.Home.menu[i]
-        return menu
+        return this.$store.state.Home.menu[this.activeTab]
       }
     },
     rules: {
@@ -72,7 +81,7 @@ export default {
     fetch () {
       if (this.menu !== 'MDC') {
         this.$store.commit('SET_libraryPage', this.$store.state.Library.page + 1)
-        getServer(this, 'all', this.menu)
+        getServer(this, this.activeTab, this.menu)
       }
     }
   }
@@ -84,5 +93,10 @@ export default {
   }
   .list {
     margin-top: 91px;
+  }
+  .submits{
+    position: relative;
+    left: 210px;
+    top: 1
   }
 </style>
