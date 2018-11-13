@@ -28,6 +28,9 @@ export default {
     activeTab () {
       return this.$store.state.Home.activeTab
     },
+    forumModule () {
+      return this.$store.state.Forum.forumModule
+    },
     specialConfigList () {
       return ''
     },
@@ -50,7 +53,7 @@ export default {
     },
     wxcButtonClicked () {
       if (this.$store.state.Home.user.login) {
-        const forum = { username: this.$store.state.Home.user.data.username, label: this.$store.state.Forum.forumLabel, title: this.title }
+        const forum = { username: this.$store.state.Home.user.data.username, label: this.$store.state.Forum.forumLabel, title: this.title, module: this.forumModule }
         const ForumContent = { content: this.content, username: this.$store.state.Home.user.data.username }
         createForum(this, { forum_all: { forum: forum, forum_content: ForumContent } }, 'create', this.activeTab)
       } else {

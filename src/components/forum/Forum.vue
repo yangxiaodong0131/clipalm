@@ -2,7 +2,7 @@
   <scroller class="container" v-bind:style="panel">
     <div style="height:20px"></div>
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
-      <div class="panel" @click="wxcRichTextLinkClick(index)">
+      <div class="panel2" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
       </div>
     </div>
@@ -10,15 +10,17 @@
           size="full"
           class="submits"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    <mini-bar :title="menu"></mini-bar>
   </scroller>
 </template>
 
 <script>
 import { WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
+import MiniBar from '../common/MiniBar.vue'
 import { getServer } from '../../utils/server'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcSpecialRichText, WxcButton, WxcRichText },
+  components: { WxcSpecialRichText, WxcButton, WxcRichText, MiniBar },
   data: () => ({
   }),
   computed: {
@@ -95,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-.panel {
+.panel2 {
   width: 750px;
   background-color: #f2f3f4;
   font-size: 30px;
@@ -109,6 +111,9 @@ export default {
   padding-bottom: 15px;
   padding-left: 15px;
   padding-right: 15px;
+}
+.panel {
+  margin-top: 140px;
 }
 .container {
   margin-top: 91px;

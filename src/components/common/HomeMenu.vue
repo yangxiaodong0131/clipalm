@@ -6,7 +6,7 @@
         :text="menu"
         type="white"
         @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
-      <div v-if="activeTab === 4 && menu === '菜单'">
+      <div v-if="activeTab === 4 && menu === '论坛'">
         <text class="title">我的帖子</text>
         <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="`rich-${index}`">
           <div @click="wxcRichTextLinkClick(index)">
@@ -22,6 +22,7 @@
 <script>
 import { Utils, WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
+import { getServer } from '../../utils/server'
 export default {
   components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar },
   data () {
@@ -93,9 +94,15 @@ export default {
           break
         case 4:
           this.$store.commit('SET_post', [])
+          this.$store.commit('SET_forumModule', menu)
           break
       }
       this.$store.commit('SET_menu', [this.activeTab, menu])
+    },
+    wxcRichTextLinkClick (i) {
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
+      this.$store.commit('SET_forumIndex', i)
+      getServer(this, this.activeTab, '帖子', this.posts[i])
     }
   }
 }
