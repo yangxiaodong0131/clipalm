@@ -1,5 +1,6 @@
 <template>
   <div class="panel" v-bind:style="panel">
+    <mini-bar title="1235"></mini-bar>
     <category title="--用户名--"></category>
     <text class="red" slot="title" style="">{{user.username}}</text>
     <category title="--选择用户功能--"></category>
@@ -45,12 +46,13 @@
 <script>
 import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
+import MiniBar from '../common/MiniBar.vue'
 import { userLogout, updateUser } from '../../utils/user'
 const modal = weex.requireModule('modal')
 
 export default {
   name: 'user-doc',
-  components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell },
+  components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
   data: () => ({
     customStyles: {
       lineSpacing: '14px',
