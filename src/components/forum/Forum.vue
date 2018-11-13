@@ -1,7 +1,7 @@
 <template>
   <scroller class="container" v-bind:style="panel">
-    <div style="height:20px"></div>
-    <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
+    <div class="div" style="height:20px"></div>
+    <div class="specialrich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel2" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
       </div>
@@ -116,7 +116,6 @@ export default {
   margin-top: 140px;
 }
 .container {
-  margin-top: 91px;
   width: 750px;
   font-size: 30px;
 }
@@ -124,5 +123,8 @@ export default {
   position: relative;
   left: 23px;
   top: 1px;
+}
+.div {
+  margin-top: 91px;
 }
 </style>

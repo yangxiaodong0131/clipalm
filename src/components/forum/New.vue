@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-bind:style="panel">
-    <input type="text" style="height:80;padding:20;" placeholder="输入帖子标题" class="input" :autofocus=true value="" @input="oninput"/>
+    <input class="input" type="text" placeholder="输入帖子标题" :autofocus=true value="" @input="oninput"/>
     <div class="wrapper">
       <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" :autofocus=true value="" ></textarea>
     </div>
@@ -8,15 +8,17 @@
           size="full"
           class="submits"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    <mini-bar title="发帖"></mini-bar>
   </div>
 </template>
 
 <script>
 import { WxcButton } from 'weex-ui'
 import { createForum } from '../../utils/server'
+import MiniBar from '../common/MiniBar.vue'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcButton },
+  components: { WxcButton, MiniBar },
   data: () => ({
     title: '123456',
     content: '1548789'
@@ -81,7 +83,6 @@ export default {
     padding-right: 15px;
   }
 .container {
-  margin-top: 91px;
   width: 750px;
   font-size: 30px;
 }
@@ -110,5 +111,10 @@ export default {
   margin-top: 20px;
   left: 23px;
   top: 1px;
+}
+.input {
+  margin-top: 91px;
+  height: 80px;
+  padding: 20px;
 }
 </style>

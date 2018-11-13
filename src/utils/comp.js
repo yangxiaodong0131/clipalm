@@ -1,3 +1,4 @@
+import { getDetails } from './details.js'
 const stream = weex.requireModule('stream')
 const urlConfig = require('./config.js')
 const qs = require('qs')
@@ -11,8 +12,10 @@ export function compDrg (obj, wt4, i) {
     body: qs.stringify(wt4)
   }, res => {
     if (res.ok) {
-      obj.$store.commit('SET_groupResult', res.data)
-      obj.$store.commit('SET_menu', [i, '分组结果'])
+      const index = obj.$store.state.Home.activeTab
+      const menu = obj.$store.state.Home.menu[index]
+      const result = getDetails(menu, res.data)
+      obj.$store.commit('SET_groupResult', result)
     } else {
       obj.info = '- 网络连接失败 -'
     }

@@ -202,7 +202,7 @@ export function getDetails (menu, data) {
       case '病案详情':
         result = caseInfo(data)
         break
-      case '分组结果':
+      case '单条分组':
         result = compResultInfo(data)
         break
       case '分析详情':

@@ -1,6 +1,11 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
     <text class="demo-title">{{title}}</text>
+    <!-- <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
+      <div class="panel" @click="wxcRichTextLinkClick(index)">
+        <wxc-rich-text :config-list="specialList"></wxc-rich-text>
+      </div>
+    </div> -->
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
@@ -37,6 +42,50 @@ export default {
     this.getData()
   },
   computed: {
+    specialConfigList () {
+      const configs = []
+      this.wt4Case.map((x) => {
+        console.log(x)
+        const config = [
+          {
+            type: 'tag',
+            value: '诊断编码:',
+            style: {
+              fontSize: 34,
+              color: '#3D3D3D',
+              borderColor: '#FFC900',
+              backgroundColor: '#FFC900',
+              borderRadius: 14
+            }
+          },
+          {
+            type: 'text',
+            value: x.disease_code,
+            theme: 'black',
+            style: { fontSize: 35 }
+          },
+          {
+            type: 'tag',
+            value: '诊断名称:',
+            style: {
+              fontSize: 34,
+              color: '#3D3D3D',
+              borderColor: '#FFC900',
+              backgroundColor: '#FFC900',
+              borderRadius: 14
+            }
+          },
+          {
+            type: 'text',
+            value: x.disease_name,
+            theme: 'black',
+            style: { fontSize: 35 }
+          }
+        ]
+        configs.push(config)
+      })
+      return configs
+    },
     menu: {
       get () {
         const i = this.$store.state.Home.activeTab
@@ -69,6 +118,7 @@ export default {
           }
           return obj
         })
+        console.log(data)
         return data
       }
     },
@@ -89,6 +139,7 @@ export default {
     }
   },
   methods: {
+    wxcRichTextLinkClick () {},
     getData () {
       const i = this.$store.state.Home.activeTab
       const menu = this.$store.state.Home.menu[i]

@@ -22,7 +22,6 @@
       <HomeMenu v-else-if="menu[1] === '病案'"></HomeMenu>
       <Introduce v-else-if="menu[1] === '介绍'"></Introduce>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
-      <GroupResult v-else-if="menu[1] == '分组结果'"></GroupResult>
       <Edit v-else></Edit>
     </div>
     <!-- library页 -->
@@ -62,7 +61,6 @@
   import Introduce from './common/Introduce'
   import Edit from './edit/Edit'
   import SingleGroup from './edit/SingleGroup'
-  import GroupResult from './edit/GroupResult'
   import ForumContent from './forum/ForumContent'
   import Forum from './forum/Forum'
   import New from './forum/New'
@@ -74,7 +72,7 @@
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
   export default {
-    components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, GroupResult, Library,
+    components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, Library,
       Report, Forum, PopRight, ForumContent, Version, Charts, New, HomeMenu, Introduce },
     data: () => ({
       tabs: [{
