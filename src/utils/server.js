@@ -175,6 +175,7 @@ export function createForum (obj, forum, type, activeTab) {
 }
 
 function setStore (obj, activeTab, menu, rdata) {
+  console.log([activeTab, menu])
   let data = []
   let details = {}
   const infoLevel = obj.$store.state.Home.infoLevel
@@ -209,7 +210,7 @@ function setStore (obj, activeTab, menu, rdata) {
         default:
           data = obj.$store.state.Library.rule
           data = data.concat(rdata.data)
-          obj.$store.commit('SET_rule', rdata.data)
+          obj.$store.commit('SET_rule', data)
           break
       }
       break

@@ -2,12 +2,17 @@
   <div class="container">
     <list class="list">
       <cell class="cell" v-for="(data, index) in datas" v-bind:key="index">
+        <text class="type-text">Weex富文本混排方案：</text>
+        <wxc-rich-text class="special-rich"
+          :config-list="configList"></wxc-rich-text>
         <wxc-cell
           :label="`${index+1}#`"
           :title="data.content"
-          :extraContent="`${data.username}-${data.datetime}`"
+          :desc="data.username"
+          :extraContent="data.datetime"
           @wxcCellClicked="returnContent(data, index+1)"
           :has-margin="true">
+          <text class="red" slot="title">{{data.content}}</text>
         </wxc-cell>
         <div v-if="data.reply !== []" v-for="(reply, index) in data.reply" v-bind:key="`reply-${index}`">
           <wxc-cell
@@ -32,14 +37,46 @@
   </div>
 </template>
 <script>
-import { WxcPopup, WxcCell, WxcButton } from 'weex-ui'
+import { WxcPopup, WxcCell, WxcButton, WxcRichText, WxcSpecialRichText } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
 import { createForum } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcPopup, WxcCell, WxcButton, MiniBar },
+  components: { WxcPopup, WxcCell, WxcButton, MiniBar, WxcRichText, WxcSpecialRichText },
   data () {
     return {
+      configList: [{
+        type: 'icon',
+        src: 'https://gw.alicdn.com/tfs/TB1RRVWQXXXXXasXpXXXXXXXXXX-24-22.png'
+      }, {
+        type: 'text',
+        value: '黄色主题',
+        theme: 'yellow'
+      }, {
+        type: 'link',
+        value: '自定义颜色link',
+        href: 'https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js',
+        style: {
+          color: '#546E7A'
+        }
+      }, {
+        type: 'icon',
+        src: 'https://gw.alicdn.com/tfs/TB1qygJRXXXXXX2XFXXXXXXXXXX-117-37.png'
+      }, {
+        type: 'tag',
+        value: '满100减20',
+        theme: 'red'
+      }, {
+        type: 'tag',
+        value: '自定义标签',
+        style: {
+          fontSize: 26,
+          color: '#ffffff',
+          borderColor: '#3d3d3d',
+          backgroundColor: '#546E7A',
+          height: 40
+        }
+      }],
       content: '',
       textShow: false,
       text: '',
@@ -103,6 +140,8 @@ export default {
 }
 .container {
   width: 750px;
+}
+.list {
   margin-top: 91px;
 }
 </style>

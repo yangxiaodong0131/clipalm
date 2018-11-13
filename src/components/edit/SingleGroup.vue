@@ -1,80 +1,102 @@
 <template>
-  <scroller class="container" v-bind:style="panel">
-    <div class="row">
-      <div class="col-md-6">
-      <text class="title">主要诊断编码(必填)</text>
-      <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" :autofocus="true" value="B25.000y001+J17.1*"/>
-    </div>
-    <div class="col-md-6">
-      <text class="title">年龄(必填)</text>
-      <input type="number" name="AGE" placeholder="请输入年龄" class="input" :autofocus="true" v-model="wt4.AGE"/>
-    </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-      <text class="title">性别(必填)</text>
-      <input type="text" name="SEX" placeholder="请输入性别" class="input" :autofocus="true" v-model="wt4.GENDER"/>
-    </div>
-    <div class="col-md-6">
-      <text class="title">住院天数(必填)</text>
-      <input type="number" name="ACCTUAL_DAYS" placeholder="请输入住院天数" class="input" :autofocus="true" v-model="wt4.ACCTUAL_DAYS"/>
-    </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-      <text class="title">总费用(必填)</text>
-      <input type="text" name="TOTAL_EXPENSE" placeholder="请输入总费用" class="input" :autofocus="true" v-model="wt4.TOTAL_EXPEMSE"/>
-    </div>
-    <div class="col-md-6">
-      <text class="title">新生儿出生天数</text>
-      <input type="number" name="SF0100" placeholder="请输入新生儿出生天数，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0100"/>
-    </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-      <text class="title">新生儿入院体重</text>
-      <input type="number" name="SF0102" placeholder="新生儿入院体重，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0102"/>
-    </div>
-    <div class="col-md-6">
-      <text class="title">呼吸机使用时间</text>
-      <input type="number" name="SF0104" placeholder="呼吸机使用时间，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0104"/>
-    </div>
-    </div>
-    <div>
-      <text class="title">出院转归(必填)</text>
-      <wxc-grid-select
-        :single="true"
-        :cols="5"
-        :customStyles="customStyles"
-        :list="testData1"
-        @select="params => onSelect('res3', params)">
-      </wxc-grid-select>
+  <list class="container">
+    <cell class="panel">
+      <div class="row">
+        <div class="col-md-6">
+        <text class="title">主要诊断编码(必填)</text>
+        <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" :autofocus="true" value="B25.000y001+J17.1*"/>
       </div>
-    </div>
-    <div>
-      <text class="title">其他诊断编码</text>
-      <textarea placeholder="请输入其他诊断编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="diags_code"></textarea>
-    </div>
-    <div>
-      <text class="title">手术/操作编码</text>
-      <textarea placeholder="请输入手术/操作编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="opers_code"></textarea>
-    </div>
-    <div class="sub">
-      <wxc-button text="提交分组"
-        class="submits"
-        @wxcButtonClicked='submit'></wxc-button>
-    </div>
-    <div style="height:400px"></div>
-  </scroller>
+      <div class="col-md-6">
+        <text class="title">年龄(必填)</text>
+        <input type="number" name="AGE" placeholder="请输入年龄" class="input" :autofocus="true" v-model="wt4.AGE"/>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+        <text class="title">性别(必填)</text>
+        <input type="text" name="SEX" placeholder="请输入性别" class="input" :autofocus="true" v-model="wt4.GENDER"/>
+      </div>
+      <div class="col-md-6">
+        <text class="title">住院天数(必填)</text>
+        <input type="number" name="ACCTUAL_DAYS" placeholder="请输入住院天数" class="input" :autofocus="true" v-model="wt4.ACCTUAL_DAYS"/>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+        <text class="title">总费用(必填)</text>
+        <input type="text" name="TOTAL_EXPENSE" placeholder="请输入总费用" class="input" :autofocus="true" v-model="wt4.TOTAL_EXPEMSE"/>
+      </div>
+      <div class="col-md-6">
+        <text class="title">新生儿出生天数</text>
+        <input type="number" name="SF0100" placeholder="请输入新生儿出生天数，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0100"/>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+        <text class="title">新生儿入院体重</text>
+        <input type="number" name="SF0102" placeholder="新生儿入院体重，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0102"/>
+      </div>
+      <div class="col-md-6">
+        <text class="title">呼吸机使用时间</text>
+        <input type="number" name="SF0104" placeholder="呼吸机使用时间，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0104"/>
+      </div>
+      </div>
+      <div>
+        <text class="title">出院转归(必填)</text>
+        <wxc-grid-select
+          :single="true"
+          :cols="5"
+          :customStyles="customStyles"
+          :list="testData1"
+          @select="params => onSelect('res3', params)">
+        </wxc-grid-select>
+        </div>
+      </div>
+      <div>
+        <text class="title">其他诊断编码</text>
+        <textarea placeholder="请输入其他诊断编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="diags_code"></textarea>
+      </div>
+      <div>
+        <text class="title">手术/操作编码</text>
+        <textarea placeholder="请输入手术/操作编码，中间以逗号分隔，如'B25.901,B25.902" rows='3' name="opers_code"></textarea>
+      </div>
+      <div class="sub">
+        <wxc-button text="提交分组"
+          class="submits"
+          @wxcButtonClicked='submit'></wxc-button>
+      </div>
+      <div class="cell">
+        <wxc-simple-flow class="cell" :list="groupResult" :themeColor="themeColor"></wxc-simple-flow>
+        <!-- <wxc-cell class="cell" v-for="(detail, index) in groupResult.details"
+          v-if="groupResult.info[detail.title]"
+          :key="index"
+          :label="detail.label"
+          :title="groupResult.info[detail.title]"
+          :has-arrow="detail.hasArrow"
+          ></wxc-cell> -->
+      </div>
+      <div style="height:400px"></div>
+    </cell>
+    <mini-bar :title="menu"></mini-bar>
+  </list>
 </template>
 
 <script>
-import { WxcGridSelect, WxcButton } from 'weex-ui'
+import { WxcGridSelect, WxcButton, WxcCell, WxcSimpleFlow } from 'weex-ui'
 import { compDrg } from '../../utils/comp'
+import MiniBar from '../common/MiniBar.vue'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcGridSelect, WxcButton },
+  components: { WxcGridSelect, WxcButton, MiniBar, WxcCell, WxcSimpleFlow },
   data: () => ({
+    themeColor: {
+      lineColor: '#bf280b',
+      pointInnerColor: '#b95048',
+      pointBorderColor: '#bf280b',
+      highlightTitleColor: '#bf280b',
+      highlightPointInnerColor: '#bf280b',
+      highlightPointBorderColor: '#d46262'
+    },
     customStyles: {
       lineSpacing: '14px',
       width: '140px',
@@ -100,12 +122,43 @@ export default {
     testData2: [{ title: '男', checked: true }, { title: '女' }]
   }),
   computed: {
+    scroller () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
+    },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
       const style = {
         height: tabPageHeight
       }
       return style
+    },
+    menu: {
+      get () {
+        const i = this.$store.state.Home.activeTab
+        const menu = this.$store.state.Home.menu[i]
+        return menu
+      }
+    },
+    groupResult: {
+      get () {
+        const groupResult = this.$store.state.Edit.groupResult
+        const datas = []
+        if (groupResult.details !== undefined) {
+          groupResult.details.map((x) => {
+            const data = {
+              'desc': groupResult.info[x.title],
+              'highlight': true,
+              'title': x.label
+            }
+            datas.push(data)
+          })
+        }
+        return datas
+      }
     }
   },
   methods: {
@@ -139,7 +192,6 @@ export default {
 <style scoped>
 .container {
   width: 750px;
-  margin-top: 91px;
 }
 .input {
   font-size: 30px;
@@ -167,16 +219,22 @@ export default {
   justify-content: space-around;
   padding-bottom: 20px;
 }
-.textarea{
+.textarea {
   font-size: 15px;
   width: 750px;
   border-width: 1px;
   border-color: #aaa;
   border-radius: 40px;
 }
-.submits{
+.submits {
   position: relative;
   left: 23px;
   margin-top: 70px;
+}
+.panel {
+  margin-top: 91px;
+}
+.cell {
+  background-color: #C6e2FF;
 }
 </style>
