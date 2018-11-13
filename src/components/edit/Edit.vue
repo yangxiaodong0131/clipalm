@@ -19,6 +19,12 @@
           </wxc-cell>
         </div>
       </cell>
+      <cell style="height:200px">
+        <wxc-button text="加载更多"
+          class="submits"
+          size="big"
+          @wxcButtonClicked="fetch"></wxc-button>
+      </cell>
     </list>
     <mini-bar :title="menu"></mini-bar>
   </div>
@@ -86,12 +92,11 @@ export default {
       })
       return configs
     },
-    menu: {
-      get () {
-        const i = this.$store.state.Home.activeTab
-        const menu = this.$store.state.Home.menu[i]
-        return menu
-      }
+    activeTab () {
+      return this.$store.state.Home.activeTab
+    },
+    menu () {
+      return this.$store.state.Home.menu[this.activeTab]
     },
     wt4Case: {
       get () {
@@ -118,7 +123,6 @@ export default {
           }
           return obj
         })
-        console.log(data)
         return data
       }
     },
@@ -154,10 +158,7 @@ export default {
     },
     fetch () {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
-      getServer(this, 'all', this.$store.state.Edit.editMenu)
-    },
-    test () {
-      console.log('dasdas')
+      getServer(this, this.activeTab, this.menu)
     }
   }
 }
@@ -176,5 +177,10 @@ export default {
   }
   .demo {
     width: 750px;
+  }
+  .submits{
+    position: relative;
+    left: 210px;
+    top: 1
   }
 </style>

@@ -8,6 +8,12 @@
             :has-arrow="true"
             :extraContent="stat.desc"></wxc-cell>
       </cell>
+      <cell style="height:200px">
+        <wxc-button text="加载更多"
+          class="submits"
+          size="big"
+          @wxcButtonClicked="fetch"></wxc-button>
+      </cell>
     </list>
     <mini-bar :title="menu"></mini-bar>
   </div>
@@ -31,17 +37,14 @@ export default {
     }
   },
   computed: {
-    menu: {
-      get () {
-        const i = this.$store.state.Home.activeTab
-        const menu = this.$store.state.Home.menu[i]
-        return menu
-      }
+    activeTab () {
+      return this.$store.state.Home.activeTab
     },
-    stats: {
-      get () {
-        return this.$store.state.Stat.statDrg
-      }
+    menu () {
+      return his.$store.state.Home.menu[this.activeTab]
+    },
+    stats () {
+      return this.$store.state.Stat.statDrg
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
@@ -66,7 +69,7 @@ export default {
     },
     fetch () {
       this.$store.commit('SET_statPage', this.$store.state.Stat.statPage + 1)
-      getServer(this, 'all', '统计分析')
+      getServer(this, this.activeTab, this.menu)
     }
   }
 }
@@ -78,5 +81,10 @@ export default {
   }
   .list {
     margin-top: 91px;
+  }
+  .submits{
+    position: relative;
+    left: 210px;
+    top: 1
   }
 </style>
