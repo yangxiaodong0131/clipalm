@@ -41,7 +41,7 @@ export default {
       return this.$store.state.Home.activeTab
     },
     menu () {
-      return his.$store.state.Home.menu[this.activeTab]
+      return this.$store.state.Home.menu[this.activeTab]
     },
     stats () {
       return this.$store.state.Stat.statDrg
