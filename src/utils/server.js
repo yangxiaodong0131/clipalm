@@ -94,7 +94,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_cv?plat=client&order=code&drg=${value}`
         break
       case '帖子列表':
-        url = `forum?plat=client&lable=${value.b_wt4_v1_id}&username=${value.username}&category=${value.category}`
+        url = `forum?plat=client&lable=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`
         break
       case '帖子':
         url = `forum?id=${value.id}`

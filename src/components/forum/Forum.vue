@@ -75,7 +75,7 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       if (this.posts.length === 0) {
-        getServer(this, i, '帖子列表', { category: this.menu })
+        getServer(this, i, '帖子列表', { module: this.menu })
       }
     },
     wxcRichTextLinkClick (i) {
@@ -87,7 +87,7 @@ export default {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])
     },
     menuClicked (menu) {
-      this.$store.commit('SET_forumCategory', menu)
+      this.$store.commit('SET_forumModule', menu)
       // console.log(menu)
     }
   }
