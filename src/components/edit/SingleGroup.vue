@@ -66,13 +66,14 @@
           @wxcButtonClicked='submit'></wxc-button>
       </div>
       <div class="cell">
-        <wxc-cell class="cell" v-for="(detail, index) in groupResult.details"
+        <wxc-simple-flow class="cell" :list="groupResult" :themeColor="themeColor"></wxc-simple-flow>
+        <!-- <wxc-cell class="cell" v-for="(detail, index) in groupResult.details"
           v-if="groupResult.info[detail.title]"
           :key="index"
           :label="detail.label"
           :title="groupResult.info[detail.title]"
           :has-arrow="detail.hasArrow"
-          ></wxc-cell>
+          ></wxc-cell> -->
       </div>
       <div style="height:400px"></div>
     </cell>
@@ -81,13 +82,21 @@
 </template>
 
 <script>
-import { WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
+import { WxcGridSelect, WxcButton, WxcCell, WxcSimpleFlow } from 'weex-ui'
 import { compDrg } from '../../utils/comp'
 import MiniBar from '../common/MiniBar.vue'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcGridSelect, WxcButton, MiniBar, WxcCell },
+  components: { WxcGridSelect, WxcButton, MiniBar, WxcCell, WxcSimpleFlow },
   data: () => ({
+    themeColor: {
+      lineColor: '#bf280b',
+      pointInnerColor: '#b95048',
+      pointBorderColor: '#bf280b',
+      highlightTitleColor: '#bf280b',
+      highlightPointInnerColor: '#bf280b',
+      highlightPointBorderColor: '#d46262'
+    },
     customStyles: {
       lineSpacing: '14px',
       width: '140px',
@@ -136,7 +145,19 @@ export default {
     },
     groupResult: {
       get () {
-        return this.$store.state.Edit.groupResult
+        const groupResult = this.$store.state.Edit.groupResult
+        const datas = []
+        if (groupResult.details !== undefined) {
+          groupResult.details.map((x) => {
+            const data = {
+              'desc': groupResult.info[x.title],
+              'highlight': true,
+              'title': x.label
+            }
+            datas.push(data)
+          })
+        }
+        return datas
       }
     }
   },
