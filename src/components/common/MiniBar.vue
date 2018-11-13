@@ -46,7 +46,7 @@ export default {
     activeTab () {
       return this.$store.state.Home.activeTab
     },
-    activeMenu () {
+    menu () {
       return this.$store.state.Home.menu[this.activeTab]
     },
     infoLevel () {
@@ -54,9 +54,9 @@ export default {
     },
     isShow () {
       let show = true
-      if (this.activeMenu === '介绍') {
+      if (this.menu === '介绍') {
         show = false
-      } else if (this.activeTab === 0 && this.activeMenu === '用户登录') {
+      } else if (this.activeTab === 0 && this.menu === '用户登录') {
         show = false
       }
       return show
@@ -83,8 +83,9 @@ export default {
   },
   methods: {
     homeButtonClick () {
+      const menu = ['', '病案', '字典', 'DRG分析', '论坛']
       this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_menu', [this.activeTab, '菜单'])
+      this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
       if (this.activeTab === 4) {
         getServer(this, this.activeTab, '帖子列表', { username: this.$store.state.Home.user.data.username })
       }

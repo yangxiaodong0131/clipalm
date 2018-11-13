@@ -2,7 +2,7 @@ const state = {
   // type: '',
   post: [],
   forumPage: 1,
-  forumCategory: '',
+  forumModule: '',
   forumLabel: '',
   forumIndex: null,
   forumContent: {}
@@ -12,8 +12,8 @@ const mutations = {
   SET_forumIndex (state, x) {
     state.forumIndex = x
   },
-  SET_forumCategory (state, x) {
-    state.forumCategory = x
+  SET_forumModule (state, x) {
+    state.forumModule = x
   },
   SET_post (state, x) {
     state.post = x
@@ -32,7 +32,7 @@ const mutations = {
 const actions = {
   someAsyncTask ({ commit }) {
     commit('SET_forumIndex')
-    commit('SET_forumCategory')
+    commit('SET_forumModule')
     commit('SET_post')
     commit('SET_forumPage')
     commit('SET_forumContent')

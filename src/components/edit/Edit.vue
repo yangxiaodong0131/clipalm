@@ -15,6 +15,7 @@
         </div>
       </cell>
     </list>
+    <mini-bar :title="menu"></mini-bar>
   </div>
 </template>
 
@@ -22,8 +23,9 @@
 import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLoading, WxcPartLoading, WxcButton } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
+import MiniBar from '../common/MiniBar.vue'
 export default {
-  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton },
+  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton, MiniBar },
   data () {
     return {
       forceValue: 0,
@@ -35,6 +37,13 @@ export default {
     this.getData()
   },
   computed: {
+    menu: {
+      get () {
+        const i = this.$store.state.Home.activeTab
+        const menu = this.$store.state.Home.menu[i]
+        return menu
+      }
+    },
     wt4Case: {
       get () {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
@@ -112,9 +121,9 @@ export default {
     border-width: 1px;
     border-radius: 14px;
     padding: 10px;
+    margin-top: 91px;
   }
   .demo {
     width: 750px;
-    margin-top: 91px;
   }
 </style>

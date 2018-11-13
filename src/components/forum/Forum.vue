@@ -2,7 +2,7 @@
   <scroller class="container" v-bind:style="panel">
     <div style="height:20px"></div>
     <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
-      <div class="panel" @click="wxcRichTextLinkClick(index)">
+      <div class="panel2" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
       </div>
     </div>
@@ -10,15 +10,17 @@
           size="full"
           class="submits"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    <mini-bar :title="menu"></mini-bar>
   </scroller>
 </template>
 
 <script>
 import { WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
+import MiniBar from '../common/MiniBar.vue'
 import { getServer } from '../../utils/server'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcSpecialRichText, WxcButton, WxcRichText },
+  components: { WxcSpecialRichText, WxcButton, WxcRichText, MiniBar },
   data: () => ({
   }),
   computed: {
@@ -75,7 +77,7 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       if (this.posts.length === 0) {
-        getServer(this, i, '帖子列表', { category: this.menu })
+        getServer(this, i, '帖子列表', { module: this.menu })
       }
     },
     wxcRichTextLinkClick (i) {
@@ -87,7 +89,7 @@ export default {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])
     },
     menuClicked (menu) {
-      this.$store.commit('SET_forumCategory', menu)
+      this.$store.commit('SET_forumModule', menu)
       // console.log(menu)
     }
   }
@@ -95,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-.panel {
+.panel2 {
   width: 750px;
   background-color: #f2f3f4;
   font-size: 30px;
@@ -109,6 +111,9 @@ export default {
   padding-bottom: 15px;
   padding-left: 15px;
   padding-right: 15px;
+}
+.panel {
+  margin-top: 140px;
 }
 .container {
   margin-top: 91px;

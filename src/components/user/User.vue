@@ -1,7 +1,6 @@
 <template>
   <div class="panel" v-bind:style="panel">
-    <mini-bar title="1235"></mini-bar>
-    <category title="--用户名--"></category>
+    <category class="category" title="--用户名--"></category>
     <text class="red" slot="title" style="">{{user.username}}</text>
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
@@ -40,6 +39,7 @@
         size="full"
         class="submits"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    <mini-bar title="用户信息"></mini-bar>
   </div>
 </template>
 
@@ -174,7 +174,6 @@ export default {
     margin-left: 0px;
     border-color: #BBBBBB;
     padding-top: 0;
-    margin-top: 91px;
     background-color: #C6e2FF;
   }
   .text {
@@ -201,5 +200,8 @@ export default {
     border-width: 1px;
     border-radius: 14px;
     padding: 10px;
+  }
+  .category {
+    margin-top: 91px;
   }
 </style>

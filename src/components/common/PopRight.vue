@@ -40,13 +40,15 @@
         <div style="height:200px"></div>
       </cell>
     </list>
+    <mini-bar :title="menu"></mini-bar>
   </div>
 </template>
 <script>
 import { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow } from 'weex-ui'
 import { getServer } from '../../utils/server'
+import MiniBar from '../common/MiniBar.vue'
 export default {
-  components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow },
+  components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow, MiniBar },
   data () {
     return {
       themeColor: {
@@ -60,6 +62,13 @@ export default {
     }
   },
   computed: {
+    menu: {
+      get () {
+        const i = this.$store.state.Home.activeTab
+        const menu = this.$store.state.Home.menu[i]
+        return menu
+      }
+    },
     activeTab () {
       return this.$store.state.Home.activeTab
     },
@@ -110,7 +119,6 @@ export default {
   .demo {
     width: 750px;
     background-color: #f2f3f4;
-    margin-top: 91px;
   }
   .text {
     font-size: 35px;
@@ -121,5 +129,8 @@ export default {
   }
   .btns {
     margin-left: 200px;
+  }
+  .list {
+    margin-top: 91px;
   }
 </style>

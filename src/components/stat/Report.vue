@@ -1,14 +1,15 @@
 <template>
   <div class="container" v-bind:style="panel">
-      <list class="list" @loadmore="fetch" loadmoreoffset="30000">
-        <cell class="cell" v-for="(stat, index) in stats" v-bind:key="index">
-          <wxc-cell :label="stat.code"
-              @wxcCellClicked="wxcIndexlistItemClicked(stat)"
-              :has-margin="false"
-              :has-arrow="true"
-              :extraContent="stat.desc"></wxc-cell>
-        </cell>
-      </list>
+    <list class="list" @loadmore="fetch" loadmoreoffset="30000">
+      <cell class="cell" v-for="(stat, index) in stats" v-bind:key="index">
+        <wxc-cell :label="stat.code"
+            @wxcCellClicked="wxcIndexlistItemClicked(stat)"
+            :has-margin="false"
+            :has-arrow="true"
+            :extraContent="stat.desc"></wxc-cell>
+      </cell>
+    </list>
+    <mini-bar :title="menu"></mini-bar>
   </div>
 </template>
 
@@ -16,8 +17,9 @@
 import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
+import MiniBar from '../common/MiniBar.vue'
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell },
+  components: { WxcIndexlist, WxcPopup, WxcCell, MiniBar },
   created: function () {
     this.getData()
   },
@@ -29,6 +31,13 @@ export default {
     }
   },
   computed: {
+    menu: {
+      get () {
+        const i = this.$store.state.Home.activeTab
+        const menu = this.$store.state.Home.menu[i]
+        return menu
+      }
+    },
     stats: {
       get () {
         return this.$store.state.Stat.statDrg
@@ -64,8 +73,10 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin-top: 91px;
-  width: 750px;
-}
+  .container {
+    width: 750px;
+  }
+  .list {
+    margin-top: 91px;
+  }
 </style>
