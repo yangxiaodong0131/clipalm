@@ -19,7 +19,7 @@
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
       <PopRight v-if="infoLevel[1] > 0"></PopRight>
-      <HomeMenu v-else-if="menu[1] === '菜单'"></HomeMenu>
+      <HomeMenu v-else-if="menu[1] === '病案'"></HomeMenu>
       <Introduce v-else-if="menu[1] === '介绍'"></Introduce>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
       <GroupResult v-else-if="menu[1] == '分组结果'"></GroupResult>
@@ -28,21 +28,21 @@
     <!-- library页 -->
     <div class="panel" v-bind:class="panel">
       <PopRight v-if="infoLevel[2] > 0"></PopRight>
-      <HomeMenu v-else-if="menu[2] === '菜单'"></HomeMenu>
+      <HomeMenu v-else-if="menu[2] === '字典'"></HomeMenu>
       <Introduce v-else-if="menu[2] === '介绍'"></Introduce>
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
     <div class="panel" v-bind:class="panel">
       <PopRight v-if="infoLevel[3] > 0"></PopRight>
-      <HomeMenu v-else-if="menu[3] === '菜单'"></HomeMenu>
+      <HomeMenu v-else-if="menu[3] === 'DRG分析'"></HomeMenu>
       <Introduce v-else-if="menu[3] === '介绍'"></Introduce>
       <Charts v-else-if="menu[3] == '报表'"></Charts>
       <Report v-else></Report>
     </div>
     <!-- forum页 -->
     <div class="panel" v-bind:class="panel">
-      <HomeMenu v-if="menu[4] === '菜单'"></HomeMenu>
+      <HomeMenu v-if="menu[4] === '论坛'"></HomeMenu>
       <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
       <New v-else-if="menu[4] === '新建帖子'"></New>
       <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent>
