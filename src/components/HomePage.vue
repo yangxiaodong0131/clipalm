@@ -49,7 +49,7 @@
       <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
-  <mini-bar></mini-bar>
+  <!-- <mini-bar></mini-bar> -->
 </div>
 </template>
 

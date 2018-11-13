@@ -2,7 +2,7 @@
   <div class="wxc-demo">
     <scroller class="scroller">
       <div class="demo">
-        <wxc-minibar :title="miniBarTitle"
+        <wxc-minibar :title="title"
                     background-color="#009ff0"
                     text-color="#FFFFFF"
                     :show="isShow"
@@ -30,6 +30,9 @@ import { getServer } from '../../utils/server'
 // const modal = weex.requireModule('modal')
 export default {
   components: { WxcMinibar },
+  props: {
+    title: ''
+  },
   data () {
     return {
       rightButton: '',
@@ -43,7 +46,7 @@ export default {
     activeTab () {
       return this.$store.state.Home.activeTab
     },
-    menu () {
+    activeMenu () {
       return this.$store.state.Home.menu[this.activeTab]
     },
     infoLevel () {
@@ -51,9 +54,9 @@ export default {
     },
     isShow () {
       let show = true
-      if (this.menu === '介绍') {
+      if (this.activeMenu === '介绍') {
         show = false
-      } else if (this.activeTab === 0 && this.menu === '用户登录') {
+      } else if (this.activeTab === 0 && this.activeMenu === '用户登录') {
         show = false
       }
       return show
