@@ -48,6 +48,21 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '费用异常病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
+      case 'MDC':
+        url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'ADRG':
+        url = `rule_bj_adrg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'DRG':
+        url = `rule_bj_drg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'ICD9':
+        url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'ICD10':
+        url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        break
       case 'CN-DRG':
         url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
