@@ -6,14 +6,20 @@
           <wxc-rich-text class="special-rich"
             :config-list="configList1[index]"
             @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
-          <text class="type-text" style="color:#a4a3a5;font-size:20px">{{data.username}}-{{data.datetime}}</text>
+          <text class="type-text" style="color:#a4a3a5;font-size:20px">{{data.username}} | {{data.datetime}}</text>
           <div v-if="data.reply !== []" v-for="(reply, index) in data.reply" v-bind:key="`reply-${index}`">
-            <wxc-cell
-              :label="reply.content"
+            <!--<wxc-cell
+              :cell-style="cellStyle"
+              :label="reply.username"
               :title="reply.content"
-              :extraContent="`${reply.username}-${reply.datetime}`"
-              :has-margin="true">
-            </wxc-cell>
+              :has-bottom-border="false"
+              :extraContent="`${reply.datetime}`"
+              :has-margin="false">
+            </wxc-cell>-->
+            <div class="row">
+              <div class="col-md-6"><text class="type-text" style="color:#a4a3a5;font-size:25px">     {{reply.username}}</text></div>
+              <div class="col-md-6"><text class="type-text" style="color:#000000;font-size:25px">    回复@{{data.username}}:{{reply.content}}</text></div>
+            </div>
           </div>
         </div>
         <div style="height:40px"> </div>
@@ -42,7 +48,13 @@ export default {
       content: '',
       textShow: false,
       text: '',
-      data: null
+      data: null,
+      cellStyle: {
+        backgroundColor: '#C6e2FF',
+        height: '50px',
+        width: '600px',
+        fontSize: '30px'
+      }
     }
   },
   computed: {
@@ -73,7 +85,7 @@ export default {
         this.datas.map((x, index) => {
           const config = [{
             type: 'text',
-            value: `${index + 1}#`,
+            value: `${index + 1}楼`,
             theme: 'yellow',
             fontSize: 30
           }, {
@@ -138,8 +150,8 @@ export default {
   width: 750px;
 }
 .type-container {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 .list {
   margin-top: 91px;
