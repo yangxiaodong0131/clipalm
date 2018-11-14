@@ -70,21 +70,12 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'BJ-ICD9':
         url = `icd9c?plat=client&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      // case 'CN-DRG':
-      //   url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-      //   break
-      // case 'BJ-ICD10':
-      //   url = `rule_bj_adrg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-      //   break
-      // case 'BJ-ICD9':
-      //   url = `rule_bj_drg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-      //   break
-      // case 'GB-ICD9':
-      //   url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-      //   break
-      // case 'GB-ICD10':
-      //   url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-      //   break
+      case 'GB-ICD10':
+        url = `icd10c?plat=client&version=GB&year=${year}&page=${obj.$store.state.Library.page}`
+        break
+      case 'GB-ICD9':
+        url = `icd9c?plat=client&year=${year}&page=${obj.$store.state.Library.page}`
+        break
       case 'DRG基础':
         url = `wt4_stat_cv?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
