@@ -75,7 +75,15 @@ export default {
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails(`${this.menu}规则详情`, e)
+      let type = ''
+      switch (this.menu) {
+        case 'CN-DRG':
+          type = 'MDC规则详情'
+          break
+        default:
+          type = this.menu
+      }
+      const details = getDetails(type, e)
       this.$store.commit('SET_info', details)
     },
     fetch () {

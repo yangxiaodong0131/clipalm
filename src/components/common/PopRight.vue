@@ -28,7 +28,7 @@
           <text class="title" style="font-size: 20px;" v-else >无</text>
         </div>
         <div>
-          <text class="title">{{infoPage.infoListTitle}}</text>
+          <text :show="infoPage.isInfoListTitleShow" class="title">{{infoPage.infoListTitle}}</text>
           <wxc-cell v-for="(info, index) in infoPage.infoList"
             :key="index"
             :label="info.label"
@@ -40,7 +40,7 @@
         <div style="height:200px"></div>
       </cell>
     </list>
-    <mini-bar :title="menu"></mini-bar>
+    <mini-bar :title="title"></mini-bar>
   </div>
 </template>
 <script>
@@ -62,15 +62,11 @@ export default {
     }
   },
   computed: {
-    menu: {
-      get () {
-        const i = this.$store.state.Home.activeTab
-        const menu = this.$store.state.Home.menu[i]
-        return menu
-      }
-    },
     activeTab () {
       return this.$store.state.Home.activeTab
+    },
+    menu () {
+      return this.$store.state.Home.menu[this.activeTab]
     },
     infoLevel () {
       return this.$store.state.Home.infoLevel[this.activeTab] - 1
@@ -81,6 +77,9 @@ export default {
         infoPage = {}
       }
       return infoPage
+    },
+    title () {
+      return this.infoPage.infoTitle
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
@@ -102,15 +101,7 @@ export default {
       }
     },
     wxcCellClicked2 (e) {
-      // console.log(e.all)
-      // this.$store.commit('SET_infoLevel', 1)
-      // const details = getDetails(`${e.menu}规则详情`, e.all)
-      // this.$store.commit('SET_info', details)
-      // // console.log(e)
-      // let menu = ''
       getServer(this, this.activeTab, `${e.menu}规则详情`, e.all)
-      // this.$store.commit('SET_infoLevel', 0)
-      // this.$store.commit('SET_menu', [this.activeTab, menu])
     }
   }
 }

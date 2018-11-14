@@ -48,7 +48,7 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '费用异常病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
-      case 'MDC':
+      case 'CN-DRG':
         url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
       case 'ADRG':
@@ -63,21 +63,24 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'ICD10':
         url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      case 'CN-DRG':
-        url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-        break
       case 'BJ-ICD10':
-        url = `rule_bj_adrg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+        url = `icd10c?plat=client&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      case 'BJ-ICD9':
-        url = `rule_bj_drg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-        break
-      case 'GB-ICD9':
-        url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-        break
-      case 'GB-ICD10':
-        url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
-        break
+      // case 'CN-DRG':
+      //   url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+      //   break
+      // case 'BJ-ICD10':
+      //   url = `rule_bj_adrg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+      //   break
+      // case 'BJ-ICD9':
+      //   url = `rule_bj_drg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+      //   break
+      // case 'GB-ICD9':
+      //   url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+      //   break
+      // case 'GB-ICD10':
+      //   url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
+      //   break
       case 'DRG基础':
         url = `wt4_stat_cv?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
@@ -104,6 +107,12 @@ export function getServer (obj, activeTab, menu, value = null) {
         break
       case 'DRG':
         url = `rule_bj_drg?plat=client&page=1&adrg=${value.code}&version=${version}`
+        break
+      case 'ICD10亚目列表规则详情':
+        url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`
+        break
+      case 'ICD10细目列表规则详情':
+        url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`
         break
       case 'statInfo':
         url = `wt4_stat_cv?plat=client&order=code&drg=${value}`
@@ -190,7 +199,6 @@ export function createForum (obj, forum, type, activeTab) {
 }
 
 function setStore (obj, activeTab, menu, rdata) {
-  console.log([activeTab, menu])
   let data = []
   let details = {}
   const infoLevel = obj.$store.state.Home.infoLevel
@@ -218,6 +226,20 @@ function setStore (obj, activeTab, menu, rdata) {
           obj.$store.commit('SET_info', details)
           break
         case 'DRG规则详情':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        case 'ICD10亚目列表规则详情':
+          data.icd = rdata.data.map((x) => {
+            x.name = x.desc
+            return x
+          })
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(menu, data)
+          obj.$store.commit('SET_info', details)
+          break
+        case 'ICD10细目列表规则详情':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
