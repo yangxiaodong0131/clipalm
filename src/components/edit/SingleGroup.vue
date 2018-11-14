@@ -66,14 +66,8 @@
             @wxcButtonClicked='submit'></wxc-button>
         </div>
         <div class="cell">
+          <text class="title">分组日志</text>
           <wxc-simple-flow class="cell" :list="groupResult" :themeColor="themeColor"></wxc-simple-flow>
-          <!-- <wxc-cell class="cell" v-for="(detail, index) in groupResult.details"
-            v-if="groupResult.info[detail.title]"
-            :key="index"
-            :label="detail.label"
-            :title="groupResult.info[detail.title]"
-            :has-arrow="detail.hasArrow"
-            ></wxc-cell> -->
         </div>
         <div style="height:400px"></div>
       </cell>
@@ -149,11 +143,11 @@ export default {
         const groupResult = this.$store.state.Edit.groupResult
         const datas = []
         if (groupResult.details !== undefined) {
-          groupResult.details.map((x) => {
+          const arr = groupResult.info.log.split(';')
+          arr.map((x) => {
             const data = {
-              'desc': groupResult.info[x.title],
-              'highlight': true,
-              'title': x.label
+              'highlight': false,
+              'title': x
             }
             datas.push(data)
           })
@@ -202,12 +196,9 @@ export default {
   border-color: #ffffff;
   border-radius: 40px;
 }
-.title{
-  font-size: 25px;
-  /* height:60; */
-  /* padding: 10; */
-  /* color:ghostwhite;
-  background: gray; */
+.title {
+  text-align: center;
+  font-size: 35px;
 }
 .wxc-grid-select{
   font-size: 20px;
