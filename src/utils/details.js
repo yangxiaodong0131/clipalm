@@ -60,7 +60,7 @@ function mdcInfo (data) {
   })
   const result = {
     info: data,
-    infoTitle: 'MDC规则详情',
+    infoTitle: `${data.code}规则详情`,
     infoListTitle: 'ADRG列表',
     isInfoListShow: true,
     infoList: infoList,
@@ -101,7 +101,7 @@ function adrgInfo (data) {
   })
   const result = {
     info: data,
-    infoTitle: 'ADRG规则详情',
+    infoTitle: `${data.code}规则详情`,
     isInfoListShow: true,
     infoListTitle: 'DRG列表',
     infoList: infoList,
@@ -117,7 +117,7 @@ function adrgInfo (data) {
 function drgInfo (data) {
   const result = {
     info: data,
-    infoTitle: 'DRG规则详情',
+    infoTitle: `${data.code}规则详情`,
     isInfoButtonShow: false,
     buttonText: ``,
     gridList: [],
@@ -186,6 +186,24 @@ function compResultInfo (data) {
   }
   return result
 }
+function icd (data, title) {
+  const infoList = data.icd.map((x) => {
+    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: title, all: x}
+    return obj
+  })
+  const result = {
+    info: data,
+    infoTitle: title,
+    isInfoListShow: true,
+    infoListTitle: '',
+    isInfoListTitleShow: false,
+    infoList: infoList,
+    gridList: [],
+    details: []
+  }
+  return result
+}
+
 const info = {
   infoTitle: '',
   isInfoButtonShow: false,
@@ -195,7 +213,7 @@ const info = {
 }
 
 export function getDetails (menu, data) {
-  console.log(data)
+  console.log(menu)
   let result = info
   if (data) {
     switch (menu) {
@@ -217,8 +235,26 @@ export function getDetails (menu, data) {
       case 'DRG规则详情':
         result = drgInfo(data)
         break
+      case 'BJ-ICD10':
+        result = icd(data, 'ICD10亚目列表')
+        break
       case 'ICD10规则详情':
         result = icd10Info(data)
+        break
+      case 'ICD10亚目列表规则详情':
+        result = icd(data, 'ICD10细目列表')
+        break
+      case 'ICD10细目列表规则详情':
+        result = icd10Info(data)
+        break
+      case 'BJ-ICD9':
+        result = icd(data, 'ICD9亚目列表')
+        break
+      case 'ICD9亚目列表规则详情':
+        result = icd(data, 'ICD9细目列表')
+        break
+      case 'ICD9细目列表规则详情':
+        result = icd9Info(data)
         break
       case 'ICD9规则详情':
         result = icd9Info(data)

@@ -10,12 +10,12 @@
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
-            :label="wt4.disease_name"
+            :title="wt4.disease_name"
+            :desc="wt4.extraContent"
             :has-margin="false"
             :has-arrow="true"
             :arrow-icon="arrawSrc"
-            @wxcCellClicked="wxcCellClicked(wt4)"
-            :extraContent="wt4.extraContent">
+            @wxcCellClicked="wxcCellClicked(wt4)">
           </wxc-cell>
         </div>
       </cell>
@@ -103,18 +103,37 @@ export default {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
           const obj = x
           let extraContent = ``
+          let value = ''
           switch (this.$store.state.Home.menu[1]) {
             case '未入组病历':
-              extraContent = `${x.diags_code}`
+              if (x.diags_code.length > 50) {
+                value = x.diags_code.substr(0, 50)
+              } else {
+                value = x.diags_code
+              }
+              extraContent = `其他诊断：${value}`
               break
             case 'QY病历':
-              extraContent = `${x.opers_code}`
+              if (x.opers_code.length > 50) {
+                value = x.opers_code.substr(0, 50)
+              } else {
+                value = x.opers_code
+              }
+              extraContent = `其他手术：${value}`
               break
             case '费用异常病历':
-              extraContent = `${x.total_expense}元·入组DRG平均费用`
+              if (x.total_expense.length > 50) {
+                value = x.total_expense.substr(0, 50)
+              } else {
+                value = x.total_expense
+              }
+              extraContent = `总费用：${value}元·入组DRG平均费用`
               break
             default:
-              extraContent = `${x.gender}·${x.age}岁·${x.total_expense}元·${x.acctual_days}天·${x.drg}`
+              extraContent = `性别：${x.gender}·年龄：${x.age}岁·费用：${x.total_expense}元·住院天数：${x.acctual_days}天·drg：${x.drg}`
+              if (extraContent.length > 50) {
+                extraContent = extraContent.substr(0, 50)
+              }
           }
           if (extraContent === '') {
             obj.extraContent = '无'
