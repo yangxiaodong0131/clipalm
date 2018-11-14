@@ -6,6 +6,7 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
+  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
@@ -66,6 +67,9 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'BJ-ICD10':
         url = `icd10c?plat=client&year=${year}&page=${obj.$store.state.Library.page}`
         break
+      case 'BJ-ICD9':
+        url = `icd9c?plat=client&year=${year}&page=${obj.$store.state.Library.page}`
+        break
       // case 'CN-DRG':
       //   url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
       //   break
@@ -113,6 +117,12 @@ export function getServer (obj, activeTab, menu, value = null) {
         break
       case 'ICD10细目列表规则详情':
         url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`
+        break
+      case 'ICD9亚目列表规则详情':
+        url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`
+        break
+      case 'ICD9细目列表规则详情':
+        url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`
         break
       case 'statInfo':
         url = `wt4_stat_cv?plat=client&order=code&drg=${value}`
@@ -240,6 +250,20 @@ function setStore (obj, activeTab, menu, rdata) {
           obj.$store.commit('SET_info', details)
           break
         case 'ICD10细目列表规则详情':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        case 'ICD9亚目列表规则详情':
+          data.icd = rdata.data.map((x) => {
+            x.name = x.desc
+            return x
+          })
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(menu, data)
+          obj.$store.commit('SET_info', details)
+          break
+        case 'ICD9细目列表规则详情':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)

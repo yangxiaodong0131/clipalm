@@ -213,6 +213,7 @@ const info = {
 }
 
 export function getDetails (menu, data) {
+  console.log(menu)
   let result = info
   if (data) {
     switch (menu) {
@@ -245,6 +246,15 @@ export function getDetails (menu, data) {
         break
       case 'ICD10细目列表规则详情':
         result = icd10Info(data)
+        break
+      case 'BJ-ICD9':
+        result = icd(data, 'ICD9亚目列表')
+        break
+      case 'ICD9亚目列表规则详情':
+        result = icd(data, 'ICD9细目列表')
+        break
+      case 'ICD9细目列表规则详情':
+        result = icd9Info(data)
         break
       case 'ICD9规则详情':
         result = icd9Info(data)
