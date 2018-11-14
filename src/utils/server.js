@@ -48,28 +48,28 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '费用异常病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
         break
-      case 'MDC':
+      case 'CN-DRG':
         url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      case 'ADRG':
+      case 'BJ-ICD10':
         url = `rule_bj_adrg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      case 'DRG':
+      case 'BJ-ICD9':
         url = `rule_bj_drg?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      case 'ICD9':
+      case 'GB-ICD9':
         url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      case 'ICD10':
+      case 'GB-ICD10':
         url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
         break
-      case '统计分析(字母增序)':
+      case 'DRG基础':
         url = `wt4_stat_cv?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
-      case '统计分析(费用CV降序)':
+      case 'DRG专家':
         url = `wt4_stat_cv?plat=client&order=cv&page=${obj.$store.state.Stat.statPage}`
         break
-      case '统计分析(平均费用增序)':
+      case 'DRG机构':
         url = `wt4_stat_cv?plat=client&order=fee&page=${obj.$store.state.Stat.statPage}`
         break
       case '帖子列表':

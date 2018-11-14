@@ -87,12 +87,12 @@
           activeIcon: 'http://210.75.199.113/images/edit_fill.png'
         }, {
           title: '字典',
-          menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
+          menu: ['CN-DRG', 'BJ-ICD10', 'BJ-ICD9', 'GB-ICD10', 'GB-ICD9'],
           icon: 'http://210.75.199.113/images/library.png',
           activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
-          menu: ['统计分析(字母增序)', '统计分析(费用CV降序)', '统计分析(平均费用增序)', '报表'],
+          menu: ['DRG基础', 'DRG专家', 'DRG机构', '报表'],
           icon: 'http://210.75.199.113/images/stat.png',
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
