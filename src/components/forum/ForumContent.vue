@@ -2,25 +2,19 @@
   <div class="container">
     <list class="list">
       <cell class="cell" v-for="(data, index) in datas" v-bind:key="index">
-        <text class="type-text">Weex富文本混排方案：</text>
-        <wxc-rich-text class="special-rich"
-          :config-list="configList"></wxc-rich-text>
-        <wxc-cell
-          :label="`${index+1}#`"
-          :title="data.content"
-          :desc="data.username"
-          :extraContent="data.datetime"
-          @wxcCellClicked="returnContent(data, index+1)"
-          :has-margin="true">
-          <text class="red" slot="title">{{data.content}}</text>
-        </wxc-cell>
-        <div v-if="data.reply !== []" v-for="(reply, index) in data.reply" v-bind:key="`reply-${index}`">
-          <wxc-cell
-            :label="reply.content"
-            :title="reply.content"
-            :extraContent="`${reply.username}-${reply.datetime}`"
-            :has-margin="true">
-          </wxc-cell>
+        <div class="type-container">
+          <wxc-rich-text class="special-rich"
+            :config-list="configList1[index]"
+            @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
+          <text class="type-text" style="color:#a4a3a5;font-size:20px">{{data.username}}-{{data.datetime}}</text>
+          <div v-if="data.reply !== []" v-for="(reply, index) in data.reply" v-bind:key="`reply-${index}`">
+            <wxc-cell
+              :label="reply.content"
+              :title="reply.content"
+              :extraContent="`${reply.username}-${reply.datetime}`"
+              :has-margin="true">
+            </wxc-cell>
+          </div>
         </div>
         <div style="height:40px"> </div>
       </cell>
@@ -33,7 +27,7 @@
         size="full"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     </div>
-    <mini-bar :title="menu"></mini-bar>
+    <mini-bar :title="title"></mini-bar>
   </div>
 </template>
 <script>
@@ -45,38 +39,6 @@ export default {
   components: { WxcPopup, WxcCell, WxcButton, MiniBar, WxcRichText, WxcSpecialRichText },
   data () {
     return {
-      configList: [{
-        type: 'icon',
-        src: 'https://gw.alicdn.com/tfs/TB1RRVWQXXXXXasXpXXXXXXXXXX-24-22.png'
-      }, {
-        type: 'text',
-        value: '黄色主题',
-        theme: 'yellow'
-      }, {
-        type: 'link',
-        value: '自定义颜色link',
-        href: 'https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js',
-        style: {
-          color: '#546E7A'
-        }
-      }, {
-        type: 'icon',
-        src: 'https://gw.alicdn.com/tfs/TB1qygJRXXXXXX2XFXXXXXXXXXX-117-37.png'
-      }, {
-        type: 'tag',
-        value: '满100减20',
-        theme: 'red'
-      }, {
-        type: 'tag',
-        value: '自定义标签',
-        style: {
-          fontSize: 26,
-          color: '#ffffff',
-          borderColor: '#3d3d3d',
-          backgroundColor: '#546E7A',
-          height: 40
-        }
-      }],
       content: '',
       textShow: false,
       text: '',
@@ -96,9 +58,41 @@ export default {
     posts () {
       return this.$store.state.Forum.post
     },
+    forum () {
+      return this.$store.state.Forum.forumContent
+    },
+    title () {
+      return `${this.forum.module}-${this.forum.title}`
+    },
     datas () {
       return this.$store.state.Forum.forumContent.content
     },
+    configList1 () {
+      const configs = []
+      if (this.datas) {
+        this.datas.map((x, index) => {
+          const config = [{
+            type: 'text',
+            value: `${index + 1}#`,
+            theme: 'yellow',
+            fontSize: 30
+          }, {
+            type: 'text',
+            value: `${x.content}`,
+            style: {
+              fontSize: 30,
+              color: '#000000'
+            }
+          }]
+          configs.push(config)
+        })
+      }
+      return configs
+    },
+    // a () {
+    //   console.log(this.datas)
+    //   return ''
+    // },
     forumIndex () {
       return this.$store.state.Forum.forumIndex
     }
@@ -119,7 +113,9 @@ export default {
         modal.toast({ message: '请先登录', duration: 1 })
       }
     },
-    returnContent (data, index) {
+    wxcRichTextLinkClick (data) {
+      const index = 1
+      modal.toast({ message: index, duration: 1 })
       // if (this.)
       this.data = data
       this.textShow = true
@@ -140,6 +136,10 @@ export default {
 }
 .container {
   width: 750px;
+}
+.type-container {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 .list {
   margin-top: 91px;
