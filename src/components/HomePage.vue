@@ -87,7 +87,7 @@
           activeIcon: 'http://210.75.199.113/images/edit_fill.png'
         }, {
           title: '字典',
-          menu: ['MDC', 'ADRG', 'DRG', 'ICD10', 'ICD9'],
+          menu: ['CN-DRG', 'BJ-ICD10', 'BJ-ICD9', 'GB-ICD10', 'GB-ICD9'],
           icon: 'http://210.75.199.113/images/library.png',
           activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
