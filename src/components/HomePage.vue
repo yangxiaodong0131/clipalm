@@ -92,7 +92,7 @@
           activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
-          menu: ['DRG基础', 'DRG专家', 'DRG机构', '报表'],
+          menu: ['DRG基础', '报表'],
           icon: 'http://210.75.199.113/images/stat.png',
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
