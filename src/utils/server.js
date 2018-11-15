@@ -71,10 +71,10 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `icd9c?plat=client&year=${year}&page=${obj.$store.state.Library.page}`
         break
       case 'GB-ICD10':
-        url = `icd10c?plat=client&version=GB&year=${year}&page=${obj.$store.state.Library.page}`
+        url = `icd10c?plat=client&version=GB&year=2018&page=${obj.$store.state.Library.page}`
         break
       case 'GB-ICD9':
-        url = `icd9c?plat=client&year=${year}&page=${obj.$store.state.Library.page}`
+        url = `icd9c?plat=client&year=2018&page=${obj.$store.state.Library.page}`
         break
       case 'DRG基础':
         url = `wt4_stat_cv?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
@@ -104,10 +104,10 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `rule_bj_drg?plat=client&page=1&adrg=${value.code}&version=${version}`
         break
       case 'ICD10亚目列表规则详情':
-        url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`
+        url = `rule_bj_icd10?plat=client&version=${value.version}&year=${value.year}&page=1&code=${value.code}`
         break
       case 'ICD10细目列表规则详情':
-        url = `rule_bj_icd10?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`
+        url = `rule_bj_icd10?plat=client&version=${value.version}&year=${value.version}&page=1&code=${value.code}`
         break
       case 'ICD9亚目列表规则详情':
         url = `rule_bj_icd9?plat=client&version=${version}&year=${year}&page=1&code=${value.code}`

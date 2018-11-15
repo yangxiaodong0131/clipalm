@@ -213,7 +213,6 @@ const info = {
 }
 
 export function getDetails (menu, data) {
-  console.log(menu)
   let result = info
   if (data) {
     switch (menu) {
