@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import { WxcIndexlist, WxcPopup, WxcCell } from 'weex-ui'
+import { WxcIndexlist, WxcPopup, WxcCell, WxcButton } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
 export default {
-  components: { WxcIndexlist, WxcPopup, WxcCell, MiniBar },
+  components: { WxcIndexlist, WxcPopup, WxcCell, MiniBar, WxcButton },
   created: function () {
     this.getData()
   },

@@ -1,11 +1,35 @@
 <template>
   <div class="demo" v-bind:style="panel">
     <div class="panel">
-      <wxc-button class="submits"
-        v-for="(menu, index) in menus" :key="index"
-        :text="menu"
-        type="white"
-        @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
+        <wxc-button class="submits"
+          v-for="(menu, index) in menus" :key="index"
+          :text="menu"
+          type="white"
+          @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
+      <div v-if="activeTab === 3 && menu === 'DRG分析'">
+        <div class="demo demo1">
+          <wxc-button text="DRG专家"
+                      class="submitss"
+                      type="white"
+                      @wxcButtonClicked="wxcButtonClickedMenu('wxc-expert')"></wxc-button>
+          <wxc-button text="DRG机构"
+                      class="submitss"
+                      type="white"
+                      @wxcButtonClicked="wxcButtonClickedMenu('wxc-mechanism')"></wxc-button>
+        </div>
+         <wxc-popover ref="wxc-expert"
+                     :buttons="btns1"
+                     :position="popoverPosition1"
+                     :arrowPosition="popoverArrowPosition1"
+                     @wxcPopoverButtonClicked="popoverButtonClicked">
+        </wxc-popover>
+         <wxc-popover ref="wxc-mechanism"
+                     :buttons="btns2"
+                     :position="popoverPosition2"
+                     :arrowPosition="popoverArrowPosition2"
+                     @wxcPopoverButtonClicked="popoverButtonClicked">
+        </wxc-popover>
+      </div>
       <div v-if="activeTab === 4 && menu === '论坛'">
         <text class="title">我的帖子</text>
         <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="`rich-${index}`">
@@ -20,14 +44,22 @@
 </template>
 
 <script>
-import { Utils, WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
+import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
 import { getServer } from '../../utils/server'
+const modal = weex.requireModule('modal')
 export default {
-  components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar },
+  components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar, WxcPopover },
   data () {
     return {
-      height: Utils.env.getPageHeight() - 120
+      height: Utils.env.getPageHeight() - 120,
+      btns1: [{ text: '偏差分布', key: 's1' }],
+      popoverPosition1: { x: 200, y: 230 },
+      popoverArrowPosition1: { pos: 'bottom', x: 500 },
+      btns2: [{ text: '年', key: 't1' }],
+      popoverPosition2: { x: 200, y: 520 },
+      popoverArrowPosition2: { pos: 'bottom', x: 500 },
+      submits: {}
     }
   },
   computed: {
@@ -103,6 +135,15 @@ export default {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
       this.$store.commit('SET_forumIndex', i)
       getServer(this, this.activeTab, '帖子', this.posts[i])
+    },
+    minibarRightButtonClick () {
+      this.$refs['wxc-popover'].wxcPopoverShow()
+    },
+    popoverButtonClicked (obj) {
+      modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 })
+    },
+    wxcButtonClickedMenu (ref) {
+      this.$refs[ref].wxcPopoverShow()
     }
   }
 }
@@ -127,7 +168,16 @@ export default {
     margin-top: 30px;
     margin-bottom: 30px;
   }
+  .submitss {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
   .panel {
     margin-top: 140px;
+  }
+  .demo1 {
+    margin-top: 50px;
+    margin-left: 20px;
   }
 </style>
