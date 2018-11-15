@@ -149,9 +149,6 @@ export default {
       this.$store.commit('SET_forumIndex', i)
       getServer(this, this.activeTab, '帖子', this.posts[i])
     },
-    minibarRightButtonClick () {
-      this.$refs['wxc-popover'].wxcPopoverShow()
-    },
     popoverButtonClicked (obj) {
       modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 })
     },
