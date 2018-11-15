@@ -11,11 +11,11 @@
           <wxc-button text="DRG专家"
                       class="submitss"
                       type="white"
-                      @wxcButtonClicked="wxcButtonClicked('wxc-expert')"></wxc-button>
+                      @wxcButtonClicked="wxcButtonClickedMenu('wxc-expert')"></wxc-button>
           <wxc-button text="DRG机构"
                       class="submitss"
                       type="white"
-                      @wxcButtonClicked="wxcButtonClicked('wxc-mechanism')"></wxc-button>
+                      @wxcButtonClicked="wxcButtonClickedMenu('wxc-mechanism')"></wxc-button>
         </div>
          <wxc-popover ref="wxc-expert"
                      :buttons="btns1"
@@ -47,44 +47,16 @@
 import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
 import { getServer } from '../../utils/server'
-const modal = weex.requireModule('modal');
+const modal = weex.requireModule('modal')
 export default {
   components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar, WxcPopover },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      btns1: [
-      {
-        text: '偏差分布',
-        key: 's1'
-      },
-      {
-        text: '主诊未入组',
-        key: 's2'
-      },
-      {
-        text: '手术QY',
-        key: 's3'
-      }],
+      btns1: [{ text: '偏差分布', key: 's1' }],
       popoverPosition1: { x: 200, y: 230 },
       popoverArrowPosition1: { pos: 'bottom', x: 500 },
-      btns2: [
-      {
-        text: '年',
-        key: 't1'
-      },
-      {
-        text: '半年',
-        key: 't2'
-      },
-      {
-        text: '季度',
-        key: 't3'
-      },
-      {
-        text: '月',
-        key: 't4'
-      }],
+      btns2: [{ text: '年', key: 't1' }],
       popoverPosition2: { x: 200, y: 520 },
       popoverArrowPosition2: { pos: 'bottom', x: 500 },
       submits: {}
@@ -165,12 +137,12 @@ export default {
       getServer(this, this.activeTab, '帖子', this.posts[i])
     },
     minibarRightButtonClick () {
-      this.$refs['wxc-popover'].wxcPopoverShow();
+      this.$refs['wxc-popover'].wxcPopoverShow()
     },
     popoverButtonClicked (obj) {
-      modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 });
+      modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 })
     },
-    wxcButtonClicked (ref='wxc-popover1') {
+    wxcButtonClickedMenu (ref) {
       this.$refs[ref].wxcPopoverShow()
     }
   }
