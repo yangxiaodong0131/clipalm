@@ -252,6 +252,9 @@ export function getDetails (menu, data) {
       case 'BJ-ICD9':
         result = icd(data, 'ICD9亚目列表')
         break
+      case 'GB-ICD9':
+        result = icd(data, 'ICD9亚目列表')
+        break
       case 'ICD9亚目列表规则详情':
         result = icd(data, 'ICD9细目列表')
         break
