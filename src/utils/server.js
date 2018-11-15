@@ -6,6 +6,7 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
+  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
@@ -70,7 +71,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `icd9c?plat=client&version=GB&year=2018&page=${obj.$store.state.Library.page}`
         break
       case 'DRG基础':
-        url = `wt4_stat_cv?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
+        url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
       case 'DRG专家':
         url = `wt4_stat_cv?plat=client&order=cv&page=${obj.$store.state.Stat.statPage}`
@@ -108,8 +109,11 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'ICD9细目列表规则详情':
         url = `rule_bj_icd9?plat=client&version=${value.version}&year=${value.year}&page=1&code=${value.code}`
         break
-      case 'statInfo':
-        url = `wt4_stat_cv?plat=client&order=code&drg=${value}`
+      case 'ADRG分析规则详情':
+        url = `wt4_stat_adrg?plat=client&order=code&code=${value.code}`
+        break
+      case 'DRG分析规则详情':
+        url = `wt4_stat_cv?plat=client&order=code&code=${value.code}`
         break
       case '帖子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`
@@ -260,9 +264,25 @@ function setStore (obj, activeTab, menu, rdata) {
       }
       break
     case 3:
-      data = obj.$store.state.Stat.statDrg
-      data = data.concat(rdata.data)
-      obj.$store.commit('SET_statDrg', rdata.data)
+      switch (menu) {
+        case 'ADRG分析规则详情':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          console.log(rdata.data)
+          details = getDetails(menu, rdata.data[0])
+          console.log(details)
+          obj.$store.commit('SET_info', details)
+          break
+        case 'DRG分析规则详情':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        default:
+          data = obj.$store.state.Stat.statDrg
+          data = data.concat(rdata.data)
+          obj.$store.commit('SET_statDrg', rdata.data)
+          break
+      }
       break
     case 4:
       switch (menu) {

@@ -28,12 +28,23 @@ function caseInfo (data) {
   }
   return result
 }
-function statInfo (data) {
+function statInfo (data, menu) {
+  const infoList = data.stat.map((x) => {
+    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
+    return obj
+  })
+  let isInfoListShow = true
+  if (infoList === []) {
+    isInfoListShow = false
+  }
   const result = {
     info: data,
     infoTitle: '分析详情',
     isInfoButtonShow: false,
     buttonText: ``,
+    infoListTitle: `${menu}列表`,
+    isInfoListShow: isInfoListShow,
+    infoList: infoList,
     gridList: [],
     details: [
       {'label': '编码', 'title': 'code', 'hasArrow': false},
@@ -223,7 +234,7 @@ export function getDetails (menu, data) {
         result = compResultInfo(data)
         break
       case '分析详情':
-        result = statInfo(data)
+        result = statInfo(data, 'ADRG')
         break
       case 'MDC规则详情':
         result = mdcInfo(data)
@@ -233,6 +244,12 @@ export function getDetails (menu, data) {
         break
       case 'DRG规则详情':
         result = drgInfo(data)
+        break
+      case 'ADRG分析规则详情':
+        result = statInfo(data, 'DRG')
+        break
+      case 'DRG分析规则详情':
+        result = statInfo(data, '')
         break
       case 'BJ-ICD10':
         result = icd(data, 'ICD10亚目列表')
