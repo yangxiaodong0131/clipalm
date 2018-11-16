@@ -63,10 +63,25 @@ export default {
     },
     leftButtonShow () {
       let show = false
-      if (this.infoLevel === 0) {
-        show = false
-      } else {
-        show = true
+      switch (this.menu) {
+        case '个人信息':
+          show = false
+          break
+        case '病案':
+          show = false
+          break
+        case '字典':
+          show = false
+          break
+        case 'DRG分析':
+          show = false
+          break
+        case '论坛':
+          show = false
+          break
+        default:
+          show = true
+          break
       }
       return show
     },
@@ -91,7 +106,12 @@ export default {
       }
     },
     minibarLeftButtonClick () {
-      this.$store.commit('SET_infoLevel', this.infoLevel - 1)
+      const menu = ['', '病案', '字典', 'DRG分析', '论坛']
+      if (this.infoLevel === 0) {
+        this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
+      } else {
+        this.$store.commit('SET_infoLevel', this.infoLevel - 1)
+      }
     }
   }
 }
