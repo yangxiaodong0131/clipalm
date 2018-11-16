@@ -24,6 +24,9 @@ export default {
   data: () => ({
   }),
   computed: {
+    user () {
+      return this.$store.state.Home.user
+    },
     activeTab () {
       return this.$store.state.Home.activeTab
     },
@@ -77,7 +80,19 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       if (this.posts.length === 0) {
-        getServer(this, i, '帖子列表', { module: this.menu })
+        // console.log('sssssssssss')
+        console.log(this.menu)
+        switch (this.menu) {
+          case '我的帖子':
+            getServer(this, i, '帖子列表', { username: this.user.data.username })
+            break
+          case '最新帖子':
+            getServer(this, i, '帖子列表', { username: this.user.data.username })
+            break
+          default:
+            getServer(this, i, '帖子列表', { module: this.menu })
+            break
+        }
       }
     },
     wxcRichTextLinkClick (i) {

@@ -8,44 +8,6 @@
               :text="menu"
               type="white"
               @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
-          <div v-if="activeTab === 3 && menu === 'DRG分析'">
-            <div class="demo demo1">
-              <wxc-button text="DRG专家"
-                          class="submitss"
-                          type="white"
-                          @wxcButtonClicked="wxcButtonClickedMenu('wxc-expert')"></wxc-button>
-              <wxc-button text="DRG机构"
-                          class="submitss"
-                          type="white"
-                          @wxcButtonClicked="wxcButtonClickedMenu('wxc-mechanism')"></wxc-button>
-            </div>
-             <wxc-popover ref="wxc-expert"
-                         :buttons="btns1"
-                         :position="popoverPosition1"
-                         :arrowPosition="popoverArrowPosition1"
-                         @wxcPopoverButtonClicked="popoverButtonClicked">
-            </wxc-popover>
-             <wxc-popover ref="wxc-mechanism"
-                         :buttons="btns2"
-                         :position="popoverPosition2"
-                         :arrowPosition="popoverArrowPosition2"
-                         @wxcPopoverButtonClicked="popoverButtonClicked">
-            </wxc-popover>
-          </div>
-          <!--<div v-if="activeTab === 4 && menu === '论坛'">
-            <text class="title">我的帖子</text>
-            <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="`rich-${index}`">
-              <div @click="wxcRichTextLinkClick(index)">
-                <wxc-rich-text :config-list="specialList"></wxc-rich-text>
-              </div>
-            </div>
-            <text class="title">最新帖子</text>
-            <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="`rich2-${index}`">
-              <div @click="wxcRichTextLinkClick(index)">
-                <wxc-rich-text :config-list="specialList"></wxc-rich-text>
-              </div>
-            </div>
-          </div>-->
         </div>
       </cell>
     </list>
@@ -129,12 +91,15 @@ export default {
     wxcButtonClicked (menu) {
       switch (this.activeTab) {
         case 1:
+          this.$store.commit('SET_wt4Page', 0)
           this.$store.commit('SET_wt4Case', [])
           break
         case 2:
+          this.$store.commit('SET_libraryPage', 0)
           this.$store.commit('SET_rule', [])
           break
         case 3:
+          this.$store.commit('SET_statPage', 0)
           this.$store.commit('SET_statDrg', [])
           break
         case 4:
