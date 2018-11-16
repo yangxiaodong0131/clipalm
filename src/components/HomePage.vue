@@ -97,7 +97,7 @@
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
           title: '论坛',
-          menu: ['用户反馈', '病案讨论', '字典交流', 'DRG分析', '论坛建议'],
+          menu: ['用户反馈', '病案讨论', '字典交流', 'DRG分析', '论坛建议', '我的帖子', '最新帖子'],
           icon: 'http://210.75.199.113/images/forum.png',
           activeIcon: 'http://210.75.199.113/images/forum_fill.png'
         }],
@@ -205,7 +205,7 @@
         } else if (i === 4) {
           this.$store.commit('SET_menu', [i, menu])
           this.$store.commit('SET_forumLabel', this.$store.state.Home.menu[activeTab])
-          getServer(this, i, '帖子列表', { username: this.user.data.username })
+          // getServer(this, i, '帖子列表', { username: this.user.data.username })
         }
       }
     }
