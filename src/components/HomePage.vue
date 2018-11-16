@@ -43,7 +43,7 @@
     <div class="panel" v-bind:class="panel">
       <HomeMenu v-if="menu[4] === '论坛'"></HomeMenu>
       <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
-      <New v-else-if="menu[4] === '新建帖子'"></New>
+      <!-- <New v-else-if="menu[4] === '新建帖子'"></New> -->
       <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent>
       <Forum v-else></Forum>
     </div>
@@ -63,7 +63,7 @@
   import SingleGroup from './edit/SingleGroup'
   import ForumContent from './forum/ForumContent'
   import Forum from './forum/Forum'
-  import New from './forum/New'
+  // import New from './forum/New'
   import Library from './library/Library'
   import Report from './stat/Report'
   import Charts from './stat/Charts'
@@ -73,7 +73,7 @@
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, Library,
-      Report, Forum, PopRight, ForumContent, Version, Charts, New, HomeMenu, Introduce },
+      Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce },
     data: () => ({
       tabs: [{
         title: '用户',

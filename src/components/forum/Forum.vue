@@ -1,15 +1,27 @@
 <template>
   <scroller class="container" v-bind:style="panel">
     <div class="div" style="height:20px"></div>
+    <div v-if="showNew">
+      <input class="input" type="text" placeholder="输入帖子标题" :autofocus=true value="" @input="oninput"/>
+      <div class="wrapper">
+        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" :autofocus=true value="" ></textarea>
+      </div>
+      <wxc-button text="发布"
+            size="full"
+            class="submits"
+            @wxcButtonClicked="sumbit"></wxc-button>
+    </div>
+    <wxc-button v-if="!showNew"
+          text="发帖"
+          size="full"
+          class="submits"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    <div class="div" style="height:20px"></div>
     <div class="specialrich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel2" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
       </div>
     </div>
-    <wxc-button text="发帖"
-          size="full"
-          class="submits"
-          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     <mini-bar :title="menu"></mini-bar>
   </scroller>
 </template>
@@ -17,11 +29,14 @@
 <script>
 import { WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
-import { getServer } from '../../utils/server'
-// const modal = weex.requireModule('modal')
+import { getServer, createForum } from '../../utils/server'
+const modal = weex.requireModule('modal')
 export default {
   components: { WxcSpecialRichText, WxcButton, WxcRichText, MiniBar },
   data: () => ({
+    showNew: false,
+    title: '',
+    content: ''
   }),
   computed: {
     user () {
@@ -32,6 +47,9 @@ export default {
     },
     menu () {
       return this.$store.state.Home.menu[this.activeTab]
+    },
+    forumModule () {
+      return this.$store.state.Forum.forumModule
     },
     posts () {
       return this.$store.state.Forum.post
@@ -80,8 +98,6 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       if (this.posts.length === 0) {
-        // console.log('sssssssssss')
-        console.log(this.menu)
         switch (this.menu) {
           case '我的帖子':
             getServer(this, i, '帖子列表', { username: this.user.data.username })
@@ -100,12 +116,28 @@ export default {
       this.$store.commit('SET_forumIndex', i)
       getServer(this, this.activeTab, '帖子', this.posts[i])
     },
+    oninput (event) {
+      this.title = event.value
+    },
+    oninput2 (event) {
+      this.content = event.value
+    },
     wxcButtonClicked () {
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '新建帖子'])
+      this.showNew = true
     },
     menuClicked (menu) {
       this.$store.commit('SET_forumModule', menu)
       // console.log(menu)
+    },
+    sumbit () {
+      if (this.$store.state.Home.user.login) {
+        const forum = { username: this.$store.state.Home.user.data.username, label: this.$store.state.Forum.forumLabel, title: this.title, module: this.forumModule }
+        const ForumContent = { content: this.content, username: this.$store.state.Home.user.data.username }
+        createForum(this, { forum_all: { forum: forum, forum_content: ForumContent } }, 'create', this.activeTab)
+        this.showNew = false
+      } else {
+        modal.toast({ message: '请先登录', duration: 1 })
+      }
     }
   }
 }
@@ -141,5 +173,28 @@ export default {
 }
 .div {
   margin-top: 91px;
+}
+.input {
+  font-size: 40px;
+  height: 80px;
+  width: 1250px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e3dbdb;
+}
+.textarea {
+  font-size: 40px;
+  width: 746px;
+  height: 400px;
+  margin-top: 50px;
+  margin-left: 0px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  color: #666666;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e3dbdb;
 }
 </style>
