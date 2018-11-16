@@ -32,7 +32,7 @@
                          @wxcPopoverButtonClicked="popoverButtonClicked">
             </wxc-popover>
           </div>
-          <div v-if="activeTab === 4 && menu === '论坛'">
+          <!--<div v-if="activeTab === 4 && menu === '论坛'">
             <text class="title">我的帖子</text>
             <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="`rich-${index}`">
               <div @click="wxcRichTextLinkClick(index)">
@@ -45,7 +45,7 @@
                 <wxc-rich-text :config-list="specialList"></wxc-rich-text>
               </div>
             </div>
-          </div>
+          </div>-->
         </div>
       </cell>
     </list>
