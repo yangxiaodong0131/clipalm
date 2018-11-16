@@ -1,6 +1,6 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
-    <text class="demo-title">{{title}}</text>
+    <text class="demo-title"  v-if="wt4Case.length !== 0">{{title}}</text>
     <!-- <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel" @click="wxcRichTextLinkClick(index)">
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
@@ -19,7 +19,7 @@
           </wxc-cell>
         </div>
       </cell>
-      <cell style="height:200px">
+      <cell style="height:200px" v-if="wt4Case.length !== 0">
         <wxc-button text="加载更多"
           class="submits"
           size="big"
