@@ -9,7 +9,7 @@
                   :arrow-icon="arrawSrc"
                   :extraContent="rule.desc"></wxc-cell>
       </cell>
-      <cell style="height:200px" v-if="wt4Case.length !== 0">
+      <cell style="height:200px" v-if="rules.length !== 0">
         <wxc-button text="加载更多"
           class="submits"
           size="big"
