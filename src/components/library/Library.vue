@@ -68,13 +68,11 @@ export default {
   },
   methods: {
     getData () {
-      const i = this.$store.state.Home.activeTab
       if (this.rules.length === 0) {
-        getServer(this, i, this.menu)
+        getServer(this, this.activeTab, this.menu)
       }
     },
     wxcIndexlistItemClicked (e) {
-      this.$store.commit('SET_infoLevel', 1)
       let type = ''
       switch (this.menu) {
         case 'CN-DRG':
@@ -84,6 +82,7 @@ export default {
           type = this.menu
       }
       const details = getDetails(type, e)
+      this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_info', details)
     },
     fetch () {
