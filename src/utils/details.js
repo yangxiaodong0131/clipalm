@@ -214,6 +214,23 @@ function icd (data, title) {
   }
   return result
 }
+function dissect (data, title) {
+  const infoList = data.dissect.map((x) => {
+    const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: { name: x }}
+    return obj
+  })
+  const result = {
+    info: data,
+    infoTitle: title,
+    isInfoListShow: true,
+    infoListTitle: '',
+    isInfoListTitleShow: false,
+    infoList: infoList,
+    gridList: [],
+    details: []
+  }
+  return result
+}
 
 const info = {
   infoTitle: '',
@@ -279,6 +296,24 @@ export function getDetails (menu, data) {
         result = icd9Info(data)
         break
       case 'ICD9规则详情':
+        result = icd9Info(data)
+        break
+      case '疾病分类/诊断术语':
+        result = dissect(data, '诊断术语-部位')
+        break
+      case '诊断术语-部位规则详情':
+        result = icd(data, '诊断术语-部位规则列表')
+        break
+      case '诊断术语-部位规则列表规则详情':
+        result = icd10Info(data)
+        break
+      case '临床手术/操作术语':
+        result = dissect(data, '操作术语-部位')
+        break
+      case '操作术语-部位规则详情':
+        result = icd(data, '操作术语-部位规则列表')
+        break
+      case '操作术语-部位规则列表规则详情':
         result = icd9Info(data)
         break
       default:

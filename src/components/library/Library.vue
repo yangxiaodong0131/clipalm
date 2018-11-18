@@ -9,7 +9,7 @@
                   :arrow-icon="arrawSrc"
                   :extraContent="rule.desc"></wxc-cell>
       </cell>
-      <cell style="height:200px" v-if="wt4Case.length !== 0">
+      <cell style="height:200px" v-if="rules.length !== 0">
         <wxc-button text="加载更多"
           class="submits"
           size="big"
@@ -68,13 +68,11 @@ export default {
   },
   methods: {
     getData () {
-      const i = this.$store.state.Home.activeTab
       if (this.rules.length === 0) {
-        getServer(this, i, this.menu)
+        getServer(this, this.activeTab, this.menu)
       }
     },
     wxcIndexlistItemClicked (e) {
-      this.$store.commit('SET_infoLevel', 1)
       let type = ''
       switch (this.menu) {
         case 'CN-DRG':
@@ -84,6 +82,7 @@ export default {
           type = this.menu
       }
       const details = getDetails(type, e)
+      this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_info', details)
     },
     fetch () {
