@@ -1,25 +1,22 @@
 <template>
   <div class="container" v-bind:class="container">
-    <div v-if="!show">
-      <list class="list" @loadmore="fetch" loadmoreoffset="30000">
-        <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
-          <wxc-cell :label="rule.code"
-                    @wxcCellClicked="wxcIndexlistItemClicked(rule)"
-                    :has-margin="false"
-                    :has-arrow="true"
-                    :arrow-icon="arrawSrc"
-                    :extraContent="rule.desc"></wxc-cell>
-        </cell>
-        <cell style="height:200px" v-if="rules.length !== 0">
-          <wxc-button text="加载更多"
-            class="submits"
-            size="big"
-            @wxcButtonClicked="fetch"></wxc-button>
-        </cell>
-      </list>
-      <mini-bar :title="menu" rightIcon="home"></mini-bar>
-    </div>
-    <pop-right v-if="show" :page="page"></pop-right>
+    <list class="list" @loadmore="fetch" loadmoreoffset="30000">
+      <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
+        <wxc-cell :label="rule.code"
+                  @wxcCellClicked="wxcIndexlistItemClicked(rule)"
+                  :has-margin="false"
+                  :has-arrow="true"
+                  :arrow-icon="arrawSrc"
+                  :extraContent="rule.desc"></wxc-cell>
+      </cell>
+      <cell style="height:200px" v-if="rules.length !== 0">
+        <wxc-button text="加载更多"
+          class="submits"
+          size="big"
+          @wxcButtonClicked="fetch"></wxc-button>
+      </cell>
+    </list>
+    <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </div>
 </template>
 
@@ -90,7 +87,7 @@ export default {
       const details = getDetails(type, e)
       this.show = true
       this.page = details
-      // this.$store.commit('SET_infoLevel', 1)
+      this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_info', details)
     },
     fetch () {

@@ -105,7 +105,8 @@ export default {
       }
     },
     wxcCellClicked2 (e) {
-      getServer(this, this.activeTab, `${e.menu}规则详情`, e.all)
+      console.log(e)
+      getServer(this, this.activeTab, `${e.menu}`, e.all)
     }
   }
 }
