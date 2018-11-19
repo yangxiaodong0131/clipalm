@@ -11,6 +11,44 @@
         </div>
       </cell>
     </list>
+    <div class="submits" v-if="activeTab === 3">
+      <div>
+        <wxc-button text="DRG专家"
+          type="blue"
+          disabled="true"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="偏差分析"
+          type="white"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="主诊未入组"
+          type="white"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="手术QY"
+          type="white"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="DRG机构"
+          type="blue"
+          disabled="true"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="年"
+          type="white"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="季度"
+          type="white"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="月"
+          type="white"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      </div>
+      <!--<div class="wxc-demo">
+        <scroller class="scroller">
+          <wxc-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked"></wxc-radio>
+          <text class="radio-text">checkedItem: {{checkedInfo}}</text>
+          <category title="Radio不可选"></category>
+          <wxc-radio :list="list2"></wxc-radio>
+        </scroller>
+      </div>-->
+    </div>
     <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </div>
 </template>
@@ -25,19 +63,25 @@ export default {
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      btns1: [{ text: '偏差分布', key: 's1' }],
-      popoverPosition1: { x: 200, y: 230 },
-      popoverArrowPosition1: { pos: 'bottom', x: 500 },
-      btns2: [{ text: '年', key: 't1' }],
-      popoverPosition2: { x: 200, y: 520 },
-      popoverArrowPosition2: { pos: 'bottom', x: 500 },
-      submits: {},
-      cellStyle: { backgroundColor: '#f2f3f4', height: '20' }
+      list: [
+        { title: '选项1', value: 1 },
+        { title: '选项2', value: 2, checked: true },
+        { title: '选项3', value: 3 },
+        { title: '选项4', value: 4 },
+      ],
+      list2: [
+        { title: '未选不可修改', value: 5, disabled: true },
+        { title: '已选不可修改', value: 6, disabled: true, checked: true },
+      ],
+      checkedInfo: { title: '选项2', value: 2 }
     }
   },
   computed: {
     activeTab () {
       return this.$store.state.Home.activeTab
+    },
+    wxcRadioListChecked (e) {
+      this.checkedInfo = e;
     },
     menu () {
       return this.$store.state.Home.menu[this.activeTab]
