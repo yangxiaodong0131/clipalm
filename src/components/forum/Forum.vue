@@ -22,7 +22,7 @@
         <wxc-rich-text :config-list="specialList"></wxc-rich-text>
       </div>
     </div>
-    <mini-bar :title="menu"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </scroller>
 </template>
 

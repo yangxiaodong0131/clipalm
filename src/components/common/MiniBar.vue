@@ -14,13 +14,8 @@
                  slot="left"
                  v-if="leftButtonShow"
                  style="height: 32px;width: 32px;"></image>
-          <image src="http://210.75.199.113/images/home.png"
+          <image :src="`http://210.75.199.113/images/${rightIcon}.png`"
                  slot="right"
-                 v-if="homeButtonShow"
-                 style="height: 32px;width: 32px;"></image>
-          <image src="http://210.75.199.113/images/table.png"
-                 slot="right"
-                 v-if="!homeButtonShow"
                  style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
       </div>
@@ -35,7 +30,8 @@ import { getServer } from '../../utils/server'
 export default {
   components: { WxcMinibar },
   props: {
-    title: ''
+    title: '',
+    rightIcon: ''
   },
   data () {
     return {
@@ -86,16 +82,6 @@ export default {
         default:
           show = true
           break
-      }
-      return show
-    },
-    miniBarTitle () {
-      return this.$store.state.Home.miniBarTitle
-    },
-    homeButtonShow () {
-      let show = true
-      if (this.activeTab === 0) {
-        show = false
       }
       return show
     }
