@@ -13,28 +13,27 @@
           @LongPress="LongPress(detail)"
           @wxcCellClicked="wxcCellClicked(detail)"
           ></wxc-cell>
-        <div v-if="infoPage.infoTitle === '病案详情'">
-          <category title="--分组日志--"></category>
-          <wxc-simple-flow :list="infoPage.gridList['分组日志']" :themeColor="themeColor"></wxc-simple-flow>
-        </div>
-        <div v-else v-for="(gridList, index) in infoPage.gridList"
+        <div v-for="(g, index) in infoPage.grid"
               :key="index">
           <category :title="`--${index}--`"></category>
+          <div v-if="index === '分组日志'">
+            <wxc-simple-flow :list="g" :themeColor="themeColor"></wxc-simple-flow>
+          </div>
           <wxc-grid-select
-              v-if="Object.keys(gridList).length !== 0"
+              v-else-if="Object.keys(g).length !== 0"
               :single="true"
               :cols="1"
-              :list="gridList"></wxc-grid-select>
+              :list="g"></wxc-grid-select>
           <text class="title" style="font-size: 20px;" v-else >无</text>
         </div>
-        <div>
-          <category v-if="infoPage.isInfoListTitleShow" :title="`--${infoPage.infoListTitle}--`"></category>
-          <wxc-cell v-for="(info, index) in infoPage.infoList"
+        <div v-if="infoPage.showSubRule">
+          <category v-if="infoPage.showSubRuleTitle" :title="`--${infoPage.subRuleTitle}--`"></category>
+          <wxc-cell v-for="(rule, index) in infoPage.subRule"
             :key="index"
-            :label="info.label"
-            :title="info.title"
-            :has-arrow="info.hasArrow"
-            @wxcCellClicked="wxcCellClicked2(info)">
+            :label="rule.label"
+            :title="rule.title"
+            :has-arrow="rule.hasArrow"
+            @wxcCellClicked="wxcCellClicked2(rule)">
           </wxc-cell>
         </div>
         <div style="height:200px"></div>
@@ -80,7 +79,7 @@ export default {
       return infoPage
     },
     title () {
-      return this.infoPage.infoTitle
+      return this.infoPage.title
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight

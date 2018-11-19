@@ -1,11 +1,6 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
     <text class="demo-title"  v-if="wt4Case.length !== 0">{{title}}</text>
-    <!-- <div class="special-rich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
-      <div class="panel" @click="wxcRichTextLinkClick(index)">
-        <wxc-rich-text :config-list="specialList"></wxc-rich-text>
-      </div>
-    </div> -->
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
       <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
