@@ -66,13 +66,12 @@
             @wxcButtonClicked='submit'></wxc-button>
         </div>
         <div class="cell">
-          <text class="title">分组日志</text>
           <wxc-simple-flow class="cell" :list="groupResult" :themeColor="themeColor"></wxc-simple-flow>
         </div>
         <div style="height:400px"></div>
       </cell>
     </list>
-    <mini-bar :title="menu"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </div>
 </template>
 

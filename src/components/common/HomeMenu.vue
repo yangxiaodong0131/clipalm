@@ -11,7 +11,7 @@
         </div>
       </cell>
     </list>
-    <mini-bar :title="menu"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </div>
 </template>
 

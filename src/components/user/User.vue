@@ -29,17 +29,13 @@
       :list="mdcs"
       @select="params => onSelect(params, 'mdc')">
     </wxc-grid-select>
-    <wxc-button text="用户报表"
-        :show="true"
-        size="medium"
-        class="submits"
-        @wxcButtonClicked="chart"></wxc-button>
     <div style="height:20px;"></div>
     <wxc-button text="退出登录"
         size="full"
         class="submits"
+        type="blue"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    <mini-bar title="用户信息"></mini-bar>
+    <mini-bar title="用户信息" rightIcon="table"></mini-bar>
   </div>
 </template>
 
@@ -77,9 +73,9 @@ export default {
     list_1: {
       get () {
         const types = {
-          专家用户: { title: '专家用户', value: 1 }
+          专家用户: { title: '专家用户', value: 1 },
           // 机构用户: { title: '机构用户', value: 2, disabled: 'true' },
-          // 个人用户: { title: '个人用户', value: 3, disabled: 'true' }
+          个人用户: { title: '个人用户', value: 2 }
         }
         let serverType = ''
         if (this.$store.state.Home.user.data.type) {
@@ -97,9 +93,9 @@ export default {
       get () {
         const versions = {
           BJ编码版: { title: 'BJ编码版', value: 1 },
-          GB编码版: { title: 'GB编码版', value: 1 }
+          GB编码版: { title: 'GB编码版', value: 1 },
           // CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
-          // 术语版: { title: '术语版', value: 4, disabled: 'true' }
+          术语版: { title: '术语版', value: 3 }
         }
         let serverVersion = ''
         if (this.$store.state.Home.user.data.clipalm_version) {
@@ -136,11 +132,6 @@ export default {
   methods: {
     minibarRightButtonClick (e) {
       this.$store.commit('SET_menu', [0, '用户登录'])
-    },
-    chart () {
-      this.$store.commit('SET_activeTab', 3)
-      this.$store.commit('SET_menu', [3, '报表'])
-      this.$store.commit('SET_chartType', '用户报表')
     },
     onSelect (params, type) {
       const user = {}

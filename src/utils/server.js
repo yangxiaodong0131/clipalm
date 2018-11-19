@@ -6,7 +6,6 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
-  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
@@ -71,10 +70,10 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `icd9c?plat=client&version=GB&year=2018&page=${obj.$store.state.Library.page}`
         break
       case '疾病分类/诊断术语':
-        url = `rule_bj_mdc?plat=client&version=BJ&year=2017&type=dissect`
+        url = `rule_bj_mdc?plat=client&version=CN&type=dissect`
         break
       case '临床手术/操作术语':
-        url = `rule_bj_mdc?plat=client&version=BJ&year=2017&type=dissect`
+        url = `rule_bj_mdc?plat=client&version=CN&type=dissect`
         break
       case 'DRG基础':
         url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
@@ -122,16 +121,16 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_cv?plat=client&order=code&code=${value.code}`
         break
       case '诊断术语-部位规则详情':
-        url = `rule_bj_icd10?plat=client&version=BJ&year=2017&page=1&dissect=${value.name}`
+        url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}`
         break
       case '诊断术语-部位规则列表规则详情':
-        url = `rule_bj_icd10?plat=client&version=${value.version}&year=${value.year}&page=1&code=${value.code}&type=one`
+        url = `rule_bj_icd10?plat=client&version=CN&page=1&code=${value.code}&type=one`
         break
       case '操作术语-部位规则详情':
-        url = `rule_bj_icd9?plat=client&version=BJ&year=2017&page=1&dissect=${value.name}`
+        url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}`
         break
       case '操作术语-部位规则列表规则详情':
-        url = `rule_bj_icd9?plat=client&version=${value.version}&year=${value.year}&page=1&code=${value.code}&type=one`
+        url = `rule_bj_icd9?plat=client&version=CN&page=1&code=${value.code}&type=one`
         break
       case '帖子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`
@@ -305,9 +304,7 @@ function setStore (obj, activeTab, menu, rdata) {
       switch (menu) {
         case 'ADRG分析规则详情':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          console.log(rdata.data)
           details = getDetails(menu, rdata.data[0])
-          console.log(details)
           obj.$store.commit('SET_info', details)
           break
         case 'DRG分析规则详情':

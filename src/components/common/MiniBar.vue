@@ -14,9 +14,8 @@
                  slot="left"
                  v-if="leftButtonShow"
                  style="height: 32px;width: 32px;"></image>
-          <image src="http://210.75.199.113/images/home.png"
+          <image :src="`http://210.75.199.113/images/${rightIcon}.png`"
                  slot="right"
-                 v-if="homeButtonShow"
                  style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
       </div>
@@ -31,7 +30,8 @@ import { getServer } from '../../utils/server'
 export default {
   components: { WxcMinibar },
   props: {
-    title: ''
+    title: '',
+    rightIcon: ''
   },
   data () {
     return {
@@ -84,25 +84,21 @@ export default {
           break
       }
       return show
-    },
-    miniBarTitle () {
-      return this.$store.state.Home.miniBarTitle
-    },
-    homeButtonShow () {
-      let show = true
-      if (this.activeTab === 0) {
-        show = false
-      }
-      return show
     }
   },
   methods: {
     homeButtonClick () {
-      const menu = ['', '病案', '字典', 'DRG分析', '论坛']
-      this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
-      if (this.activeTab === 4) {
-        getServer(this, this.activeTab, '帖子列表', { username: this.$store.state.Home.user.data.username })
+      if (this.activeTab === 0) {
+        this.$store.commit('SET_activeTab', 3)
+        this.$store.commit('SET_menu', [3, '报表'])
+        this.$store.commit('SET_chartType', '用户报表')
+      } else {
+        const menu = ['', '病案', '字典', 'DRG分析', '论坛']
+        this.$store.commit('SET_infoLevel', 0)
+        this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
+        if (this.activeTab === 4) {
+          getServer(this, this.activeTab, '帖子列表', { username: this.$store.state.Home.user.data.username })
+        }
       }
     },
     minibarLeftButtonClick () {

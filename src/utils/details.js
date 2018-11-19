@@ -1,166 +1,154 @@
+const result = {
+  info: {},
+  title: '',
+  details: [],
+  grid: {},
+  showSubRule: false, subRule: [],
+  showSubRuleTitle: false, subRuleTitle: ''}
 function caseInfo (data) {
-  const gridList = {}
-  gridList['分组日志'] = data.log.map((x) => {
-    const obj = { date: '', desc: '', highlight: false, title: x }
-    return obj
-  })
-  const result = {
-    info: data,
-    infoTitle: '病案详情',
-    isInfoButtonShow: false,
-    buttonText: ``,
-    gridList: gridList,
-    details: [
-      {'label': '入组DRG', 'title': 'drg', 'hasArrow': true},
-      {'label': '病案ID', 'title': 'b_wt4_v1_id', 'hasArrow': false},
-      {'label': '主要诊断编码', 'title': 'disease_code', 'hasArrow': false},
-      {'label': '主要诊断名称', 'title': 'disease_name', 'hasArrow': false},
-      {'label': '其他诊断', 'title': 'diags_code', 'hasArrow': false},
-      {'label': '手术/操作', 'title': 'opers_code', 'hasArrow': false},
-      {'label': '住院天数', 'title': 'acctual_days', 'hasArrow': false},
-      {'label': '住院总费用', 'title': 'total_expense', 'hasArrow': false},
-      {'label': '性别', 'title': 'gender', 'hasArrow': false},
-      {'label': '年龄', 'title': 'age', 'hasArrow': false},
-      {'label': '新生儿天数', 'title': 'sf0100', 'hasArrow': false},
-      {'label': '新生儿体重', 'title': 'sf0102', 'hasArrow': false},
-      {'label': '呼吸机使用时间', 'title': 'sf0104', 'hasArrow': false},
-      {'label': '出院转归', 'title': 'sf0108', 'hasArrow': false}]
+  result.title = '病案详情'
+  result.info = data
+  if (data.log) {
+    result.grid['分组日志'] = data.log.map((x) => {
+      const obj = { date: '', desc: '', highlight: false, title: x }
+      return obj
+    })
   }
+  result.details = [
+    {'label': '入组DRG', 'title': 'drg', 'hasArrow': true},
+    {'label': '病案ID', 'title': 'b_wt4_v1_id', 'hasArrow': false},
+    {'label': '主要诊断编码', 'title': 'disease_code', 'hasArrow': false},
+    {'label': '主要诊断名称', 'title': 'disease_name', 'hasArrow': false},
+    {'label': '其他诊断', 'title': 'diags_code', 'hasArrow': false},
+    {'label': '手术/操作', 'title': 'opers_code', 'hasArrow': false},
+    {'label': '住院天数', 'title': 'acctual_days', 'hasArrow': false},
+    {'label': '住院总费用', 'title': 'total_expense', 'hasArrow': false},
+    {'label': '性别', 'title': 'gender', 'hasArrow': false},
+    {'label': '年龄', 'title': 'age', 'hasArrow': false},
+    {'label': '新生儿天数', 'title': 'sf0100', 'hasArrow': false},
+    {'label': '新生儿体重', 'title': 'sf0102', 'hasArrow': false},
+    {'label': '呼吸机使用时间', 'title': 'sf0104', 'hasArrow': false},
+    {'label': '出院转归', 'title': 'sf0108', 'hasArrow': false}]
   return result
 }
 function statInfo (data, menu) {
-  const infoList = data.stat.map((x) => {
-    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
-    return obj
-  })
-  let isInfoListShow = true
-  if (infoList === []) {
-    isInfoListShow = false
+  result.title = '分析详情'
+  result.info = data
+  if (data.stat) {
+    result.showSubRule = true
+    result.subRuleTitle = `${menu}列表`
+    result.showSubRuleTitle = true
+    result.subRule = data.stat.map((x) => {
+      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
+      return obj
+    })
   }
-  const result = {
-    info: data,
-    infoTitle: '分析详情',
-    isInfoButtonShow: false,
-    buttonText: ``,
-    infoListTitle: `${menu}列表`,
-    isInfoListShow: isInfoListShow,
-    infoList: infoList,
-    gridList: [],
-    details: [
-      {'label': '编码', 'title': 'code', 'hasArrow': false},
-      {'label': '名称', 'title': 'desc', 'hasArrow': false},
-      {'label': '费用变异系数', 'title': 'fee_cv', 'hasArrow': false},
-      {'label': '时间变异系数', 'title': 'day_cv', 'hasArrow': false},
-      {'label': '死亡风险等级', 'title': 'death_level', 'hasArrow': false},
-      {'label': '权重', 'title': 'weight', 'hasArrow': false},
-      {'label': '平均费用', 'title': 'fee_avg', 'hasArrow': false},
-      {'label': '平均住院天数', 'title': 'day_avg', 'hasArrow': false},
-      {'label': '病历数', 'title': 'num_sum', 'hasArrow': false}]
-  }
+  result.details = [
+    {'label': '编码', 'title': 'code', 'hasArrow': false},
+    {'label': '名称', 'title': 'desc', 'hasArrow': false},
+    {'label': '费用变异系数', 'title': 'fee_cv', 'hasArrow': false},
+    {'label': '时间变异系数', 'title': 'day_cv', 'hasArrow': false},
+    {'label': '死亡风险等级', 'title': 'death_level', 'hasArrow': false},
+    {'label': '权重', 'title': 'weight', 'hasArrow': false},
+    {'label': '平均费用', 'title': 'fee_avg', 'hasArrow': false},
+    {'label': '平均住院天数', 'title': 'day_avg', 'hasArrow': false},
+    {'label': '病历数', 'title': 'num_sum', 'hasArrow': false}]
   return result
 }
 function mdcInfo (data) {
-  const gridList = {}
-  const infoList = data.adrg.map((x) => {
-    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'ADRG', all: x}
-    return obj
-  })
-  gridList['非QY小手术规则'] = data.icd9_aa.map((x) => {
-    const obj = { title: x }
-    return obj
-  })
-  const result = {
-    info: data,
-    infoTitle: `${data.code}规则详情`,
-    infoListTitle: 'ADRG列表',
-    isInfoListShow: true,
-    infoList: infoList,
-    gridList: gridList,
-    details: [
-      {'label': '编码', 'title': 'code', 'hasArrow': false},
-      {'label': '名称', 'title': 'desc', 'hasArrow': false},
-      {'label': '年份', 'title': 'year', 'hasArrow': false},
-      {'label': '版本', 'title': 'version', 'hasArrow': false}]
+  result.title = `${data.code}规则详情`
+  result.info = data
+  if (data.adrg) {
+    result.showSubRule = true
+    result.showSubRuleTitle = true
+    result.subRuleTitle = 'ADRG列表'
+    result.subRule = data.adrg.map((x) => {
+      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'ADRG', all: x}
+      return obj
+    })
   }
+  if (data.icd9_aa) {
+    result.grid['非QY小手术规则'] = data.icd9_aa.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
+  }
+  result.details = [
+    {'label': '编码', 'title': 'code', 'hasArrow': false},
+    {'label': '名称', 'title': 'desc', 'hasArrow': false},
+    {'label': '年份', 'title': 'year', 'hasArrow': false},
+    {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
 function adrgInfo (data) {
-  const gridList = {}
-  const infoList = data.drg.map((x) => {
-    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'DRG', all: x}
-    return obj
-  })
-  gridList['主要诊断规则'] = data.icd10_aa.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  gridList['其他诊断规则'] = data.icd10_bb.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  gridList['主要手术规则'] = data.icd9_aa.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  gridList['其他手术规则'] = data.icd9_bb.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  const result = {
-    info: data,
-    infoTitle: `${data.code}规则详情`,
-    isInfoListShow: true,
-    infoListTitle: 'DRG列表',
-    infoList: infoList,
-    gridList: gridList,
-    details: [
-      {'label': '编码', 'title': 'code', 'hasArrow': false},
-      {'label': '名称', 'title': 'desc', 'hasArrow': false},
-      {'label': '年份', 'title': 'year', 'hasArrow': false},
-      {'label': '版本', 'title': 'version', 'hasArrow': false}]
+  result.title = `${data.code}规则详情`
+  result.info = data
+  if (data.drg) {
+    result.showSubRule = true
+    result.showSubRuleTitle = true
+    result.subRuleTitle = 'DRG列表'
+    result.subRule = data.drg.map((x) => {
+      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'DRG', all: x}
+      return obj
+    })
   }
+  if (data.icd10_aa) {
+    result.grid['主要诊断规则'] = data.icd10_aa.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
+  }
+  if (data.icd10_bb) {
+    result.grid['其他诊断规则'] = data.icd10_bb.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
+  }
+  if (data.icd9_aa) {
+    result.grid['主要手术规则'] = data.icd9_aa.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
+  }
+  if (data.icd9_bb) {
+    result.grid['其他手术规则'] = data.icd9_bb.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
+  }
+  result.details = [
+    {'label': '编码', 'title': 'code', 'hasArrow': false},
+    {'label': '名称', 'title': 'desc', 'hasArrow': false},
+    {'label': '年份', 'title': 'year', 'hasArrow': false},
+    {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
 function drgInfo (data) {
-  const result = {
-    info: data,
-    infoTitle: `${data.code}规则详情`,
-    isInfoButtonShow: false,
-    buttonText: ``,
-    gridList: [],
-    details: [
-      {'label': '编码', 'title': 'code', 'hasArrow': false},
-      {'label': '名称', 'title': 'desc', 'hasArrow': false},
-      {'label': '年份', 'title': 'year', 'hasArrow': false},
-      {'label': '版本', 'title': 'version', 'hasArrow': false}]
-  }
+  result.title = `${data.code}规则详情`
+  result.info = data
+  result.details = [
+    {'label': '编码', 'title': 'code', 'hasArrow': false},
+    {'label': '名称', 'title': 'desc', 'hasArrow': false},
+    {'label': '年份', 'title': 'year', 'hasArrow': false},
+    {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
 function icd10Info (data) {
-  const gridList = {}
-  gridList['ADRG规则'] = data.adrg.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  const result = {
-    info: data,
-    infoTitle: 'ICD10规则详情',
-    isInfoButtonShow: false,
-    buttonText: ``,
-    gridList: gridList,
-    details: [
-      {'label': '编码', 'title': 'code', 'hasArrow': false},
-      {'label': '名称', 'title': 'desc', 'hasArrow': false},
-      {'label': '年份', 'title': 'year', 'hasArrow': false},
-      {'label': '版本', 'title': 'version', 'hasArrow': false},
-      {'label': 'MCC', 'title': 'mcc', 'hasArrow': false},
-      {'label': 'CC', 'title': 'cc', 'hasArrow': false}]
+  result.title = 'ICD10规则详情'
+  result.info = data
+  if (data.adrg) {
+    result.grid['ADRG规则'] = data.adrg.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
   }
+  result.details = [
+    {'label': '编码', 'title': 'code', 'hasArrow': false},
+    {'label': '名称', 'title': 'desc', 'hasArrow': false},
+    {'label': '年份', 'title': 'year', 'hasArrow': false},
+    {'label': '版本', 'title': 'version', 'hasArrow': false},
+    {'label': 'MCC', 'title': 'mcc', 'hasArrow': false},
+    {'label': 'CC', 'title': 'cc', 'hasArrow': false}]
   return result
 }
 function icd9Info (data) {
@@ -198,19 +186,15 @@ function compResultInfo (data) {
   return result
 }
 function icd (data, title) {
-  const infoList = data.icd.map((x) => {
-    const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: title, all: x}
-    return obj
-  })
-  const result = {
-    info: data,
-    infoTitle: title,
-    isInfoListShow: true,
-    infoListTitle: '',
-    isInfoListTitleShow: false,
-    infoList: infoList,
-    gridList: [],
-    details: []
+  result.title = title
+  result.info = data
+  if (data.icd) {
+    result.showSubRule = true
+    result.subRuleTitle = title
+    result.subRule = data.icd.map((x) => {
+      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: title, all: x}
+      return obj
+    })
   }
   return result
 }
@@ -241,6 +225,7 @@ const info = {
 }
 
 export function getDetails (menu, data) {
+  console.log(menu)
   let result = info
   if (data) {
     switch (menu) {
@@ -320,5 +305,6 @@ export function getDetails (menu, data) {
         break
     }
   }
+  console.log(result)
   return result
 }
