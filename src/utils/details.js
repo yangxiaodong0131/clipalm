@@ -65,10 +65,12 @@ function mdcInfo (data) {
     const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'ADRG', all: x}
     return obj
   })
-  gridList['非QY小手术规则'] = data.icd9_aa.map((x) => {
-    const obj = { title: x }
-    return obj
-  })
+  if (data.icd9_aa) {
+    gridList['非QY小手术规则'] = data.icd9_aa.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
+  }
   const result = {
     info: data,
     infoTitle: `${data.code}规则详情`,
@@ -90,26 +92,34 @@ function adrgInfo (data) {
     const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'DRG', all: x}
     return obj
   })
-  gridList['主要诊断规则'] = data.icd10_aa.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  gridList['其他诊断规则'] = data.icd10_bb.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  gridList['主要手术规则'] = data.icd9_aa.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  gridList['其他手术规则'] = data.icd9_bb.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
+  if (data.icd10_aa) {
+    gridList['主要诊断规则'] = data.icd10_aa.map((x) => {
+      const obj = {}
+      obj.title = x
+      return obj
+    })
+  }
+  if (data.icd10_bb) {
+    gridList['其他诊断规则'] = data.icd10_bb.map((x) => {
+      const obj = {}
+      obj.title = x
+      return obj
+    })
+  }
+  if (data.icd9_aa) {
+    gridList['主要手术规则'] = data.icd9_aa.map((x) => {
+      const obj = {}
+      obj.title = x
+      return obj
+    })
+  }
+  if (data.icd9_bb) {
+    gridList['其他手术规则'] = data.icd9_bb.map((x) => {
+      const obj = {}
+      obj.title = x
+      return obj
+    })
+  }
   const result = {
     info: data,
     infoTitle: `${data.code}规则详情`,
@@ -254,6 +264,7 @@ export function getDetails (menu, data) {
         result = statInfo(data, 'ADRG')
         break
       case 'MDC规则详情':
+        console.log(data)
         result = mdcInfo(data)
         break
       case 'ADRG规则详情':

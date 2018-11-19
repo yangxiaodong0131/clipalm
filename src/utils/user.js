@@ -61,6 +61,7 @@ export function updateUser (obj, user) {
   }, res => {
     if (res.ok) {
       obj.$store.commit('SET_userData', res.data.data)
+      storage.setItem('user', JSON.stringify({ login: true, data: res.data.data }))
     } else {
       obj.info = '- 网络连接失败 -'
     }
