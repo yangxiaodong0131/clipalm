@@ -14,12 +14,12 @@
           @wxcCellClicked="wxcCellClicked(detail)"
           ></wxc-cell>
         <div v-if="infoPage.infoTitle === '病案详情'">
-          <text class="title">分组日志</text>
+          <category title="--分组日志--"></category>
           <wxc-simple-flow :list="infoPage.gridList['分组日志']" :themeColor="themeColor"></wxc-simple-flow>
         </div>
         <div v-else v-for="(gridList, index) in infoPage.gridList"
               :key="index">
-          <text class="title">{{index}}</text>
+          <category :title="`--${index}--`"></category>
           <wxc-grid-select
               v-if="Object.keys(gridList).length !== 0"
               :single="true"
@@ -28,7 +28,7 @@
           <text class="title" style="font-size: 20px;" v-else >无</text>
         </div>
         <div>
-          <text :show="infoPage.isInfoListTitleShow" class="title">{{infoPage.infoListTitle}}</text>
+          <category v-if="infoPage.isInfoListTitleShow" :title="`--${infoPage.infoListTitle}--`"></category>
           <wxc-cell v-for="(info, index) in infoPage.infoList"
             :key="index"
             :label="info.label"
@@ -47,8 +47,9 @@
 import { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
+import Category from '../common/category.vue'
 export default {
-  components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow, MiniBar },
+  components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow, MiniBar, Category },
   data () {
     return {
       themeColor: {

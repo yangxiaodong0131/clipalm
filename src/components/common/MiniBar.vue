@@ -18,7 +18,7 @@
                  slot="right"
                  v-if="homeButtonShow"
                  style="height: 32px;width: 32px;"></image>
-          <image src="http://210.75.199.113/images/left.png"
+          <image src="http://210.75.199.113/images/table.png"
                  slot="right"
                  v-if="!homeButtonShow"
                  style="height: 32px;width: 32px;"></image>
