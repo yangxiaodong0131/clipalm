@@ -1,22 +1,25 @@
 <template>
   <div class="container" v-bind:class="container">
-    <list class="list" @loadmore="fetch" loadmoreoffset="30000">
-      <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
-        <wxc-cell :label="rule.code"
-                  @wxcCellClicked="wxcIndexlistItemClicked(rule)"
-                  :has-margin="false"
-                  :has-arrow="true"
-                  :arrow-icon="arrawSrc"
-                  :extraContent="rule.desc"></wxc-cell>
-      </cell>
-      <cell style="height:200px" v-if="rules.length !== 0">
-        <wxc-button text="加载更多"
-          class="submits"
-          size="big"
-          @wxcButtonClicked="fetch"></wxc-button>
-      </cell>
-    </list>
-    <mini-bar :title="menu" rightIcon="home"></mini-bar>
+    <div v-if="!show">
+      <list class="list" @loadmore="fetch" loadmoreoffset="30000">
+        <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
+          <wxc-cell :label="rule.code"
+                    @wxcCellClicked="wxcIndexlistItemClicked(rule)"
+                    :has-margin="false"
+                    :has-arrow="true"
+                    :arrow-icon="arrawSrc"
+                    :extraContent="rule.desc"></wxc-cell>
+        </cell>
+        <cell style="height:200px" v-if="rules.length !== 0">
+          <wxc-button text="加载更多"
+            class="submits"
+            size="big"
+            @wxcButtonClicked="fetch"></wxc-button>
+        </cell>
+      </list>
+      <mini-bar :title="menu" rightIcon="home"></mini-bar>
+    </div>
+    <pop-right v-if="show" :page="page"></pop-right>
   </div>
 </template>
 
@@ -25,14 +28,17 @@ import { WxcCell, WxcButton } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
+import PopRight from '../common/PopRight.vue'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell, MiniBar, WxcButton },
+  components: { WxcCell, MiniBar, PopRight, WxcButton },
   data () {
     return {
       height: 400,
       isShow: false,
-      arrawSrc: 'http://210.75.199.113/images/more.png'
+      arrawSrc: 'http://210.75.199.113/images/more.png',
+      show: false,
+      page: {}
     }
   },
   created () {
@@ -82,7 +88,9 @@ export default {
           type = this.menu
       }
       const details = getDetails(type, e)
-      this.$store.commit('SET_infoLevel', 1)
+      this.show = true
+      this.page = details
+      // this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_info', details)
     },
     fetch () {
