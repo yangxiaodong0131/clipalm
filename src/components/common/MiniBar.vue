@@ -18,6 +18,10 @@
                  slot="right"
                  v-if="homeButtonShow"
                  style="height: 32px;width: 32px;"></image>
+          <image src="http://210.75.199.113/images/left.png"
+                 slot="right"
+                 v-if="!homeButtonShow"
+                 style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
       </div>
     </scroller>
@@ -98,11 +102,17 @@ export default {
   },
   methods: {
     homeButtonClick () {
-      const menu = ['', '病案', '字典', 'DRG分析', '论坛']
-      this.$store.commit('SET_infoLevel', 0)
-      this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
-      if (this.activeTab === 4) {
-        getServer(this, this.activeTab, '帖子列表', { username: this.$store.state.Home.user.data.username })
+      if (this.activeTab === 0) {
+        this.$store.commit('SET_activeTab', 3)
+        this.$store.commit('SET_menu', [3, '报表'])
+        this.$store.commit('SET_chartType', '用户报表')
+      } else {
+        const menu = ['', '病案', '字典', 'DRG分析', '论坛']
+        this.$store.commit('SET_infoLevel', 0)
+        this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
+        if (this.activeTab === 4) {
+          getServer(this, this.activeTab, '帖子列表', { username: this.$store.state.Home.user.data.username })
+        }
       }
     },
     minibarLeftButtonClick () {
