@@ -46,7 +46,6 @@ export default {
     specialConfigList () {
       const configs = []
       this.wt4Case.map((x) => {
-        console.log(x)
         const config = [
           {
             type: 'tag',
@@ -97,38 +96,22 @@ export default {
       get () {
         const data = this.$store.state.Edit.wt4Case.map((x) => {
           const obj = x
-          let extraContent = ``
-          let value = ''
+          let extraContent = ''
           switch (this.$store.state.Home.menu[1]) {
             case '未入组病历':
-              if (x.diags_code.length > 50) {
-                value = x.diags_code.substr(0, 50)
-              } else {
-                value = x.diags_code
-              }
-              extraContent = `其他诊断：${value}`
+              extraContent = `主要诊断：${x.disease_code}; 其他诊断：${x.diags_code}`
               break
             case 'QY病历':
-              if (x.opers_code.length > 50) {
-                value = x.opers_code.substr(0, 50)
-              } else {
-                value = x.opers_code
-              }
-              extraContent = `其他手术：${value}`
+              extraContent = `主要诊断：${x.disease_code}; 主要手术：${x.oper_code}; DRG：${x.drg}`
+              break
+            case '低风险死亡病历':
+              extraContent = `主要诊断：${x.disease_code}; 年龄：${x.oper_code}; 其他诊断：${x.diags_code}; DRG：${x.drg}`
               break
             case '费用异常病历':
-              if (x.total_expense.length > 50) {
-                value = x.total_expense.substr(0, 50)
-              } else {
-                value = x.total_expense
-              }
-              extraContent = `总费用：${value}元·入组DRG平均费用`
+              extraContent = `主要诊断：${x.disease_code}; 总费用：${x.total_expense}; 年龄：${x.age}; 其他诊断：${x.diags_code};住院日${x.acctual_days}; DRG：${x.drg}`
               break
             default:
               extraContent = `性别：${x.gender}·年龄：${x.age}岁·费用：${x.total_expense}元·住院天数：${x.acctual_days}天·drg：${x.drg}`
-              if (extraContent.length > 50) {
-                extraContent = extraContent.substr(0, 50)
-              }
           }
           if (extraContent === '') {
             obj.extraContent = '无'

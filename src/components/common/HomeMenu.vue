@@ -1,6 +1,17 @@
 <template>
   <div class="demo" v-bind:style="panel">
-    <list class="list">
+  <div class="bigdiv">
+    <div v-for="(v, i) in menus" :key="i" class="row">
+      <div v-for="(text, k) in v" :key="k" class="item" @click="wxcButtonClicked(text)">
+          <!-- <wxc-icon class="icon" name="scanning" :icon-style="iconStyle"></wxc-icon> -->
+          <image class="icon"
+                 src="http://210.75.199.113/images/left.png"
+                 style="height: 32px;width: 32px;"></image>
+          <text class="text">{{text}}</text>
+      </div>
+    </div>
+  </div>
+    <!-- <list class="list">
       <cell class="cell">
         <div class="panel">
             <wxc-button class="submits"
@@ -10,18 +21,18 @@
               @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
         </div>
       </cell>
-    </list>
+    </list> -->
     <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </div>
 </template>
 
 <script>
-import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag } from 'weex-ui'
+import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag, WxcIcon } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar, WxcPopover, WxcCell, WxcTag },
+  components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
@@ -32,7 +43,21 @@ export default {
       popoverPosition2: { x: 200, y: 520 },
       popoverArrowPosition2: { pos: 'bottom', x: 500 },
       submits: {},
-      cellStyle: { backgroundColor: '#f2f3f4', height: '20' }
+      cellStyle: { backgroundColor: '#f2f3f4', height: '20' },
+      iconStyle: { color: 'green' },
+      customStyles: {
+        lineSpacing: '14px',
+        width: '150px',
+        height: '60px',
+        icon: '',
+        color: '#333333',
+        checkedColor: '#ffffff',
+        disabledColor: '#eeeeee',
+        borderColor: '#666666',
+        checkedBorderColor: '#ffb200',
+        backgroundColor: '#ffffff',
+        checkedBackgroundColor: '#1E90FF'
+      }
     }
   },
   computed: {
@@ -43,7 +68,12 @@ export default {
       return this.$store.state.Home.menu[this.activeTab]
     },
     menus () {
-      return this.$store.state.Home.menus
+      const list = []
+      const aa = this.$store.state.Home.menus.slice(0, 3)
+      list.push(aa)
+      const bb = this.$store.state.Home.menus.slice(3, 6)
+      list.push(bb)
+      return list
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
@@ -119,6 +149,9 @@ export default {
     },
     wxcButtonClickedMenu (ref) {
       this.$refs[ref].wxcPopoverShow()
+    },
+    onSelect (params) {
+      console.log(params)
     }
   }
 }
@@ -135,7 +168,9 @@ export default {
   }
   .demo {
     width: 750px;
-    /* margin-top: 21px; */
+    /* flex-direction: column;
+    align-items: center; */
+    /* justify-content: center; */
   }
   .submits {
     position: relative;
@@ -163,5 +198,34 @@ export default {
   }
   .special-rich {
     margin-top: 14px;
+  }
+  .bigdiv {
+    margin-top: 491px;
+    /* width: 550px; */
+  }
+  .item{
+    flex:1;
+    align-items: center;
+    /* border-width: 2px 1px 2px 1px; */
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-style: solid;
+    border-color: gray;
+    margin: 20px;
+    background-color: #87CEFF;
+  }
+  .row{
+    flex-direction: row;
+    width: 740px;
+  }
+  .text {
+    font-size: 27px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .icon {
+    margin-top: 20px;
   }
 </style>
