@@ -6,7 +6,6 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
-  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
@@ -176,35 +175,6 @@ export function getLastVersion (obj) {
   })
 }
 
-export function createForum (obj, forum, type, activeTab) {
-  stream.fetch({
-    method: 'POST',
-    type: 'json',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-    responseType: 'json',
-    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/forum`,
-    body: qs.stringify(forum)
-  }, res => {
-    if (res.ok) {
-      switch (type) {
-        case 'reply':
-          modal.toast({ message: '回复成功', duration: 1 })
-          obj.$store.commit('SET_menu', [activeTab, '帖子'])
-          getServer(obj, activeTab, '帖子', res.data)
-          break
-        default:
-          obj.$store.commit('SET_menu', [activeTab, '帖子列表'])
-          obj.$store.commit('SET_post', [])
-          obj.$store.commit('SET_forumPage', 1)
-          modal.toast({ message: '帖子创建成功', duration: 1 })
-          getServer(obj, activeTab, '帖子列表', obj.$store.state.Home.menu[activeTab])
-      }
-    } else {
-      obj.info = '- 网络连接失败 -'
-    }
-  })
-}
-
 function setStore (obj, activeTab, menu, rdata) {
   let data = []
   let details = {}
@@ -313,4 +283,33 @@ function setStore (obj, activeTab, menu, rdata) {
       break
   }
   obj.$store.commit('SET_isLoadingShow', false)
+}
+
+export function createForum (obj, forum, type, activeTab) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/forum`,
+    body: qs.stringify(forum)
+  }, res => {
+    if (res.ok) {
+      switch (type) {
+        case 'reply':
+          modal.toast({ message: '回复成功', duration: 1 })
+          obj.$store.commit('SET_menu', [activeTab, '帖子'])
+          getServer(obj, activeTab, '帖子', res.data)
+          break
+        default:
+          obj.$store.commit('SET_menu', [activeTab, '帖子列表'])
+          obj.$store.commit('SET_post', [])
+          obj.$store.commit('SET_forumPage', 1)
+          modal.toast({ message: '帖子创建成功', duration: 1 })
+          getServer(obj, activeTab, '帖子列表', obj.$store.state.Home.menu[activeTab])
+      }
+    } else {
+      obj.info = '- 网络连接失败 -'
+    }
+  })
 }
