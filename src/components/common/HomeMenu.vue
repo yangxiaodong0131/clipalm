@@ -22,6 +22,32 @@
         </div>
       </cell>
     </list> -->
+  <div v-if="activeTab === 3">
+  <wxc-rich-text  :config-list='configHeader'
+                  :has-text-margin="true"
+                  @wxcRichTextLinkClick='wxcRichTextLinkClick'></wxc-rich-text>
+    <div v-for="(v, i) in analysis" :key="i" class="row">
+      <div v-for="(text, k) in v" :key="k" class="item" @click="wxcButtonClicked(text)">
+          <!-- <wxc-icon class="icon" name="scanning" :icon-style="iconStyle"></wxc-icon>-->
+          <image class="icon"
+                 src="http://210.75.199.113/images/left.png"
+                 style="height: 32px;width: 32px;"></image>
+          <text class="text">{{text}}</text>
+      </div>
+    </div>
+    <wxc-rich-text  :config-list='configHeader2'
+                    :has-text-margin="true"
+                    @wxcRichTextLinkClick='wxcRichTextLinkClick'></wxc-rich-text>
+    <div v-for="(v, i) in mechanism" :key="i" class="row">
+      <div v-for="(text, k) in v" :key="k" class="item" @click="wxcButtonClicked(text)">
+          <!-- <wxc-icon class="icon" name="scanning" :icon-style="iconStyle"></wxc-icon>-->
+          <image class="submits"
+                 src="http://210.75.199.113/images/left.png"
+                 style="height: 32px;width: 32px;"></image>
+          <text class="text">{{text}}</text>
+      </div>
+    </div>
+  </div>
     <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </div>
 </template>
@@ -36,28 +62,26 @@ export default {
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      btns1: [{ text: '偏差分布', key: 's1' }],
-      popoverPosition1: { x: 200, y: 230 },
-      popoverArrowPosition1: { pos: 'bottom', x: 500 },
-      btns2: [{ text: '年', key: 't1' }],
-      popoverPosition2: { x: 200, y: 520 },
-      popoverArrowPosition2: { pos: 'bottom', x: 500 },
-      submits: {},
-      cellStyle: { backgroundColor: '#f2f3f4', height: '20' },
-      iconStyle: { color: 'green' },
-      customStyles: {
-        lineSpacing: '14px',
-        width: '150px',
-        height: '60px',
-        icon: '',
-        color: '#333333',
-        checkedColor: '#ffffff',
-        disabledColor: '#eeeeee',
-        borderColor: '#666666',
-        checkedBorderColor: '#ffb200',
-        backgroundColor: '#ffffff',
-        checkedBackgroundColor: '#1E90FF'
-      }
+      analysis: [['偏差分析', '主诊未入组', '手术QY']],
+      mechanism: [['年', '季度', '月']],
+      configHeader: [{
+        type: 'tag',
+        value: 'DRG专家',
+        theme: 'blue',
+        style: {
+          fontSize: 26,
+          height: 36
+        }
+      }],
+      configHeader2: [{
+        type: 'tag',
+        value: 'DRG机构',
+        theme: 'blue',
+        style: {
+          fontSize: 26,
+          height: 36
+        }
+      }]
     }
   },
   computed: {
