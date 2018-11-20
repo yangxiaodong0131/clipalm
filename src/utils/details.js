@@ -38,12 +38,10 @@ function caseInfo (result, data) {
       return obj
     })
   }
-  result.details = details
   return result
 }
 function statInfo (result, data, menu) {
   result.title = '分析详情'
-  result.info = data
   if (data.stat && data.stat.length > 0) {
     result.showSubRule = true
     result.subRuleTitle = `${menu}列表`
@@ -53,26 +51,15 @@ function statInfo (result, data, menu) {
       return obj
     })
   }
-  result.details = [
-    {'label': '编码', 'title': 'code', 'hasArrow': false},
-    {'label': '名称', 'title': 'name', 'hasArrow': false},
-    {'label': '费用变异系数', 'title': 'fee_cv', 'hasArrow': false},
-    {'label': '时间变异系数', 'title': 'day_cv', 'hasArrow': false},
-    {'label': '死亡风险等级', 'title': 'death_level', 'hasArrow': false},
-    {'label': '权重', 'title': 'weight', 'hasArrow': false},
-    {'label': '平均费用', 'title': 'fee_avg', 'hasArrow': false},
-    {'label': '平均住院天数', 'title': 'day_avg', 'hasArrow': false},
-    {'label': '病历数', 'title': 'num_sum', 'hasArrow': false}]
   return result
 }
 function mdcInfo (result, data) {
   result.title = `${data.code}规则详情`
-  result.info = data
-  if (data.adrg) {
+  if (data.adrgs) {
     result.showSubRule = true
     result.showSubRuleTitle = true
     result.subRuleTitle = 'ADRG列表'
-    result.subRule = data.adrg.map((x) => {
+    result.subRule = data.adrgs.map((x) => {
       const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'ADRG', all: x}
       return obj
     })
@@ -87,12 +74,11 @@ function mdcInfo (result, data) {
 }
 function adrgInfo (result, data) {
   result.title = `${data.code}规则详情`
-  result.info = data
-  if (data.drg) {
+  if (data.drgs) {
     result.showSubRule = true
     result.showSubRuleTitle = true
     result.subRuleTitle = 'DRG列表'
-    result.subRule = data.drg.map((x) => {
+    result.subRule = data.drgs.map((x) => {
       const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'DRG', all: x}
       return obj
     })
@@ -121,74 +107,39 @@ function adrgInfo (result, data) {
       return obj
     })
   }
-  result.details = [
-    {'label': '编码', 'title': 'code', 'hasArrow': false},
-    {'label': '名称', 'title': 'name', 'hasArrow': false},
-    {'label': '年份', 'title': 'year', 'hasArrow': false},
-    {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
 function drgInfo (result, data) {
-  const result2 = {info: {}, title: '', details: [], grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   result.title = `${data.code}规则详情`
-  result.info = data
-  result.details = [
-    {'label': '编码', 'title': 'code', 'hasArrow': false},
-    {'label': '名称', 'title': 'name', 'hasArrow': false},
-    {'label': '年份', 'title': 'year', 'hasArrow': false},
-    {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
 function icd10Info (result, data) {
   result.title = 'ICD10规则详情'
-  result.info = data
   if (data.adrg) {
     result.grid['ADRG规则'] = data.adrg.map((x) => {
       const obj = { title: x }
       return obj
     })
   }
-  console.log(result)
   return result
 }
 function icd9Info (result, data) {
-  const gridList = {}
-  gridList['ADRG规则'] = data.adrg.map((x) => {
-    const obj = {}
-    obj.title = x
-    return obj
-  })
-  const result2 = {
-    info: data,
-    infoTitle: 'ICD9规则详情',
-    isInfoButtonShow: false,
-    buttonText: ``,
-    gridList: gridList,
-    details: [
-      {'label': '编码', 'title': 'code', 'hasArrow': false},
-      {'label': '名称', 'title': 'name', 'hasArrow': false},
-      {'label': '年份', 'title': 'year', 'hasArrow': false},
-      {'label': '版本', 'title': 'version', 'hasArrow': false},
-      {'label': '手术室手术', 'title': 'p_type', 'hasArrow': false}]
+  result.title = 'ICD9规则详情'
+  if (data.adrg) {
+    result.grid['ADRG规则'] = data.adrg.map((x) => {
+      const obj = { title: x }
+      return obj
+    })
   }
-  return result2
+  return result
 }
 function compResultInfo (result, data) {
-  const result2 = {
-    info: data,
-    infoTitle: '分组结果',
-    isInfoButtonShow: false,
-    buttonText: ``,
-    details: [
-      {'label': '入组DRG', 'title': 'drg', 'hasArrow': false},
-      {'label': '分组日志', 'title': 'log', 'hasArrow': false}]
-  }
-  return result2
+  result.title = '分组结果'
+  return result
 }
 function subRule (result, data, title) {
   result.details = []
   result.title = title
-  result.info = data
   if (['诊断术语-部位', '操作术语-部位'].includes(title) && data.dissect) {
     result.showSubRule = true
     result.subRuleTitle = title
@@ -204,7 +155,6 @@ function subRule (result, data, title) {
       return obj
     })
   }
-  console.log(result)
   return result
 }
 // function dissect (result, data, title) {
@@ -216,8 +166,7 @@ function subRule (result, data, title) {
 // }
 
 export function getDetails (menu, data) {
-  console.log([menu, data])
-  let result = {info: {}, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
+  let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     if (['BJ-ICD10', 'GB-ICD10'].includes(menu)) {
       menu = 'ICD10'
@@ -267,7 +216,7 @@ export function getDetails (menu, data) {
         result = subRule(result, data, 'ICD9细目')
         break
       case 'ICD9细目':
-        result = icd10Info(result, data)
+        result = icd9Info(result, data)
         break
       case '疾病分类/诊断术语':
         result = subRule(result, data, '诊断术语-部位')
