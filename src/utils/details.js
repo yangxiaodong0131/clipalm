@@ -44,7 +44,7 @@ function caseInfo (result, data) {
 function statInfo (result, data, menu) {
   result.title = '分析详情'
   result.info = data
-  if (data.stat) {
+  if (data.stat && data.stat.length > 0) {
     result.showSubRule = true
     result.subRuleTitle = `${menu}列表`
     result.showSubRuleTitle = true
