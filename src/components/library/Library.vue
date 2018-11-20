@@ -25,14 +25,17 @@ import { WxcCell, WxcButton } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
+import PopRight from '../common/PopRight.vue'
 // const modal = weex.requireModule('modal')
 export default {
-  components: { WxcCell, MiniBar, WxcButton },
+  components: { WxcCell, MiniBar, PopRight, WxcButton },
   data () {
     return {
       height: 400,
       isShow: false,
-      arrawSrc: 'http://210.75.199.113/images/more.png'
+      arrawSrc: 'http://210.75.199.113/images/more.png',
+      show: false,
+      page: {}
     }
   },
   created () {
@@ -76,12 +79,14 @@ export default {
       let type = ''
       switch (this.menu) {
         case 'CN-DRG':
-          type = 'MDC规则详情'
+          type = 'MDC'
           break
         default:
           type = this.menu
       }
       const details = getDetails(type, e)
+      this.show = true
+      this.page = details
       this.$store.commit('SET_infoLevel', 1)
       this.$store.commit('SET_info', details)
     },
