@@ -35,6 +35,9 @@ export function getServer (obj, activeTab, menu, value = null) {
   } else {
     year = '2017'
   }
+  if (value && !value.version) {
+    value.version = 'CN'
+  }
   if (value === null) {
     switch (menu) {
       case 'QY病历':
@@ -92,16 +95,10 @@ export function getServer (obj, activeTab, menu, value = null) {
   } else {
     switch (menu) {
       case 'ADRG':
-        url = `rule_bj_adrg?plat=client&page=1&mdc=${value.mdc}&version=${version}`
-        break
-      case 'ADRG规则详情':
         url = `rule_bj_adrg?plat=client&page=1&code=${value.code}&version=${version}`
         break
-      case 'DRG规则详情':
-        url = `rule_bj_drg?plat=client&page=1&code=${value.code}&version=${version}`
-        break
       case 'DRG':
-        url = `rule_bj_drg?plat=client&page=1&adrg=${value.code}&version=${version}`
+        url = `rule_bj_drg?plat=client&page=1&code=${value.code}&version=${version}`
         break
       case 'ICD10亚目':
         url = `rule_bj_icd10?plat=client&version=${value.version}&year=${value.year}&page=1&code=${value.code}`
@@ -124,15 +121,9 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '诊断术语-部位':
         url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}`
         break
-      // case '诊断术语-部位规则列表规则详情':
-      //   url = `rule_bj_icd10?plat=client&version=CN&page=1&code=${value.code}&type=one`
-      //   break
-      // case '操作术语-部位规则详情':
-      //   url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}`
-      //   break
-      // case '操作术语-部位规则列表规则详情':
-      //   url = `rule_bj_icd9?plat=client&version=CN&page=1&code=${value.code}&type=one`
-      //   break
+      case '操作术语-部位':
+        url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}`
+        break
       case '帖子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`
         break
@@ -236,12 +227,12 @@ function setStore (obj, activeTab, menu, rdata) {
       break
     case 2:
       switch (menu) {
-        case 'ADRG规则详情':
+        case 'ADRG':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
-        case 'DRG规则详情':
+        case 'DRG':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
@@ -274,24 +265,14 @@ function setStore (obj, activeTab, menu, rdata) {
           details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
-        case '诊断术语-部位规则详情':
+        case '诊断术语-部位':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, { icd: rdata.data })
           obj.$store.commit('SET_info', details)
           break
-        case '诊断术语-部位规则列表规则详情':
-          obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
-          obj.$store.commit('SET_info', details)
-          break
-        case '操作术语-部位规则详情':
+        case '操作术语-部位':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, { icd: rdata.data })
-          obj.$store.commit('SET_info', details)
-          break
-        case '操作术语-部位规则列表规则详情':
-          obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         default:

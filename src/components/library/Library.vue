@@ -79,7 +79,7 @@ export default {
       let type = ''
       switch (this.menu) {
         case 'CN-DRG':
-          type = 'MDC规则详情'
+          type = 'MDC'
           break
         default:
           type = this.menu

@@ -66,7 +66,6 @@ function statInfo (result, data, menu) {
   return result
 }
 function mdcInfo (result, data) {
-  result.next =
   result.title = `${data.code}规则详情`
   result.info = data
   if (data.adrg) {
@@ -149,6 +148,7 @@ function icd10Info (result, data) {
       return obj
     })
   }
+  console.log(result)
   return result
 }
 function icd9Info (result, data) {
@@ -189,7 +189,14 @@ function subRule (result, data, title) {
   result.details = []
   result.title = title
   result.info = data
-  if (data.icd) {
+  if (['诊断术语-部位', '操作术语-部位'].includes(title) && data.dissect) {
+    result.showSubRule = true
+    result.subRuleTitle = title
+    result.subRule = data.dissect.map((x) => {
+      const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: {name: x}}
+      return obj
+    })
+  } else if (data.icd) {
     result.showSubRule = true
     result.subRuleTitle = title
     result.subRule = data.icd.map((x) => {
@@ -197,6 +204,7 @@ function subRule (result, data, title) {
       return obj
     })
   }
+  console.log(result)
   return result
 }
 // function dissect (result, data, title) {
@@ -228,13 +236,13 @@ export function getDetails (menu, data) {
       case '分析详情':
         result = statInfo(result, data, 'ADRG')
         break
-      case 'MDC规则详情':
+      case 'MDC':
         result = mdcInfo(result, data)
         break
-      case 'ADRG规则详情':
+      case 'ADRG':
         result = adrgInfo(result, data)
         break
-      case 'DRG规则详情':
+      case 'DRG':
         result = drgInfo(result, data)
         break
       case 'ADRG分析规则详情':
@@ -271,7 +279,7 @@ export function getDetails (menu, data) {
       //   result = icd10Info(result, data)
       //   break
       case '临床手术/操作术语':
-        result = dissect(result, data, '操作术语-部位')
+        result = subRule(result, data, '操作术语-部位')
         break
       case '操作术语-部位':
         result = subRule(result, data, 'ICD9细目')
