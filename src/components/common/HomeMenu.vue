@@ -1,9 +1,8 @@
 <template>
   <div class="demo" v-bind:style="panel">
   <div class="bigdiv">
-    <div v-for="(v, i) in menus" :key="i" class="row">
-      <div v-for="(text, k) in v" :key="k" class="item" @click="wxcButtonClicked(text)">
-          <!-- <wxc-icon class="icon" name="scanning" :icon-style="iconStyle"></wxc-icon> -->
+    <div v-for="(v, i) in menus" :key="`menus${i}`" class="row">
+      <div v-for="(text, k) in v" :key="`menu${k}`" class="item" @click="wxcButtonClicked(text)">
           <image class="icon"
                  src="http://210.75.199.113/images/left.png"
                  style="height: 32px;width: 32px;"></image>
@@ -11,37 +10,22 @@
       </div>
     </div>
   </div>
-    <!-- <list class="list">
-      <cell class="cell">
-        <div class="panel">
-            <wxc-button class="submits"
-              v-for="(menu, index) in menus" :key="index"
-              :text="menu"
-              type="white"
-              @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
-        </div>
-      </cell>
-    </list> -->
   <div v-if="activeTab === 3">
-  <wxc-rich-text  :config-list='configHeader'
-                  :has-text-margin="true"
-                  @wxcRichTextLinkClick='wxcRichTextLinkClick'></wxc-rich-text>
-    <div v-for="(v, i) in analysis" :key="i" class="row">
-      <div v-for="(text, k) in v" :key="k" class="item" @click="wxcButtonClicked(text)">
-          <!-- <wxc-icon class="icon" name="scanning" :icon-style="iconStyle"></wxc-icon>-->
+    <wxc-rich-text  :config-list='configHeader'
+                    :has-text-margin="true"></wxc-rich-text>
+    <div v-for="(texts, indexs) in [['偏差分析', '主诊未入组', '手术QY']]" :key="`texts1-${indexs}s`" class="row">
+      <div v-for="(text, index) in texts" :key="`text1-${index}`" class="item" @click="wxcButtonClicked(text)">
           <image class="icon"
                  src="http://210.75.199.113/images/left.png"
                  style="height: 32px;width: 32px;"></image>
           <text class="text">{{text}}</text>
       </div>
     </div>
-    <wxc-rich-text  :config-list='configHeader2'
-                    :has-text-margin="true"
-                    @wxcRichTextLinkClick='wxcRichTextLinkClick'></wxc-rich-text>
-    <div v-for="(v, i) in mechanism" :key="i" class="row">
-      <div v-for="(text, k) in v" :key="k" class="item" @click="wxcButtonClicked(text)">
-          <!-- <wxc-icon class="icon" name="scanning" :icon-style="iconStyle"></wxc-icon>-->
-          <image class="submits"
+    <wxc-rich-text :config-list='configHeader2'
+                  :has-text-margin="true"></wxc-rich-text>
+    <div v-for="(texts, indexs) in [['年', '季度', '月']]" :key="`texts2-${indexs}s`" class="row">
+      <div v-for="(text, index) in texts" :key="`text2-${index}`" class="item" @click="wxcButtonClicked(text)">
+          <image class="icon"
                  src="http://210.75.199.113/images/left.png"
                  style="height: 32px;width: 32px;"></image>
           <text class="text">{{text}}</text>
@@ -62,8 +46,6 @@ export default {
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      analysis: [['偏差分析', '主诊未入组', '手术QY']],
-      mechanism: [['年', '季度', '月']],
       configHeader: [{
         type: 'tag',
         value: 'DRG专家',
@@ -93,10 +75,18 @@ export default {
     },
     menus () {
       const list = []
-      const aa = this.$store.state.Home.menus.slice(0, 3)
-      list.push(aa)
-      const bb = this.$store.state.Home.menus.slice(3, 6)
-      list.push(bb)
+      let k = 0
+      for (let i = 0; i < this.$store.state.Home.menus.length; i++) {
+        let menu = list[k]
+        if (!menu) {
+          list[k] = []
+        } else if (menu.length >= 3) {
+          k = k + 1
+          list[k] = []
+        }
+        menu = list[k]
+        menu.push(this.$store.state.Home.menus[i])
+      }
       return list
     },
     panel () {
