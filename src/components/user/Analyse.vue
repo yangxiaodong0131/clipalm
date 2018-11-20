@@ -2,14 +2,17 @@
   <div class="panel" v-bind:style="panel">
     <div v-for="(value, key) in userAnalyse" v-bind:key="key">
       <category class="category" :title="`--${key}--`"></category>
-      <wxc-cell v-for="(data, index) in value"
+      <wxc-cell
+        v-for="(data, index) in value"
         v-bind:key="`${key}-${index}`"
-        :label="data.type"
-        :title="`${data.count}`"
+        :title="`${data.time}`"
+        :desc="`${data.count}  ${data.user.join(';')}`"
+        :has-margin="false"
         :has-arrow="false"
-        :has-margin="true"></wxc-cell>
+        @wxcCellClicked="wxcCellClicked(wt4)">
+      </wxc-cell>
     </div>
-    <mini-bar title="用户分析" rightIcon="table"></mini-bar>
+    <mini-bar title="用户分析" rightIcon="home"></mini-bar>
   </div>
 </template>
 
@@ -27,7 +30,6 @@ export default {
   computed: {
     userAnalyse: {
       get () {
-        console.log(this.$store.state.Home.userAnalyse)
         return this.$store.state.Home.userAnalyse
       }
     },

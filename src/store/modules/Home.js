@@ -6,7 +6,7 @@ const state = {
   infoPages: [[], [], [], [], []],
   infoLevel: [0, 0, 0, 0, 0],
   user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },
-  userAnalyse: {},
+  userAnalyse: null,
   isLoadingShow: false,
   // 发布版本修改
   version: '0.0.1',
