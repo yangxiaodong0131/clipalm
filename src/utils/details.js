@@ -1,11 +1,4 @@
-const result = {
-  info: {},
-  title: '',
-  details: [],
-  grid: {},
-  showSubRule: false, subRule: [],
-  showSubRuleTitle: false, subRuleTitle: ''}
-function caseInfo (data) {
+function caseInfo (result, data) {
   result.title = '病案详情'
   result.info = data
   if (data.log) {
@@ -31,7 +24,7 @@ function caseInfo (data) {
     {'label': '出院转归', 'title': 'sf0108', 'hasArrow': false}]
   return result
 }
-function statInfo (data, menu) {
+function statInfo (result, data, menu) {
   result.title = '分析详情'
   result.info = data
   if (data.stat) {
@@ -55,7 +48,7 @@ function statInfo (data, menu) {
     {'label': '病历数', 'title': 'num_sum', 'hasArrow': false}]
   return result
 }
-function mdcInfo (data) {
+function mdcInfo (result, data) {
   result.title = `${data.code}规则详情`
   result.info = data
   if (data.adrg) {
@@ -80,7 +73,7 @@ function mdcInfo (data) {
     {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
-function adrgInfo (data) {
+function adrgInfo (result, data) {
   result.title = `${data.code}规则详情`
   result.info = data
   if (data.drg) {
@@ -123,7 +116,7 @@ function adrgInfo (data) {
     {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
-function drgInfo (data) {
+function drgInfo (result, data) {
   result.title = `${data.code}规则详情`
   result.info = data
   result.details = [
@@ -133,7 +126,7 @@ function drgInfo (data) {
     {'label': '版本', 'title': 'version', 'hasArrow': false}]
   return result
 }
-function icd10Info (data) {
+function icd10Info (result, data) {
   result.title = 'ICD10规则详情'
   result.info = data
   if (data.adrg) {
@@ -151,14 +144,14 @@ function icd10Info (data) {
     {'label': 'CC', 'title': 'cc', 'hasArrow': false}]
   return result
 }
-function icd9Info (data) {
+function icd9Info (result, data) {
   const gridList = {}
   gridList['ADRG规则'] = data.adrg.map((x) => {
     const obj = {}
     obj.title = x
     return obj
   })
-  const result = {
+  const result2 = {
     info: data,
     infoTitle: 'ICD9规则详情',
     isInfoButtonShow: false,
@@ -171,10 +164,10 @@ function icd9Info (data) {
       {'label': '版本', 'title': 'version', 'hasArrow': false},
       {'label': '手术室手术', 'title': 'p_type', 'hasArrow': false}]
   }
-  return result
+  return result2
 }
-function compResultInfo (data) {
-  const result = {
+function compResultInfo (result, data) {
+  const result2 = {
     info: data,
     infoTitle: '分组结果',
     isInfoButtonShow: false,
@@ -183,9 +176,9 @@ function compResultInfo (data) {
       {'label': '入组DRG', 'title': 'drg', 'hasArrow': false},
       {'label': '分组日志', 'title': 'log', 'hasArrow': false}]
   }
-  return result
+  return result2
 }
-function icd (data, title) {
+function icd (result, data, title) {
   result.title = title
   result.info = data
   if (data.icd) {
@@ -198,12 +191,12 @@ function icd (data, title) {
   }
   return result
 }
-function dissect (data, title) {
+function dissect (result, data, title) {
   const infoList = data.dissect.map((x) => {
     const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: { name: x }}
     return obj
   })
-  const result = {
+  const result2 = {
     info: data,
     infoTitle: title,
     isInfoListShow: true,
@@ -213,20 +206,19 @@ function dissect (data, title) {
     gridList: [],
     details: []
   }
-  return result
+  return result2
 }
 
-const info = {
-  infoTitle: '',
-  isInfoButtonShow: false,
-  buttonText: '',
-  gridList: [],
-  details: []
-}
+// const info = {
+//   infoTitle: '',
+//   isInfoButtonShow: false,
+//   buttonText: '',
+//   gridList: [],
+//   details: []
+// }
 
 export function getDetails (menu, data) {
-  console.log(menu)
-  let result = info
+  let result = {info: {}, title: '', details: [], grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     switch (menu) {
       case '病案详情':
