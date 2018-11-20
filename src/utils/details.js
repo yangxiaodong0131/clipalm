@@ -139,7 +139,6 @@ function subRule (result, data, title) {
   return result
 }
 export function getDetails (menu, data) {
-  console.log(menu)
   let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     if (['BJ-ICD10', 'GB-ICD10'].includes(menu)) {
