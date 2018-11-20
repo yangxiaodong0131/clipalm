@@ -3,6 +3,20 @@ const storage = weex.requireModule('storage')
 const urlConfig = require('./config.js')
 const qs = require('qs')
 
+export function analyse (obj) {
+  stream.fetch({
+    method: 'GET',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/user_analyse`
+  }, res => {
+    if (res.ok) {
+      obj.$store.commit('SET_userAnalyse', res.data)
+    }
+  })
+}
+
 export function userLogin (obj, user) {
   stream.fetch({
     method: 'POST',

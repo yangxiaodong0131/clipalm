@@ -13,7 +13,8 @@
     @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
     <!-- user页 -->
     <div class="panel" v-bind:class="panel">
-      <Login v-if="menu[0] == '用户登录'"></Login>
+      <Analyse v-if="infoLevel[0] > 0"></Analyse>
+      <Login v-else-if="menu[0] == '用户登录'"></Login>
       <User v-if="menu[0] == '个人信息'"></User>
     </div>
     <!-- edit页 -->
@@ -67,13 +68,14 @@
   import Library from './library/Library'
   import Report from './stat/Report'
   import Charts from './stat/Charts'
+  import Analyse from './user/Analyse'
   import User from './user/User'
   import Login from './user/Login'
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, Library,
-      Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce },
+      Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce, Analyse },
     data: () => ({
       tabs: [{
         title: '用户',
