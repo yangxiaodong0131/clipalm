@@ -2,9 +2,9 @@
   <scroller class="container" v-bind:style="panel">
     <div class="div" style="height:20px"></div>
     <div v-if="showNew">
-      <input class="input" type="text" placeholder="输入帖子标题" :autofocus=true value="" @input="oninput"/>
+      <input class="input" type="text" placeholder="输入帖子标题" value="" @input="oninput"/>
       <div class="wrapper">
-        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" :autofocus=true value="" ></textarea>
+        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
       </div>
       <wxc-button text="发布"
             size="full"

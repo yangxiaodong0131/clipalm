@@ -27,7 +27,7 @@
     </list>
     <div>
       <text v-if="textShow" style="font-size:35px;">{{text}}</text>
-      <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" :autofocus=true value="" ></textarea>
+      <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
       <wxc-button text="回复"
         class="submits"
         size="full"

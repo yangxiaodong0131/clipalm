@@ -5,41 +5,41 @@
         <div class="row">
           <div class="col-md-6">
             <text class="title">主要诊断编码(必填)</text>
-            <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" :autofocus="true" value="B25.000y001+J17.1*"/>
+            <input type="text" name="DISEASE_CODE" placeholder="请输入主要诊断编码，如'B25.901'" class="input" value="B25.000y001+J17.1*"/>
           </div>
           <div class="col-md-6">
             <text class="title">年龄(必填)</text>
-            <input type="number" name="AGE" placeholder="请输入年龄" class="input" :autofocus="true" v-model="wt4.AGE"/>
+            <input type="number" name="AGE" placeholder="请输入年龄" class="input" v-model="wt4.AGE"/>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <text class="title">性别(必填)</text>
-            <input type="text" name="SEX" placeholder="请输入性别" class="input" :autofocus="true" v-model="wt4.GENDER"/>
+            <input type="text" name="SEX" placeholder="请输入性别" class="input" v-model="wt4.GENDER"/>
           </div>
           <div class="col-md-6">
             <text class="title">住院天数(必填)</text>
-            <input type="number" name="ACCTUAL_DAYS" placeholder="请输入住院天数" class="input" :autofocus="true" v-model="wt4.ACCTUAL_DAYS"/>
+            <input type="number" name="ACCTUAL_DAYS" placeholder="请输入住院天数" class="input" v-model="wt4.ACCTUAL_DAYS"/>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <text class="title">总费用(必填)</text>
-            <input type="text" name="TOTAL_EXPENSE" placeholder="请输入总费用" class="input" :autofocus="true" v-model="wt4.TOTAL_EXPEMSE"/>
+            <input type="text" name="TOTAL_EXPENSE" placeholder="请输入总费用" class="input" v-model="wt4.TOTAL_EXPEMSE"/>
           </div>
           <div class="col-md-6">
             <text class="title">新生儿出生天数</text>
-            <input type="number" name="SF0100" placeholder="请输入新生儿出生天数，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0100"/>
+            <input type="number" name="SF0100" placeholder="请输入新生儿出生天数，缺省填'-1'" class="input" v-model="wt4.SF0100"/>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <text class="title">新生儿入院体重</text>
-            <input type="number" name="SF0102" placeholder="新生儿入院体重，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0102"/>
+            <input type="number" name="SF0102" placeholder="新生儿入院体重，缺省填'-1'" class="input" v-model="wt4.SF0102"/>
           </div>
           <div class="col-md-6">
             <text class="title">呼吸机使用时间</text>
-            <input type="number" name="SF0104" placeholder="呼吸机使用时间，缺省填'-1'" class="input" :autofocus="true" v-model="wt4.SF0104"/>
+            <input type="number" name="SF0104" placeholder="呼吸机使用时间，缺省填'-1'" class="input" v-model="wt4.SF0104"/>
           </div>
         </div>
         <div>
