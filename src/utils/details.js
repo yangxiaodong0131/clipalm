@@ -52,7 +52,7 @@ function statInfo (result, data, menu) {
   }
   return result
 }
-function drgInfo (result, data, title) {
+function drgInfo (obj, result, data, title) {
   result.title = `${data.code}规则详情`
   if (data.adrgs) {
     result.showSubRule = true
@@ -63,8 +63,8 @@ function drgInfo (result, data, title) {
       return obj
     })
   }
-  if (data.icd9_aa && title === 'MDC') {
-    result.grid['非QY小手术规则'] = data.icd9_aa.map((x) => {
+  if (data.icd9_a && title === 'MDC') {
+    result.grid['非QY小手术规则'] = data.icd9_a.map((x) => {
       const obj = { title: x }
       return obj
     })
@@ -78,26 +78,26 @@ function drgInfo (result, data, title) {
       return obj
     })
   }
-  if (data.icd10_aa && title === 'ADRG') {
-    result.grid['主要诊断规则'] = data.icd10_aa.map((x) => {
+  if (data.icd10_a && title === 'ADRG') {
+    result.grid['主要诊断规则'] = data.icd10_a.map((x) => {
       const obj = { title: x }
       return obj
     })
   }
-  if (data.icd10_bb && title === 'ADRG') {
-    result.grid['其他诊断规则'] = data.icd10_bb.map((x) => {
+  if (data.icd10_b && title === 'ADRG') {
+    result.grid['其他诊断规则'] = data.icd10_b.map((x) => {
       const obj = { title: x }
       return obj
     })
   }
-  if (data.icd9_aa && title === 'ADRG') {
-    result.grid['主要手术规则'] = data.icd9_aa.map((x) => {
+  if (data.icd9_a && title === 'ADRG') {
+    result.grid['主要手术规则'] = data.icd9_a.map((x) => {
       const obj = { title: x }
       return obj
     })
   }
-  if (data.icd9_bb && title === 'ADRG') {
-    result.grid['其他手术规则'] = data.icd9_bb.map((x) => {
+  if (data.icd9_b && title === 'ADRG') {
+    result.grid['其他手术规则'] = data.icd9_b.map((x) => {
       const obj = { title: x }
       return obj
     })
@@ -138,7 +138,7 @@ function subRule (result, data, title) {
   }
   return result
 }
-export function getDetails (menu, data) {
+export function getDetails (obj, menu, data) {
   let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     if (['BJ-ICD10', 'GB-ICD10'].includes(menu)) {
@@ -156,13 +156,13 @@ export function getDetails (menu, data) {
         result = compResultInfo(result, data)
         break
       case 'MDC':
-        result = drgInfo(result, data, 'MDC')
+        result = drgInfo(obj, result, data, 'MDC')
         break
       case 'ADRG':
-        result = drgInfo(result, data, 'ADRG')
+        result = drgInfo(obj, result, data, 'ADRG')
         break
       case 'DRG':
-        result = drgInfo(result, data, 'DRG')
+        result = drgInfo(obj, result, data, 'DRG')
         break
       case 'ICD10':
         result = subRule(result, data, 'ICD10亚目')

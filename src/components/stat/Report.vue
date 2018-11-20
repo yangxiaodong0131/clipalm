@@ -64,7 +64,7 @@ export default {
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails('MDC分析', e)
+      const details = getDetails(this, 'MDC分析', e)
       this.$store.commit('SET_info', details)
     },
     fetch () {

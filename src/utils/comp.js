@@ -14,7 +14,7 @@ export function compDrg (obj, wt4, i) {
     if (res.ok) {
       const index = obj.$store.state.Home.activeTab
       const menu = obj.$store.state.Home.menu[index]
-      const result = getDetails(menu, res.data)
+      const result = getDetails(obj, menu, res.data)
       obj.$store.commit('SET_groupResult', result)
     } else {
       obj.info = '- 网络连接失败 -'

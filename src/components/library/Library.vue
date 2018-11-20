@@ -84,7 +84,7 @@ export default {
         default:
           type = this.menu
       }
-      const details = getDetails(type, e)
+      const details = getDetails(this, type, e)
       this.show = true
       this.page = details
       this.$store.commit('SET_infoLevel', 1)

@@ -184,7 +184,7 @@ function setStore (obj, activeTab, menu, rdata) {
       switch (menu) {
         case 'statInfo':
           obj.$store.commit('SET_infoLevel', 2)
-          details = getDetails('分析详情', rdata.data[0])
+          details = getDetails(obj, '分析详情', rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         default:
@@ -199,12 +199,12 @@ function setStore (obj, activeTab, menu, rdata) {
       switch (menu) {
         case 'ADRG':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
+          details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         case 'DRG':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
+          details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         case 'ICD10亚目':
@@ -213,12 +213,12 @@ function setStore (obj, activeTab, menu, rdata) {
             return x
           })
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, data)
+          details = getDetails(obj, menu, data)
           obj.$store.commit('SET_info', details)
           break
         case 'ICD10细目':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
+          details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         case 'ICD9亚目':
@@ -227,22 +227,22 @@ function setStore (obj, activeTab, menu, rdata) {
             return x
           })
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, data)
+          details = getDetails(obj, menu, data)
           obj.$store.commit('SET_info', details)
           break
         case 'ICD9细目':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
+          details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         case '诊断术语-部位':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, { icd: rdata.data })
+          details = getDetails(obj, menu, { icd: rdata.data })
           obj.$store.commit('SET_info', details)
           break
         case '操作术语-部位':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, { icd: rdata.data })
+          details = getDetails(obj, menu, { icd: rdata.data })
           obj.$store.commit('SET_info', details)
           break
         default:
@@ -256,12 +256,12 @@ function setStore (obj, activeTab, menu, rdata) {
       switch (menu) {
         case 'ADRG分析':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
+          details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         case 'DRG分析':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
-          details = getDetails(menu, rdata.data[0])
+          details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
         default:

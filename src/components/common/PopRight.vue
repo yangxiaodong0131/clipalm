@@ -105,7 +105,6 @@ export default {
       }
     },
     wxcCellClicked2 (e) {
-      console.log(e)
       getServer(this, this.activeTab, `${e.menu}`, e.all)
     }
   }
