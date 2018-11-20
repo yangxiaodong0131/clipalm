@@ -112,10 +112,10 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'ICD9细目':
         url = `rule_bj_icd9?plat=client&version=${value.version}&year=${value.year}&page=1&code=${value.code}`
         break
-      case 'ADRG分析规则详情':
+      case 'ADRG分析':
         url = `wt4_stat_adrg?plat=client&order=code&code=${value.code}`
         break
-      case 'DRG分析规则详情':
+      case 'DRG分析':
         url = `wt4_stat_cv?plat=client&order=code&code=${value.code}`
         break
       case '诊断术语-部位':
@@ -284,12 +284,12 @@ function setStore (obj, activeTab, menu, rdata) {
       break
     case 3:
       switch (menu) {
-        case 'ADRG分析规则详情':
+        case 'ADRG分析':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
-        case 'DRG分析规则详情':
+        case 'DRG分析':
           obj.$store.commit('SET_infoLevel', infoLevel + 1)
           details = getDetails(menu, rdata.data[0])
           obj.$store.commit('SET_info', details)

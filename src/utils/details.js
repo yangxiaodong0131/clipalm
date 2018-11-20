@@ -245,10 +245,10 @@ export function getDetails (menu, data) {
       case 'DRG':
         result = drgInfo(result, data)
         break
-      case 'ADRG分析规则详情':
+      case 'ADRG分析':
         result = statInfo(result, data, 'DRG')
         break
-      case 'DRG分析规则详情':
+      case 'DRG分析':
         result = statInfo(result, data, '')
         break
       case 'ICD10':
