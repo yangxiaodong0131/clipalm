@@ -6,7 +6,7 @@
         v-for="(data, index) in value"
         v-bind:key="`${key}-${index}`"
         :title="`${data.time}`"
-        :desc="`${data.count}  ${data.user.join(';')}`"
+        :desc="`${data.count}`"
         :has-margin="false"
         :has-arrow="false"
         @wxcCellClicked="wxcCellClicked(wt4)">
