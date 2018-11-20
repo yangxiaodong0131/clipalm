@@ -3,6 +3,7 @@
     @swipe="swipe"
     v-bind:style="panel">
     <list class="list" :show="true">
+      {{page}}
       <cell class="cell">
         <wxc-cell v-for="(detail, index) in infoPage.details"
           v-if="infoPage.info[detail.title]"
@@ -49,6 +50,9 @@ import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 export default {
   components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow, MiniBar, Category },
+  props: {
+    page: ''
+  },
   data () {
     return {
       themeColor: {
@@ -101,7 +105,7 @@ export default {
       }
     },
     wxcCellClicked2 (e) {
-      getServer(this, this.activeTab, `${e.menu}规则详情`, e.all)
+      getServer(this, this.activeTab, `${e.menu}`, e.all)
     }
   }
 }

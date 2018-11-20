@@ -167,7 +167,7 @@ export default {
     },
     wxcCellClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails('病案详情', e)
+      const details = getDetails(this, '病案详情', e)
       this.$store.commit('SET_info', details)
     },
     fetch () {
