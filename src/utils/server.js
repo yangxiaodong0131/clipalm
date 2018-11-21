@@ -40,16 +40,16 @@ export function getServer (obj, activeTab, menu, value = null) {
   if (value === null) {
     switch (menu) {
       case 'QY病历':
-        url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '未入组病历':
-        url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '低风险死亡病历':
-        url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '费用异常病历':
-        url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case 'CN-DRG':
         url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`

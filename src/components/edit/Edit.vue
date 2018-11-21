@@ -109,16 +109,16 @@ export default {
           let extraContent = ''
           switch (this.$store.state.Home.menu[1]) {
             case '未入组病历':
-              extraContent = `主要诊断：${x.disease_code}; 其他诊断：${x.diags_code}`
+              extraContent = `其他诊断：${x.diags_code}`
               break
             case 'QY病历':
-              extraContent = `主要诊断：${x.disease_code}; 主要手术：${x.oper_code}; DRG：${x.drg}`
+              extraContent = `主要手术：${x.oper_code}; DRG：${x.drg}`
               break
             case '低风险死亡病历':
-              extraContent = `主要诊断：${x.disease_code}; 年龄：${x.oper_code}; 其他诊断：${x.diags_code}; DRG：${x.drg}`
+              extraContent = `年龄：${x.age}; 其他诊断：${x.diags_code}; DRG：${x.drg}`
               break
             case '费用异常病历':
-              extraContent = `主要诊断：${x.disease_code}; 总费用：${x.total_expense}; 年龄：${x.age}; 其他诊断：${x.diags_code};住院日${x.acctual_days}; DRG：${x.drg}`
+              extraContent = `总费用：${x.total_expense}; 年龄：${x.age}; 其他诊断：${x.diags_code};住院日${x.acctual_days}; DRG：${x.drg}`
               break
             default:
               extraContent = `性别：${x.gender}·年龄：${x.age}岁·费用：${x.total_expense}元·住院天数：${x.acctual_days}天·drg：${x.drg}`
