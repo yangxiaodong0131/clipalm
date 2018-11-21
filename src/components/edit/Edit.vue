@@ -12,7 +12,7 @@
       <cell v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
-            :title="wt4.disease_name"
+            :title="wt4.disease_code"
             :desc="wt4.extraContent"
             :has-margin="false"
             :has-arrow="true"
