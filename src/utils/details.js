@@ -125,7 +125,7 @@ function subRule (result, data, title) {
     result.showSubRule = true
     result.subRuleTitle = title
     result.subRule = data.dissect.map((x) => {
-      const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: {name: x}}
+      const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: {name: x, mdc: data.mdc}}
       return obj
     })
   } else if (data.icd) {
