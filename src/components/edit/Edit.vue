@@ -1,8 +1,15 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
-    <text class="demo-title"  v-if="wt4Case.length !== 0">{{title}}</text>
+    <div class="count">
+      <wxc-cell v-for="(item, index) in title" v-bind:key="index"
+                :title="index"
+                :desc="item"
+                :cell-style="cellStyle"
+                extraContent="       |"></wxc-cell>
+    </div>
+    <!-- <text class="demo-title"  v-if="wt4Case.length !== 0">{{title.count}}</text> -->
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
-      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
+      <cell v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
             :title="wt4.disease_name"
@@ -36,7 +43,10 @@ export default {
     return {
       forceValue: 0,
       refreshing: false,
-      arrawSrc: 'http://210.75.199.113/images/more.png'
+      arrawSrc: 'http://210.75.199.113/images/more.png',
+      cellStyle: {
+        backgroundColor: '#C6E2FF',
+      }
     }
   },
   created () {
@@ -126,7 +136,13 @@ export default {
     title: {
       get () {
         const data = this.$store.state.Edit.wt4Info
-        return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
+        const obj = {
+          '病历数': `${data.count}`,
+          '平均费用': `${data.fee_avg}`,
+          '平均住院天数': `${data.day_avg}`,
+        }
+        return obj
+        // return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
       }
     },
     panel: {
@@ -170,7 +186,6 @@ export default {
     border-width: 1px;
     border-radius: 14px;
     padding: 10px;
-    margin-top: 91px;
   }
   .demo {
     width: 750px;
@@ -179,5 +194,11 @@ export default {
     position: relative;
     left: 210px;
     top: 1
+  }
+  .count {
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 91px;
+    background-color: #C6E2FF;
   }
 </style>
