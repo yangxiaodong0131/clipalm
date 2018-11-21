@@ -17,7 +17,7 @@ export function compDrg (obj, wt4, i) {
       const result = getDetails(obj, menu, res.data)
       obj.$store.commit('SET_groupResult', result)
     } else {
-      obj.info = '- 网络连接失败 -'
+      obj.info = '- 网络连接超时 -'
     }
   })
 }

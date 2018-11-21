@@ -154,7 +154,7 @@ export function getServer (obj, activeTab, menu, value = null) {
             setStore(obj, activeTab, menu, res.data)
           } else {
             obj.$store.commit('SET_isLoadingShow', false)
-            modal.toast({ message: '- 网络连接失败 -', duration: 1 })
+            modal.toast({ message: '- 网络连接超时 -', duration: 1 })
           }
         })
       }
@@ -315,7 +315,7 @@ export function createForum (obj, forum, type, activeTab) {
           getServer(obj, activeTab, '帖子列表', obj.$store.state.Home.menu[activeTab])
       }
     } else {
-      obj.info = '- 网络连接失败 -'
+      obj.info = '- 网络连接超时 -'
     }
   })
 }
