@@ -42,10 +42,11 @@
     </div>
     <!-- forum页 -->
     <div class="panel" v-bind:class="panel">
-      <HomeMenu v-if="menu[4] === '论坛'"></HomeMenu>
+      <ForumContent v-if="infoLevel[4] > 0"></ForumContent>
+      <HomeMenu v-else-if="menu[4] === '论坛'"></HomeMenu>
       <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
       <!-- <New v-else-if="menu[4] === '新建帖子'"></New> -->
-      <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent>
+      <!-- <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent> -->
       <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>

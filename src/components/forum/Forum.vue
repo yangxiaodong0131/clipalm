@@ -11,11 +11,13 @@
             class="submits"
             @wxcButtonClicked="sumbit"></wxc-button>
     </div>
-    <wxc-button v-if="!showNew"
-          text="发帖"
-          size="full"
-          class="submits"
-          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    <div v-if="!showNew">
+      <wxc-button v-if="showNewButton"
+            text="发帖"
+            size="full"
+            class="submits"
+            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    </div>
     <div class="div" style="height:20px"></div>
     <div class="specialrich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
       <div class="panel2" @click="wxcRichTextLinkClick(index)">
@@ -35,6 +37,7 @@ export default {
   components: { WxcSpecialRichText, WxcButton, WxcRichText, MiniBar },
   data: () => ({
     showNew: false,
+    showNewButton: true,
     title: '',
     content: ''
   }),
@@ -92,6 +95,9 @@ export default {
     }
   },
   created () {
+    if (['我的帖子', '最新帖子'].includes(this.menu)) {
+      this.showNewButton = false
+    }
     this.getData()
   },
   methods: {
@@ -112,8 +118,9 @@ export default {
       }
     },
     wxcRichTextLinkClick (i) {
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
+      // this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
       this.$store.commit('SET_forumIndex', i)
+      this.$store.commit('SET_infoLevel', 1)
       getServer(this, this.activeTab, '帖子', this.posts[i])
     },
     oninput (event) {
