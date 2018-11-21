@@ -26,7 +26,7 @@
         size="full"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     </div>
-    <mini-bar :title="title"></mini-bar>
+    <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
   <div class="container" v-else>
     <list class="list">
@@ -53,7 +53,7 @@
         size="full"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     </div>
-    <mini-bar :title="title"></mini-bar>
+    <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 <script>

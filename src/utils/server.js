@@ -90,6 +90,9 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '帖子列表':
         url = `forum?plat=client&table=`
         break
+      case '最新帖子':
+        url = `forum?plat=client&table=&order=time`
+        break
     }
   } else {
     switch (menu) {
@@ -274,6 +277,9 @@ function setStore (obj, activeTab, menu, rdata) {
     case 4:
       switch (menu) {
         case '帖子列表':
+          obj.$store.commit('SET_post', rdata.data)
+          break
+        case '最新帖子':
           obj.$store.commit('SET_post', rdata.data)
           break
         case '帖子':
