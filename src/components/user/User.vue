@@ -33,7 +33,7 @@
         class="submits"
         type="blue"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    <mini-bar title="用户信息" rightIcon="table"></mini-bar>
+    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" :rightButtonShow="rightButtonShow"></mini-bar>
   </div>
 </template>
 
@@ -66,6 +66,11 @@ export default {
     user: {
       get () {
         return this.$store.state.Home.user.data
+      }
+    },
+    rightButtonShow: {
+      get () {
+        return this.user.admin
       }
     },
     list_1: {

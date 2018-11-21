@@ -12,7 +12,7 @@
         @wxcCellClicked="wxcCellClicked(wt4)">
       </wxc-cell>
     </div>
-    <mini-bar title="用户分析" rightIcon="home"></mini-bar>
+    <mini-bar title="用户分析" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 

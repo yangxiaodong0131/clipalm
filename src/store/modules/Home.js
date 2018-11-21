@@ -52,6 +52,9 @@ const mutations = {
       state.infoLevel[state.activeTab] = 1
     }
   },
+  SET_onlyInfoLevel (state, x) {
+    state.infoLevel.splice(x[0], 1, x[1])
+  },
   SET_infoLevel (state, x) {
     const level = state.infoLevel[state.activeTab]
     switch (x) {
@@ -89,6 +92,7 @@ const actions = {
     commit('SET_isLoadingShow')
     commit('SET_info')
     commit('SET_infoLevel')
+    commit('SET_onlyInfoLevel')
   }
 }
 

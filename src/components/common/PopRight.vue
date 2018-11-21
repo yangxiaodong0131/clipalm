@@ -3,17 +3,16 @@
     @swipe="swipe"
     v-bind:style="panel">
     <list class="list" :show="true">
-      {{page}}
       <cell class="cell">
-        <wxc-cell v-for="(detail, index) in infoPage.details"
-          v-if="infoPage.info[detail.title]"
-          :key="index"
-          :label="detail.label"
-          :title="infoPage.info[detail.title]"
-          :has-arrow="detail.hasArrow"
-          @LongPress="LongPress(detail)"
-          @wxcCellClicked="wxcCellClicked(detail)"
-          ></wxc-cell>
+        <div v-for="(detail, index) in infoPage.details" :key="index">
+          <wxc-cell
+            :key="index"
+            :label="detail.label"
+            :title="infoPage.info[detail.title]"
+            :has-arrow="detail.hasArrow"
+            @wxcCellClicked="wxcCellClicked(detail)"
+            ></wxc-cell>
+        </div>
         <div v-for="(g, index) in infoPage.grid"
               :key="index">
           <category :title="`--${index}--`"></category>
@@ -40,7 +39,7 @@
         <div style="height:200px"></div>
       </cell>
     </list>
-    <mini-bar :title="title" rightIcon="home"></mini-bar>
+    <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 <script>
@@ -48,6 +47,7 @@ import { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow } from 'weex-ui'
 import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
+// const modal = weex.requireModule('modal')
 export default {
   components: { WxcCell, WxcButton, WxcGridSelect, WxcSimpleFlow, MiniBar, Category },
   props: {
@@ -80,6 +80,7 @@ export default {
       if (!infoPage) {
         infoPage = {}
       }
+      // modal.toast({ 'message': infoPage.info, 'duration': 1 })
       return infoPage
     },
     title () {

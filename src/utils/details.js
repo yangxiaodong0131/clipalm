@@ -205,5 +205,12 @@ export function getDetails (obj, menu, data) {
         break
     }
   }
+  const detailsData = []
+  result.details.map((x) => {
+    if (result.info[x.title]) {
+      detailsData.push(x)
+    }
+  })
+  result.details = detailsData
   return result
 }

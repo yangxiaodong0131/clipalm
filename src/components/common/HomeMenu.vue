@@ -23,7 +23,7 @@
     </div>
     <wxc-rich-text :config-list='configHeader2'
                   :has-text-margin="true"></wxc-rich-text>
-    <div v-for="(texts, indexs) in [['年', '季度', '月']]" :key="`texts2-${indexs}s`" class="row">
+    <div v-for="(texts, indexs) in [['年', '半年', '季度', '月']]" :key="`texts2-${indexs}s`" class="row">
       <div v-for="(text, index) in texts" :key="`text2-${index}`" class="item" @click="wxcButtonClicked(text)">
           <image class="icon"
                  src="http://210.75.199.113/images/left.png"
@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-    <mini-bar :title="menu" rightIcon="home"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 
