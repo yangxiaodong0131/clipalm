@@ -11,8 +11,7 @@
     </div>
   </div>
   <div v-if="activeTab === 3">
-    <wxc-rich-text  :config-list='configHeader'
-                    :has-text-margin="true"></wxc-rich-text>
+    <category title="DRG专家"></category>
     <div v-for="(texts, indexs) in [['偏差分析', '主诊未入组', '手术QY']]" :key="`texts1-${indexs}s`" class="row">
       <div v-for="(text, index) in texts" :key="`text1-${index}`" class="item" @click="wxcButtonClicked(text)">
           <image class="icon"
@@ -21,8 +20,7 @@
           <text class="text">{{text}}</text>
       </div>
     </div>
-    <wxc-rich-text :config-list='configHeader2'
-                  :has-text-margin="true"></wxc-rich-text>
+    <category title="DRG机构"></category>
     <div v-for="(texts, indexs) in [['年', '半年', '季度', '月']]" :key="`texts2-${indexs}s`" class="row">
       <div v-for="(text, index) in texts" :key="`text2-${index}`" class="item" @click="wxcButtonClicked(text)">
           <image class="icon"
@@ -39,31 +37,14 @@
 <script>
 import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag, WxcIcon } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
+import Category from '../common/category.vue'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcButton, WxcSpecialRichText, WxcRichText, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
+  components: { WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
   data () {
     return {
-      height: Utils.env.getPageHeight() - 120,
-      configHeader: [{
-        type: 'tag',
-        value: 'DRG专家',
-        theme: 'blue',
-        style: {
-          fontSize: 26,
-          height: 36
-        }
-      }],
-      configHeader2: [{
-        type: 'tag',
-        value: 'DRG机构',
-        theme: 'blue',
-        style: {
-          fontSize: 26,
-          height: 36
-        }
-      }]
+      height: Utils.env.getPageHeight() - 120
     }
   },
   computed: {

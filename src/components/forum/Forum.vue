@@ -1,40 +1,52 @@
 <template>
-  <scroller class="container" v-bind:style="panel">
-    <div class="div" style="height:20px"></div>
-    <div v-if="showNew">
-      <input class="input" type="text" placeholder="输入帖子标题" value="" @input="oninput"/>
-      <div class="wrapper">
-        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
-      </div>
-      <wxc-button text="发布"
-            size="full"
-            class="submits"
-            @wxcButtonClicked="sumbit"></wxc-button>
-    </div>
-    <div v-if="!showNew">
-      <wxc-button v-if="showNewButton"
-            text="发帖"
-            size="full"
-            class="submits"
-            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    </div>
-    <div class="div" style="height:20px"></div>
-    <div class="specialrich" v-for="(specialList, index) in specialConfigList" v-bind:key="index">
-      <div class="panel2" @click="wxcRichTextLinkClick(index)">
-        <wxc-rich-text :config-list="specialList"></wxc-rich-text>
-      </div>
-    </div>
-    <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
-  </scroller>
+  <div class="container">
+    <list class="list">
+      <div style="height:10px"></div>
+      <cell>
+        <div v-if="showNew">
+          <input class="input" type="text" placeholder="输入帖子标题" value="" @input="oninput"/>
+          <div class="wrapper">
+            <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
+          </div>
+          <wxc-button text="发布"
+                size="full"
+                class="submits"
+                @wxcButtonClicked="sumbit"></wxc-button>
+        </div>
+        <div v-if="!showNew">
+          <wxc-button v-if="showNewButton"
+                text="发帖"
+                size="full"
+                class="submits"
+                @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        </div>
+      </cell>
+      <div style="height:10px"></div>
+      <cell v-for="(post, index) in posts" v-bind:key="index">
+        <div class="panel">
+          <wxc-cell
+            :label="post.username"
+            :title="post.title"
+            :extraContent="`${post.datetime}`"
+            :has-margin="false"
+            :has-vertical-indent="false"
+            :has-arrow="true"
+            @wxcCellClicked="wxcRichTextLinkClick(index)">
+          </wxc-cell>
+        </div>
+      </cell>
+    </list>
+    <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
+  </div>
 </template>
 
 <script>
-import { WxcSpecialRichText, WxcButton, WxcRichText } from 'weex-ui'
+import { WxcSpecialRichText, WxcButton, WxcRichText, WxcCell } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
 import { getServer, createForum } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
-  components: { WxcSpecialRichText, WxcButton, WxcRichText, MiniBar },
+  components: { WxcSpecialRichText, WxcButton, WxcRichText, MiniBar, WxcCell },
   data: () => ({
     showNew: false,
     showNewButton: true,
@@ -109,7 +121,7 @@ export default {
             getServer(this, i, '帖子列表', { username: this.user.data.username })
             break
           case '最新帖子':
-            getServer(this, i, '帖子列表', { username: this.user.data.username })
+            getServer(this, i, '最新帖子')
             break
           default:
             getServer(this, i, '帖子列表', { module: this.menu })
@@ -151,43 +163,27 @@ export default {
 </script>
 
 <style scoped>
-.panel2 {
-  width: 750px;
-  background-color: #f2f3f4;
-  font-size: 30px;
+.demo-title {
+  font-size: 28px;
+  background-color: #C6E2FF;
+  text-align: center;
   border-style: solid;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  border-top-width: 0px;
-  border-bottom-width: 1px;
-  border-bottom-color: gray;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.panel {
-  margin-top: 140px;
+  border-width: 1px;
+  border-radius: 14px;
+  padding: 10px;
 }
 .container {
   width: 750px;
-  font-size: 30px;
 }
-.submits{
-  position: relative;
-  left: 23px;
-  top: 1px;
+.type-container {
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
-.div {
+.list {
   margin-top: 91px;
 }
-.input {
-  font-size: 40px;
-  height: 80px;
-  width: 1250px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #e3dbdb;
+.wrapper {
+  margin-top: 91px;
 }
 .textarea {
   font-size: 40px;
