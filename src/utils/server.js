@@ -40,16 +40,16 @@ export function getServer (obj, activeTab, menu, value = null) {
   if (value === null) {
     switch (menu) {
       case 'QY病历':
-        url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '未入组病历':
-        url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '低风险死亡病历':
-        url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '费用异常病历':
-        url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}`
+        url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case 'CN-DRG':
         url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
@@ -115,13 +115,13 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_adrg?plat=client&order=code&code=${value.code}`
         break
       case 'DRG分析':
-        url = `wt4_stat_cv?plat=client&order=code&code=${value.code}`
+        url = `wt4_stat_cv?plat=client&order=code&drg=${value.code}`
         break
       case '诊断术语-部位':
-        url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}`
+        url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
       case '操作术语-部位':
-        url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}`
+        url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
       case '帖子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`

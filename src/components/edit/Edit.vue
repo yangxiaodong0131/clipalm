@@ -1,8 +1,15 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
-    <text class="demo-title"  v-if="wt4Case.length !== 0">{{title}}</text>
+    <div class="count">
+      <wxc-cell v-for="(item, index) in title" v-bind:key="index"
+                :title="index"
+                :desc="item"
+                :cell-style="cellStyle"
+                extraContent="       |"></wxc-cell>
+    </div>
+    <!-- <text class="demo-title"  v-if="wt4Case.length !== 0">{{title.count}}</text> -->
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
-      <cell class="cell" v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
+      <cell v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
             :title="wt4.disease_name"
@@ -36,7 +43,10 @@ export default {
     return {
       forceValue: 0,
       refreshing: false,
-      arrawSrc: 'http://210.75.199.113/images/more.png'
+      arrawSrc: 'http://210.75.199.113/images/more.png',
+      cellStyle: {
+        backgroundColor: '#C6E2FF'
+      }
     }
   },
   created () {
@@ -99,16 +109,16 @@ export default {
           let extraContent = ''
           switch (this.$store.state.Home.menu[1]) {
             case '未入组病历':
-              extraContent = `主要诊断：${x.disease_code}; 其他诊断：${x.diags_code}`
+              extraContent = `其他诊断：${x.diags_code}`
               break
             case 'QY病历':
-              extraContent = `主要诊断：${x.disease_code}; 主要手术：${x.oper_code}; DRG：${x.drg}`
+              extraContent = `主要手术：${x.oper_code}; DRG：${x.drg}`
               break
             case '低风险死亡病历':
-              extraContent = `主要诊断：${x.disease_code}; 年龄：${x.oper_code}; 其他诊断：${x.diags_code}; DRG：${x.drg}`
+              extraContent = `年龄：${x.age}; 其他诊断：${x.diags_code}; DRG：${x.drg}`
               break
             case '费用异常病历':
-              extraContent = `主要诊断：${x.disease_code}; 总费用：${x.total_expense}; 年龄：${x.age}; 其他诊断：${x.diags_code};住院日${x.acctual_days}; DRG：${x.drg}`
+              extraContent = `总费用：${x.total_expense}; 年龄：${x.age}; 其他诊断：${x.diags_code};住院日${x.acctual_days}; DRG：${x.drg}`
               break
             default:
               extraContent = `性别：${x.gender}·年龄：${x.age}岁·费用：${x.total_expense}元·住院天数：${x.acctual_days}天·drg：${x.drg}`
@@ -126,7 +136,13 @@ export default {
     title: {
       get () {
         const data = this.$store.state.Edit.wt4Info
-        return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
+        const obj = {
+          '病历数': `${data.count}`,
+          '平均费用': `${data.fee_avg}`,
+          '平均住院天数': `${data.day_avg}`
+        }
+        return obj
+        // return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
       }
     },
     panel: {
@@ -170,7 +186,6 @@ export default {
     border-width: 1px;
     border-radius: 14px;
     padding: 10px;
-    margin-top: 91px;
   }
   .demo {
     width: 750px;
@@ -179,5 +194,11 @@ export default {
     position: relative;
     left: 210px;
     top: 1
+  }
+  .count {
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 91px;
+    background-color: #C6E2FF;
   }
 </style>
