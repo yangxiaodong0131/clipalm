@@ -6,6 +6,7 @@ const state = {
   infoPages: [[], [], [], [], []],
   infoLevel: [0, 0, 0, 0, 0],
   user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },
+  userAnalyse: null,
   isLoadingShow: false,
   // 发布版本修改
   version: '0.0.1',
@@ -33,6 +34,9 @@ const mutations = {
   },
   SET_userData (state, x) {
     state.user.data = x
+  },
+  SET_userAnalyse (state, x) {
+    state.userAnalyse = x
   },
   SET_isLoadingShow (state, x) {
     state.isLoadingShow = x
@@ -79,6 +83,7 @@ const actions = {
     commit('SET_menus')
     commit('SET_menu')
     commit('SET_user')
+    commit('SET_userAnalyse')
     commit('SET_menu_all')
     commit('SET_userData')
     commit('SET_isLoadingShow')

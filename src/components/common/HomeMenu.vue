@@ -1,9 +1,8 @@
 <template>
   <div class="demo" v-bind:style="panel">
   <div class="bigdiv">
-    <div v-for="(v, i) in menus" :key="i" class="row">
-      <div v-for="(text, k) in v" :key="k" class="item" @click="wxcButtonClicked(text)">
-          <!-- <wxc-icon class="icon" name="scanning" :icon-style="iconStyle"></wxc-icon> -->
+    <div v-for="(v, i) in menus" :key="`menus${i}`" class="row">
+      <div v-for="(text, k) in v" :key="`menu${k}`" class="item" @click="wxcButtonClicked(text)">
           <image class="icon"
                  src="http://210.75.199.113/images/left.png"
                  style="height: 32px;width: 32px;"></image>
@@ -11,17 +10,28 @@
       </div>
     </div>
   </div>
-    <!-- <list class="list">
-      <cell class="cell">
-        <div class="panel">
-            <wxc-button class="submits"
-              v-for="(menu, index) in menus" :key="index"
-              :text="menu"
-              type="white"
-              @wxcButtonClicked="wxcButtonClicked(menu)"></wxc-button>
-        </div>
-      </cell>
-    </list> -->
+  <div v-if="activeTab === 3">
+    <wxc-rich-text  :config-list='configHeader'
+                    :has-text-margin="true"></wxc-rich-text>
+    <div v-for="(texts, indexs) in [['偏差分析', '主诊未入组', '手术QY']]" :key="`texts1-${indexs}s`" class="row">
+      <div v-for="(text, index) in texts" :key="`text1-${index}`" class="item" @click="wxcButtonClicked(text)">
+          <image class="icon"
+                 src="http://210.75.199.113/images/left.png"
+                 style="height: 32px;width: 32px;"></image>
+          <text class="text">{{text}}</text>
+      </div>
+    </div>
+    <wxc-rich-text :config-list='configHeader2'
+                  :has-text-margin="true"></wxc-rich-text>
+    <div v-for="(texts, indexs) in [['年', '季度', '月']]" :key="`texts2-${indexs}s`" class="row">
+      <div v-for="(text, index) in texts" :key="`text2-${index}`" class="item" @click="wxcButtonClicked(text)">
+          <image class="icon"
+                 src="http://210.75.199.113/images/left.png"
+                 style="height: 32px;width: 32px;"></image>
+          <text class="text">{{text}}</text>
+      </div>
+    </div>
+  </div>
     <mini-bar :title="menu" rightIcon="home"></mini-bar>
   </div>
 </template>
@@ -36,28 +46,24 @@ export default {
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      btns1: [{ text: '偏差分布', key: 's1' }],
-      popoverPosition1: { x: 200, y: 230 },
-      popoverArrowPosition1: { pos: 'bottom', x: 500 },
-      btns2: [{ text: '年', key: 't1' }],
-      popoverPosition2: { x: 200, y: 520 },
-      popoverArrowPosition2: { pos: 'bottom', x: 500 },
-      submits: {},
-      cellStyle: { backgroundColor: '#f2f3f4', height: '20' },
-      iconStyle: { color: 'green' },
-      customStyles: {
-        lineSpacing: '14px',
-        width: '150px',
-        height: '60px',
-        icon: '',
-        color: '#333333',
-        checkedColor: '#ffffff',
-        disabledColor: '#eeeeee',
-        borderColor: '#666666',
-        checkedBorderColor: '#ffb200',
-        backgroundColor: '#ffffff',
-        checkedBackgroundColor: '#1E90FF'
-      }
+      configHeader: [{
+        type: 'tag',
+        value: 'DRG专家',
+        theme: 'blue',
+        style: {
+          fontSize: 26,
+          height: 36
+        }
+      }],
+      configHeader2: [{
+        type: 'tag',
+        value: 'DRG机构',
+        theme: 'blue',
+        style: {
+          fontSize: 26,
+          height: 36
+        }
+      }]
     }
   },
   computed: {
@@ -69,10 +75,18 @@ export default {
     },
     menus () {
       const list = []
-      const aa = this.$store.state.Home.menus.slice(0, 3)
-      list.push(aa)
-      const bb = this.$store.state.Home.menus.slice(3, 6)
-      list.push(bb)
+      let k = 0
+      for (let i = 0; i < this.$store.state.Home.menus.length; i++) {
+        let menu = list[k]
+        if (!menu) {
+          list[k] = []
+        } else if (menu.length >= 3) {
+          k = k + 1
+          list[k] = []
+        }
+        menu = list[k]
+        menu.push(this.$store.state.Home.menus[i])
+      }
       return list
     },
     panel () {

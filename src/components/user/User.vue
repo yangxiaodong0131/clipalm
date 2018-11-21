@@ -1,7 +1,5 @@
 <template>
   <div class="panel" v-bind:style="panel">
-    <!-- <category class="category" title="--用户名--"></category>
-    <text class="red" slot="title" style="">{{user.username}}</text> -->
     <category class="category" title="--选择用户功能--"></category>
     <wxc-grid-select
       class="gridSelect"

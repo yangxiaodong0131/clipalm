@@ -89,11 +89,15 @@ export default {
   methods: {
     homeButtonClick () {
       if (this.activeTab === 0) {
-        this.$store.commit('SET_activeTab', 3)
-        this.$store.commit('SET_menu', [3, '报表'])
-        this.$store.commit('SET_chartType', '用户报表')
+        if (this.rightIcon === 'table') {
+          this.$store.commit('SET_menu', [0, '用户统计'])
+          this.$store.commit('SET_infoLevel', 1)
+        } else if (this.rightIcon === 'home') {
+          this.$store.commit('SET_menu', [0, '个人信息'])
+          this.$store.commit('SET_infoLevel', 0)
+        }
       } else {
-        const menu = ['', '病案', '字典', 'DRG分析', '论坛']
+        const menu = ['用户统计', '病案', '字典', 'DRG分析', '论坛']
         this.$store.commit('SET_infoLevel', 0)
         this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
         if (this.activeTab === 4) {
@@ -102,9 +106,12 @@ export default {
       }
     },
     minibarLeftButtonClick () {
-      const menu = ['', '病案', '字典', 'DRG分析', '论坛']
+      const menu = ['个人信息', '病案', '字典', 'DRG分析', '论坛']
       if (this.infoLevel === 0) {
         this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
+      } else if (this.activeTab === 0) {
+        this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
+        this.$store.commit('SET_infoLevel', 0)
       } else {
         this.$store.commit('SET_infoLevel', this.infoLevel - 1)
       }

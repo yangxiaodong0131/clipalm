@@ -1,21 +1,13 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="seen">
     <list class="list">
       <cell class="cell" v-for="(data, index) in datas" v-bind:key="index">
         <div class="type-container">
           <wxc-rich-text class="special-rich"
             :config-list="configList1[index]"
-            @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
-          <text class="type-text" style="color:#a4a3a5;font-size:20px">{{data.username}} | {{data.datetime}}</text>
+            @wxcRichTextLinkClick="wxcRichNextLinkClick"></wxc-rich-text>
+          <text class="type-text" @click="change" style="color:#a4a3a5;font-size:20px">{{data.username}} | {{data.datetime}}</text>
           <div v-if="data.reply !== []" v-for="(reply, index) in data.reply" v-bind:key="`reply-${index}`">
-            <!--<wxc-cell
-              :cell-style="cellStyle"
-              :label="reply.username"
-              :title="reply.content"
-              :has-bottom-border="false"
-              :extraContent="`${reply.datetime}`"
-              :has-margin="false">
-            </wxc-cell>-->
             <div class="row">
               <div class="col-md-6"><text class="type-text" style="color:#a4a3a5;font-size:25px">     {{reply.username}}</text></div>
               <div class="col-md-6"><text class="type-text" style="color:#000000;font-size:25px">    回复@{{data.username}}:{{reply.content}}</text></div>
@@ -35,6 +27,26 @@
     </div>
     <mini-bar :title="title"></mini-bar>
   </div>
+  <div class="container" v-else>
+    <div class="wrapper">
+      <div class="type-container"  v-for="(data, index) in datas" v-bind:key="index">
+        <!--<wxc-rich-text class="special-rich"
+                        :config-list="configList2[index]"
+                        @wxcRichTextLinkClick="wxcRichNextLinkClick"></wxc-rich-text>-->
+        <text class="type-text" @click="change" v-if="data.reply !== []"  v-for="(reply, index) in data.reply" v-bind:key="`reply-${index}`" style="color:#a4a3a5;font-size:20px">{{`${index + 1}楼`}} | {{reply.content}}</text>
+        <text class="type-text" @click="change" v-if="data.reply !== []"  v-for="(reply, index) in data.reply" v-bind:key="`reply-${index}`" style="color:#a4a3a5;font-size:20px">{{reply.username}} | {{reply.datetime}}</text>
+      </div>
+    </div>
+    <div>
+      <text v-if="textShow" style="font-size:35px;">{{text}}</text>
+      <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" :autofocus=true value="" ></textarea>
+      <wxc-button text="回复"
+        class="submits"
+        size="full"
+        @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    </div>
+    <mini-bar :title="title"></mini-bar>
+  </div>
 </template>
 <script>
 import { WxcPopup, WxcCell, WxcButton, WxcRichText, WxcSpecialRichText } from 'weex-ui'
@@ -47,6 +59,7 @@ export default {
     return {
       content: '',
       textShow: false,
+      seen: true,
       text: '',
       data: null,
       cellStyle: {
@@ -101,6 +114,42 @@ export default {
       }
       return configs
     },
+    // coverage () {
+    //   const coverages = []
+    //   if (this.datas) {
+    //     this.datas.map((x, index) => {
+    //       const coverage = x
+    //       coverages.push(coverage)
+    //     })
+    //   }
+    //   return coverages
+    // // },
+    // configList2 () {
+    //   const configs = []
+    //   if (this.datas) {
+    //     this.datas.map((x, index) => {
+    //       console.log(x)
+    //       this.x.map((e, order) => {
+    //         console.log(e)
+    //       })
+    //       const config = [{
+    //         type: 'text',
+    //         value: `${index + 1}楼`,
+    //         theme: 'yellow',
+    //         fontSize: 30
+    //       }, {
+    //         type: 'text',
+    //         value: `${x.reply[index].content}`,
+    //         style: {
+    //           fontSize: 30,
+    //           color: '#000000'
+    //         }
+    //       }]
+    //       configs.push(config)
+    //     })
+    //   }
+    //   return configs
+    // },
     // a () {
     //   console.log(this.datas)
     //   return ''
@@ -113,6 +162,9 @@ export default {
     oninput2 (event) {
       this.content = event.value
     },
+    change () {
+      this.seen = false
+    },
     wxcButtonClicked () {
       let ForumContent = {}
       if (this.$store.state.Home.user.login && this.textShow === false) {
@@ -124,6 +176,8 @@ export default {
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
       }
+    },
+    wxcRichNextLinkClick () {
     },
     wxcRichTextLinkClick (data) {
       const index = 1
@@ -154,6 +208,9 @@ export default {
   margin-top: 0px;
 }
 .list {
+  margin-top: 91px;
+}
+.wrapper {
   margin-top: 91px;
 }
 </style>

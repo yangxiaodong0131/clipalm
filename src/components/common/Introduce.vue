@@ -116,7 +116,7 @@ export default {
       caseConfigTitle: [{
         type: 'text',
         value: '病案说明',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 36
         }
@@ -125,7 +125,7 @@ export default {
       configHeader1: [{
         type: 'tag',
         value: '1.入组异常病案查询',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -146,7 +146,7 @@ export default {
       configHeader2: [{
         type: 'tag',
         value: '1.1 未入组病案(0000组)',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -167,7 +167,7 @@ export default {
       configHeader3: [{
         type: 'tag',
         value: '1.2 费用异常病案',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -188,7 +188,7 @@ export default {
       configHeader4: [{
         type: 'tag',
         value: '1.3 质量异常病案',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -209,7 +209,7 @@ export default {
       configHeader5: [{
         type: 'tag',
         value: '2.单条分组',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -218,7 +218,7 @@ export default {
       configHeader6: [{
         type: 'tag',
         value: '2.1 单条分组说明',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -239,7 +239,7 @@ export default {
       configHeader7: [{
         type: 'tag',
         value: '2.2 分组病历字段说明',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -380,7 +380,7 @@ export default {
       configHeader18: [{
         type: 'tag',
         value: '3、自定义病案查询',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
@@ -389,7 +389,7 @@ export default {
       configHeader19: [{
         type: 'tag',
         value: '3.1 自定义病案查询说明',
-        theme: 'yellow',
+        theme: 'blue',
         style: {
           fontSize: 26,
           height: 36
