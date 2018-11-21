@@ -115,13 +115,13 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_adrg?plat=client&order=code&code=${value.code}`
         break
       case 'DRG分析':
-        url = `wt4_stat_cv?plat=client&order=code&code=${value.code}`
+        url = `wt4_stat_cv?plat=client&order=code&drg=${value.code}`
         break
       case '诊断术语-部位':
-        url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}`
+        url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
       case '操作术语-部位':
-        url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}`
+        url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
       case '帖子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`
