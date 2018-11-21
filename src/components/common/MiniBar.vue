@@ -16,6 +16,7 @@
                  style="height: 32px;width: 32px;"></image>
           <image :src="`http://210.75.199.113/images/${rightIcon}.png`"
                  slot="right"
+                 v-if="rightButtonShow"
                  style="height: 32px;width: 32px;"></image>
         </wxc-minibar>
       </div>
@@ -31,7 +32,8 @@ export default {
   components: { WxcMinibar },
   props: {
     title: '',
-    rightIcon: ''
+    rightIcon: '',
+    rightButtonShow: ''
   },
   data () {
     return {

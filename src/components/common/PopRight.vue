@@ -39,7 +39,7 @@
         <div style="height:200px"></div>
       </cell>
     </list>
-    <mini-bar :title="title" rightIcon="home"></mini-bar>
+    <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 <script>

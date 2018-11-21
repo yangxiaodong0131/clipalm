@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-    <mini-bar :title="menu" rightIcon="home"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 
