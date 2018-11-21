@@ -471,7 +471,7 @@ export default {
           fontSize: 28
         }
       }],
-    // 字典
+      // 字典
       libConfigTitle: [{
         type: 'text',
         value: '病案说明',
@@ -544,7 +544,7 @@ export default {
           fontSize: 28
         }
       }],
-    // DRG
+      // DRG
       drgConfigTitle: [{
         type: 'text',
         value: 'DRG分析',
@@ -617,7 +617,7 @@ export default {
           fontSize: 28
         }
       }],
-    // 论坛
+      // 论坛
       forConfigTitle: [{
         type: 'text',
         value: '论坛说明',

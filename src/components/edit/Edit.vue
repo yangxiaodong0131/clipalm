@@ -45,7 +45,7 @@ export default {
       refreshing: false,
       arrawSrc: 'http://210.75.199.113/images/more.png',
       cellStyle: {
-        backgroundColor: '#C6E2FF',
+        backgroundColor: '#C6E2FF'
       }
     }
   },
@@ -139,7 +139,7 @@ export default {
         const obj = {
           '病历数': `${data.count}`,
           '平均费用': `${data.fee_avg}`,
-          '平均住院天数': `${data.day_avg}`,
+          '平均住院天数': `${data.day_avg}`
         }
         return obj
         // return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
