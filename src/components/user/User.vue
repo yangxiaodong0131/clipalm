@@ -141,6 +141,9 @@ export default {
           break
         case 'version':
           const version = this.list_2[params.selectIndex].title
+          this.$store.commit('SET_menu', [2, '字典'])
+          this.$store.commit('SET_infoLevel', [2, 0])
+          console.log(this.$store.state.Home.activeTab)
           user.clipalm_version = version
           modal.toast({ message: `已设置${version}为默认查询版本`, duration: 1 })
           break
