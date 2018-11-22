@@ -95,7 +95,7 @@
           activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
-          menu: [{'': [['DRG基础']]}],
+          menu: [{'DRG基础': [['DRG基础']], 'DRG专家': [['偏差分析', '主诊未入组', '手术QY']], 'DRG机构': [['年', '半年', '季度', '月']]}],
           icon: 'http://210.75.199.113/images/stat.png',
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
