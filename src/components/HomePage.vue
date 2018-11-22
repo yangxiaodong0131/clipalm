@@ -80,27 +80,27 @@
     data: () => ({
       tabs: [{
         title: '用户',
-        menu:  ['用户登录', '个人信息'],
+        menu:  [{'用户': ['用户登录', '个人信息']}],
         icon: 'http://210.75.199.113/images/user.png',
         activeIcon: 'http://210.75.199.113/images/user_fill.png'
         }, {
           title: '病案',
-          menu: ['未入组病历', 'QY病历', '低风险死亡病历', '费用异常病历', '单条分组'],
+          menu: [{'病案查询': [['未入组病历', 'QY病历', '低风险死亡病历'], ['费用异常病历']], '单条分组': [['单条分组']]}],
           icon: 'http://210.75.199.113/images/edit.png',
           activeIcon: 'http://210.75.199.113/images/edit_fill.png'
         }, {
           title: '字典',
-          menu: ['CN-DRG', 'BJ-ICD10', 'BJ-ICD9', 'GB-ICD10', 'GB-ICD9', '疾病分类/诊断术语', '临床手术/操作术语'],
+          menu: [{'DRG': [['CN-DRG', 'BJ-ICD10', 'BJ-ICD9'], ['GB-ICD10', 'GB-ICD9']], '疾病': [['疾病分类/诊断术语']], '手术': [['临床手术/操作术语']]}],
           icon: 'http://210.75.199.113/images/library.png',
           activeIcon: 'http://210.75.199.113/images/library_fill.png'
         }, {
           title: 'DRG分析',
-          menu: ['DRG基础'],
+          menu: [{'': [['DRG基础']]}],
           icon: 'http://210.75.199.113/images/stat.png',
           activeIcon: 'http://210.75.199.113/images/stat_fill.png'
         }, {
           title: '论坛',
-          menu: ['用户反馈', '病案讨论', '字典交流', 'DRG分析', '论坛建议', '我的帖子', '最新帖子'],
+          menu: [{'论坛版块': [['用户反馈', '病案讨论', '字典交流'], ['DRG分析', '论坛建议']], '帖子': [['我的帖子', '最新帖子']]}],
           icon: 'http://210.75.199.113/images/forum.png',
           activeIcon: 'http://210.75.199.113/images/forum_fill.png'
         }],
