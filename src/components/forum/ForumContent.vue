@@ -20,7 +20,7 @@
       </cell>
       <cell>
         <text v-if="textShow" style="font-size:35px;">{{text}}</text>
-        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
+        <textarea class="textarea" placeholder="输入回复内容" @input="oninput2" value="" ></textarea>
         <wxc-button text="回复"
           class="submits"
           size="full"
@@ -33,9 +33,17 @@
 
   <div class="demo" v-bind:style="panel" v-else>
     <div style="height:100px;"></div>
-    <category class="category" :title="forum.title"></category>
+    <wxc-cell
+      :label="`${replyIndex + 1}#`"
+      :title="`${content[replyIndex].content}`"
+      :desc="`${content[replyIndex].username} | ${content[replyIndex].datetime}`"
+      :has-margin="false"
+      :has-vertical-indent="false"
+      :has-arrow="false">
+    </wxc-cell>
+    <category class="category" title="该楼的回复"></category>
     <list class="list" loadmoreoffset="20">
-      <cell>
+      <cell v-if="reply.length > 0">
         <div class="panel">
           <wxc-cell
             v-for="(r, index) in reply" v-bind:key="index"
@@ -48,8 +56,19 @@
           </wxc-cell>
         </div>
       </cell>
+      <cell v-else>
+          <div class="panel">
+            <wxc-cell
+              title="无回复"
+              :has-margin="false"
+              :has-vertical-indent="false"
+              :has-arrow="false"
+              :arrow-icon="arrawSrc">
+            </wxc-cell>
+          </div>
+      </cell>
       <cell>
-        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
+        <textarea class="textarea" placeholder="输入回复内容" @input="oninput2" value="" ></textarea>
         <wxc-button text=" 再回复"
           class="submits"
           size="full"
@@ -141,7 +160,6 @@ export default {
     },
     wxcCellClicked (data, index) {
       this.$store.commit('SET_infoLevel', this.infoLevel + 1)
-      modal.toast({ message: this.infoLevel, duration: 60 })
       this.reply = data.reply
       this.replyId = data.id
       this.replyIndex = index

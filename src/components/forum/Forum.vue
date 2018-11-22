@@ -27,9 +27,10 @@
       <cell v-for="(post, index) in posts" v-bind:key="index">
         <div class="panel">
           <wxc-cell
-            :label="post.username"
             :title="post.title"
-            :extraContent="`${post.datetime}`"
+            :extraContent="`${post.content_count}`"
+            :arrow-icon="arrawSrc"
+            :desc="`${post.username} | ${post.datetime}`"
             :has-margin="false"
             :has-arrow="true"
             @wxcCellClicked="wxcRichTextLinkClick(index)">
@@ -52,7 +53,8 @@ export default {
     showNew: false,
     showNewButton: true,
     title: '',
-    content: ''
+    content: '',
+    arrawSrc: 'http://210.75.199.113/images/massage.png'
   }),
   computed: {
     user () {
