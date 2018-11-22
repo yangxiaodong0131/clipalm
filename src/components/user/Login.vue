@@ -30,7 +30,8 @@ export default {
   data () {
     return {
       visible: false,
-      user: { password: '', username: '', plat: 'client' },
+      user: { password: '123456', username: 'hitb', plat: 'client' },
+      // user: { password: '', username: '', plat: 'client' },
       barStyle: {
         backgroundColor: '#C6e2FF'
       },

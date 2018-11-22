@@ -47,7 +47,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '低风险死亡病历':
-        url = `wt4_2017?plat=client&drg=&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        url = `wt4_2017?plat=client&sf0108=5&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         break
       case '费用异常病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}&version=${version}`

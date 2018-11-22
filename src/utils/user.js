@@ -76,7 +76,6 @@ export function updateUser (obj, user) {
   }, res => {
     if (res.ok) {
       obj.$store.commit('SET_userData', res.data.data)
-      storage.setItem('user', JSON.stringify({ login: true, data: res.data.data }))
       obj.$store.commit('SET_menu', [2, '字典'])
       obj.$store.commit('SET_onlyInfoLevel', [2, 0])
       obj.$store.commit('SET_menu', [1, '病案'])
