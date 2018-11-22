@@ -31,6 +31,7 @@ export function userLogin (obj, user) {
         obj.$store.commit('SET_user', res.data)
         storage.setItem('user', JSON.stringify(res.data))
         obj.$store.commit('SET_menu_all', ['个人信息', '病案', '字典', 'DRG分析', '论坛'])
+        butyingPoint(user)
       } else {
         obj.$store.commit('SET_user', { loginResult: '账号或密码错误', login: false, data: { clipalm_version: 'BJ编码版' } })
       }
@@ -83,5 +84,16 @@ export function updateUser (obj, user) {
     } else {
       obj.info = '- 网络连接超时 -'
     }
+  })
+}
+
+function butyingPoint (user) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/butying_point`,
+    body: qs.stringify({ butying_point: {action_info: 'login', username: user.username, plat: 'clipalm'} })
   })
 }
