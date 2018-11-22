@@ -1,7 +1,8 @@
 <template>
-  <div class="container">
-    <list class="list"  v-if="infoLevel === 1">
-      <category class="category" :title="forum.title"></category>
+  <div class="demo" v-bind:style="panel" v-if="infoLevel === 1">
+    <div style="height:100px;"></div>
+    <category class="category" :title="forum.title"></category>
+    <list class="list" loadmoreoffset="20">
       <cell v-for="(data, index) in content" v-bind:key="index">
         <div class="panel">
           <wxc-cell
@@ -18,23 +19,19 @@
         </div>
       </cell>
     </list>
-    <div>
-      <text v-if="textShow" style="font-size:35px;">{{text}}</text>
-      <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
-      <wxc-button text="回复"
-        class="submits"
-        size="full"
-        @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    </div>
-    <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
-    <list class="list" v-else>
-      <category class="category" :title="forum.title"></category>
-      <text class="text">{{replyIndex + 1}}#的回复</text>
+    <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
+  </div>
+
+  <div class="demo" v-bind:style="panel" v-else>
+    <div style="height:100px;"></div>
+    <category class="category" :title="forum.title"></category>
+    <list class="list" loadmoreoffset="20">
       <cell>
-        <div class="panel" v-for="(reply, index) in reply" v-bind:key="index">
+        <div class="panel">
           <wxc-cell
-            :title="`${reply.content}`"
-            :desc="`${reply.username}  ${reply.datetime}`"
+            v-for="(r, index) in reply" v-bind:key="index"
+            :title="`${r.content}`"
+            :desc="`${r.username}  ${r.datetime}`"
             :has-margin="false"
             :has-vertical-indent="false"
             :has-arrow="false"
@@ -42,16 +39,15 @@
           </wxc-cell>
         </div>
       </cell>
+      <cell>
+        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
+        <wxc-button text=" 再回复"
+          class="submits"
+          size="full"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      </cell>
     </list>
-    <div>
-      <text v-if="textShow" style="font-size:35px;">{{text}}</text>
-      <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
-      <wxc-button text=" 再回复"
-        class="submits"
-        size="full"
-        @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    </div>
-    <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 <script>
@@ -102,6 +98,13 @@ export default {
     },
     forumIndex () {
       return this.$store.state.Forum.forumIndex
+    },
+    panel () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
+      }
+      return style
     }
   },
   methods: {
@@ -128,6 +131,7 @@ export default {
     },
     wxcCellClicked (data, index) {
       this.$store.commit('SET_infoLevel', this.infoLevel + 1)
+      modal.toast({ message: this.infoLevel, duration: 60 })
       this.reply = data.reply
       this.replyId = data.id
       this.replyIndex = index
@@ -145,17 +149,12 @@ export default {
   border-radius: 14px;
   padding: 10px;
 }
-.container {
+.demo {
   width: 750px;
 }
-.type-container {
-  margin-bottom: 0px;
-  margin-top: 0px;
-}
-.list {
-  margin-top: 91px;
-}
-.wrapper {
-  margin-top: 91px;
+.submits{
+  position: relative;
+  left: 210px;
+  top: 1
 }
 </style>
