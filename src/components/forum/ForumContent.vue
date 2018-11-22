@@ -1,6 +1,6 @@
 <template>
-  <div class="container" v-if="infoLevel === 1">
-    <list class="list">
+  <div class="container">
+    <list class="list"  v-if="infoLevel === 1">
       <category class="category" :title="forum.title"></category>
       <cell v-for="(data, index) in content" v-bind:key="index">
         <div class="panel">
@@ -27,9 +27,7 @@
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     </div>
     <mini-bar :title="title" rightIcon="home" rightButtonShow="true"></mini-bar>
-  </div>
-  <div class="container" v-else>
-    <list class="list">
+    <list class="list" v-else>
       <category class="category" :title="forum.title"></category>
       <text class="text">{{replyIndex + 1}}#的回复</text>
       <cell>

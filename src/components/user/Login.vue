@@ -88,10 +88,10 @@ export default {
       this.$store.commit('SET_menu', [i, '注册用户'])
     },
     NameOnInput (e) {
-      this.value = e.value
+      this.user.username = e.value
     },
     PwdOnInput (e) {
-      this.value = e.value
+      this.user.password = e.value
     }
   }
 }
