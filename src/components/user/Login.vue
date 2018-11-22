@@ -29,12 +29,7 @@
         <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
         <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
       </div>
-      <wxc-cell :has-arrow="false"
-                    :cell-style="cellStyle"
-                    :has-top-border="false"
-                    :auto-accessible="false">
-        <text class="red" slot="title" style="">{{loginResult}}</text>
-      </wxc-cell>
+      <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
     </div>
   </div>
 </template>
@@ -42,10 +37,11 @@
 <script>
 import { WxcButton, WxcSearchbar, WxcCell } from 'weex-ui'
 import { userLogin } from '../../utils/user'
+import Category from '../common/category.vue'
 
 export default {
   name: 'login-page',
-  components: { WxcButton, WxcSearchbar, WxcCell },
+  components: { WxcButton, WxcSearchbar, WxcCell, Category },
   data () {
     return {
       value: '输入框内容。。。',
@@ -58,6 +54,14 @@ export default {
       },
       btnStyle: {
         marginTop: '20px'
+      },
+      btnStyle2: {
+        paddingLeft: '15px',
+        backgroundColor: 'rgba(224, 221, 220, 0)',
+        borderWidth: '0px'
+      },
+      textStyle: {
+        color: 'rgb(166, 162, 162)'
       },
       cellStyle: {
         backgroundColor: '#C6e2FF',
