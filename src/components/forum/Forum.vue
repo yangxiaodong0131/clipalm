@@ -10,18 +10,20 @@
           </div>
           <wxc-button text="发布"
                 size="full"
+                type="blue"
                 class="submits"
                 @wxcButtonClicked="sumbit"></wxc-button>
         </div>
-        <div v-if="!showNew">
+        <div v-if="!showNew" class="submits">
           <wxc-button v-if="showNewButton"
                 text="发帖"
                 size="full"
+                type="blue"
                 class="submits"
                 @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         </div>
       </cell>
-      <div style="height:10px"></div>
+    <div style="height:10px"></div>
       <cell v-for="(post, index) in posts" v-bind:key="index">
         <div class="panel">
           <wxc-cell
@@ -29,7 +31,6 @@
             :title="post.title"
             :extraContent="`${post.datetime}`"
             :has-margin="false"
-            :has-vertical-indent="false"
             :has-arrow="true"
             @wxcCellClicked="wxcRichTextLinkClick(index)">
           </wxc-cell>
@@ -199,5 +200,12 @@ export default {
   border-width: 1px;
   border-style: solid;
   border-color: #e3dbdb;
+}
+.submits {
+  color: #666666;
+  font-size: 32px;
+  margin-left: 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 </style>
