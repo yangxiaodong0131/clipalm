@@ -1,17 +1,21 @@
 <template>
   <div class="panel" v-bind:style="panel">
-    <div v-for="(value, key) in userAnalyse" v-bind:key="key">
-      <category class="category" :title="`--${key}--`"></category>
-      <wxc-cell
-        v-for="(data, index) in value"
-        v-bind:key="`${key}-${index}`"
-        :title="`${data.time}`"
-        :desc="`${data.count}`"
-        :has-margin="false"
-        :has-arrow="false"
-        @wxcCellClicked="wxcCellClicked(wt4)">
-      </wxc-cell>
-    </div>
+    <list class="list">
+      <cell v-for="(value, key) in userAnalyse" v-bind:key="key">
+        <category class="category" :title="`--${key}--`"></category>
+        <wxc-cell
+          v-for="(data, index) in value"
+          v-bind:key="`${key}-${index}`"
+          :title="`${data.time}`"
+          :desc="`${data.count}`"
+          :has-margin="false"
+          :has-arrow="false"
+          @wxcCellClicked="wxcCellClicked(wt4)">
+        </wxc-cell>
+      </cell>
+      <cell style="height:100px">
+      </cell>
+    </list>
     <mini-bar title="用户分析" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>

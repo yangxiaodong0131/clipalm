@@ -1,6 +1,6 @@
 <template>
   <div class="demo" v-bind:style="panel" v-if="infoLevel === 1">
-    <div style="height:100px;"></div>
+    <div style="height:91px;"></div>
     <category class="category" :title="forum.title"></category>
     <list class="list" loadmoreoffset="20">
       <cell v-for="(data, index) in content" v-bind:key="index">
@@ -17,6 +17,15 @@
             @wxcCellClicked="wxcCellClicked(data, index)">
           </wxc-cell>
         </div>
+      </cell>
+      <cell>
+        <text v-if="textShow" style="font-size:35px;">{{text}}</text>
+        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
+        <wxc-button text="回复"
+          class="submits"
+          size="full"
+          type="blue"
+          @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       </cell>
     </list>
     <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
@@ -44,6 +53,7 @@
         <wxc-button text=" 再回复"
           class="submits"
           size="full"
+          type="blue"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       </cell>
     </list>
@@ -152,9 +162,11 @@ export default {
 .demo {
   width: 750px;
 }
-.submits{
-  position: relative;
-  left: 210px;
-  top: 1
+.submits {
+  color: #666666;
+  font-size: 32px;
+  margin-left: 23px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 </style>
