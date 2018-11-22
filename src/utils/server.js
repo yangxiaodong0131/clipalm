@@ -6,6 +6,7 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
+  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
@@ -312,7 +313,8 @@ export function createForum (obj, forum, type, activeTab) {
           obj.$store.commit('SET_post', [])
           obj.$store.commit('SET_forumPage', 1)
           modal.toast({ message: '帖子创建成功', duration: 1 })
-          getServer(obj, activeTab, '帖子列表', obj.$store.state.Home.menu[activeTab])
+          const module = forum.forum_all.forum.module
+          getServer(obj, activeTab, '帖子列表', { module: module })
       }
     } else {
       obj.info = '- 网络连接超时 -'

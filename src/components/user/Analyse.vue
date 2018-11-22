@@ -13,8 +13,7 @@
           @wxcCellClicked="wxcCellClicked(wt4)">
         </wxc-cell>
       </cell>
-      <cell style="height:100px">
-      </cell>
+      <cell style="height:100px"> </cell>
     </list>
     <mini-bar title="用户分析" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
