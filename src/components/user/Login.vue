@@ -4,27 +4,12 @@
       <image style="width:344px;height:177px" src="http://210.75.199.113/images/clipalm.png"></image>
     </div>
     <div v-bind:style="panel">
-      <wxc-searchbar ref="wxc-searchbar"
-        input-type='text'
-        v-model = 'user.username'
-        :default-value='name'
-        cancel-label='用户名'
-        placeholder='用户名'
-        theme='yellow'
-        :bar-style='barStyle'
-        @wxcSearchbarInputOnInput="NameOnInput">
-      </wxc-searchbar>
-
-      <wxc-searchbar ref="wxc-searchbar"
-        input-type='password'
-        v-model = 'user.password'
-        :default-value='pwd'
-        cancel-label='密码'
-        placeholder='密码'
-        theme='yellow'
-        :bar-style='barStyle'
-        @wxcSearchbarInputOnInput="PwdOnInput">
-      </wxc-searchbar>
+      <div class="input-bar">
+        <input class="input" type="text" placeholder="用户名" v-model="user.username" />
+      </div>
+      <div class="input-bar">
+        <input class="input" type="password" placeholder="密码" v-model="user.password"/>
+      </div>
       <div class="row">
         <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
         <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
@@ -44,11 +29,8 @@ export default {
   components: { WxcButton, WxcSearchbar, WxcCell, Category },
   data () {
     return {
-      value: '输入框内容。。。',
-      name: 'hitb',
-      pwd: '123456',
       visible: false,
-      user: { password: '123456', username: 'hitb', plat: 'client' },
+      user: { password: '', username: '', plat: 'client' },
       barStyle: {
         backgroundColor: '#C6e2FF'
       },
@@ -104,6 +86,23 @@ export default {
 <style scoped>
   .wrapper {
     justify-content: center;
+  }
+  .input-bar {
+    height: 78px;
+    margin-left: 25px;
+    border-top-width: 2px;
+    border-top-color: #DDD;
+    background-color: #FFFFFF;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .input {
+    width: 700px;
+    height: 78px;
+    padding-left: 30px;
+    color: #606060;
+    background-color: #FFFFFF;
+    font-size: 36px;
   }
   .panel {
     flex-direction: column;
