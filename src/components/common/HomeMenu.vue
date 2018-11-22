@@ -13,26 +13,6 @@
       </div>
     </div>
   </div>
-  <div v-if="activeTab === 3">
-    <category title="DRG专家"></category>
-    <div v-for="(texts, indexs) in [['偏差分析', '主诊未入组', '手术QY']]" :key="`texts1-${indexs}s`" class="row">
-      <div v-for="(text, index) in texts" :key="`text1-${index}`" class="item" @click="wxcButtonClicked(text)">
-          <image class="icon"
-                 src="http://210.75.199.113/images/left.png"
-                 style="height: 32px;width: 32px;"></image>
-          <text class="text">{{text}}</text>
-      </div>
-    </div>
-    <category title="DRG机构"></category>
-    <div v-for="(texts, indexs) in [['年', '半年', '季度', '月']]" :key="`texts2-${indexs}s`" class="row">
-      <div v-for="(text, index) in texts" :key="`text2-${index}`" class="item" @click="wxcButtonClicked(text)">
-          <image class="icon"
-                 src="http://210.75.199.113/images/left.png"
-                 style="height: 32px;width: 32px;"></image>
-          <text class="text">{{text}}</text>
-      </div>
-    </div>
-  </div>
     <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>
 </template>
