@@ -72,6 +72,7 @@
   import Analyse from './user/Analyse'
   import User from './user/User'
   import Login from './user/Login'
+  import { userLogin } from '../utils/user'
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
   export default {
@@ -170,8 +171,12 @@
       storage.getItem('user', e => {
         if (e.result === 'success') {
           const edata = JSON.parse(e.data)
-          this.$store.commit('SET_user', edata)
-          this.$store.commit('SET_menu', [0, '个人信息'])
+          if (edata.username && edata.password) {
+            this.$store.commit('SET_menu_all', ['个人信息', '病案', '字典', 'DRG分析', '论坛'])
+            userLogin(this, edata)
+          } else {
+            this.$store.commit('SET_menu_all', ['用户登录', '介绍', '介绍', '介绍', '介绍'])
+          }
         } else {
           this.$store.commit('SET_menu_all', ['用户登录', '介绍', '介绍', '介绍', '介绍'])
         }
