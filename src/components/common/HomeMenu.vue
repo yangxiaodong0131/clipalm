@@ -1,12 +1,15 @@
 <template>
   <div class="demo" v-bind:style="panel">
-  <div class="bigdiv">
-    <div v-for="(v, i) in menus" :key="`menus${i}`" class="row">
-      <div v-for="(text, k) in v" :key="`menu${k}`" class="item" @click="wxcButtonClicked(text)">
+  <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
+    <div v-for="(text, i) in v" :key="`menus${i}`">
+      <category :title="i"></category>
+      <div v-for="(text1, k) in text" :key="`menu${k}`" class="row">
+        <div v-if="text1.length > 0" v-for="(text2, k) in text1" :key="`menu${k}`" @click="wxcButtonClicked(text2)" class="item">
           <image class="icon"
-                 src="http://210.75.199.113/images/left.png"
-                 style="height: 32px;width: 32px;"></image>
-          <text class="text">{{text}}</text>
+                  src="http://210.75.199.113/images/left.png"
+                  style="height: 32px;width: 32px;"></image>
+          <text class="text">{{text2}}</text>
+        </div>
       </div>
     </div>
   </div>
@@ -55,20 +58,7 @@ export default {
       return this.$store.state.Home.menu[this.activeTab]
     },
     menus () {
-      const list = []
-      let k = 0
-      for (let i = 0; i < this.$store.state.Home.menus.length; i++) {
-        let menu = list[k]
-        if (!menu) {
-          list[k] = []
-        } else if (menu.length >= 3) {
-          k = k + 1
-          list[k] = []
-        }
-        menu = list[k]
-        menu.push(this.$store.state.Home.menus[i])
-      }
-      return list
+      return this.$store.state.Home.menus
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
@@ -195,7 +185,7 @@ export default {
     margin-top: 14px;
   }
   .bigdiv {
-    margin-top: 491px;
+    margin-top: 350px;
     /* width: 550px; */
   }
   .item{
