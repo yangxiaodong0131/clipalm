@@ -96,14 +96,15 @@ export default {
   },
   methods: {
     wxcCellClicked (detail) {
-      switch (detail.label) {
-        case '入组DRG':
-          const drg = this.infoPage.info[detail.title]
-          getServer(this, this.activeTab, 'statInfo', drg)
-          break
-        default:
-          break
-      }
+      console.log(detail)
+      // switch (detail.label) {
+      //   case '入组DRG':
+      //     const drg = this.infoPage.info[detail.title]
+      //     getServer(this, this.activeTab, 'statInfo', drg)
+      //     break
+      //   default:
+      //     break
+      // }
     },
     wxcCellClicked2 (e) {
       getServer(this, this.activeTab, `${e.menu}`, e.all)
