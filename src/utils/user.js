@@ -81,7 +81,7 @@ export function updateUser (obj, user) {
       obj.$store.commit('SET_menu', [1, '病案'])
       obj.$store.commit('SET_onlyInfoLevel', [1, 0])
     } else {
-      obj.info = '- 网络连接失败 -'
+      obj.info = '- 网络连接超时 -'
     }
   })
 }
