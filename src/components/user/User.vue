@@ -9,7 +9,7 @@
       :list="list_1"
       @select="params => onSelect(params, 'user')">
     </wxc-grid-select>
-    <category title="--选择字典版本--"></category>
+    <category title="--选择字典--"></category>
     <wxc-grid-select
       class="gridSelect"
       :single="true"
@@ -18,7 +18,7 @@
       :list="list_2"
       @select="params => onSelect(params, 'version')">
     </wxc-grid-select>
-    <category title="--选择MDC修订--"></category>
+    <category title="--选择MDC--"></category>
     <wxc-grid-select
       class="gridSelect"
       :single="true"
