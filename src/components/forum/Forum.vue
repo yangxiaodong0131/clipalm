@@ -23,7 +23,7 @@
                 @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         </div>
       </cell>
-    <div style="height:10px"></div>
+      <div style="height:10px"></div>
       <cell v-for="(post, index) in posts" v-bind:key="index">
         <div class="panel">
           <wxc-cell
@@ -37,6 +37,7 @@
           </wxc-cell>
         </div>
       </cell>
+      <cell style="height:100px"> </cell>
     </list>
     <mini-bar :title="forumModule" rightIcon="home" rightButtonShow="true"></mini-bar>
   </div>

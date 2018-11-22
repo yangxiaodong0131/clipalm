@@ -5,7 +5,7 @@
                 :title="index"
                 :desc="item"
                 :cell-style="cellStyle"
-                extraContent="       |"></wxc-cell>
+                :extraContent="aa(title, index)"></wxc-cell>
     </div>
     <!-- <text class="demo-title"  v-if="wt4Case.length !== 0">{{title.count}}</text> -->
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
@@ -172,6 +172,15 @@ export default {
     fetch () {
       this.$store.commit('SET_wt4Page', this.$store.state.Edit.wt4Page + 1)
       getServer(this, this.activeTab, this.menu)
+    },
+    aa (title, index) {
+      const keys = Object.keys(title)
+      const lastKey = keys[keys.length - 1]
+      if (lastKey === index) {
+        return ''
+      } else {
+        return '       |'
+      }
     }
   }
 }
