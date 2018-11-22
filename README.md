@@ -13,6 +13,8 @@ https://alibaba.github.io/weex-ui/#/cn/
 
 http://weex-project.io/examples.html
 
+https://github.com/joggerplus/awesome-weex
+
 #### web端开发：
 
 $ npm install -g weex-toolkit
