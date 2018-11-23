@@ -525,7 +525,7 @@ export default {
       }],
       libConfigHeader3: [{
         type: 'tag',
-        value: '其他编码查询',
+        value: '术语名称查询',
         theme: 'blue',
         style: {
           fontSize: 26,
@@ -538,7 +538,7 @@ export default {
       },
       {
         type: 'text',
-        value: '卫统4字段查询，病理码查询等等。',
+        value: '用名称查询术语。',
         theme: 'black',
         style: {
           fontSize: 28
@@ -598,7 +598,7 @@ export default {
       }],
       drgConfigHeader3: [{
         type: 'tag',
-        value: '3.3 医保用户',
+        value: '3.3 个人用户',
         theme: 'blue',
         style: {
           fontSize: 26,
@@ -611,7 +611,7 @@ export default {
       },
       {
         type: 'text',
-        value: '借助DRG，对医保核算进行把控。',
+        value: '新注册用户可看到基础分析。',
         theme: 'black',
         style: {
           fontSize: 28
@@ -642,7 +642,7 @@ export default {
       },
       {
         type: 'text',
-        value: '涉及到用户注册、用户登录、字典交流、DRG分析、论坛建议相关发帖。',
+        value: '涉及到用户注册、用户登录相关发帖。',
         theme: 'black',
         style: {
           fontSize: 28
