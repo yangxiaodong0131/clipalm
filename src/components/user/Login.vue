@@ -53,6 +53,11 @@ export default {
       }
     }
   },
+  created () {
+    if (weex.config.env.platform === 'Web') {
+      this.user = { password: '123456', username: 'hitb', plat: 'client' }
+    }
+  },
   computed: {
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
