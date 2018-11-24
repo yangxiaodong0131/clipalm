@@ -1,4 +1,3 @@
-
 import Vue2 from 'vue'
 import Vuex from 'vuex'
 import modules from './modules'
