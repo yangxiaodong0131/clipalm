@@ -15,16 +15,16 @@
         <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
       </div>
       <div class="row">
-          <div class="col-md-5">
-            <text class="input-forget" @wxcButtonClicked="findPassword">找回密码</text>
-          </div>
-          <div class="col-md-2"></div>
-          <div class="col-md-5">          
-            <text class="input-register" @wxcButtonClicked="register">立即注册</text>
-          </div>
+        <div class="col-md-5">
+          <text class="input-forget">找回密码</text>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+          <text class="input-register" v-on:Clicked="register">立即注册</text>
+        </div>
       </div>
       <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
-    </div>  
+    </div>
   </div>
 </template>
 
