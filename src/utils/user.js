@@ -58,7 +58,7 @@ export function register (obj, user) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
     responseType: 'json',
     url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/drg_admin_user`,
-    body: qs.stringify({ params: user })
+    body: qs.stringify({ drg_admin_user: user })
   }, res => {
     if (res.ok) {
       console.log(res.data)

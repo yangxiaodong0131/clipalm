@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5">
-          <text class="input-immediate" @click="register">立即注册</text>
+          <text class="input-immediate" @click="immediate">立即注册</text>
         </div>
       </div>
       <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
@@ -91,30 +91,21 @@ export default {
     immediate () {
       this.seen = true
       this.exchange = false
-      // const i = this.$store.state.Home.activeTab
-      // this.$store.commit('SET_menu', [i, '注册用户'])
+      if (weex.config.env.platform === 'Web') {
+        this.user = { password: '123456', username: 'hitb1', confirm: '123456', plat: 'client' }
+      } else {
+        this.user = { password: '', username: '', confirm: '', plat: 'client' }
+      }
     },
     register () {
-      if (!this.user.username) {
-        modal.alert({
-          message: '请输入用户名',
-          duration: 0.3
-        })
-      } else if (!this.user.password) {
-        modal.alert({
-          message: '请输入密码',
-          duration: 0.3
-        })
-      } else if (!this.user.confirm) {
-        modal.alert({
-          message: '请确认密码',
-          duration: 0.3
-        })
+      if (this.user.username !== '') {
+        modal.alert({ message: '请输入用户名', duration: 0.3 })
+      } else if (this.user.password !== '') {
+        modal.alert({ message: '请输入密码', duration: 0.3 })
+      } else if (this.user.confirm !== '') {
+        modal.alert({ message: '请确认密码', duration: 0.3 })
       } else if (this.user.password !== this.user.confirm) {
-        modal.alert({
-          message: '两次密码输入不一致',
-          duration: 0.3
-        })
+        modal.alert({ message: '两次密码输入不一致', duration: 0.3 })
       } else {
         register(this, this.user)
       }
