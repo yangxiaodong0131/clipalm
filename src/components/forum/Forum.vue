@@ -4,7 +4,7 @@
       <div style="height:10px"></div>
       <cell>
         <div v-if="showNew">
-          <input class="input" type="text" placeholder="输入帖子标题" value="" @input="oninput"/>
+          <input type="text" placeholder="输入帖子标题" class="input" :autofocus=true value="" @input="oninput"/>
           <div class="wrapper">
             <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
           </div>
@@ -176,6 +176,12 @@ export default {
   border-radius: 14px;
   padding: 10px;
 }
+.input {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+  height: 80px;
+}
 .container {
   width: 750px;
 }
@@ -184,16 +190,16 @@ export default {
   margin-top: 0px;
 }
 .list {
-  margin-top: 91px;
+  margin-top: 90px;
 }
 .wrapper {
-  margin-top: 91px;
+  margin-top: 10px;
 }
 .textarea {
   font-size: 40px;
-  width: 746px;
+  width: 750px;
   height: 400px;
-  margin-top: 50px;
+  margin-top: 0px;
   margin-left: 0px;
   padding-top: 20px;
   padding-bottom: 0px;
@@ -202,7 +208,7 @@ export default {
   color: #666666;
   border-width: 1px;
   border-style: solid;
-  border-color: #e3dbdb;
+  border-color: #000000;
 }
 .submits {
   color: #666666;
