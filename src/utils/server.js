@@ -88,6 +88,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         break
       case '主诊未入组':
         url = `wt4_stat_cv_disease?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        router = 'drgwork_wt4/expert'
         break
       case 'DRG专家':
         url = `wt4_stat_cv?plat=client&order=cv&page=${obj.$store.state.Stat.statPage}`
