@@ -10,36 +10,41 @@
       <div class="input-bar">
         <input class="input" type="password" placeholder="密码" v-model="user.password"/>
       </div>
-      <div class="row">
-        <wxc-button type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
-        <!-- <wxc-button text="注册" size="big" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button> -->
+      <div class="input-bar" v-if="seen">
+        <input class="input" type="password" placeholder="确认密码" v-model="user.confirm"/>
       </div>
       <div class="row">
-          <div class="col-md-5">
-            <text class="input-forget" @wxcButtonClicked="findPassword">找回密码</text>
-          </div>
-          <div class="col-md-2"></div>
-          <div class="col-md-5">          
-            <text class="input-register" @wxcButtonClicked="register">立即注册</text>
-          </div>
+        <wxc-button v-if="exchange" type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
+        <wxc-button v-else text="注册" type="blue" size="null" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <text class="input-forget">找回密码</text>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+          <text class="input-immediate" @click="immediate">立即注册</text>
+        </div>
       </div>
       <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
 import { WxcButton, WxcSearchbar, WxcCell } from 'weex-ui'
-import { userLogin } from '../../utils/user'
+import { userLogin, register } from '../../utils/user'
 import Category from '../common/category.vue'
-
+var modal = weex.requireModule('modal')
 export default {
   name: 'login-page',
   components: { WxcButton, WxcSearchbar, WxcCell, Category },
   data () {
     return {
       visible: false,
-      user: { password: '', username: '', plat: 'client' },
+      seen: false,
+      exchange: true,
+      user: { password: '', username: '', confirm: '', plat: 'client' },
       barStyle: {
         backgroundColor: '#C6e2FF'
       },
@@ -83,9 +88,36 @@ export default {
     login () {
       userLogin(this, this.user)
     },
+    immediate () {
+      this.seen = true
+      this.exchange = false
+      // const i = this.$store.state.Home.activeTab
+      // this.$store.commit('SET_menu', [i, '注册用户'])
+    },
     register () {
-      const i = this.$store.state.Home.activeTab
-      this.$store.commit('SET_menu', [i, '注册用户'])
+      if (!this.user.username) {
+        modal.alert({
+          message: '请输入用户名',
+          duration: 0.3
+        })
+      } else if (!this.user.password) {
+        modal.alert({
+          message: '请输入密码',
+          duration: 0.3
+        })
+      } else if (!this.user.confirm) {
+        modal.alert({
+          message: '请确认密码',
+          duration: 0.3
+        })
+      } else if (this.user.password !== this.user.confirm) {
+        modal.alert({
+          message: '两次密码输入不一致',
+          duration: 0.3
+        })
+      } else {
+        register(this, this.user)
+      }
     },
     NameOnInput (e) {
       this.user.username = e.value
@@ -117,7 +149,7 @@ export default {
     color: #606060;
     background-color: #FFFFFF;
     font-size: 36px;
-    border-width: 1px;
+    border-width: 0.5px;
     border-style: solid;
     border-color: #000000;
   }
@@ -151,7 +183,7 @@ export default {
   .input-forget{
     font-size: 30px;
   }
-  .input-register{
+  .input-immediate{
     font-size: 30px;
   }
 </style>
