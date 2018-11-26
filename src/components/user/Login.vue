@@ -108,6 +108,9 @@ export default {
     color: #606060;
     background-color: #FFFFFF;
     font-size: 36px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
   }
   .panel {
     flex-direction: column;

@@ -18,15 +18,6 @@
       :list="list_2"
       @select="params => onSelect(params, 'version')">
     </wxc-grid-select>
-    <category title="--选择MDC--"></category>
-    <wxc-grid-select
-      class="gridSelect"
-      :single="true"
-      :cols="5"
-      :customStyles="customStyles"
-      :list="mdcs"
-      @select="params => onSelect(params, 'mdc')">
-    </wxc-grid-select>
     <div style="height:20px;"></div>
     <wxc-button text="退出登录"
         size="full"
