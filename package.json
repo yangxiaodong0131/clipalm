@@ -37,6 +37,7 @@
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "weex-bindingx": "^0.0.48",
+    "weex-flymeui": "^0.1.23",
     "weex-ui": "^0.6.6",
     "weex-vue-render": "^1.0.17"
   },
