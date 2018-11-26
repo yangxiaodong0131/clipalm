@@ -18,6 +18,24 @@
       :list="list_2"
       @select="params => onSelect(params, 'version')">
     </wxc-grid-select>
+    <category title="--选择ICD版本--"></category>
+    <wxc-grid-select
+      class="gridSelect"
+      :single="true"
+      :cols="5"
+      :customStyles="customStyles"
+      :list="list_3"
+      @select="params => onSelect(params, 'icd')">
+    </wxc-grid-select>
+    <category title="--选择DRG版本--"></category>
+    <wxc-grid-select
+      class="gridSelect"
+      :single="true"
+      :cols="5"
+      :customStyles="customStyles"
+      :list="list_4"
+      @select="params => onSelect(params, 'drg')">
+    </wxc-grid-select>
     <div style="height:20px;"></div>
     <wxc-button text="退出登录"
         size="full"
@@ -103,6 +121,28 @@ export default {
         return Object.values(versions)
       }
     },
+    list_3: {
+      get () {
+        const icds = [
+          { title: 'ICD10 6.0', value: 1 },
+          { title: 'ICD10 5.0', value: 1 }
+        ]
+        return icds
+      }
+    },
+    list_4: {
+      get () {
+        const drgs = [
+          { title: '2013', value: 1 },
+          { title: '2014', value: 1 },
+          { title: '2015', value: 1 },
+          { title: '2016', value: 1 },
+          { title: '2017', value: 1 },
+          { title: '2018', value: 1 }
+        ]
+        return drgs
+      }
+    },
     mdcs: {
       get () {
         const arr = this.$store.state.Home.user.data.mdc
@@ -143,6 +183,14 @@ export default {
         case 'user':
           const types = this.list_1[params.selectIndex].title
           user.type = types
+          break
+        case 'icd':
+          const icd = this.list_3[params.selectIndex].title
+          user.icd_version = icd
+          break
+        case 'drg':
+          const drg = this.list_4[params.selectIndex].title
+          user.drg_version = drg
           break
       }
       updateUser(this, user)
