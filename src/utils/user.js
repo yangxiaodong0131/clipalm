@@ -51,6 +51,22 @@ export function userLogin (obj, user) {
     }
   })
 }
+export function register (obj, user) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/drg_admin_user`,
+    body: qs.stringify({ drg_admin_user: user })
+  }, res => {
+    if (res.ok) {
+      console.log(res.data)
+    } else {
+      obj.$store.commit('SET_user', { loginResult: '网络连接失败', login: false, data: { clipalm_version: 'BJ编码版' } })
+    }
+  })
+}
 
 export function userLogout (obj) {
   obj.$store.commit('SET_menu_all', ['用户登录', '介绍', '介绍', '介绍', '介绍'])
