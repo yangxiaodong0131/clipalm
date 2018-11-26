@@ -6,13 +6,13 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
-  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
   let version = ''
   let year = ''
   let url = ''
+  let router = urlConfig.router
   switch (obj.$store.state.Home.user.data.clipalm_version) {
     case 'BJ编码版':
       version = 'BJ'
@@ -42,15 +42,19 @@ export function getServer (obj, activeTab, menu, value = null) {
     switch (menu) {
       case 'QY病历':
         url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        router = 'drgwork_wt4/expert'
         break
       case '未入组病历':
         url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        router = 'drgwork_wt4/expert'
         break
       case '低风险死亡病历':
         url = `wt4_2017?plat=client&sf0108=5&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        router = 'drgwork_wt4/expert'
         break
       case '费用异常病历':
         url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        router = 'drgwork_wt4/expert'
         break
       case 'CN-DRG':
         url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
@@ -148,7 +152,7 @@ export function getServer (obj, activeTab, menu, value = null) {
           type: 'json',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
           responseType: 'json',
-          url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/${url}`
+          url: `${urlConfig.http}:${urlConfig.port}/${router}/${url}`
         }, function (res) {
           if (res.ok) {
             storage.setItem(url, JSON.stringify(res.data))
