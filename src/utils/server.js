@@ -86,6 +86,9 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'DRG基础':
         url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
+      case '主诊未入组':
+        url = `wt4_stat_cv_disease?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        break
       case 'DRG专家':
         url = `wt4_stat_cv?plat=client&order=cv&page=${obj.$store.state.Stat.statPage}`
         break
