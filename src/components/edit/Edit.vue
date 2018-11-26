@@ -1,11 +1,11 @@
 <template>
   <div class="demo" @swipe="swipe" v-bind:style="panel">
-    <div class="count">
-      <wxc-cell v-for="(item, index) in title" v-bind:key="index"
+    <div class="count" v-if="showStat">
+      <wxc-cell v-for="(item, index) in stat" v-bind:key="index"
                 :title="index"
-                :desc="item"
+                :desc="`${item}`"
                 :cell-style="cellStyle"
-                :extraContent="aa(title, index)"></wxc-cell>
+                :extraContent="aa(stat, index)"></wxc-cell>
     </div>
     <!-- <text class="demo-title"  v-if="wt4Case.length !== 0">{{title.count}}</text> -->
     <list class="list" @loadmore="fetch" loadmoreoffset="20">
@@ -133,17 +133,15 @@ export default {
         return data
       }
     },
-    title: {
-      get () {
-        const data = this.$store.state.Edit.wt4Info
-        const obj = {
-          '病历数': `${data.count}`,
-          '平均费用': `${data.fee_avg}`,
-          '平均住院天数': `${data.day_avg}`
-        }
-        return obj
-        // return `病历数:${data.count} 平均费用${data.fee_avg} 平均住院天数${data.day_avg}`
+    showStat () {
+      let show = false
+      if (this.wt4Case.length > 0) {
+        show = true
       }
+      return show
+    },
+    stat () {
+      return this.$store.state.Edit.wt4Info
     },
     panel: {
       get () {

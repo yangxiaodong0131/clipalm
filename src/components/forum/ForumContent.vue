@@ -26,6 +26,11 @@
           size="full"
           type="blue"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="删帖"
+          class="submits"
+          size="full"
+          type="blue"
+          @wxcButtonClicked="wxcDeleteButtonClicked"></wxc-button>
       </cell>
     </list>
     <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
@@ -83,7 +88,7 @@
 import { WxcPopup, WxcCell, WxcButton, WxcRichText, WxcSpecialRichText } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
-import { createForum } from '../../utils/server'
+import { createForum, deleteForum } from '../../utils/server'
 const modal = weex.requireModule('modal')
 export default {
   components: { WxcPopup, WxcCell, WxcButton, MiniBar, WxcRichText, WxcSpecialRichText, Category },
@@ -150,7 +155,7 @@ export default {
         createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply', this.activeTab)
       } else if (this.$store.state.Home.user.login && this.infoLevel === 2) {
         ForumContent = { sid: this.forum.id, forum_content_id: this.replyId, content: this.textContent, username: this.username }
-        createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply', this.activeTab)
+        deleteForum(this, { forum_all: { forum_content: ForumContent } }, 'reply', this.activeTab)
         this.$store.commit('SET_infoLevel', this.infoLevel - 1)
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
@@ -163,6 +168,13 @@ export default {
       this.reply = data.reply
       this.replyId = data.id
       this.replyIndex = index
+    },
+    wxcDeleteButtonClicked () {
+      if (this.$store.state.Forum.forumContent.content.length > 1) {
+        modal.toast({ 'message': '该回复禁止删除', 'duration': 0.8 })
+      } else {
+        deleteForum(this, this.forum.id)
+      }
     }
   }
 }

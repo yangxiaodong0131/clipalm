@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5">
-          <text class="input-immediate" @click="immediate">立即注册</text>
+          <text class="input-immediate" @click="register">立即注册</text>
         </div>
       </div>
       <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
