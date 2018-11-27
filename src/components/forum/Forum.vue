@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-bind:style="panel">
     <list class="list">
       <div style="height:10px"></div>
       <cell>
