@@ -84,20 +84,22 @@ export default {
     },
     list_1: {
       get () {
-        const types = {
-          专家用户: { title: '专家用户', value: 1 },
-          // 机构用户: { title: '机构用户', value: 2, disabled: 'true' },
-          个人用户: { title: '个人用户', value: 2 }
-        }
-        let serverType = ''
+        // const types = {
+        //   专家用户: { title: '专家用户', value: 1 },
+        //   // 机构用户: { title: '机构用户', value: 2, disabled: 'true' },
+        //   个人用户: { title: '个人用户', value: 2 }
+        // }
+        let types = {}
+        // let serverType = ''
         if (this.$store.state.Home.user.data.type) {
-          serverType = this.$store.state.Home.user.data.type
+          types[this.$store.state.Home.user.data.type] = { title: this.$store.state.Home.user.data.type, value: 1, checked: true }
+          // serverType = this.$store.state.Home.user.data.type
         } else {
-          serverType = '个人用户'
+          types = { 专家用户: { title: '专家用户', value: 1, checked: true } }
         }
-        if (types[serverType]) {
-          types[serverType].checked = true
-        }
+        // if (types[serverType]) {
+        //   types[serverType].checked = true
+        // }
         return Object.values(types)
       }
     },
@@ -132,15 +134,24 @@ export default {
     },
     list_4: {
       get () {
-        const drgs = [
-          { title: '2013', value: 1 },
-          { title: '2014', value: 1 },
-          { title: '2015', value: 1 },
-          { title: '2016', value: 1 },
-          { title: '2017', value: 1 },
-          { title: '2018', value: 1 }
-        ]
-        return drgs
+        const drgs = {
+          2013: { title: '2013', value: 1 },
+          2014: { title: '2014', value: 1 },
+          2015: { title: '2015', value: 1 },
+          2016: { title: '2016', value: 1 },
+          2017: { title: '2017', value: 1 },
+          2018: { title: '2018', value: 1 }
+        }
+        let drgVersion = ''
+        if (this.$store.state.Home.user.data.clipalm_year) {
+          drgVersion = this.$store.state.Home.user.data.clipalm_year
+        } else {
+          drgVersion = '2017'
+        }
+        if (drgs[drgVersion]) {
+          drgs[drgVersion].checked = true
+        }
+        return Object.values(drgs)
       }
     },
     mdcs: {
@@ -169,31 +180,35 @@ export default {
     },
     onSelect (params, type) {
       const user = {}
-      switch (type) {
-        case 'mdc':
-          const mdc = this.mdcs[params.selectIndex].title
-          this.$store.commit('SET_mdc', mdc)
-          user.clipalm_mdc = mdc
-          break
-        case 'version':
-          const version = this.list_2[params.selectIndex].title
-          user.clipalm_version = version
-          modal.toast({ message: `已设置${version}为默认查询版本`, duration: 1 })
-          break
-        case 'user':
-          const types = this.list_1[params.selectIndex].title
-          user.type = types
-          break
-        case 'icd':
-          const icd = this.list_3[params.selectIndex].title
-          user.icd_version = icd
-          break
-        case 'drg':
-          const drg = this.list_4[params.selectIndex].title
-          user.drg_version = drg
-          break
+      if (type === 'user') {
+        this.list_1[params.selectIndex].checked = true
+      } else {
+        switch (type) {
+          case 'mdc':
+            const mdc = this.mdcs[params.selectIndex].title
+            this.$store.commit('SET_mdc', mdc)
+            user.clipalm_mdc = mdc
+            break
+          case 'version':
+            const version = this.list_2[params.selectIndex].title
+            user.clipalm_version = version
+            modal.toast({ message: `已设置${version}为默认查询版本`, duration: 1 })
+            break
+          // case 'user':
+            // const types = this.list_1[params.selectIndex].title
+            // user.type = types
+            // break
+          case 'icd':
+            const icd = this.list_3[params.selectIndex].title
+            user.icd_version = icd
+            break
+          case 'drg':
+            const drg = this.list_4[params.selectIndex].title
+            user.clipalm_year = drg
+            break
+        }
+        updateUser(this, user)
       }
-      updateUser(this, user)
     },
     wxcButtonClicked () {
       userLogout(this)

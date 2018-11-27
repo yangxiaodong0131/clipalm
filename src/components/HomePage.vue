@@ -86,7 +86,7 @@
         activeIcon: `${urlConfig.static}/images/user_fill.png`
         }, {
           title: '病案',
-          menu: [{'病案查询': [['未入组病历', 'QY病历', '低风险死亡病历'], ['费用异常病历']], '单条分组': [['单条分组']]}],
+          menu: [{'病案查询': [['未入组病历', 'QY病历', '低风险死亡病历'], ['费用异常病历', '填报异常病历']], '单条分组': [['单条分组']], '我的病案': [['我的病案']]}],
           icon: `${urlConfig.static}/images/edit.png`,
           activeIcon: `${urlConfig.static}/images/edit_fill.png`
         }, {
