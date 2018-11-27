@@ -112,9 +112,9 @@ export default {
       // }
     },
     wxcRichTextLinkClick (i) {
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '贴子'])
       this.$store.commit('SET_forumIndex', i)
-      getServer(this, this.activeTab, '帖子', this.posts[i])
+      getServer(this, this.activeTab, '贴子', this.posts[i])
     },
     popoverButtonClicked (obj) {
       modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 })

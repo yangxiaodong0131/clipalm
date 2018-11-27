@@ -96,10 +96,10 @@ export function getServer (obj, activeTab, menu, value = null) {
       case 'DRG机构':
         url = `wt4_stat_cv?plat=client&order=fee&page=${obj.$store.state.Stat.statPage}`
         break
-      case '帖子列表':
+      case '贴子列表':
         url = `forum?plat=client&table=`
         break
-      case '最新帖子':
+      case '最新贴子':
         url = `forum?plat=client&table=&order=time`
         break
     }
@@ -135,10 +135,10 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '操作术语-部位':
         url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
-      case '帖子列表':
+      case '贴子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`
         break
-      case '帖子':
+      case '贴子':
         url = `forum?id=${value.id}`
         break
     }
@@ -285,13 +285,13 @@ function setStore (obj, activeTab, menu, rdata) {
       break
     case 4:
       switch (menu) {
-        case '帖子列表':
+        case '贴子列表':
           obj.$store.commit('SET_post', rdata.data)
           break
-        case '最新帖子':
+        case '最新贴子':
           obj.$store.commit('SET_post', rdata.data)
           break
-        case '帖子':
+        case '贴子':
           obj.$store.commit('SET_forumContent', rdata.data[0])
           break
       }
@@ -313,16 +313,16 @@ export function createForum (obj, forum, type, activeTab) {
       switch (type) {
         case 'reply':
           modal.toast({ message: '回复成功', duration: 1 })
-          obj.$store.commit('SET_menu', [activeTab, '帖子'])
-          getServer(obj, activeTab, '帖子', res.data)
+          obj.$store.commit('SET_menu', [activeTab, '贴子'])
+          getServer(obj, activeTab, '贴子', res.data)
           break
         default:
-          obj.$store.commit('SET_menu', [activeTab, '帖子列表'])
+          obj.$store.commit('SET_menu', [activeTab, '贴子列表'])
           obj.$store.commit('SET_post', [])
           obj.$store.commit('SET_forumPage', 1)
-          modal.toast({ message: '帖子创建成功', duration: 1 })
+          modal.toast({ message: '贴子创建成功', duration: 1 })
           const module = forum.forum_all.forum.module
-          getServer(obj, activeTab, '帖子列表', { module: module })
+          getServer(obj, activeTab, '贴子列表', { module: module })
       }
     } else {
       obj.info = '- 网络连接超时 -'
@@ -344,16 +344,16 @@ export function deleteForum (obj, id) {
       // switch (type) {
       //   case 'reply':
       //     modal.toast({ message: '回复成功', duration: 1 })
-      //     obj.$store.commit('SET_menu', [activeTab, '帖子'])
-      //     getServer(obj, activeTab, '帖子', res.data)
+      //     obj.$store.commit('SET_menu', [activeTab, '贴子'])
+      //     getServer(obj, activeTab, '贴子', res.data)
       //     break
       //   default:
-      //     obj.$store.commit('SET_menu', [activeTab, '帖子列表'])
+      //     obj.$store.commit('SET_menu', [activeTab, '贴子列表'])
       //     obj.$store.commit('SET_post', [])
       //     obj.$store.commit('SET_forumPage', 1)
-      //     modal.toast({ message: '帖子创建成功', duration: 1 })
+      //     modal.toast({ message: '贴子创建成功', duration: 1 })
       //     const module = forum.forum_all.forum.module
-      //     getServer(obj, activeTab, '帖子列表', { module: module })
+      //     getServer(obj, activeTab, '贴子列表', { module: module })
       // }
     } else {
       obj.info = '- 网络连接超时 -'

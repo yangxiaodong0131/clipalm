@@ -26,7 +26,7 @@
           size="full"
           type="blue"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-        <wxc-button text="删帖"
+        <wxc-button text="删贴"
           class="submits"
           size="full"
           type="blue"

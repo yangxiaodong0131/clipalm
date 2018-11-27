@@ -495,7 +495,7 @@ export default {
       },
       {
         type: 'text',
-        value: '涉及到用户注册、用户登录相关发帖。',
+        value: '涉及到用户注册、用户登录相关发贴。',
         theme: 'black',
         style: {
           fontSize: 28
@@ -516,7 +516,7 @@ export default {
       },
       {
         type: 'text',
-        value: '对未入组的病案、QY病案、病案等相关发帖。',
+        value: '对未入组的病案、QY病案、病案等相关发贴。',
         theme: 'black',
         style: {
           fontSize: 28
@@ -579,7 +579,7 @@ export default {
       },
       {
         type: 'text',
-        value: '对论坛功能的建议相关发帖。',
+        value: '对论坛功能的建议相关发贴。',
         theme: 'black',
         style: {
           fontSize: 28
@@ -587,7 +587,7 @@ export default {
       }],
       forConfigHeader6: [{
         type: 'tag',
-        value: '6.1 我的帖子',
+        value: '6.1 我的贴子',
         theme: 'blue',
         style: {
           fontSize: 26,
@@ -608,7 +608,7 @@ export default {
       }],
       forConfigHeader7: [{
         type: 'tag',
-        value: '6.2 最新帖子',
+        value: '6.2 最新贴子',
         theme: 'blue',
         style: {
           fontSize: 26,
@@ -621,7 +621,7 @@ export default {
       },
       {
         type: 'text',
-        value: '最新发的帖子会在这里展示出来。',
+        value: '最新发的贴子会在这里展示出来。',
         theme: 'black',
         style: {
           fontSize: 28
