@@ -13,6 +13,10 @@
       <div class="input-bar" v-if="seen">
         <input class="input" type="password" placeholder="确认密码" v-model="user.confirm"/>
       </div>
+      <div class="input-bar" v-if="seen">
+        <input class="input" type="email" placeholder="邮箱" v-model="user.email"/>
+      </div>
+      <text v-if="seen" style="color: red; paddingLeft: 30px; fontSize: 30px">* 密码为至少6位的任意字符</text>
       <div class="row">
         <wxc-button v-if="exchange" type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
         <wxc-button v-else text="注册" type="blue" size="null" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
@@ -35,7 +39,7 @@
 import { WxcButton, WxcSearchbar, WxcCell } from 'weex-ui'
 import { userLogin, register } from '../../utils/user'
 import Category from '../common/category.vue'
-const modal = weex.requireModule('modal')
+// const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 export default {
   name: 'login-page',
@@ -45,7 +49,7 @@ export default {
       visible: false,
       seen: false,
       exchange: true,
-      user: { password: '', username: '', confirm: '', plat: 'client' },
+      user: { password: '', username: '', confirm: '', plat: 'client', email: '' },
       barStyle: {
         backgroundColor: '#C6e2FF'
       },
@@ -71,7 +75,7 @@ export default {
   },
   created () {
     if (weex.config.env.platform === 'Web') {
-      this.user = { password: '123456', username: 'hitb', plat: 'client' }
+      this.user = { password: '123456', username: 'hitb', plat: 'client', email: '123456@hitb.com' }
     }
   },
   computed: {
@@ -94,22 +98,34 @@ export default {
       this.seen = true
       this.exchange = false
       if (weex.config.env.platform === 'Web') {
-        this.user = { password: '123456', username: 'hitb1', confirm: '123456', plat: 'client' }
+        this.user = { password: '123456', username: '13345678900', confirm: '123456', plat: 'client', email: '123456@hitb.com' }
       } else {
-        this.user = { password: '', username: '', confirm: '', plat: 'client' }
+        this.user = { password: '', username: '', confirm: '', plat: 'client', email: '' }
       }
     },
     register () {
-      if (this.user.username !== '') {
-        modal.alert({ message: '请输入用户名', duration: 0.3 })
-      } else if (this.user.password !== '') {
-        modal.alert({ message: '请输入密码', duration: 0.3 })
-      } else if (this.user.confirm !== '') {
-        modal.alert({ message: '请确认密码', duration: 0.3 })
+      const regexp = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/
+      const regexp1 = /^.{6,}$/
+      const regexp2 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
+      if (this.user.username === '') {
+        this.$store.commit('SET_loginResult', '请输入用户名')
+      } else if (this.user.password === '') {
+        this.$store.commit('SET_loginResult', '请输入密码')
+      } else if (this.user.confirm === '') {
+        this.$store.commit('SET_loginResult', '请确认密码')
+      } else if (this.user.email === '') {
+        this.$store.commit('SET_loginResult', '请确认邮箱')
       } else if (this.user.password !== this.user.confirm) {
-        modal.alert({ message: '两次密码输入不一致', duration: 0.3 })
+        this.$store.commit('SET_loginResult', '两次密码输入不一致')
+      } else if (!regexp.test(this.user.username)) {
+        this.$store.commit('SET_loginResult', '用户名输入有误')
+      } else if (!regexp1.test(this.user.password)) {
+        this.$store.commit('SET_loginResult', '密码输入有误')
+      } else if (!regexp2.test(this.user.email)) {
+        this.$store.commit('SET_loginResult', '邮箱输入有误')
       } else {
         register(this, this.user)
+        this.$store.commit('SET_loginResult', this.loginResult)
       }
     },
     NameOnInput (e) {

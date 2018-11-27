@@ -74,6 +74,9 @@ const mutations = {
   },
   SET_serverVersion (state, x) {
     state.serverVersion = x
+  },
+  SET_loginResult (state, x) {
+    state.user.loginResult = x
   }
 }
 
