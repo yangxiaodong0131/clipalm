@@ -37,13 +37,14 @@ import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLo
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
 import MiniBar from '../common/MiniBar.vue'
+const urlConfig = require('../../utils/config.js')
 export default {
   components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton, MiniBar },
   data () {
     return {
       forceValue: 0,
       refreshing: false,
-      arrawSrc: 'http://210.75.199.113/images/more.png',
+      arrawSrc: `${urlConfig.static}/images/more.png`,
       cellStyle: {
         backgroundColor: '#C6E2FF'
       }

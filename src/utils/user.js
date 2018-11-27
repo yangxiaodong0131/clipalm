@@ -61,7 +61,7 @@ export function register (obj, user) {
     body: qs.stringify({ drg_admin_user: user })
   }, res => {
     if (res.ok) {
-      console.log(res.data)
+      obj.$store.commit('SET_loginResult', res.data.log)
     } else {
       obj.$store.commit('SET_user', { loginResult: '网络连接失败', login: false, data: { clipalm_version: 'BJ编码版' } })
     }

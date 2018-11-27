@@ -26,7 +26,7 @@
           size="full"
           type="blue"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-        <wxc-button text="删帖"
+        <wxc-button text="删贴"
           class="submits"
           size="full"
           type="blue"
@@ -90,6 +90,7 @@ import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 import { createForum, deleteForum } from '../../utils/server'
 const modal = weex.requireModule('modal')
+const urlConfig = require('../../utils/config.js')
 export default {
   components: { WxcPopup, WxcCell, WxcButton, MiniBar, WxcRichText, WxcSpecialRichText, Category },
   data () {
@@ -102,7 +103,7 @@ export default {
       reply: [],
       replyId: null,
       replyIndex: null,
-      arrawSrc: 'http://210.75.199.113/images/massage.png'
+      arrawSrc: `${urlConfig.static}/images/massage.png`
     }
   },
   computed: {

@@ -45,8 +45,8 @@
       <ForumContent v-if="infoLevel[4] > 0"></ForumContent>
       <HomeMenu v-else-if="menu[4] === '论坛'"></HomeMenu>
       <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
-      <!-- <New v-else-if="menu[4] === '新建帖子'"></New> -->
-      <!-- <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent> -->
+      <!-- <New v-else-if="menu[4] === '新建贴子'"></New> -->
+      <!-- <ForumContent v-else-if="menu[4] === '贴子'"></ForumContent> -->
       <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
@@ -65,7 +65,6 @@
   import SingleGroup from './edit/SingleGroup'
   import ForumContent from './forum/ForumContent'
   import Forum from './forum/Forum'
-  // import New from './forum/New'
   import Library from './library/Library'
   import Report from './stat/Report'
   import Charts from './stat/Charts'
@@ -75,6 +74,7 @@
   import { userLogin } from '../utils/user'
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
+  const urlConfig = require('../utils/config.js')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Edit, SingleGroup, Library,
       Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce, Analyse },
@@ -82,28 +82,28 @@
       tabs: [{
         title: '用户',
         menu:  [{'用户': ['用户登录', '个人信息']}],
-        icon: 'http://210.75.199.113/images/user.png',
-        activeIcon: 'http://210.75.199.113/images/user_fill.png'
+        icon: `${urlConfig.static}/images/user.png`,
+        activeIcon: `${urlConfig.static}/images/user_fill.png`
         }, {
           title: '病案',
           menu: [{'病案查询': [['未入组病历', 'QY病历', '低风险死亡病历'], ['费用异常病历']], '单条分组': [['单条分组']]}],
-          icon: 'http://210.75.199.113/images/edit.png',
-          activeIcon: 'http://210.75.199.113/images/edit_fill.png'
+          icon: `${urlConfig.static}/images/edit.png`,
+          activeIcon: `${urlConfig.static}/images/edit_fill.png`
         }, {
           title: '字典',
           menu: [{'DRG': [['CN-DRG', 'BJ-ICD10', 'BJ-ICD9'], ['GB-ICD10', 'GB-ICD9']], '疾病': [['疾病分类/诊断术语']], '手术': [['临床手术/操作术语']]}],
-          icon: 'http://210.75.199.113/images/library.png',
-          activeIcon: 'http://210.75.199.113/images/library_fill.png'
+          icon: `${urlConfig.static}/images/library.png`,
+          activeIcon: `${urlConfig.static}/images/library_fill.png`
         }, {
           title: 'DRG分析',
           menu: [{'DRG基础': [['DRG基础']], 'DRG专家': [['偏差分布', '主诊未入组', '手术QY']], 'DRG机构': [['年', '半年', '季度', '月']]}],
-          icon: 'http://210.75.199.113/images/stat.png',
-          activeIcon: 'http://210.75.199.113/images/stat_fill.png'
+          icon: `${urlConfig.static}/images/stat.png`,
+          activeIcon: `${urlConfig.static}/images/stat_fill.png`
         }, {
           title: '论坛',
-          menu: [{'论坛版块': [['用户反馈', '病案讨论', '字典交流'], ['DRG分析', '论坛建议']], '帖子': [['我的帖子', '最新帖子']]}],
-          icon: 'http://210.75.199.113/images/forum.png',
-          activeIcon: 'http://210.75.199.113/images/forum_fill.png'
+          menu: [{'论坛版块': [['用户反馈', '病案讨论', '字典交流'], ['DRG分析', '论坛建议']], '贴子': [['我的贴子', '最新贴子']]}],
+          icon: `${urlConfig.static}/images/forum.png`,
+          activeIcon: `${urlConfig.static}/images/forum_fill.png`
         }],
       tabStyles: {
         bgColor: '#FFFFFF',
@@ -213,7 +213,7 @@
         } else if (i === 4) {
           this.$store.commit('SET_menu', [i, menu])
           this.$store.commit('SET_forumLabel', this.$store.state.Home.menu[activeTab])
-          // getServer(this, i, '帖子列表', { username: this.user.data.username })
+          // getServer(this, i, '贴子列表', { username: this.user.data.username })
         }
       }
     }

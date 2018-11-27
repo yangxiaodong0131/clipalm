@@ -6,7 +6,7 @@
         <div v-for="(text1, k) in text" :key="`menu${k}`" class="row">
           <div v-if="text1.length > 0" v-for="(text2, k) in text1" :key="`menu${k}`" @click="wxcButtonClicked(text2)" class="item">
             <image class="icon"
-                    src="http://210.75.199.113/images/left.png"
+                    :src="`${url.static}/images/left.png`"
                     style="height: 32px;width: 32px;"></image>
             <text class="text">{{text2}}</text>
           </div>
@@ -23,11 +23,13 @@ import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
+const urlConfig = require('../../utils/config.js')
 export default {
   components: { WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
   data () {
     return {
-      height: Utils.env.getPageHeight() - 120
+      height: Utils.env.getPageHeight() - 120,
+      url: urlConfig
     }
   },
   computed: {
@@ -110,9 +112,9 @@ export default {
       // }
     },
     wxcRichTextLinkClick (i) {
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '贴子'])
       this.$store.commit('SET_forumIndex', i)
-      getServer(this, this.activeTab, '帖子', this.posts[i])
+      getServer(this, this.activeTab, '贴子', this.posts[i])
     },
     popoverButtonClicked (obj) {
       modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 })

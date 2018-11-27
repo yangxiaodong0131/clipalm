@@ -27,13 +27,14 @@ import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
 import PopRight from '../common/PopRight.vue'
 // const modal = weex.requireModule('modal')
+const urlConfig = require('../../utils/config.js')
 export default {
   components: { WxcCell, MiniBar, PopRight, WxcButton },
   data () {
     return {
       height: 400,
       isShow: false,
-      arrawSrc: 'http://210.75.199.113/images/more.png',
+      arrawSrc: `${urlConfig.static}/images/more.png`,
       show: false,
       page: {}
     }
