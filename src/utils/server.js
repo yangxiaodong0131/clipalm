@@ -90,6 +90,10 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_cv_disease?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
+      case '手术QY':
+        url = `wt4_stat_cv_qy?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        router = 'drgwork_wt4/expert'
+        break
       case '偏差分布':
         url = `wt4_stat_cv_dd?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
