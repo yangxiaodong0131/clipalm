@@ -8,7 +8,7 @@
                 :extraContent="aa(stat, index)"></wxc-cell>
     </div>
     <!-- <text class="demo-title"  v-if="wt4Case.length !== 0">{{title.count}}</text> -->
-    <list class="list" @loadmore="fetch" loadmoreoffset="20">
+    <list class="list" @loadmore="fetch" loadmoreoffset="20" v-if="showData">
       <cell v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
@@ -26,6 +26,20 @@
           class="submits"
           size="big"
           @wxcButtonClicked="fetch"></wxc-button>
+      </cell>
+    </list>
+    <list class="list" loadmoreoffset="20" v-else>
+      <cell style="height:91px">
+      </cell>
+      <cell>
+        <div class="panel" @longpress="longpress(wt4)">
+          <wxc-cell
+            title="无数据"
+            :has-margin="false"
+            :has-arrow="false"
+            :arrow-icon="arrawSrc">
+          </wxc-cell>
+        </div>
       </cell>
     </list>
     <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
@@ -47,7 +61,8 @@ export default {
       arrawSrc: `${urlConfig.static}/images/more.png`,
       cellStyle: {
         backgroundColor: '#C6E2FF'
-      }
+      },
+      showData: true
     }
   },
   created () {
@@ -141,6 +156,9 @@ export default {
       }
       return show
     },
+    user () {
+      return this.$store.state.Home.user
+    },
     stat () {
       return this.$store.state.Edit.wt4Info
     },
@@ -159,8 +177,11 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       const menu = this.$store.state.Home.menu[i]
-      if (this.wt4Case.length === 0) {
+      if (this.wt4Case.length === 0 && this.user.data.type !== '个人用户') {
         getServer(this, i, menu)
+        this.showData = true
+      } else if (this.user.data.type === '个人用户') {
+        this.showData = false
       }
     },
     wxcCellClicked (e) {
