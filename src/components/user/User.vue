@@ -134,15 +134,24 @@ export default {
     },
     list_4: {
       get () {
-        const drgs = [
-          { title: '2013', value: 1 },
-          { title: '2014', value: 1 },
-          { title: '2015', value: 1 },
-          { title: '2016', value: 1 },
-          { title: '2017', value: 1 },
-          { title: '2018', value: 1 }
-        ]
-        return drgs
+        const drgs = {
+          2013: { title: '2013', value: 1 },
+          2014: { title: '2014', value: 1 },
+          2015: { title: '2015', value: 1 },
+          2016: { title: '2016', value: 1 },
+          2017: { title: '2017', value: 1 },
+          2018: { title: '2018', value: 1 }
+        }
+        let drgVersion = ''
+        if (this.$store.state.Home.user.data.clipalm_year) {
+          drgVersion = this.$store.state.Home.user.data.clipalm_year
+        } else {
+          drgVersion = '2017'
+        }
+        if (drgs[drgVersion]) {
+          drgs[drgVersion].checked = true
+        }
+        return Object.values(drgs)
       }
     },
     mdcs: {
@@ -195,7 +204,7 @@ export default {
             break
           case 'drg':
             const drg = this.list_4[params.selectIndex].title
-            user.drg_version = drg
+            user.clipalm_year = drg
             break
         }
         updateUser(this, user)
