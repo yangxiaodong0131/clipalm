@@ -1,6 +1,8 @@
 <template>
   <div class="panel" v-bind:style="panel">
-    <category class="category" title="--选择用户功能--"></category>
+    <category class="category" :title="`用户积分信息`"></category>
+    <text class="bpStyle">当前积分：{{user.bp}}</text>
+    <category title="--选择用户功能--"></category>
     <wxc-grid-select
       class="gridSelect"
       :single="true"
@@ -36,7 +38,6 @@
       :list="list_4"
       @select="params => onSelect(params, 'drg')">
     </wxc-grid-select>
-    <category class="category" :title="`用户积分信息-${user.bp}`"></category>
     <div style="height:20px;"></div>
     <wxc-button text="退出登录"
         size="full"
@@ -252,5 +253,9 @@ export default {
   }
   .category {
     margin-top: 91px;
+  }
+  .bpStyle {
+    font-size: 30px;
+    margin: 10 0 10 30;
   }
 </style>
