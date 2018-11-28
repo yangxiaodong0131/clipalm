@@ -162,6 +162,7 @@ function subRule (result, data, title) {
   return result
 }
 export function getDetails (obj, menu, data) {
+  console.log(menu)
   let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     if (['BJ-ICD10', 'GB-ICD10'].includes(menu)) {
@@ -220,7 +221,7 @@ export function getDetails (obj, menu, data) {
       case '操作术语-部位':
         result = subRule(result, data, 'ICD9细目')
         break
-      case 'DRG-基础':
+      case 'DRG基础':
         result = statInfo(result, data, 'ADRG')
         break
       case 'ADRG分析':
