@@ -1,7 +1,7 @@
 <template>
   <div class="container" v-bind:style="panel">
+    <div style="height:10px"></div>
     <list class="list">
-      <div style="height:10px"></div>
       <cell>
         <div v-if="showNew">
           <input type="text" placeholder="输入贴子标题" class="input" :autofocus=true value="" @input="oninput"/>
@@ -23,7 +23,9 @@
                 @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         </div>
       </cell>
-      <div style="height:10px"></div>
+    </list>
+    <div style="height:10px"></div>
+    <list class="list" v-if="showData">
       <cell v-for="(post, index) in posts" v-bind:key="index">
         <div class="panel">
           <wxc-cell
@@ -38,6 +40,18 @@
         </div>
       </cell>
       <cell style="height:100px"> </cell>
+    </list>
+    <list class="list" v-else>
+      <cell>
+        <div class="panel">
+          <wxc-cell
+            title="无帖子"
+            :has-margin="false"
+            :has-arrow="false"
+            :arrow-icon="arrawSrc">
+          </wxc-cell>
+        </div>
+      </cell>
     </list>
     <mini-bar :title="forumModule" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
   </div>
@@ -68,10 +82,14 @@ export default {
     menu () {
       return this.$store.state.Home.menu[this.activeTab]
     },
+    showData () {
+      return this.$store.state.Home.showData
+    },
     forumModule () {
       return this.$store.state.Forum.forumModule
     },
     posts () {
+      console.log(this.$store.state.Forum.post)
       return this.$store.state.Forum.post
     },
     forumLabel () {
