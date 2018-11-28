@@ -16,7 +16,7 @@
           @wxcButtonClicked="fetch"></wxc-button>
       </cell>
     </list>
-    <mini-bar :title="menu" rightIcon="home" rightButtonShow="true"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 

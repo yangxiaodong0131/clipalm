@@ -39,7 +39,7 @@
       </cell>
       <cell style="height:100px"> </cell>
     </list>
-    <mini-bar :title="forumModule" rightIcon="home" rightButtonShow="true"></mini-bar>
+    <mini-bar :title="forumModule" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 

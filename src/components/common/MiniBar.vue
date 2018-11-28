@@ -10,7 +10,7 @@
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="homeButtonClick"
                     @wxcMinibarLeftButtonClicked="minibarLeftButtonClick">
-          <image :src="`${url.static}/images/left.png`"
+          <image :src="`${url.static}/images/${leftIcon}.png`"
                  slot="left"
                  v-if="leftButtonShow"
                  style="height: 32px;width: 32px;"></image>
@@ -33,6 +33,7 @@ export default {
   props: {
     title: '',
     rightIcon: '',
+    leftIcon: '',
     rightButtonShow: ''
   },
   data () {
@@ -67,9 +68,6 @@ export default {
     leftButtonShow () {
       let show = false
       switch (this.menu) {
-        case '个人信息':
-          show = false
-          break
         case '病案':
           show = false
           break
