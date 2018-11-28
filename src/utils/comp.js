@@ -15,7 +15,6 @@ export function compDrg (obj, wt4, i) {
       const index = obj.$store.state.Home.activeTab
       const menu = obj.$store.state.Home.menu[index]
       const result = getDetails(obj, menu, res.data)
-      console.log(result)
       compWt4(obj, wt4, result)
       obj.$store.commit('SET_groupResult', result)
     } else {
