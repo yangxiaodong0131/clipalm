@@ -61,7 +61,7 @@ export function getServer (obj, activeTab, menu, value = null) {
         router = 'drgwork_wt4/expert'
         break
       case '我的病案':
-        url = `my_wt4?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        url = `wt4_comp?plat=client&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         router = 'drgwork_wt4/expert'
         break
       case 'CN-DRG':
