@@ -104,14 +104,10 @@ export default {
       }
     },
     minibarLeftButtonClick () {
-      const menu = ['个人信息', '病案', '字典', 'DRG分析', '论坛']
-      if (this.infoLevel === 0) {
-        this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
-      } else if (this.activeTab === 0) {
-        this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
-        this.$store.commit('SET_infoLevel', 0)
-      } else {
-        this.$store.commit('SET_infoLevel', this.infoLevel - 1)
+      if (this.activeTab === 0) {
+        if (this.leftIcon === 'setting') {
+          this.$store.commit('SET_menu', [0, '完善个人信息'])
+        }
       }
     }
   }

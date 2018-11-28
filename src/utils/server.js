@@ -91,7 +91,18 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '临床手术/操作术语':
         url = `rule_bj_mdc?plat=client&version=CN&type=dissect`
         break
+      case '主诊未入组':
+        url = `wt4_stat_cv_disease?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        router = 'drgwork_wt4/expert'
+        break
+      case '手术QY':
+        url = `wt4_stat_cv_qy?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        router = 'drgwork_wt4/expert'
+        break
       case 'DRG基础':
+        url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
+        break
+      case '偏差分布':
         url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
       case 'DRG机构分析-年':
@@ -108,18 +119,6 @@ export function getServer (obj, activeTab, menu, value = null) {
         break
       case 'DRG机构分析-月':
         url = `wt4_stat_cv_org?type=month&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
-        router = 'drgwork_wt4/expert'
-        break
-      case '主诊未入组':
-        url = `wt4_stat_cv_disease?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
-        router = 'drgwork_wt4/expert'
-        break
-      case '手术QY':
-        url = `wt4_stat_cv_qy?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
-        router = 'drgwork_wt4/expert'
-        break
-      case '偏差分布':
-        url = `wt4_stat_cv_dd?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
       case '贴子列表':
