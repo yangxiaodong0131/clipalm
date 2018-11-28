@@ -3,14 +3,15 @@
     <scroller>
       <div>
         <div style="height: 91px;"></div>
-          <text style="height: 40px;font-size: 35px">性别</text>
-        <input type="text" placeholder="请输入性别" class="input" :autofocus=true value="" v-model="personal.gender" />
+          <text style="height: 55px;font-size: 35px;text-align: center;">性别</text>
+        <!--<input type="text" placeholder="请输入性别" class="input" :autofocus=true value="" v-model="personal.gender" />-->
+          <wxc-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked"></wxc-radio>
       </div>
       <div>
-          <text style="height: 40px;font-size: 35px">所在机构</text>
+          <text style="height: 55px;font-size: 35px;text-align: center;">所在机构</text>
         <input type="text" placeholder="请输入所在机构" class="input" v-model="personal.org" />
       </div>
-      <wxc-button text="提交个人信息"
+      <wxc-button text="提交"
               type="blue"
               size="full"
               class="submits"
@@ -21,15 +22,20 @@
 </template>
 
 <script>
-import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
+import { WxcMinibar, WxcGridSelect, WxcButton, WxcRadio, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
 import MiniBar from '../common/MiniBar.vue'
 import { updateUser } from '../../utils/user'
-
+var modal = weex.requireModule('modal')
 export default {
   name: 'user-person',
-  components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
+  components: { WxcMinibar, WxcGridSelect, Category, WxcRadio, WxcButton, WxcCell, MiniBar },
   data: () => ({
+    list: [
+      { title: '男', value: 1 },
+      { title: '女', value: 2, checked: true }
+    ],
+    checkedInfo: { title: '女', value: 2 },
     personal: { gender: '', org: '' }
   }),
   computed: {
@@ -52,8 +58,20 @@ export default {
   created () {
   },
   methods: {
+    wxcRadioListChecked (e) {
+      console.log(e)
+      this.personal.gender = e.title
+    },
     wxcButtonClicked () {
-      updateUser(this, this.personal)
+      if (this.personal.org === '') {
+        modal.alert({
+          message: '请输入所在机构',
+          duration: 0.3
+        })
+      } else {
+        updateUser(this, this.personal)
+        console.log(this.personal)
+      }
     }
   }
 }
@@ -77,7 +95,7 @@ export default {
   .submits{
     position: relative;
     left: 23px;
-    top: 1px;
+    margin-top: 20px;
   }
   .red{
     text-align: left;
@@ -96,7 +114,7 @@ export default {
   }
   .input {
     font-size: 30px;
-    height: 50px;
+    height: 100px;
     width: 750px;
     border-width: 1px;
     border-color: #000000;
