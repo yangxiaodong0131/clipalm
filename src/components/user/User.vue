@@ -44,7 +44,7 @@
         class="submits"
         type="blue"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" :rightButtonShow="rightButtonShow"></mini-bar>
+    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
   </div>
 </template>
 
