@@ -6,6 +6,7 @@ const urlConfig = require('./config.js')
 const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
+  console.log([activeTab, menu, value])
   // activeTab:页面
   // menu:判断查询菜单
   // value:查询条件
@@ -95,19 +96,19 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
       case 'DRG机构-年':
-        url = `wt4_stat_cv_dd?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        url = `wt4_stat_cv_org?type=year&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
       case 'DRG机构-半年':
-        url = `wt4_stat_cv_dd?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        url = `wt4_stat_cv_org?type=half_year&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
       case 'DRG机构-季度':
-        url = `wt4_stat_cv_dd?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        url = `wt4_stat_cv_org?type=season&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
       case 'DRG机构-月':
-        url = `wt4_stat_cv_dd?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
+        url = `wt4_stat_cv_org?type=month&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
       case '主诊未入组':
