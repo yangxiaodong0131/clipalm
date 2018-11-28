@@ -27,7 +27,8 @@ const details = [
   {'label': '病历数', 'title': 'num_sum', 'hasArrow': false},
   {'label': 'MCC', 'title': 'mcc', 'hasArrow': false},
   {'label': 'CC', 'title': 'cc', 'hasArrow': false},
-  {'label': '手术室手术', 'title': 'p_type', 'hasArrow': false}]
+  {'label': '手术室手术', 'title': 'p_type', 'hasArrow': false},
+  {'label': '机构', 'title': 'org_id', 'hasArrow': false}]
 function caseInfo (result, data) {
   result.title = '病案详情'
   result.info = data
@@ -50,6 +51,28 @@ function statInfo (result, data, menu) {
       return obj
     })
   }
+  return result
+}
+function statInfoOrg (result, data, menu) {
+  result.title = '分析详情'
+  if (data.stat && data.stat.length > 0) {
+    result.showSubRule = true
+    result.subRuleTitle = `${menu}列表`
+    result.showSubRuleTitle = true
+    result.subRule = data.stat.map((x) => {
+      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
+      return obj
+    })
+  }
+  result.details = [
+    {'label': '时间', 'title': 'code', 'hasArrow': false},
+    {'label': '机构', 'title': 'name', 'hasArrow': false},
+    {'label': '费用变异系数', 'title': 'fee_cv', 'hasArrow': false},
+    {'label': '时间变异系数', 'title': 'day_cv', 'hasArrow': false},
+    {'label': '权重', 'title': 'weight', 'hasArrow': false},
+    {'label': '平均费用', 'title': 'fee_avg', 'hasArrow': false},
+    {'label': '平均住院天数', 'title': 'day_avg', 'hasArrow': false},
+    {'label': '病历数', 'title': 'num_sum', 'hasArrow': false}]
   return result
 }
 function drgInfo (obj, result, data, title) {
@@ -148,6 +171,9 @@ export function getDetails (obj, menu, data) {
     } else if (['BJ-ICD9', 'GB-ICD9'].includes(menu)) {
       menu = 'ICD9'
     }
+    if (['DRG机构分析-年', 'DRG机构分析-半年', 'DRG机构分析-季度', 'DRG机构分析-年'].includes(menu)) {
+      menu = 'DRG机构分析'
+    }
     switch (menu) {
       case '病案详情':
         result = caseInfo(result, data)
@@ -194,7 +220,7 @@ export function getDetails (obj, menu, data) {
       case '操作术语-部位':
         result = subRule(result, data, 'ICD9细目')
         break
-      case 'MDC分析':
+      case 'DRG-基础':
         result = statInfo(result, data, 'ADRG')
         break
       case 'ADRG分析':
@@ -202,6 +228,9 @@ export function getDetails (obj, menu, data) {
         break
       case 'DRG分析':
         result = statInfo(result, data, '')
+        break
+      case 'DRG机构分析':
+        result = statInfoOrg(result, data, '')
         break
     }
   }

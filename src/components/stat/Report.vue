@@ -8,7 +8,7 @@
             :has-arrow="true"
             :extraContent="stat.desc"></wxc-cell>
       </cell>
-      <cell style="height:200px" v-if="stats.length !== 0">
+      <cell style="height:200px" v-if="showMore">
         <wxc-button text="加载更多"
           class="submits"
           size="big"
@@ -52,22 +52,26 @@ export default {
         height: tabPageHeight
       }
       return style
+    },
+    showMore () {
+      let show = false
+      if (['DRG机构分析-年', 'DRG机构分析-半年', 'DRG机构分析-季度', 'DRG机构分析-月'].includes(this.menu)) {
+        show = false
+      } else if (this.stats.length !== 0) {
+        show = true
+      }
+      return show
     }
   },
   methods: {
     getData () {
-      const i = this.$store.state.Home.activeTab
-      let menu = this.$store.state.Home.menu[i]
-      if (['年', '半年', '季度', '月'].includes(menu)) {
-        menu = `DRG机构-${menu}`
-      }
       if (this.stats.length === 0) {
-        getServer(this, i, menu)
+        getServer(this, this.activeTab, this.menu)
       }
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
-      const details = getDetails(this, 'MDC分析', e)
+      const details = getDetails(this, this.menu, e)
       this.$store.commit('SET_info', details)
     },
     fetch () {
