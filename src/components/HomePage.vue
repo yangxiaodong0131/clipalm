@@ -13,10 +13,10 @@
     @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
     <!-- user页 -->
     <div class="panel" v-bind:class="panel">
-      <Analyse v-if="infoLevel[0] > 0"></Analyse>
+      <Analyse v-if="menu[0] == '用户统计'"></Analyse>
+      <Personal v-else-if="menu[0] == '完善个人信息'"></Personal>
       <Login v-else-if="menu[0] == '用户登录'"></Login>
-      <User v-if="menu[0] == '个人信息'"></User>
-      <Personal v-if="menu[0] == '完善个人信息'"></Personal>
+      <User v-else-if="menu[0] == '个人信息'"></User>
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">

@@ -8,7 +8,7 @@ export function compDrg (obj, wt4, i) {
     type: 'json',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
     responseType: 'json',
-    url: `${urlConfig.http}:3001/comp_drg`,
+    url: `${urlConfig.drgserver}:3001/comp_drg`,
     body: qs.stringify(wt4)
   }, res => {
     if (res.ok) {
