@@ -36,6 +36,7 @@
       :list="list_4"
       @select="params => onSelect(params, 'drg')">
     </wxc-grid-select>
+    <category class="category" :title="`用户积分信息-${user.bp}`"></category>
     <div style="height:20px;"></div>
     <wxc-button text="退出登录"
         size="full"
