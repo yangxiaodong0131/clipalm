@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-bind:style="panel">
-    <list class="list" @loadmore="fetch" loadmoreoffset="30000">
+    <list class="list" @loadmore="fetch" loadmoreoffset="30000" v-if="showData">
       <cell class="cell" v-for="(stat, index) in stats" v-bind:key="index">
         <wxc-cell :label="stat.code"
             @wxcCellClicked="wxcIndexlistItemClicked(stat)"
@@ -13,6 +13,18 @@
           class="submits"
           size="big"
           @wxcButtonClicked="fetch"></wxc-button>
+      </cell>
+    </list>
+    <list class="list" loadmoreoffset="20" v-else>
+      <cell>
+        <div class="panel">
+          <wxc-cell
+            title="无数据"
+            :has-margin="false"
+            :has-arrow="false"
+            :arrow-icon="arrawSrc">
+          </wxc-cell>
+        </div>
       </cell>
     </list>
     <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
@@ -42,6 +54,9 @@ export default {
     },
     menu () {
       return this.$store.state.Home.menu[this.activeTab]
+    },
+    showData () {
+      return this.$store.state.Home.showData
     },
     stats () {
       return this.$store.state.Stat.statDrg

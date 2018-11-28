@@ -13,6 +13,7 @@ export function getServer (obj, activeTab, menu, value = null) {
   let year = ''
   let url = ''
   let router = urlConfig.router
+  obj.$store.commit('SET_showData', true)
   switch (obj.$store.state.Home.user.data.clipalm_version) {
     case 'BJ编码版':
       version = 'BJ'
@@ -321,6 +322,10 @@ function setStore (obj, activeTab, menu, rdata) {
       }
       break
   }
+  if (data.length === 0) {
+    obj.$store.commit('SET_showData', false)
+  }
+  console.log(data)
   obj.$store.commit('SET_isLoadingShow', false)
 }
 

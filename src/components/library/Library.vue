@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-bind:class="container">
-    <list class="list" @loadmore="fetch" loadmoreoffset="30000">
+    <list class="list" @loadmore="fetch" loadmoreoffset="30000" v-if="showData">
       <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
         <wxc-cell :label="rule.code"
                   @wxcCellClicked="wxcIndexlistItemClicked(rule)"
@@ -14,6 +14,18 @@
           class="submits"
           size="big"
           @wxcButtonClicked="fetch"></wxc-button>
+      </cell>
+    </list>
+    <list class="list" loadmoreoffset="20" v-else>
+      <cell>
+        <div class="panel" @longpress="longpress(wt4)">
+          <wxc-cell
+            title="无数据"
+            :has-margin="false"
+            :has-arrow="false"
+            :arrow-icon="arrawSrc">
+          </wxc-cell>
+        </div>
       </cell>
     </list>
     <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
@@ -43,29 +55,24 @@ export default {
     this.getData()
   },
   computed: {
-    activeTab: {
-      get () {
-        return this.$store.state.Home.activeTab
-      }
+    activeTab () {
+      return this.$store.state.Home.activeTab
     },
-    menu: {
-      get () {
-        return this.$store.state.Home.menu[this.activeTab]
-      }
+    menu () {
+      return this.$store.state.Home.menu[this.activeTab]
     },
-    rules: {
-      get () {
-        return this.$store.state.Library.rule
-      }
+    showData () {
+      return this.$store.state.Home.showData
     },
-    container: {
-      get () {
-        const tabPageHeight = weex.config.env.deviceHeight
-        const style = {
-          height: tabPageHeight
-        }
-        return style
+    rules () {
+      return this.$store.state.Library.rule
+    },
+    container () {
+      const tabPageHeight = weex.config.env.deviceHeight
+      const style = {
+        height: tabPageHeight
       }
+      return style
     }
   },
   updated: function () {
