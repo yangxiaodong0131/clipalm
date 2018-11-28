@@ -104,12 +104,10 @@ export default {
           this.$store.commit('SET_forumModule', menu)
           break
       }
+      if (['年', '半年', '季度', '月'].includes(menu)) {
+        menu = `DRG机构分析-${menu}`
+      }
       this.$store.commit('SET_menu', [this.activeTab, menu])
-      // if (['偏差分布', '主诊未入组', '手术QY', '年', '半年', '季度', '月'].includes(menu)) {
-      //   modal.toast({ 'message': '该功能未开放', 'duration': 2 })
-      // } else {
-      //   this.$store.commit('SET_menu', [this.activeTab, menu])
-      // }
     },
     wxcRichTextLinkClick (i) {
       this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '贴子'])

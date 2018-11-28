@@ -63,7 +63,6 @@ export function getServer (obj, activeTab, menu, value = null) {
         break
       case '我的病案':
         url = `wt4_comp?plat=client&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
-        router = 'drgwork_wt4/expert'
         break
       case 'CN-DRG':
         url = `rule_bj_mdc?plat=client&version=${version}&year=${year}&page=${obj.$store.state.Library.page}`
@@ -92,9 +91,6 @@ export function getServer (obj, activeTab, menu, value = null) {
       case '临床手术/操作术语':
         url = `rule_bj_mdc?plat=client&version=CN&type=dissect`
         break
-      case 'DRG基础':
-        url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
-        break
       case '主诊未入组':
         url = `wt4_stat_cv_disease?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
@@ -103,22 +99,25 @@ export function getServer (obj, activeTab, menu, value = null) {
         url = `wt4_stat_cv_qy?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
+      case 'DRG基础':
+        url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
+        break
       case '偏差分布':
         url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
         break
-      case 'DRG机构-年':
+      case 'DRG机构分析-年':
         url = `wt4_stat_cv_org?type=year&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
-      case 'DRG机构-半年':
+      case 'DRG机构分析-半年':
         url = `wt4_stat_cv_org?type=half_year&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
-      case 'DRG机构-季度':
+      case 'DRG机构分析-季度':
         url = `wt4_stat_cv_org?type=season&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
-      case 'DRG机构-月':
+      case 'DRG机构分析-月':
         url = `wt4_stat_cv_org?type=month&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
