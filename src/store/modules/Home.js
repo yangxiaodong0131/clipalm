@@ -7,6 +7,7 @@ const state = {
   infoLevel: [0, 0, 0, 0, 0],
   user: { loginResult: '', login: false, data: { clipalm_version: 'BJ编码版' } },
   showData: true,
+  showMore: true,
   userAnalyse: null,
   isLoadingShow: false,
   // 发布版本修改
@@ -35,6 +36,9 @@ const mutations = {
   },
   SET_showData (state, x) {
     state.showData = x
+  },
+  SET_showMore (state, x) {
+    state.showMore = x
   },
   SET_userData (state, x) {
     state.user.data = x
@@ -91,6 +95,7 @@ const actions = {
     commit('SET_serverVersion')
     commit('SET_activeTab')
     commit('SET_showData')
+    commit('SET_showMore')
     commit('SET_menus')
     commit('SET_menu')
     commit('SET_user')

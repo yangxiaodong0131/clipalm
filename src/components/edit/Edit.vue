@@ -21,7 +21,7 @@
           </wxc-cell>
         </div>
       </cell>
-      <cell style="height:200px" v-if="wt4Case.length !== 0">
+      <cell style="height:200px" v-if="showMore">
         <wxc-button text="加载更多"
           class="submits"
           size="big"
@@ -155,6 +155,9 @@ export default {
         show = true
       }
       return show
+    },
+    showMore () {
+      return this.$store.state.Home.showMore
     },
     user () {
       return this.$store.state.Home.user
