@@ -58,24 +58,12 @@ export default {
     getData () {
       const i = this.$store.state.Home.activeTab
       let menu = this.$store.state.Home.menu[i]
-      console.log(this.stats.length)
-      if (this.stats.length === 0 && this.menu === '年') {
-        const ins = `DRG机构-${menu}`
-        return ins
-      } else if (this.stats.length === 0 && this.menu === '半年') {
-        const ins = `DRG机构-${menu}`
-        return ins
-      } else if (this.stats.length === 0 && this.menu === '季度') {
-        const ins = `DRG机构-${menu}`
-        return ins
-      } else if (this.stats.length === 0 && this.menu === '月') {
-        const ins = `DRG机构-${menu}`
-        console.log(ins)
-        return ins
-      } else {
-        console(this.ins)
+      if (['年', '半年', '季度', '月'].includes(menu)) {
+        menu = `DRG机构-${menu}`
       }
-      getServer(this, i, this.ins)
+      if (this.stats.length === 0) {
+        getServer(this, i, menu)
+      }
     },
     wxcIndexlistItemClicked (e) {
       this.$store.commit('SET_infoLevel', 1)
