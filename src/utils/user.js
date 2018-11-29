@@ -102,6 +102,27 @@ export function updateUser (obj, user) {
   })
 }
 
+export function forgetPassword (obj, user) {
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/forget_password`,
+    body: qs.stringify({ drg_admin_user: user, id: obj.$store.state.Home.user.data.id })
+  }, res => {
+    if (res.ok) {
+      obj.$store.commit('SET_userData', res.data.data)
+      obj.$store.commit('SET_menu', [2, '字典'])
+      obj.$store.commit('SET_onlyInfoLevel', [2, 0])
+      obj.$store.commit('SET_menu', [1, '病案'])
+      obj.$store.commit('SET_onlyInfoLevel', [1, 0])
+    } else {
+      obj.info = '- 网络连接超时 -'
+    }
+  })
+}
+
 function butyingPoint (user) {
   stream.fetch({
     method: 'POST',

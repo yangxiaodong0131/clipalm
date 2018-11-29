@@ -6,8 +6,8 @@ const details = [
   {'label': '手术室手术', 'title': 'p_type', 'hasArrow': false},
   {'label': '入组DRG', 'title': 'drg', 'hasArrow': false},
   {'label': '病案ID', 'title': 'b_wt4_v1_id', 'hasArrow': false},
-  {'label': '主要诊断编码', 'title': 'disease_code', 'hasArrow': false},
-  {'label': '主要诊断名称', 'title': 'disease_name', 'hasArrow': false},
+  {'label': '主要诊断', 'title': 'disease_code', 'hasArrow': false},
+  // {'label': '主要诊断名称', 'title': 'disease_name', 'hasArrow': false},
   {'label': '其他诊断', 'title': 'diags_code', 'hasArrow': false},
   {'label': '手术/操作', 'title': 'opers_code', 'hasArrow': false},
   {'label': '住院天数', 'title': 'acctual_days', 'hasArrow': false},
@@ -162,7 +162,6 @@ function subRule (result, data, title) {
   return result
 }
 export function getDetails (obj, menu, data) {
-  console.log(menu)
   let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     if (['BJ-ICD10', 'GB-ICD10'].includes(menu)) {
