@@ -65,6 +65,9 @@ export default {
       }
       return show
     },
+    user () {
+      return this.$store.state.Home.user
+    },
     leftButtonShow () {
       let show = false
       switch (this.menu) {
@@ -89,24 +92,26 @@ export default {
   },
   methods: {
     homeButtonClick () {
-      if (this.activeTab === 0) {
-        if (this.rightIcon === 'table') {
-          this.$store.commit('SET_menu', [0, '用户统计'])
-          this.$store.commit('SET_infoLevel', 1)
-        } else if (this.rightIcon === 'home') {
-          this.$store.commit('SET_menu', [0, '个人信息'])
-          this.$store.commit('SET_infoLevel', 0)
-        }
+      const menus = ['个人信息', '病案', '字典', 'DRG分析', '论坛']
+      if (this.menu === '个人信息') {
+        this.$store.commit('SET_menu', [0, '用户统计'])
+      } else if (this.menu === '找回密码') {
+        this.$store.commit('SET_menu', [0, '用户登录'])
+      } else if (this.menu === '用户统计') {
+        this.$store.commit('SET_menu', [0, '个人信息'])
+      } else if (this.infoLevel === 0) {
+        this.$store.commit('SET_menu', [this.activeTab, menus[this.activeTab]])
       } else {
-        const menu = ['用户统计', '病案', '字典', 'DRG分析', '论坛']
         this.$store.commit('SET_infoLevel', 0)
-        this.$store.commit('SET_menu', [this.activeTab, menu[this.activeTab]])
+        this.$store.commit('SET_menu', [this.activeTab, menus[this.activeTab]])
       }
     },
     leftButtonClick () {
       const menus = ['个人信息', '病案', '字典', 'DRG分析', '论坛']
       if (this.menu === '个人信息') {
         this.$store.commit('SET_menu', [0, '完善个人信息'])
+      } else if (this.menu === '找回密码') {
+        this.$store.commit('SET_menu', [0, '用户登录'])
       } else if (this.menu === '用户统计') {
         this.$store.commit('SET_menu', [0, '个人信息'])
       } else if (this.infoLevel === 0) {

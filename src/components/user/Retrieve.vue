@@ -24,7 +24,7 @@
               class="submits"
               @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     </scroller>
-    <mini-bar title="找回密码" rightIcon="home" rightButtonShow="true"></mini-bar>
+    <mini-bar title="找回密码" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
     <text v-if="seen" style="color: red; paddingLeft: 30px; fontSize: 30px">* 密码为至少6位的任意字符</text>
     <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
   </div>
