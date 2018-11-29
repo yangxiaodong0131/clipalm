@@ -36,6 +36,7 @@
     "vue": "^2.5.11",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
+    "weex-amui": "^0.1.2",
     "weex-bindingx": "^0.0.48",
     "weex-flymeui": "^0.1.23",
     "weex-ui": "^0.6.6",
@@ -75,6 +76,8 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.6",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "node-notifier": "^5.1.2",
     "portfinder": "^1.0.13",
     "postcss-import": "^11.0.0",
@@ -93,6 +96,6 @@
     "webpack-merge": "^4.1.0",
     "webpack-uglify-parallel": "^0.1.4",
     "weex-loader": "^0.7.2",
-    "weex-vue-precompiler": "^0.1.17"
+    "weex-vue-precompiler": "git+https://github.com/HMingHe/weex-vue-precompiler.git"
   }
 }

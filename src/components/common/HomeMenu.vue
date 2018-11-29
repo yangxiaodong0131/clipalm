@@ -1,5 +1,6 @@
 <template>
   <div class="demo" v-bind:style="panel">
+    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
       <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
@@ -13,7 +14,6 @@
         </div>
       </div>
     </div>
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 
