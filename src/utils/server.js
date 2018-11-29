@@ -322,10 +322,17 @@ function setStore (obj, activeTab, menu, rdata) {
       }
       break
   }
+  // 判断是否有数据
   if (data.length === 0) {
     obj.$store.commit('SET_showData', false)
   }
-  console.log(data)
+  // 判断是否有更多数据
+  if (rdata.data.length === 0 || data.length === 0) {
+    obj.$store.commit('SET_showMore', false)
+  } else {
+    obj.$store.commit('SET_showMore', true)
+  }
+  // 隐藏查询loading
   obj.$store.commit('SET_isLoadingShow', false)
 }
 

@@ -9,7 +9,7 @@
                   :arrow-icon="arrawSrc"
                   :extraContent="rule.desc"></wxc-cell>
       </cell>
-      <cell style="height:200px" v-if="rules.length !== 0">
+      <cell style="height:200px" v-if="showMore">
         <wxc-button text="加载更多"
           class="submits"
           size="big"
@@ -63,6 +63,9 @@ export default {
     },
     showData () {
       return this.$store.state.Home.showData
+    },
+    showMore () {
+      return this.$store.state.Home.showMore
     },
     rules () {
       return this.$store.state.Library.rule
