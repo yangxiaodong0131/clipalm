@@ -25,15 +25,11 @@ export function compDrg (obj, wt4, i) {
 
 export function compWt4 (obj, wt4, result) {
   let obj1 = {}
-  const keys = Object.keys(wt4)
-  keys.map((x) => {
+  const keys = Object.keys(wt4).concat(Object.keys(result))
+  const values = Object.values(wt4).concat(Object.values(result))
+  keys.map((x, i) => {
     const lower = x.toLowerCase()
-    obj1[lower] = wt4[x]
-    return obj1
-  })
-  const keys1 = Object.keys(result)
-  keys1.map((x) => {
-    obj1[x] = result[x]
+    obj1[lower] = values[i]
     return obj1
   })
   stream.fetch({

@@ -47,8 +47,6 @@ export default {
   data () {
     return {
       visible: false,
-      seen: false,
-      exchange: true,
       user: { password: '', username: '', confirm: '', plat: 'client', email: '' },
       barStyle: {
         backgroundColor: '#C6e2FF'
@@ -88,6 +86,32 @@ export default {
     },
     loginResult () {
       return this.$store.state.Home.user.loginResult
+    },
+    exchange: {
+      get () {
+        if (this.loginResult === '确认') {
+          return true
+        } else if (this.loginResult === ' ') {
+          return false
+        } else if (this.loginResult === '用户名已存在') {
+          return false
+        }
+        return true
+      },
+      set () {}
+    },
+    seen: {
+      get () {
+        if (this.loginResult === '确认') {
+          return false
+        } else if (this.loginResult === ' ') {
+          return true
+        } else if (this.loginResult === '用户名已存在') {
+          return true
+        }
+        return false
+      },
+      set () {}
     }
   },
   methods: {
@@ -95,10 +119,9 @@ export default {
       userLogin(this, this.user)
     },
     immediate () {
-      this.seen = true
-      this.exchange = false
+      this.$store.commit('SET_loginResult', ' ')
       if (weex.config.env.platform === 'Web') {
-        this.user = { password: '123456', username: '13345678900', confirm: '123456', plat: 'client', email: '123456@hitb.com' }
+        this.user = { password: '123456', username: '19945678900', confirm: '123456', plat: 'client', email: '123456@hitb.com' }
       } else {
         this.user = { password: '', username: '', confirm: '', plat: 'client', email: '' }
       }
