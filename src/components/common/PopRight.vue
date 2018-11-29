@@ -8,7 +8,7 @@
           <wxc-cell
             :key="index"
             :label="detail.label"
-            :title="infoPage.info[detail.title]"
+            :title="`${infoPage.info[detail.title]}`"
             :has-arrow="detail.hasArrow"
             @wxcCellClicked="wxcCellClicked(detail)"
             ></wxc-cell>
