@@ -41,7 +41,7 @@
       </cell>
       <cell style="height:100px"> </cell>
     </list>
-    <list class="list" v-else>
+    <list class="lists" v-else>
       <cell>
         <div class="panel">
           <wxc-cell

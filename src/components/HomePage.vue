@@ -17,6 +17,7 @@
       <Personal v-else-if="menu[0] == '完善个人信息'"></Personal>
       <Login v-else-if="menu[0] == '用户登录'"></Login>
       <User v-else-if="menu[0] == '个人信息'"></User>
+      <Retrieve v-else-if="menu[0] == '找回密码'">></Retrieve>
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
@@ -73,17 +74,18 @@
   import User from './user/User'
   import Login from './user/Login'
   import Personal from './user/Personal'
+  import Retrieve from './user/Retrieve'
   import { userLogin } from '../utils/user'
   const storage = weex.requireModule('storage')
   const modal = weex.requireModule('modal')
   const urlConfig = require('../utils/config.js')
   export default {
-    components: { WxcTabBar, WxcLoading, User, Login, Personal, Edit, SingleGroup, Library,
+    components: { WxcTabBar, WxcLoading, User, Login, Personal, Retrieve, Edit, SingleGroup, Library,
       Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce, Analyse },
     data: () => ({
       tabs: [{
         title: '用户',
-        menu:  [{'用户': ['用户登录', '个人信息', '完善个人信息']}],
+        menu:  [{'用户': ['用户登录', '个人信息', '完善个人信息', '找回密码']}],
         icon: `${urlConfig.static}/images/user.png`,
         activeIcon: `${urlConfig.static}/images/user_fill.png`
         }, {
