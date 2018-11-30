@@ -42,7 +42,7 @@
       <cell style="height:100px"> </cell>
     </list>
     <list class="lists" v-else>
-      <cell>
+      <cell v-if="!showNew">
         <div class="panel">
           <wxc-cell
             title="无帖子"
@@ -60,7 +60,8 @@
 <script>
 import { WxcSpecialRichText, WxcButton, WxcRichText, WxcCell } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
-import { getServer, createForum } from '../../utils/server'
+import { getServer } from '../../utils/server'
+import { createForum } from '../../utils/forum'
 const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 export default {
