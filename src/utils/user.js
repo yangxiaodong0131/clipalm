@@ -18,6 +18,7 @@ export function analyse (obj) {
 }
 
 export function userLogin (obj, user) {
+  user.plat = 'clipalm'
   stream.fetch({
     method: 'POST',
     type: 'json',
@@ -61,7 +62,11 @@ export function register (obj, user) {
     body: qs.stringify({ drg_admin_user: user })
   }, res => {
     if (res.ok) {
-      obj.$store.commit('SET_loginResult', res.data.log)
+      if (res.status === 201) {
+        userLogin(obj, { username: user.username, password: user.password })
+      } else if (res.status === 200) {
+        obj.$store.commit('SET_loginResult', '手机号码已经注册,请更换手机号码')
+      }
     } else {
       obj.$store.commit('SET_user', { loginResult: '网络连接失败', login: false, data: { clipalm_version: 'BJ编码版' } })
     }
