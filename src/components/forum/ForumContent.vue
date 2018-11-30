@@ -88,7 +88,7 @@
 import { WxcPopup, WxcCell, WxcButton, WxcRichText, WxcSpecialRichText } from 'weex-ui'
 import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
-import { createForum, deleteForum } from '../../utils/server'
+import { createForum, deleteForum } from '../../utils/forum'
 const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 export default {
@@ -134,6 +134,9 @@ export default {
     forumIndex () {
       return this.$store.state.Forum.forumIndex
     },
+    forumModule () {
+      return this.$store.state.Forum.forumModule
+    },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
       const style = {
@@ -152,11 +155,11 @@ export default {
     wxcButtonClicked () {
       let ForumContent = {}
       if (this.$store.state.Home.user.login && this.infoLevel === 1) {
-        ForumContent = { forum_id: this.forum.id, content: this.textContent, username: this.username }
+        ForumContent = { forum_id: this.forum.id, content: this.textContent, username: this.username, module: this.forumModule }
         createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply', this.activeTab)
       } else if (this.$store.state.Home.user.login && this.infoLevel === 2) {
-        ForumContent = { sid: this.forum.id, forum_content_id: this.replyId, content: this.textContent, username: this.username }
-        deleteForum(this, { forum_all: { forum_content: ForumContent } }, 'reply', this.activeTab)
+        ForumContent = { sid: this.forum.id, forum_content_id: this.replyId, content: this.textContent, username: this.username, module: this.forumModule }
+        createForum(this, { forum_all: { forum_content: ForumContent } }, 'reply', this.activeTab)
         this.$store.commit('SET_infoLevel', this.infoLevel - 1)
       } else {
         modal.toast({ message: '请先登录', duration: 1 })
@@ -174,7 +177,7 @@ export default {
       if (this.$store.state.Forum.forumContent.content.length > 1) {
         modal.toast({ 'message': '该回复禁止删除', 'duration': 0.8 })
       } else {
-        deleteForum(this, this.forum.id)
+        deleteForum(this, this.forum.id, this.forumModule)
       }
     }
   }
