@@ -2,6 +2,7 @@ const stream = weex.requireModule('stream')
 const storage = weex.requireModule('storage')
 const urlConfig = require('./config.js')
 const qs = require('qs')
+const modal = weex.requireModule('modal')
 
 export function analyse (obj) {
   stream.fetch({
@@ -117,13 +118,12 @@ export function forgetPassword (obj, user) {
     body: qs.stringify({ drg_admin_user: user, id: obj.$store.state.Home.user.data.id })
   }, res => {
     if (res.ok) {
-      obj.$store.commit('SET_userData', res.data.data)
-      obj.$store.commit('SET_menu', [2, '字典'])
-      obj.$store.commit('SET_onlyInfoLevel', [2, 0])
-      obj.$store.commit('SET_menu', [1, '病案'])
-      obj.$store.commit('SET_onlyInfoLevel', [1, 0])
-    } else {
-      obj.info = '- 网络连接超时 -'
+      if (res.data.is_success) {
+        modal.toast({ message: '密码修改成功', duration: 2 })
+        obj.$store.commit('SET_menu', [0, '用户登录'])
+      } else {
+        obj.$store.commit('SET_loginResult', res.data.log)
+      }
     }
   })
 }

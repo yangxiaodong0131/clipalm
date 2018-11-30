@@ -18,15 +18,15 @@
           <text style="height: 55px;font-size: 35px;">确认密码</text>
         <input type="text" placeholder="再输一次密码" class="input" :autofocus=true value="" v-model="user.confirm"/>
       </div>
+      <text style="color: red; paddingLeft: 30px; fontSize: 30px">* 密码为至少6位的任意字符</text>
       <wxc-button text="提交"
               type="blue"
               size="full"
               class="submits"
               @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
     </scroller>
-    <mini-bar title="找回密码" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
-    <text v-if="seen" style="color: red; paddingLeft: 30px; fontSize: 30px">* 密码为至少6位的任意字符</text>
-    <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
+        <mini-bar title="找回密码" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
   </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
   components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
   data: () => ({
     seen: true,
-    user: { username: '', email: '', plat: 'client', password: '', confirm: '' },
+    user: { username: '', email: '', plat: '', password: '', confirm: '' },
     textStyle: {
       color: 'rgb(166, 162, 162)'
     },
@@ -69,6 +69,21 @@ export default {
     },
     loginResult () {
       return this.$store.state.Home.user.loginResult
+    },
+    showRegister: {
+      get () {
+        if (this.loginResult === '确认') {
+          return false
+        } else if (this.loginResult === ' ') {
+          return true
+        } else if (this.loginResult === '用户名已存在') {
+          return true
+        } else if (this.loginResult === '') {
+          return false
+        } else {
+          return true
+        }
+      }
     }
   },
   created () {
@@ -97,7 +112,7 @@ export default {
       } else {
         this.$store.commit('SET_loginResult', this.loginResult)
         forgetPassword(this, this.user)
-        this.$store.commit('SET_menu', [0, '用户登录'])
+        // this.$store.commit('SET_menu', [0, '用户登录'])
       }
     }
   }
