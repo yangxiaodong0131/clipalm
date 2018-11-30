@@ -53,6 +53,22 @@ function statInfo (result, data, menu) {
   }
   return result
 }
+function statInfoDd (result, data, menu) {
+  result.details = []
+  result.title = '偏差分布详情'
+  result.showSubRule = true
+  result.subRuleTitle = `${menu}列表`
+  result.showSubRuleTitle = false
+  if (data.stat && data.stat.length > 0) {
+    result.subRule = data.stat.map((x) => {
+      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
+      return obj
+    })
+  } else {
+    result.subRule = [{'label': '无数据', 'title': '无数据', 'hasArrow': true, menu: `${menu}分析`, all: []}]
+  }
+  return result
+}
 function statInfoOrg (result, data, menu) {
   result.title = '分析详情'
   if (data.stat && data.stat.length > 0) {
@@ -235,6 +251,12 @@ export function getDetails (obj, menu, data) {
         break
       case 'DRG分析':
         result = statInfo(result, data, '')
+        break
+      case '偏差分布':
+        result = statInfoDd(result, data, '')
+        break
+      case '偏差分布详情':
+        result = statInfoDd(result, data, '')
         break
       case 'DRG机构分析':
         result = statInfoOrg(result, data, '')
