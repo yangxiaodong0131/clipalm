@@ -1,5 +1,7 @@
+import { getServer } from './server'
+const modal = weex.requireModule('modal')
 const stream = weex.requireModule('stream')
-// const urlConfig = require('./config.js')
+const urlConfig = require('./config.js')
 const qs = require('qs')
 export function createForum (obj, forum, type, activeTab) {
   stream.fetch({
