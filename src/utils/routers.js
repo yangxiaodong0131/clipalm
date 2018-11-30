@@ -79,10 +79,10 @@ const routers = function (obj, activeTab, menu, value) {
         url = `icd9c?plat=client&version=GB&year=2018&page=${obj.$store.state.Library.page}`
         break
       case '疾病分类/诊断术语':
-        url = `rule_bj_mdc?plat=client&version=CN&type=dissect`
+        url = `rule_bj_mdc?plat=client&version=CN&type=dissect_icd10`
         break
       case '临床手术/操作术语':
-        url = `rule_bj_mdc?plat=client&version=CN&type=dissect`
+        url = `rule_bj_mdc?plat=client&version=CN&type=dissect_icd9`
         break
       case '主诊未入组':
         url = `wt4_stat_cv_disease?plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
@@ -147,10 +147,10 @@ const routers = function (obj, activeTab, menu, value) {
       case 'DRG分析':
         url = `wt4_stat_cv?plat=client&order=code&drg=${value.code}`
         break
-      case '诊断术语-部位':
+      case '诊断术语':
         url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
-      case '操作术语-部位':
+      case '操作术语':
         url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
       case '贴子列表':

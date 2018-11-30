@@ -60,7 +60,7 @@ function statInfoOrg (result, data, menu) {
     result.subRuleTitle = `${menu}列表`
     result.showSubRuleTitle = true
     result.subRule = data.stat.map((x) => {
-      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
+      const obj = {'label': x.code, 'title': `机构: ${x.name}`, 'hasArrow': true, menu: `${menu}分析`, all: x}
       return obj
     })
   }
@@ -144,10 +144,17 @@ function compResultInfo (result, data) {
 function subRule (result, data, title) {
   result.details = []
   result.title = title
-  if (['诊断术语-部位', '操作术语-部位'].includes(title) && data.dissect) {
+  if (['诊断术语', '操作术语'].includes(title) && data.dissect) {
     result.showSubRule = true
-    result.subRuleTitle = title
+    result.showSubRuleTitle = true
+    result.subRuleTitle = `${title}部位`
     result.subRule = data.dissect.map((x) => {
+      const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: {name: x, mdc: data.mdc}}
+      return obj
+    })
+    result.showSubRuleTitle2 = true
+    result.subRuleTitle2 = `${title}表现`
+    result.subRule2 = data.dissect2.map((x) => {
       const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: {name: x, mdc: data.mdc}}
       return obj
     })
@@ -209,15 +216,15 @@ export function getDetails (obj, menu, data) {
         result = icdInfo(result, data, 'ICD9')
         break
       case '疾病分类/诊断术语':
-        result = subRule(result, data, '诊断术语-部位')
+        result = subRule(result, data, '诊断术语')
         break
-      case '诊断术语-部位':
+      case '诊断术语':
         result = subRule(result, data, 'ICD10细目')
         break
       case '临床手术/操作术语':
-        result = subRule(result, data, '操作术语-部位')
+        result = subRule(result, data, '操作术语')
         break
-      case '操作术语-部位':
+      case '操作术语':
         result = subRule(result, data, 'ICD9细目')
         break
       case 'DRG基础':
