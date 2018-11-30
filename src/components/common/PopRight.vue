@@ -37,7 +37,7 @@
           </wxc-cell>
           <category v-if="infoPage.showSubRuleTitle2" :title="`--${infoPage.subRuleTitle2}--`"></category>
           <wxc-cell v-for="(rule, index) in infoPage.subRule2"
-            :key="index"
+            :key="`sub2-${index}`"
             :label="rule.label"
             :title="rule.title"
             :has-arrow="rule.hasArrow"

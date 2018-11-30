@@ -60,7 +60,7 @@ function statInfoOrg (result, data, menu) {
     result.subRuleTitle = `${menu}列表`
     result.showSubRuleTitle = true
     result.subRule = data.stat.map((x) => {
-      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
+      const obj = {'label': x.code, 'title': `机构: ${x.name}`, 'hasArrow': true, menu: `${menu}分析`, all: x}
       return obj
     })
   }
@@ -169,7 +169,6 @@ function subRule (result, data, title) {
   return result
 }
 export function getDetails (obj, menu, data) {
-  console.log(menu)
   let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     if (['BJ-ICD10', 'GB-ICD10'].includes(menu)) {
@@ -219,13 +218,13 @@ export function getDetails (obj, menu, data) {
       case '疾病分类/诊断术语':
         result = subRule(result, data, '诊断术语')
         break
-      case '诊断术语-部位':
+      case '诊断术语':
         result = subRule(result, data, 'ICD10细目')
         break
       case '临床手术/操作术语':
         result = subRule(result, data, '操作术语')
         break
-      case '操作术语-部位':
+      case '操作术语':
         result = subRule(result, data, 'ICD9细目')
         break
       case 'DRG基础':
