@@ -87,6 +87,9 @@ export default {
           show = true
           break
       }
+      if (this.menu === 'DRG分析' && this.activeTab === 4) {
+        show = true
+      }
       return show
     }
   },

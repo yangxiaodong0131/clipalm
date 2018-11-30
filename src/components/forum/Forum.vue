@@ -90,7 +90,6 @@ export default {
       return this.$store.state.Forum.forumModule
     },
     posts () {
-      console.log(this.$store.state.Forum.post)
       return this.$store.state.Forum.post
     },
     forumLabel () {
