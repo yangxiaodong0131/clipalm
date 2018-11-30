@@ -10,18 +10,21 @@
       <div class="input-bar">
         <input class="input" type="password" placeholder="密码" v-model="user.password"/>
       </div>
-      <div class="input-bar" v-if="seen">
+      <!-- 注册显示 -->
+      <div class="input-bar" v-if="showRegister">
         <input class="input" type="password" placeholder="确认密码" v-model="user.confirm"/>
       </div>
-      <div class="input-bar" v-if="seen">
+      <div class="input-bar" v-if="showRegister">
         <input class="input" type="email" placeholder="邮箱" v-model="user.email"/>
       </div>
-      <text v-if="seen" style="color: red; paddingLeft: 30px; fontSize: 30px">* 密码为至少6位的任意字符</text>
+      <text v-if="showRegister" style="color: red; paddingLeft: 30px; fontSize: 30px">* 用户名为手机号码</text>
+      <text v-if="showRegister" style="color: red; paddingLeft: 30px; fontSize: 30px">* 密码为至少6位的任意字符</text>
+      <!-- 注册显示 -->
       <div class="row">
-        <wxc-button v-if="exchange" type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
-        <wxc-button v-else text="注册" type="blue" size="null" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
+        <wxc-button v-if="showRegister" text="注册" type="blue" size="null" :btnStyle="btnStyle" @wxcButtonClicked="register"></wxc-button>
+        <wxc-button v-else type="blue" text="登录" size="null" :btnStyle="btnStyle" @wxcButtonClicked="login"></wxc-button>
       </div>
-      <div class="row">
+      <div class="row" v-if="!showRegister">
         <div class="col-md-5">
         <text class="input-forget" @click="retrieve">找回密码</text>
         </div>
@@ -87,20 +90,7 @@ export default {
     loginResult () {
       return this.$store.state.Home.user.loginResult
     },
-    exchange: {
-      get () {
-        if (this.loginResult === '确认') {
-          return true
-        } else if (this.loginResult === ' ') {
-          return false
-        } else if (this.loginResult === '用户名已存在') {
-          return false
-        }
-        return true
-      },
-      set () {}
-    },
-    seen: {
+    showRegister: {
       get () {
         if (this.loginResult === '确认') {
           return false
@@ -108,10 +98,12 @@ export default {
           return true
         } else if (this.loginResult === '用户名已存在') {
           return true
+        } else if (this.loginResult === '') {
+          return false
+        } else {
+          return true
         }
-        return false
-      },
-      set () {}
+      }
     }
   },
   methods: {
@@ -121,7 +113,7 @@ export default {
     immediate () {
       this.$store.commit('SET_loginResult', ' ')
       if (weex.config.env.platform === 'Web') {
-        this.user = { password: '123456', username: '19945678900', confirm: '123456', plat: 'client', email: '123456@hitb.com' }
+        this.user = { password: '123456acs', username: '18515290906', confirm: '123456acs', plat: 'client', email: '123456@hitb.com' }
       } else {
         this.user = { password: '', username: '', confirm: '', plat: 'client', email: '' }
       }
@@ -134,7 +126,7 @@ export default {
       const regexp1 = /^.{6,}$/
       const regexp2 = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
       if (this.user.username === '') {
-        this.$store.commit('SET_loginResult', '请输入用户名')
+        this.$store.commit('SET_loginResult', '请输入手机号码')
       } else if (this.user.password === '') {
         this.$store.commit('SET_loginResult', '请输入密码')
       } else if (this.user.confirm === '') {
@@ -144,14 +136,14 @@ export default {
       } else if (this.user.password !== this.user.confirm) {
         this.$store.commit('SET_loginResult', '两次密码输入不一致')
       } else if (!regexp.test(this.user.username)) {
-        this.$store.commit('SET_loginResult', '用户名输入有误')
+        this.$store.commit('SET_loginResult', '手机号码输入有误')
       } else if (!regexp1.test(this.user.password)) {
         this.$store.commit('SET_loginResult', '密码输入有误')
       } else if (!regexp2.test(this.user.email)) {
         this.$store.commit('SET_loginResult', '邮箱输入有误')
       } else {
         register(this, this.user)
-        this.$store.commit('SET_loginResult', this.loginResult)
+        // this.$store.commit('SET_loginResult', this.loginResult)
       }
     },
     NameOnInput (e) {
