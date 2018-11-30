@@ -11,8 +11,8 @@ const state = {
   userAnalyse: null,
   isLoadingShow: false,
   // 发布版本修改
-  version: '0.0.1',
-  serverVersion: { version: '0.0.1' }
+  version: '1.0.1',
+  serverVersion: { version: '1.0.1' }
 }
 
 const mutations = {
