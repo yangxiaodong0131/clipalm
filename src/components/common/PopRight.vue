@@ -35,6 +35,14 @@
             :has-arrow="rule.hasArrow"
             @wxcCellClicked="wxcCellClicked2(rule)">
           </wxc-cell>
+          <category v-if="infoPage.showSubRuleTitle2" :title="`--${infoPage.subRuleTitle2}--`"></category>
+          <wxc-cell v-for="(rule, index) in infoPage.subRule2"
+            :key="index"
+            :label="rule.label"
+            :title="rule.title"
+            :has-arrow="rule.hasArrow"
+            @wxcCellClicked="wxcCellClicked2(rule)">
+          </wxc-cell>
         </div>
         <div style="height:200px"></div>
       </cell>

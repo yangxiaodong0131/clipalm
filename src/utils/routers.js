@@ -147,10 +147,10 @@ const routers = function (obj, activeTab, menu, value) {
       case 'DRG分析':
         url = `wt4_stat_cv?plat=client&order=code&drg=${value.code}`
         break
-      case '诊断术语-部位':
+      case '诊断术语':
         url = `rule_bj_icd10?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
-      case '操作术语-部位':
+      case '操作术语':
         url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
       case '贴子列表':
