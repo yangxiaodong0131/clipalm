@@ -155,10 +155,13 @@ export default {
     margin-top: 91px;
   }
   .input {
-    font-size: 30px;
-    height: 100px;
     width: 750px;
-    border-width: 1px;
+    height: 78px;
+    color: #606060;
+    background-color: #FFFFFF;
+    font-size: 36px;
+    border-width: 0.5px;
+    border-style: solid;
     border-color: #000000;
   }
 </style>
