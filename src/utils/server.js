@@ -156,9 +156,10 @@ function setStore (obj, activeTab, menu, rdata) {
     obj.$store.commit('SET_showData', false)
   }
   // 判断是否有更多数据
-  if (rdata.data.length === 0 || data.length === 0) {
+  if (rdata.data.length === 0) {
     obj.$store.commit('SET_showMore', false)
   } else {
+    obj.$store.commit('SET_showData', true)
     obj.$store.commit('SET_showMore', true)
   }
   // 隐藏查询loading
