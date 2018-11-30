@@ -1,33 +1,26 @@
 <template>
   <div class="container" v-bind:style="panel">
-    <div style="height:10px"></div>
-    <list class="list">
-      <cell>
-        <div v-if="showNew">
-          <input type="text" placeholder="输入贴子标题" class="input" :autofocus=true value="" @input="oninput"/>
-          <div class="wrapper">
-            <textarea class="textarea" placeholder="输入贴子内容" @input="oninput2" value="" ></textarea>
-          </div>
-          <wxc-button text="发布"
-                size="full"
-                type="blue"
-                class="submits"
-                @wxcButtonClicked="sumbit"></wxc-button>
-        </div>
-        <div v-if="!showNew" class="submits">
-          <wxc-button v-if="showNewButton"
-                text="发贴"
-                size="full"
-                type="blue"
-                class="submits"
-                @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-        </div>
-      </cell>
-    </list>
-    <div style="height:10px"></div>
-    <list class="list" v-if="showData">
+    <div v-if="showNew">
+      <input type="text" placeholder="输入贴子标题" class="top" :autofocus=true value="" @input="oninput"/>
+      <div class="wrapper">
+        <textarea class="textarea" placeholder="输入贴子内容" @input="oninput2" value="" ></textarea>
+      </div>
+      <wxc-button text="发布"
+            size="full"
+            type="blue"
+            class="submits"
+            @wxcButtonClicked="sumbit"></wxc-button>
+    </div>
+    <div v-if="!showNew" class="submit">
+      <wxc-button v-if="showNewButton"
+            text="发贴"
+            size="full"
+            type="blue"
+            @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+    </div>
+    <list class="lists" v-if="showData">
       <cell v-for="(post, index) in posts" v-bind:key="index">
-        <div class="panel">
+        <div>
           <wxc-cell
             :title="post.title"
             :extraContent="`${post.content_count}`"
@@ -39,7 +32,6 @@
           </wxc-cell>
         </div>
       </cell>
-      <cell style="height:100px"> </cell>
     </list>
     <list class="lists" v-else>
       <cell v-if="!showNew">
@@ -201,6 +193,13 @@ export default {
   border-color: #000000;
   height: 80px;
 }
+.top {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+  margin-top: 100px;
+  height: 80px;
+}
 .container {
   width: 750px;
 }
@@ -208,8 +207,11 @@ export default {
   margin-bottom: 0px;
   margin-top: 0px;
 }
-.list {
-  margin-top: 90px;
+.submit {
+  margin-left: 17px;
+  margin-bottom: 12px;
+  margin-bottom: 12px;
+  margin-top: 100px;
 }
 .wrapper {
   margin-top: 10px;
