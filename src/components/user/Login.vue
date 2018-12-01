@@ -94,11 +94,9 @@ export default {
       get () {
         if (this.loginResult === '确认') {
           return false
-        } else if (this.loginResult === ' ') {
-          return true
-        } else if (this.loginResult === '用户名已存在') {
-          return true
         } else if (this.loginResult === '账号或密码错误') {
+          return false
+        } else if (this.loginResult === '网络连接失败') {
           return false
         } else if (this.loginResult === '') {
           return false
