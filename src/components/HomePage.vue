@@ -17,7 +17,7 @@
       <Personal v-else-if="menu[0] == '完善个人信息'"></Personal>
       <Login v-else-if="menu[0] == '用户登录'"></Login>
       <User v-else-if="menu[0] == '个人信息'"></User>
-      <Retrieve v-else-if="menu[0] == '找回密码'">></Retrieve>
+      <Retrieve v-else-if="menu[0] == '找回密码'"><text>></text></Retrieve>
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
