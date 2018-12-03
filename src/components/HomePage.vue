@@ -95,7 +95,7 @@
           activeIcon: `${urlConfig.static}/images/edit_fill.png`
         }, {
           title: '字典',
-          menu: [{'DRG': [['CN-DRG', 'BJ-ICD10', 'BJ-ICD9'], ['GB-ICD10', 'GB-ICD9']], '疾病': [['疾病分类/诊断术语']], '手术': [['临床手术/操作术语']]}],
+          menu: [{'DRG': [['CN-DRG']], '疾病': [['疾病分类/诊断术语'], ['GB-ICD10', 'BJ-ICD10']], '手术': [['临床手术/操作术语'], ['GB-ICD9', 'BJ-ICD9']]}],
           icon: `${urlConfig.static}/images/library.png`,
           activeIcon: `${urlConfig.static}/images/library_fill.png`
         }, {
