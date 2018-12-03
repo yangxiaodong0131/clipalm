@@ -3,9 +3,11 @@
     <scroller>
       <div>
         <div style="height: 91px;"></div>
-          <text style="height: 55px;font-size: 35px;text-align: center;">性别</text>
-        <!--<input type="text" placeholder="请输入性别" class="input" :autofocus=true value="" v-model="personal.gender" />-->
-          <wxc-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked"></wxc-radio>
+          <text style="height: 55px;font-size: 35px;text-align: center;">科室信息</text>
+          <input type="text" placeholder="请输入科室信息" class="input" :autofocus=true value="" v-model="personal.Section" />
+          <!--<wxc-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked"></wxc-radio>-->
+          <text style="height: 55px;font-size: 35px;text-align: center;">职称</text>
+          <input type="text" placeholder="请输入职称" class="input" :autofocus=true value="" v-model="personal.Title" />
       </div>
       <div>
           <text style="height: 55px;font-size: 35px;text-align: center;">所在机构</text>
@@ -36,7 +38,7 @@ export default {
       { title: '女', value: 2, checked: true }
     ],
     checkedInfo: { title: '女', value: 2 },
-    personal: { gender: '', org: '' }
+    personal: { Title: '', org: '', Section: '' }
   }),
   computed: {
     userAnalyse: {
@@ -64,6 +66,16 @@ export default {
     },
     wxcButtonClicked () {
       if (this.personal.org === '') {
+        modal.alert({
+          message: '请输入科室信息',
+          duration: 0.3
+        })
+      } else if (this.personal.Section === '') {
+        modal.alert({
+          message: '请输入职称',
+          duration: 0.3
+        })
+      } else if (this.personal.Title === '') {
         modal.alert({
           message: '请输入所在机构',
           duration: 0.3
@@ -113,10 +125,13 @@ export default {
     margin-top: 91px;
   }
   .input {
-    font-size: 30px;
-    height: 100px;
     width: 750px;
-    border-width: 1px;
+    height: 78px;
+    color: #606060;
+    background-color: #FFFFFF;
+    font-size: 36px;
+    border-width: 0.5px;
+    border-style: solid;
     border-color: #000000;
   }
   .submits{
