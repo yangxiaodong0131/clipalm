@@ -51,6 +51,7 @@ function statInfo (result, data, menu) {
       return obj
     })
   }
+  result.details = result.details.filter(x => x.label !== '名称')
   return result
 }
 function statInfoDd (result, data, menu) {
@@ -251,6 +252,9 @@ export function getDetails (obj, menu, data) {
         break
       case 'DRG分析':
         result = statInfo(result, data, '')
+        break
+      case '主诊未入组':
+        result = statInfo(result, data, '主诊未入组')
         break
       case '偏差分布':
         result = statInfoDd(result, data, '')
