@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-bind:class="container">
-    <list class="list" @loadmore="fetch" loadmoreoffset="30000" v-if="showData">
+    <list class="list" @loadmore="fetch" loadmoreoffset="0" v-if="showData">
       <cell class="cell" v-for="(rule, index) in rules" v-bind:key="index">
         <wxc-cell :label="rule.code"
                   @wxcCellClicked="wxcIndexlistItemClicked(rule)"
