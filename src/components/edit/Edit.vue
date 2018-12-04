@@ -1,5 +1,5 @@
 <template>
-  <div class="demo" @swipe="swipe" v-bind:style="panel">
+  <div class="demo" v-bind:style="panel">
     <div class="count" v-if="showStat">
       <wxc-cell v-for="(item, index) in stat" v-bind:key="index"
                 :title="index"
