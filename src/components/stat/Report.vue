@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-bind:style="panel">
-    <list class="list" @loadmore="fetch" loadmoreoffset="30000" v-if="showData">
+    <list class="list" @loadmore="fetch" loadmoreoffset="0" v-if="showData">
       <cell class="cell" v-for="(stat, index) in stats" v-bind:key="index">
         <wxc-cell :label="stat.code"
             @wxcCellClicked="wxcIndexlistItemClicked(stat)"

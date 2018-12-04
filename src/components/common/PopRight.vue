@@ -27,12 +27,13 @@
           <text class="title" style="font-size: 20px;" v-else >无</text>
         </div>
         <div v-if="infoPage.showSubRule">
-          <category v-if="infoPage.showSubRuleTitle" :title="`--${infoPage.subRuleTitle}--`"></category>
+          <category :title="`--${infoPage.subRuleTitle}--`"></category>
           <wxc-grid-select
-              :single="true"
-              :cols="5"
-              :list="infoPage.subRule"
-              @select="params => wxcCellClicked2(params)"></wxc-grid-select>
+            :single="true"
+            :cols="5"
+            :list="infoPage.subRule"
+            @select="params => wxcCellClicked2(params)">
+          </wxc-grid-select>
           <!-- <wxc-cell v-for="(rule, index) in infoPage.subRule"
             :key="index"
             :label="rule.label"
@@ -134,7 +135,7 @@ export default {
 <style scoped>
   .demo {
     width: 750px;
-    background-color: #f2f3f4;
+    /* background-color: #f2f3f4; */
   }
   .text {
     font-size: 35px;
