@@ -17,7 +17,7 @@
       <Personal v-else-if="menu[0] == '完善个人信息'"></Personal>
       <Login v-else-if="menu[0] == '用户登录'"></Login>
       <User v-else-if="menu[0] == '个人信息'"></User>
-      <Retrieve v-else-if="menu[0] == '找回密码'">></Retrieve>
+      <Retrieve v-else-if="menu[0] == '找回密码'"><text>></text></Retrieve>
     </div>
     <!-- edit页 -->
     <div class="panel" v-bind:class="panel">
@@ -95,7 +95,7 @@
           activeIcon: `${urlConfig.static}/images/edit_fill.png`
         }, {
           title: '字典',
-          menu: [{'DRG': [['CN-DRG', 'BJ-ICD10', 'BJ-ICD9'], ['GB-ICD10', 'GB-ICD9']], '疾病': [['疾病分类/诊断术语']], '手术': [['临床手术/操作术语']]}],
+          menu: [{'DRG': [['CN-DRG']], '疾病': [['疾病分类/诊断术语'], ['GB-ICD10', 'BJ-ICD10']], '手术': [['临床手术/操作术语'], ['GB-ICD9', 'BJ-ICD9']]}],
           icon: `${urlConfig.static}/images/library.png`,
           activeIcon: `${urlConfig.static}/images/library_fill.png`
         }, {

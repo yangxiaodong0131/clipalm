@@ -35,19 +35,19 @@ const routers = function (obj, activeTab, menu, value) {
   if (value === null) {
     switch (menu) {
       case 'QY病历':
-        url = `wt4_2017?plat=client&drg=QY&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        url = `wt4_clipalm?type=QY&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         router = 'drgwork_wt4/expert'
         break
       case '未入组病历':
-        url = `wt4_2017?plat=client&drg=0000&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        url = `wt4_clipalm?type=0000&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         router = 'drgwork_wt4/expert'
         break
       case '低风险死亡病历':
-        url = `wt4_2017?plat=client&sf0108=5&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        url = `wt4_clipalm?type=sf0108&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         router = 'drgwork_wt4/expert'
         break
       case '费用异常病历':
-        url = `wt4_2017?plat=client&cv=1&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
+        url = `wt4_clipalm?type=cv&page=${obj.$store.state.Edit.wt4Page}&version=${version}`
         router = 'drgwork_wt4/expert'
         break
       case '填报异常病历':

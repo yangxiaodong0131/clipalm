@@ -28,21 +28,32 @@
         </div>
         <div v-if="infoPage.showSubRule">
           <category v-if="infoPage.showSubRuleTitle" :title="`--${infoPage.subRuleTitle}--`"></category>
-          <wxc-cell v-for="(rule, index) in infoPage.subRule"
+          <wxc-grid-select
+              :single="true"
+              :cols="5"
+              :list="infoPage.subRule"
+              @select="params => wxcCellClicked2(params)"></wxc-grid-select>
+          <!-- <wxc-cell v-for="(rule, index) in infoPage.subRule"
             :key="index"
             :label="rule.label"
             :title="rule.title"
             :has-arrow="rule.hasArrow"
-            @wxcCellClicked="wxcCellClicked2(rule)">
+            @wxcCellClicked="wxcCellClicked2(rule)"> -->
           </wxc-cell>
           <category v-if="infoPage.showSubRuleTitle2" :title="`--${infoPage.subRuleTitle2}--`"></category>
-          <wxc-cell v-for="(rule, index) in infoPage.subRule2"
+          <wxc-grid-select
+              v-if="infoPage.showSubRuleTitle2"
+              :single="true"
+              :cols="5"
+              :list="infoPage.subRule2"
+              @select="params => wxcCellClicked2(params)"></wxc-grid-select>
+          <!-- <wxc-cell v-for="(rule, index) in infoPage.subRule2"
             :key="`sub2-${index}`"
             :label="rule.label"
             :title="rule.title"
             :has-arrow="rule.hasArrow"
             @wxcCellClicked="wxcCellClicked2(rule)">
-          </wxc-cell>
+          </wxc-cell> -->
         </div>
         <div style="height:200px"></div>
       </cell>
@@ -114,8 +125,8 @@ export default {
       //     break
       // }
     },
-    wxcCellClicked2 (e) {
-      getServer(this, this.activeTab, `${e.menu}`, e.all)
+    wxcCellClicked2 ({selectIndex, checked, checkedList}) {
+      getServer(this, this.activeTab, `${checkedList[0].menu}`, checkedList[0].all)
     }
   }
 }

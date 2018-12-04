@@ -178,7 +178,7 @@ function subRule (result, data, title) {
     result.showSubRule = true
     result.subRuleTitle = title
     result.subRule = data.icd.map((x) => {
-      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: title, all: x}
+      const obj = {'label': x.code, 'title': x.code, 'hasArrow': true, menu: title, all: x}
       return obj
     })
   }
