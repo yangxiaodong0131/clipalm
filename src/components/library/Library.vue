@@ -9,10 +9,11 @@
                   :arrow-icon="arrawSrc"
                   :extraContent="rule.desc"></wxc-cell>
       </cell>
-      <cell style="height:200px" v-if="showMore">
+      <cell style="height:200px">
         <wxc-button text="加载更多"
           class="submits"
           size="big"
+          v-if="showMore"
           @wxcButtonClicked="fetch"></wxc-button>
       </cell>
     </list>
@@ -71,7 +72,7 @@ export default {
       return this.$store.state.Library.rule
     },
     container () {
-      const tabPageHeight = weex.config.env.deviceHeight
+      const tabPageHeight = weex.config.env.deviceHeight + 200
       const style = {
         height: tabPageHeight
       }
