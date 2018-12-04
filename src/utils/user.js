@@ -129,12 +129,14 @@ export function forgetPassword (obj, user) {
 }
 
 function butyingPoint (user) {
-  stream.fetch({
-    method: 'POST',
-    type: 'json',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-    responseType: 'json',
-    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/butying_point`,
-    body: qs.stringify({ butying_point: {action_info: 'login', username: user.username, plat: 'clipalm'} })
-  })
+  if (user.username !== 'hitb') {
+    stream.fetch({
+      method: 'POST',
+      type: 'json',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      responseType: 'json',
+      url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/butying_point`,
+      body: qs.stringify({ butying_point: {action_info: 'login', username: user.username, plat: 'clipalm'} })
+    })
+  }
 }
