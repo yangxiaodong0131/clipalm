@@ -29,7 +29,6 @@
         <div v-if="infoPage.showSubRule">
           <category :title="`--${infoPage.subRuleTitle}--`"></category>
           <wxc-grid-select
-            :customStyles="customStyles"
             :single="true"
             :cols="5"
             :list="infoPage.subRule"
@@ -136,7 +135,7 @@ export default {
 <style scoped>
   .demo {
     width: 750px;
-    background-color: #f2f3f4;
+    /* background-color: #f2f3f4; */
   }
   .text {
     font-size: 35px;
