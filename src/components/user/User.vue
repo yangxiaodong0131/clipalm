@@ -33,7 +33,7 @@
     <wxc-grid-select
       class="gridSelect"
       :single="true"
-      :cols="4"
+      :cols="5"
       :customStyles="customStyles"
       :list="list_4"
       @select="params => onSelect(params, 'drg')">
