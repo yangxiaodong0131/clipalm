@@ -133,7 +133,7 @@ function setStore (obj, activeTab, menu, rdata) {
         default:
           data = obj.$store.state.Stat.statDrg
           data = data.concat(rdata.data)
-          obj.$store.commit('SET_statDrg', rdata.data)
+          obj.$store.commit('SET_statDrg', data)
           break
       }
       break
