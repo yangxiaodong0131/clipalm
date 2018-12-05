@@ -22,6 +22,7 @@ import Category from '../common/category.vue'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
+const iconConfig = require('../../utils/icon.js')
 export default {
   components: { AmGrid, WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
   data () {
@@ -54,10 +55,8 @@ export default {
   methods: {
     genGrid (menu) {
       const datas = menu.map((x) => {
-        const text = x
-        x = x.replace(/\//g, '')
-        const icon = `${this.iconUrl}/${x}.png`
-        return { text: text, icon: icon }
+        const icon = `${this.iconUrl}/${iconConfig[x]}`
+        return { text: x, icon: icon }
       })
       return datas
     },
