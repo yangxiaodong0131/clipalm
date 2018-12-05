@@ -2,11 +2,11 @@
   <div class="demo" v-bind:style="panel">
     <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
-      <div v-for="(icon, i) in v" :key="`menus${i}`">
+      <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
         <am-grid
-          @click="wxcButtonClicked('asdf')"
-          :data="genGrid(icon)"
+          @click="wxcButtonClicked"
+          :data="genGrid(text)"
           :column-num="3"
         ></am-grid>
       </div>
@@ -49,55 +49,20 @@ export default {
     },
     user () {
       return this.$store.state.Home.user
-    },
-    posts () {
-      return this.$store.state.Forum.post
-    },
-    specialConfigList () {
-      const configs = []
-      if (this.posts) {
-        this.posts.map((x) => {
-          const config = [
-            {
-              type: 'tag',
-              value: x.module,
-              style: {
-                fontSize: 34,
-                color: '#3D3D3D',
-                borderColor: '#FFC900',
-                backgroundColor: '#FFC900',
-                borderRadius: 14
-              }
-            },
-            {
-              type: 'text',
-              value: x.title,
-              theme: 'black',
-              style: { fontSize: 35 }
-            }
-          ]
-          configs.push(config)
-        })
-      }
-      return configs
     }
   },
   methods: {
-    genGrid (grid) {
-      if (this.activeTab === 0) {
-        return []
-      } else {
-        const datas = grid.map((x) => {
-          const text = x
-          x = x.replace(/\//g, '')
-          const icon = `${this.iconUrl}/${x}.png`
-          console.log(`${this.iconUrl}/${x}.png`)
-          return { text: text, icon: icon }
-        })
-        return datas
-      }
+    genGrid (menu) {
+      const datas = menu.map((x) => {
+        const text = x
+        x = x.replace(/\//g, '')
+        const icon = `${this.iconUrl}/${x}.png`
+        return { text: text, icon: icon }
+      })
+      return datas
     },
     wxcButtonClicked (menu) {
+      menu = menu.text
       switch (this.activeTab) {
         case 1:
           this.$store.commit('SET_wt4Page', 1)
