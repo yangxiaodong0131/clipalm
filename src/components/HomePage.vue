@@ -238,7 +238,7 @@
   }
   .panel {
     width: 750px;
-    background-color: #C6e2FF;
+    background-color: #F8F8FF;
     align-items: center;
     margin-left: 0px;
     border-color: #BBBBBB;
