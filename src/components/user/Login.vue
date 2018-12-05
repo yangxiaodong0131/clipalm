@@ -52,7 +52,7 @@ export default {
       visible: false,
       user: { password: '', username: '', confirm: '', plat: 'client', email: '' },
       barStyle: {
-        backgroundColor: '#C6e2FF'
+        backgroundColor: '#F8F8FF'
       },
       btnStyle: {
         marginTop: '20px'
@@ -66,7 +66,7 @@ export default {
         color: 'rgb(166, 162, 162)'
       },
       cellStyle: {
-        backgroundColor: '#C6e2FF',
+        backgroundColor: '#F8F8FF',
         flexDirection: 'row',
         justifyContent: 'space-around',
         color: '#FFFFFF'
