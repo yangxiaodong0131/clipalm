@@ -1,25 +1,24 @@
 <template>
-  <!-- <div class="demo" v-bind:style="panel">
+  <div class="demo" v-bind:style="panel">
     <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
       <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
-      </div>
-    </div>
-    <am-grid
+        <am-grid
           @click="wxcButtonClicked('asdf')"
-          :data="list"
+          :data="text"
           :column-num="3"
         ></am-grid>
-  </div> -->
-  <div class="demo" v-bind:style="panel">
-    <!-- <text>{{list}}</text> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="demo" v-bind:style="panel">
     <am-grid
       @click="wxcButtonClicked('asdf')"
       :data="list"
       :column-num="5"
     ></am-grid>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -42,46 +41,6 @@ export default {
     menus () {
       // console.log(this.$store.state.Home.menus)
       return this.$store.state.Home.menus
-    },
-    list () {
-      let arr = [{
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-        text: 'dsfads'}]
-      if (this.menus && this.menus[0]) {
-        const objKey = Object.keys(this.menus[0])
-        objKey.map((x) => {
-          arr = this.menus[0][x].map((y) => {
-            const obj = {}
-            obj.icon = 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png'
-            obj.text = y
-            // arr.push(obj)
-            return obj
-          })
-          return arr
-        })
-        console.log(arr)
-      }
-      return arr
-      // console.log(arr)
-      // const list1 = [
-      //   {
-      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-      //     text: 'dsfads'
-      //   },
-      //   {
-      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-      //     text: '1111'
-      //   },
-      //   {
-      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-      //     text: 'dsfads'
-      //   },
-      //   {
-      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-      //     text: '1111'
-      //   }
-      // ]
-      // return list1
     },
     activeTab () {
       return this.$store.state.Home.activeTab
