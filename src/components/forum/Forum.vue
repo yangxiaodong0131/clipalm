@@ -1,9 +1,9 @@
 <template>
   <div class="container" v-bind:style="panel">
     <div v-if="showNew">
-      <input type="text" placeholder="输入贴子标题" class="top" :autofocus=true value="" @input="oninput"/>
+      <input type="text" placeholder="输入帖子标题" class="top" :autofocus=true value="" @input="oninput"/>
       <div class="wrapper">
-        <textarea class="textarea" placeholder="输入贴子内容" @input="oninput2" value="" ></textarea>
+        <textarea class="textarea" placeholder="输入帖子内容" @input="oninput2" value="" ></textarea>
       </div>
       <wxc-button text="发布"
             size="full"
@@ -13,7 +13,7 @@
     </div>
     <div v-if="!showNew" class="submit">
       <wxc-button v-if="showNewButton"
-            text="发贴"
+            text="发帖"
             size="full"
             type="blue"
             @wxcButtonClicked="wxcButtonClicked"></wxc-button>
@@ -122,7 +122,7 @@ export default {
     }
   },
   created () {
-    if (['我的贴子', '最新贴子'].includes(this.menu)) {
+    if (['我的帖子', '最新帖子'].includes(this.menu)) {
       this.showNewButton = false
     }
     this.getData()
@@ -132,23 +132,23 @@ export default {
       const i = this.$store.state.Home.activeTab
       if (this.posts.length === 0) {
         switch (this.menu) {
-          case '我的贴子':
-            getServer(this, i, '贴子列表', { username: this.user.data.username })
+          case '我的帖子':
+            getServer(this, i, '帖子列表', { username: this.user.data.username })
             break
-          case '最新贴子':
-            getServer(this, i, '最新贴子')
+          case '最新帖子':
+            getServer(this, i, '最新帖子')
             break
           default:
-            getServer(this, i, '贴子列表', { module: this.menu })
+            getServer(this, i, '帖子列表', { module: this.menu })
             break
         }
       }
     },
     wxcRichTextLinkClick (i) {
-      // this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '贴子'])
+      // this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
       this.$store.commit('SET_forumIndex', i)
       this.$store.commit('SET_infoLevel', 1)
-      getServer(this, this.activeTab, '贴子', this.posts[i])
+      getServer(this, this.activeTab, '帖子', this.posts[i])
     },
     oninput (event) {
       this.title = event.value

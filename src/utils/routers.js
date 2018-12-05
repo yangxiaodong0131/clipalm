@@ -114,10 +114,10 @@ const routers = function (obj, activeTab, menu, value) {
         url = `wt4_stat_cv_org?type=month&plat=client&version=${version}&page=${obj.$store.state.Stat.statPage}`
         router = 'drgwork_wt4/expert'
         break
-      case '贴子列表':
+      case '帖子列表':
         url = `forum?plat=client&table=`
         break
-      case '最新贴子':
+      case '最新帖子':
         url = `forum?plat=client&table=&order=time`
         break
     }
@@ -153,10 +153,10 @@ const routers = function (obj, activeTab, menu, value) {
       case '操作术语':
         url = `rule_bj_icd9?plat=client&version=CN&page=1&dissect=${value.name}&mdc=${value.mdc}`
         break
-      case '贴子列表':
+      case '帖子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&username=${value.username}&module=${value.module}`
         break
-      case '贴子':
+      case '帖子':
         url = `forum?id=${value.id}`
         break
     }

@@ -12,13 +12,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="demo" v-bind:style="panel">
-    <am-grid
-      @click="wxcButtonClicked('asdf')"
-      :data="list"
-      :column-num="5"
-    ></am-grid>
-  </div> -->
 </template>
 
 <script>
@@ -34,12 +27,11 @@ export default {
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      iconUrl: `${urlConfig.static}/images/`
+      iconUrl: `${urlConfig.static}/images`
     }
   },
   computed: {
     menus () {
-      // console.log(this.$store.state.Home.menus)
       return this.$store.state.Home.menus
     },
     activeTab () {
@@ -91,11 +83,19 @@ export default {
     }
   },
   methods: {
-    genGrid (icon) {
-      const datas = icon.map((x) => {
-        return { text: x, icon: `${this.iconUrl}/${x}.png` }
-      })
-      return datas
+    genGrid (grid) {
+      if (this.activeTab === 0) {
+        return []
+      } else {
+        const datas = grid.map((x) => {
+          const text = x
+          x = x.replace(/\//g, '')
+          const icon = `${this.iconUrl}/${x}.png`
+          console.log(`${this.iconUrl}/${x}.png`)
+          return { text: text, icon: icon }
+        })
+        return datas
+      }
     },
     wxcButtonClicked (menu) {
       switch (this.activeTab) {
@@ -122,9 +122,9 @@ export default {
       this.$store.commit('SET_menu', [this.activeTab, menu])
     },
     wxcRichTextLinkClick (i) {
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '贴子'])
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
       this.$store.commit('SET_forumIndex', i)
-      getServer(this, this.activeTab, '贴子', this.posts[i])
+      getServer(this, this.activeTab, '帖子', this.posts[i])
     },
     popoverButtonClicked (obj) {
       modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 })
