@@ -2,11 +2,11 @@
   <div class="demo" v-bind:style="panel">
     <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
-      <div v-for="(text, i) in v" :key="`menus${i}`">
+      <div v-for="(icon, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
         <am-grid
           @click="wxcButtonClicked('asdf')"
-          :data="text"
+          :data="genGrid(icon)"
           :column-num="3"
         ></am-grid>
       </div>
@@ -34,7 +34,7 @@ export default {
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      url: urlConfig
+      iconUrl: `${urlConfig.static}/images/`
     }
   },
   computed: {
@@ -91,6 +91,12 @@ export default {
     }
   },
   methods: {
+    genGrid (icon) {
+      const datas = icon.map((x) => {
+        return { text: x, icon: `${this.iconUrl}/${x}.png` }
+      })
+      return datas
+    },
     wxcButtonClicked (menu) {
       switch (this.activeTab) {
         case 1:
