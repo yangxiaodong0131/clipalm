@@ -44,7 +44,9 @@ export default {
       return this.$store.state.Home.menus
     },
     list () {
-      let arr = []
+      let arr = [{
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+        text: 'dsfads'}]
       if (this.menus && this.menus[0]) {
         const objKey = Object.keys(this.menus[0])
         objKey.map((x) => {
@@ -59,25 +61,27 @@ export default {
         })
         console.log(arr)
       }
-      const list1 = [
-        {
-          icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-          text: 'dsfads'
-        },
-        {
-          icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-          text: '1111'
-        },
-        {
-          icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-          text: 'dsfads'
-        },
-        {
-          icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-          text: '1111'
-        }
-      ]
-      return list1
+      return arr
+      // console.log(arr)
+      // const list1 = [
+      //   {
+      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+      //     text: 'dsfads'
+      //   },
+      //   {
+      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+      //     text: '1111'
+      //   },
+      //   {
+      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+      //     text: 'dsfads'
+      //   },
+      //   {
+      //     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+      //     text: '1111'
+      //   }
+      // ]
+      // return list1
     },
     activeTab () {
       return this.$store.state.Home.activeTab
