@@ -83,6 +83,7 @@
     components: { WxcTabBar, WxcLoading, User, Login, Personal, Retrieve, Edit, SingleGroup, Library,
       Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce, Analyse },
     data: () => ({
+      icon: `${urlConfig.static}/images/`,
       tabs: [{
         title: '用户',
         menu:  [{'用户': ['用户登录', '个人信息', '完善个人信息', '找回密码']}],
@@ -90,23 +91,49 @@
         activeIcon: `${urlConfig.static}/images/user_fill.png`
         }, {
           title: '病案',
-          menu: [{'病案查询': [['未入组病历', 'QY病历', '低风险死亡病历'], ['费用异常病历', '填报异常病历']], '单条分组': [['单条分组']], '我的病案': [['我的病案']]}],
+          menu: [{'病案查询':
+                    [{'text': '未入组病历', 'icon': '未入组病历.png'},
+                    {'text': 'QY病历', 'icon': 'QY病历.png'},
+                    {'text': '低风险死亡病历', 'icon': '低风险死亡病历.png'},
+                    {'text': '费用异常病历', 'icon': '费用异常病历.png'},
+                    {'text': '填报异常病历', 'icon': '填报异常病历.png'}],
+                  '单条分组': [{'text': '单条分组', 'icon': '单条分组.png'}],
+                  '我的病案': [{'text': '我的病案', 'icon': '我的病案.png'}]}],
           icon: `${urlConfig.static}/images/edit.png`,
           activeIcon: `${urlConfig.static}/images/edit_fill.png`
         }, {
           title: '字典',
-          menu: [{'DRG': [['CN-DRG']], '疾病': [['疾病分类/诊断术语'], ['GB-ICD10', 'BJ-ICD10']], '手术': [['临床手术/操作术语'], ['GB-ICD9', 'BJ-ICD9']]}],
+          menu: [{'DRG':
+                    [{'text': 'CN-DRG', 'icon': 'CN-DRG.png'}],
+                  '疾病': [{'text': '疾病分类/诊断术语', 'icon': '疾病分类/诊断术语.png'},
+                          {'text': 'BJ-ICD10', 'icon': 'BJ-ICD10.png'},
+                          {'text': 'GB-ICD10', 'icon': 'GB-ICD10.png'}],
+                  '手术': [{'text': '临床手术/操作术语', 'icon': '临床手术/操作术语.png'},
+                          {'text': 'BJ-ICD9', 'icon': 'BJ-ICD9.png'},
+                          {'text': 'GB-ICD9', 'icon': 'GB-ICD9.png'}]}],
           icon: `${urlConfig.static}/images/library.png`,
           activeIcon: `${urlConfig.static}/images/library_fill.png`
         }, {
           title: 'DRG分析',
-          // menu: [{'DRG基础': [['DRG基础']], 'DRG专家': [['偏差分布', '主诊未入组', '手术QY']], 'DRG机构': [['年', '半年', '季度', '月']]}],
-          menu: [{'DRG基础': [['DRG基础']], 'DRG专家': [['主诊未入组', '手术QY']], 'DRG机构': [['年', '半年', '季度', '月']]}],
+          menu: [{'DRG基础': [{'text': 'DRG基础', 'icon': 'DRG基础.png'}],
+                  'DRG专家': [{'text': '偏差分布', 'icon': '偏差分布.png'},
+                              {'text': '主诊未入组', 'icon': '主诊未入组.png'},
+                              {'text': '手术QY', 'icon': '手术QY.png'}],
+                  'DRG机构': [{'text': '年', 'icon': '年.png'},
+                              {'text': '半年', 'icon': '半年.png'},
+                              {'text': '季度', 'icon': '季度.png'},
+                              {'text': '月', 'icon': '月.png'}]}],
           icon: `${urlConfig.static}/images/stat.png`,
           activeIcon: `${urlConfig.static}/images/stat_fill.png`
         }, {
           title: '论坛',
-          menu: [{'论坛版块': [['用户反馈', '病案讨论', '字典交流'], ['DRG分析', '论坛建议']], '贴子': [['我的贴子', '最新贴子']]}],
+          menu: [{'论坛版块': [{'text': '用户反馈', 'icon': '用户反馈.png'},
+                              {'text': '病案讨论', 'icon': '病案讨论.png'},
+                              {'text': '字典交流', 'icon': '字典交流.png'},
+                              {'text': 'DRG分析', 'icon': 'DRG分析.png'},
+                              {'text': '论坛建议', 'icon': '论坛建议.png'}],
+                  '贴子': [{'text': '我的贴子', 'icon': '我的贴子.png'},
+                  {'text': '最新贴子', 'icon': '最新贴子.png'}]}],
           icon: `${urlConfig.static}/images/forum.png`,
           activeIcon: `${urlConfig.static}/images/forum_fill.png`
         }],

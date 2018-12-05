@@ -1,31 +1,36 @@
 <template>
   <div class="demo" v-bind:style="panel">
+    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
       <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
-        <div v-for="(text1, k) in text" :key="`menu${k}`" class="row">
-          <div v-if="text1.length > 0" v-for="(text2, k) in text1" :key="`menu${k}`" @click="wxcButtonClicked(text2)" class="item">
-            <image class="icon"
-                    :src="`${url.static}/images/${text2}.png`"
-                    style="height: 32px;width: 32px;"></image>
-            <text class="text">{{text2}}</text>
-          </div>
-        </div>
+        <am-grid
+          @click="wxcButtonClicked('asdf')"
+          :data="text"
+          :column-num="3"
+        ></am-grid>
       </div>
     </div>
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
   </div>
+  <!-- <div class="demo" v-bind:style="panel">
+    <am-grid
+      @click="wxcButtonClicked('asdf')"
+      :data="list"
+      :column-num="5"
+    ></am-grid>
+  </div> -->
 </template>
 
 <script>
 import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag, WxcIcon } from 'weex-ui'
+import { AmGrid } from 'weex-amui'
 import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 export default {
-  components: { WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
+  components: { AmGrid, WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
@@ -33,14 +38,15 @@ export default {
     }
   },
   computed: {
+    menus () {
+      // console.log(this.$store.state.Home.menus)
+      return this.$store.state.Home.menus
+    },
     activeTab () {
       return this.$store.state.Home.activeTab
     },
     menu () {
       return this.$store.state.Home.menu[this.activeTab]
-    },
-    menus () {
-      return this.$store.state.Home.menus
     },
     panel () {
       const tabPageHeight = weex.config.env.deviceHeight
