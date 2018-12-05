@@ -90,23 +90,22 @@
         activeIcon: `${urlConfig.static}/images/user_fill.png`
         }, {
           title: '病案',
-          menu: [{'病案查询': [['未入组病历', 'QY病历', '低风险死亡病历'], ['费用异常病历', '填报异常病历']], '单条分组': [['单条分组']], '我的病案': [['我的病案']]}],
+          menu: [{'病案查询': ['未入组病历', 'QY病历', '低风险死亡病历', '费用异常病历', '填报异常病历'], '单条分组': ['单条分组'], '我的病案': ['我的病案']}],
           icon: `${urlConfig.static}/images/edit.png`,
           activeIcon: `${urlConfig.static}/images/edit_fill.png`
         }, {
           title: '字典',
-          menu: [{'DRG': [['CN-DRG']], '疾病': [['疾病分类/诊断术语'], ['GB-ICD10', 'BJ-ICD10']], '手术': [['临床手术/操作术语'], ['GB-ICD9', 'BJ-ICD9']]}],
+          menu: [{'DRG': ['CN-DRG'], '疾病': ['疾病分类/诊断术语', 'GB-ICD10', 'BJ-ICD10'], '手术': ['临床手术/操作术语', 'GB-ICD9', 'BJ-ICD9']}],
           icon: `${urlConfig.static}/images/library.png`,
           activeIcon: `${urlConfig.static}/images/library_fill.png`
         }, {
           title: 'DRG分析',
-          // menu: [{'DRG基础': [['DRG基础']], 'DRG专家': [['偏差分布', '主诊未入组', '手术QY']], 'DRG机构': [['年', '半年', '季度', '月']]}],
-          menu: [{'DRG基础': [['DRG基础']], 'DRG专家': [['主诊未入组', '手术QY']], 'DRG机构': [['年', '半年', '季度', '月']]}],
+          menu: [{'DRG基础': ['DRG基础'], 'DRG专家': ['主诊未入组', '手术QY'], 'DRG机构': ['年', '半年', '季度', '月']}],
           icon: `${urlConfig.static}/images/stat.png`,
           activeIcon: `${urlConfig.static}/images/stat_fill.png`
         }, {
           title: '论坛',
-          menu: [{'论坛版块': [['用户反馈', '病案讨论', '字典交流'], ['DRG分析', '论坛建议']], '贴子': [['我的贴子', '最新贴子']]}],
+          menu: [{'论坛版块': ['用户反馈', '病案讨论', '字典交流', 'DRG分析', '论坛建议'], '贴子': ['我的贴子', '最新贴子']}],
           icon: `${urlConfig.static}/images/forum.png`,
           activeIcon: `${urlConfig.static}/images/forum_fill.png`
         }],
