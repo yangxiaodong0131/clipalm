@@ -9,7 +9,7 @@
 
 // 开发配置
 module.exports = {
-  http: 'http://127.0.0.1',
+  http: 'http://192.168.0.79',
   static: 'http://www.jiankanglaifu.com',
   drgserver: 'http://192.168.0.79',
   port: '3009',
