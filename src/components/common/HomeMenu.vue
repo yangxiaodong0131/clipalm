@@ -6,7 +6,7 @@
         <div v-for="(text1, k) in text" :key="`menu${k}`" class="row">
           <div v-if="text1.length > 0" v-for="(text2, k) in text1" :key="`menu${k}`" @click="wxcButtonClicked(text2)" class="item">
             <image class="icon"
-                    :src="`${url.static}/images/left.png`"
+                    :src="`${url.static}/images/${text2}.png`"
                     style="height: 32px;width: 32px;"></image>
             <text class="text">{{text2}}</text>
           </div>
