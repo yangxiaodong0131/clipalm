@@ -47,8 +47,8 @@
       <ForumContent v-if="infoLevel[4] > 0"></ForumContent>
       <HomeMenu v-else-if="menu[4] === '论坛'"></HomeMenu>
       <Introduce v-else-if="menu[4] === '介绍'"></Introduce>
-      <!-- <New v-else-if="menu[4] === '新建贴子'"></New> -->
-      <!-- <ForumContent v-else-if="menu[4] === '贴子'"></ForumContent> -->
+      <!-- <New v-else-if="menu[4] === '新建帖子'"></New> -->
+      <!-- <ForumContent v-else-if="menu[4] === '帖子'"></ForumContent> -->
       <Forum v-else></Forum>
     </div>
   </wxc-tab-bar>
@@ -105,7 +105,7 @@
           activeIcon: `${urlConfig.static}/images/stat_fill.png`
         }, {
           title: '论坛',
-          menu: [{'论坛版块': ['用户反馈', '病案讨论', '字典交流', 'DRG分析', '论坛建议'], '贴子': ['我的贴子', '最新贴子']}],
+          menu: [{'论坛版块': ['用户反馈', '病案讨论', '字典交流', 'DRG分析', '论坛建议'], '帖子': ['我的帖子', '最新帖子']}],
           icon: `${urlConfig.static}/images/forum.png`,
           activeIcon: `${urlConfig.static}/images/forum_fill.png`
         }],
@@ -217,7 +217,7 @@
         } else if (i === 4) {
           this.$store.commit('SET_menu', [i, menu])
           this.$store.commit('SET_forumLabel', this.$store.state.Home.menu[activeTab])
-          // getServer(this, i, '贴子列表', { username: this.user.data.username })
+          // getServer(this, i, '帖子列表', { username: this.user.data.username })
         }
       }
     }
@@ -238,7 +238,7 @@
   }
   .panel {
     width: 750px;
-    background-color: #C6e2FF;
+    background-color: #F8F8FF;
     align-items: center;
     margin-left: 0px;
     border-color: #BBBBBB;

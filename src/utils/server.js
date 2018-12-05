@@ -139,13 +139,13 @@ function setStore (obj, activeTab, menu, rdata) {
       break
     case 4:
       switch (menu) {
-        case '贴子列表':
+        case '帖子列表':
           obj.$store.commit('SET_post', rdata.data)
           break
-        case '最新贴子':
+        case '最新帖子':
           obj.$store.commit('SET_post', rdata.data)
           break
-        case '贴子':
+        case '帖子':
           obj.$store.commit('SET_forumContent', rdata.data[0])
           break
       }

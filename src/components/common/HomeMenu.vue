@@ -2,23 +2,16 @@
   <div class="demo" v-bind:style="panel">
     <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
-      <div v-for="(icon, i) in v" :key="`menus${i}`">
+      <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
         <am-grid
-          @click="wxcButtonClicked('asdf')"
-          :data="genGrid(icon)"
+          @click="wxcButtonClicked"
+          :data="genGrid(text)"
           :column-num="3"
         ></am-grid>
       </div>
     </div>
   </div>
-  <!-- <div class="demo" v-bind:style="panel">
-    <am-grid
-      @click="wxcButtonClicked('asdf')"
-      :data="list"
-      :column-num="5"
-    ></am-grid>
-  </div> -->
 </template>
 
 <script>
@@ -34,12 +27,11 @@ export default {
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      iconUrl: `${urlConfig.static}/images/`
+      iconUrl: `${urlConfig.static}/images`
     }
   },
   computed: {
     menus () {
-      // console.log(this.$store.state.Home.menus)
       return this.$store.state.Home.menus
     },
     activeTab () {
@@ -57,47 +49,20 @@ export default {
     },
     user () {
       return this.$store.state.Home.user
-    },
-    posts () {
-      return this.$store.state.Forum.post
-    },
-    specialConfigList () {
-      const configs = []
-      if (this.posts) {
-        this.posts.map((x) => {
-          const config = [
-            {
-              type: 'tag',
-              value: x.module,
-              style: {
-                fontSize: 34,
-                color: '#3D3D3D',
-                borderColor: '#FFC900',
-                backgroundColor: '#FFC900',
-                borderRadius: 14
-              }
-            },
-            {
-              type: 'text',
-              value: x.title,
-              theme: 'black',
-              style: { fontSize: 35 }
-            }
-          ]
-          configs.push(config)
-        })
-      }
-      return configs
     }
   },
   methods: {
-    genGrid (icon) {
-      const datas = icon.map((x) => {
-        return { text: x, icon: `${this.iconUrl}/${x}.png` }
+    genGrid (menu) {
+      const datas = menu.map((x) => {
+        const text = x
+        x = x.replace(/\//g, '')
+        const icon = `${this.iconUrl}/${x}.png`
+        return { text: text, icon: icon }
       })
       return datas
     },
     wxcButtonClicked (menu) {
+      menu = menu.text
       switch (this.activeTab) {
         case 1:
           this.$store.commit('SET_wt4Page', 1)
@@ -122,9 +87,9 @@ export default {
       this.$store.commit('SET_menu', [this.activeTab, menu])
     },
     wxcRichTextLinkClick (i) {
-      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '贴子'])
+      this.$store.commit('SET_menu', [this.$store.state.Home.activeTab, '帖子'])
       this.$store.commit('SET_forumIndex', i)
-      getServer(this, this.activeTab, '贴子', this.posts[i])
+      getServer(this, this.activeTab, '帖子', this.posts[i])
     },
     popoverButtonClicked (obj) {
       modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 })
@@ -141,7 +106,7 @@ export default {
 <style scoped>
   .demo-title {
     font-size: 28px;
-    background-color: #C6E2FF;
+    background-color: #F8F8FF;
     text-align: center;
     border-style: solid;
     border-width: 1px;

@@ -60,7 +60,7 @@ export default {
       refreshing: false,
       arrawSrc: `${urlConfig.static}/images/more.png`,
       cellStyle: {
-        backgroundColor: '#C6E2FF'
+        backgroundColor: '#F8F8FF'
       },
       showData: true
     }
@@ -212,7 +212,7 @@ export default {
 <style scoped>
   .demo-title {
     font-size: 28px;
-    background-color: #C6E2FF;
+    background-color: #F8F8FF;
     text-align: center;
     border-style: solid;
     border-width: 1px;
@@ -231,6 +231,6 @@ export default {
     flex-direction: row;
     justify-content: space-around;
     margin-top: 91px;
-    background-color: #C6E2FF;
+    background-color: #F8F8FF;
   }
 </style>

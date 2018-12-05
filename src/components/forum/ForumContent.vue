@@ -26,7 +26,7 @@
           size="full"
           type="blue"
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-        <wxc-button text="删贴"
+        <wxc-button text="删帖"
           class="submits"
           size="full"
           type="blue"
@@ -186,7 +186,7 @@ export default {
 <style scoped>
 .demo-title {
   font-size: 28px;
-  background-color: #C6E2FF;
+  background-color: #F8F8FF;
   text-align: center;
   border-style: solid;
   border-width: 1px;

@@ -16,16 +16,16 @@ export function createForum (obj, forum, type, activeTab) {
       switch (type) {
         case 'reply':
           modal.toast({ message: '回复成功', duration: 1 })
-          obj.$store.commit('SET_menu', [activeTab, '贴子'])
-          getServer(obj, activeTab, '贴子', res.data)
+          obj.$store.commit('SET_menu', [activeTab, '帖子'])
+          getServer(obj, activeTab, '帖子', res.data)
           break
         default:
-          obj.$store.commit('SET_menu', [activeTab, '贴子列表'])
+          obj.$store.commit('SET_menu', [activeTab, '帖子列表'])
           obj.$store.commit('SET_post', [])
           obj.$store.commit('SET_forumPage', 1)
-          modal.toast({ message: '贴子创建成功', duration: 1 })
+          modal.toast({ message: '帖子创建成功', duration: 1 })
           const module = forum.forum_all.forum.module
-          getServer(obj, activeTab, '贴子列表', { module: module })
+          getServer(obj, activeTab, '帖子列表', { module: module })
       }
     } else {
       obj.info = '- 网络连接超时 -'
@@ -42,7 +42,7 @@ export function deleteForum (obj, id, module) {
     url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/forum_del?id=${id}`
   }, res => {
     if (res.ok) {
-      getServer(obj, 4, '贴子列表', { module: module })
+      getServer(obj, 4, '帖子列表', { module: module })
       obj.$store.commit('SET_infoLevel', 0)
     } else {
       obj.info = '- 网络连接超时 -'
