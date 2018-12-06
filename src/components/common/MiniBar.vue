@@ -10,14 +10,14 @@
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="homeButtonClick"
                     @wxcMinibarLeftButtonClicked="leftButtonClick">
-          <image :src="`${url.static}/images/${leftIcon}.png`"
+          <image :src="`${url.static}/images/${leftIcon}2.png`"
                  slot="left"
                  v-if="leftButtonShow"
-                 style="height: 32px;width: 32px;"></image>
-          <image :src="`${url.static}/images/${rightIcon}.png`"
+                 style="height: 48px;width: 88px;"></image>
+          <image :src="`${url.static}/images/${rightIcon}2.png`"
                  slot="right"
                  v-if="rightButtonShow"
-                 style="height: 32px;width: 32px;"></image>
+                 style="height: 48px;width: 88px;"></image>
         </wxc-minibar>
       </div>
     </scroller>
