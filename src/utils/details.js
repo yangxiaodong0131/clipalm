@@ -162,16 +162,16 @@ function subRule (result, data, title) {
   result.details = []
   result.title = title
   if (['诊断术语', '操作术语'].includes(title) && data.dissect) {
-    result.showSubRule = true
-    result.showSubRuleTitle = true
-    result.subRuleTitle = `${title}部位`
-    result.subRule = data.dissect.map((x) => {
+    result.showDissRule = true
+    result.showDissRuleTitle = true
+    result.dissRuleTitle = `${title}部位`
+    result.dissRule = data.dissect.map((x) => {
       const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: {name: x, mdc: data.mdc}}
       return obj
     })
-    result.showSubRuleTitle2 = true
-    result.subRuleTitle2 = `${title}表现`
-    result.subRule2 = data.dissect2.map((x) => {
+    result.showDissRuleTitle2 = true
+    result.dissRuleTitle2 = `${title}表现`
+    result.dissRule2 = data.dissect2.map((x) => {
       const obj = {'label': '', 'title': x, 'hasArrow': true, menu: title, all: {name: x, mdc: data.mdc}}
       return obj
     })
