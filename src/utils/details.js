@@ -256,6 +256,9 @@ export function getDetails (obj, menu, data) {
       case '主诊未入组':
         result = statInfo(result, data, '主诊未入组')
         break
+      case '手术QY':
+        result = statInfo(result, data, '手术QY')
+        break
       case '偏差分布':
         result = statInfoDd(result, data, '')
         break
