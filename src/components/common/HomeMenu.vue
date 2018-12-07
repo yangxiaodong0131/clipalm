@@ -16,8 +16,7 @@
 
 <script>
 import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag, WxcIcon } from 'weex-ui'
-// import { AmGrid } from 'weex-amui'
-import Grid from './grid'
+import Grid from './packages/grid'
 import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 import { getServer } from '../../utils/server'
