@@ -7,11 +7,6 @@
     [
       "component",
       {
-        "libraryName": "weex-amui",
-        "libDir": "packages",
-        "style": false
-      },
-      {
         "libraryName": "weex-ui",
         "libDir": "packages",
         "style": false
