@@ -4,11 +4,11 @@
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
       <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
-        <am-grid
+        <grid
           @click="wxcButtonClicked"
           :data="genGrid(text)"
           :column-num="3"
-        ></am-grid>
+        ></grid>
       </div>
     </div>
   </div>
@@ -16,7 +16,8 @@
 
 <script>
 import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag, WxcIcon } from 'weex-ui'
-import { AmGrid } from 'weex-amui'
+// import { AmGrid } from 'weex-amui'
+import Grid from './grid'
 import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 import { getServer } from '../../utils/server'
@@ -24,7 +25,7 @@ const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 const iconConfig = require('../../utils/icon.js')
 export default {
-  components: { AmGrid, WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
+  components: { Grid, WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
