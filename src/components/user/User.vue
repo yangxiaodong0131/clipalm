@@ -1,6 +1,6 @@
 <template>
   <div class="panel" v-bind:style="panel">
-    <category class="category" :title="`用户积分信息`"></category>
+    <!--<category class="category" :title="`用户积分信息`"></category>
     <text class="bpStyle">当前积分：{{user.bp}}</text>
     <category title="--选择用户功能--"></category>
     <wxc-grid-select
@@ -44,20 +44,40 @@
         class="submits"
         type="blue"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
+    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>-->
+    <am-list style="width: 750px;" header="picker">
+    <am-picker
+      :show.sync="show"
+      title="请选择"
+      :data="list_4"
+      v-model="value"
+      @ok="onOK"
+      @hide="onHide"
+    >
+      <am-list-item
+        slot-scope="{ extra, show }"
+        title="地址"
+        :extra="extra"
+        @click="show"
+      ></am-list-item>
+    </am-picker>
+  </am-list>
+  {{list_4}}
   </div>
 </template>
 
 <script>
+import { AmPicker, AmPickerView, AmList, AmListItem } from 'weex-amui'
 import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
 import MiniBar from '../common/MiniBar.vue'
 import { userLogout, updateUser } from '../../utils/user'
+// import { log } from 'util';
 const modal = weex.requireModule('modal')
 
 export default {
   name: 'user-doc',
-  components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
+  components: { AmPicker, AmPickerView, AmList, AmListItem, WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
   data: () => ({
     customStyles: {
       lineSpacing: '14px',
@@ -71,7 +91,32 @@ export default {
       checkedBorderColor: '#ffb200',
       backgroundColor: '#ffffff',
       checkedBackgroundColor: '#1E90FF'
-    }
+    },
+    value: [],
+    seasons: [
+      [
+        {
+          label: '2013',
+          value: '2013'
+        },
+        {
+          label: '2014',
+          value: '2014'
+        }
+      ],
+      [
+        {
+          label: '春',
+          value: '春'
+        },
+        {
+          label: '夏',
+          value: '夏'
+        }
+      ]
+    ],
+    extra: '',
+    show: false
   }),
   computed: {
     user: {
@@ -136,14 +181,13 @@ export default {
     },
     list_4: {
       get () {
-        const drgs = {
-          2013: { title: '2013', value: 1 },
-          2014: { title: '2014', value: 1 },
-          2015: { title: '2015', value: 1 },
-          2016: { title: '2016', value: 1 },
-          2017: { title: '2017', value: 1 },
-          2018: { title: '2018', value: 1 }
-        }
+        const drgs = [
+          { lable: '2013', value: 1 },
+          { lable: '2014', value: 1 },
+          { lable: '2015', value: 1 },
+          { lable: '2016', value: 1 },
+          { lable: '2017', value: 1 },
+          { lable: '2018', value: 1 }]
         let drgVersion = ''
         if (this.$store.state.Home.user.data.clipalm_year) {
           drgVersion = this.$store.state.Home.user.data.clipalm_year
@@ -153,7 +197,7 @@ export default {
         if (drgs[drgVersion]) {
           drgs[drgVersion].checked = true
         }
-        return Object.values(drgs)
+        return [Object.values(drgs)]
       }
     },
     mdcs: {
@@ -180,6 +224,15 @@ export default {
     minibarRightButtonClick (e) {
       this.$store.commit('SET_menu', [0, '用户登录'])
     },
+    onOK (value2, labels) {
+      console.log(value2, labels)
+    },
+    onHide (type) {
+      console.log('hide', type)
+    },
+    // show () {
+    //   console.log('sss')
+    // },
     onSelect (params, type) {
       const user = {}
       if (type === 'user') {
