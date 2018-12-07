@@ -117,12 +117,12 @@ export default {
     },
     makeClassList (classList) {
       // web 支持
-      // if (this.isWeb() || Array.isArray(classList)) {
-      //   return classList
-      // } else {
-      //   return Object.keys(classList).filter(classname => classList[classname])
-      // }
-      return classList
+      if (weex.config.env.platform === 'Web' || Array.isArray(classList)) {
+        return classList
+      } else {
+        return Object.keys(classList).filter(classname => classList[classname])
+      }
+      // return classList
     },
     getItemClass (item) {
       return this.makeClassList({
