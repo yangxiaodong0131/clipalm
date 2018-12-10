@@ -47,18 +47,56 @@
     <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
   </div> -->
   <div class="panel" v-bind:style="panel">
-    <am-list style="width: 750px" header="picker">
+    <div style="height: 91px;"></div>
+    <category title="--选择用户功能--"></category>
+    <am-list style="width: 750px" header="">
       <am-picker
         :show.sync="show"
-        title="请选择版本"
-        :data="[list_1, list_2, list_4]"
+        title="请选择用户功能"
+        :data="[list_1]"
         v-model="value"
         @ok="onOK"
         @hide="onHide"
       >
         <am-list-item
           slot-scope="{ extra, show }"
-          title="版本"
+          title="用户功能"
+          :extra="extra"
+          @click="show"
+        ></am-list-item>
+      </am-picker>
+    </am-list>
+    <category title="--选择字典--"></category>
+    <am-list style="width: 750px" header="">
+      <am-picker
+        :show.sync="show"
+        title="请选择字典"
+        :data="[list_2]"
+        v-model="value"
+        @ok="onOK"
+        @hide="onHide"
+      >
+        <am-list-item
+          slot-scope="{ extra, show }"
+          title="字典"
+          :extra="extra"
+          @click="show"
+        ></am-list-item>
+      </am-picker>
+    </am-list>
+    <category title="--选择DRG版本--"></category>
+    <am-list style="width: 750px" header="">
+      <am-picker
+        :show.sync="show"
+        title="请选择DRG版本"
+        :data="[list_4]"
+        v-model="value"
+        @ok="onOK"
+        @hide="onHide"
+      >
+        <am-list-item
+          slot-scope="{ extra, show }"
+          title="DRG版本"
           :extra="extra"
           @click="show"
         ></am-list-item>
