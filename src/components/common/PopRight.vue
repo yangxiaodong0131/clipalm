@@ -1,6 +1,5 @@
 <template>
   <div class="demo"
-    @swipe="swipe"
     v-bind:style="panel">
     <list class="list" :show="true">
       <cell class="cell">
