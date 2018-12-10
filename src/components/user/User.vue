@@ -51,6 +51,11 @@
     <!-- <category title="--选择用户功能--"></category> -->
     <!-- <category title="--选择字典--"></category> -->
     <am-list style="width:750px;">
+      <div style="height:20px;"></div>
+      <am-list-item
+          title="用户名"
+          arrow="empty"
+          :extra="`${user.username}`"></am-list-item>
       <am-picker
         title="请选择"
         :placeholder="user.type"
@@ -64,6 +69,7 @@
           @click="show">
         </am-list-item>
       </am-picker>
+      <div style="height:35px;"></div>
       <am-picker
         title="请选择"
         :placeholder="user.clipalm_icd"
@@ -104,6 +110,7 @@
           @click="show">
         </am-list-item>
       </am-picker>
+      <div style="height:35px;"></div>
     <!-- <wxc-cell label="完善用户信息"
                 :has-arrow="true"
                 style="width:750px;"
@@ -114,16 +121,29 @@
         :extra="`${user.bp}`"
         arrow="empty"
         ></am-list-item>
+      <div style="height:35px;"></div>
       <am-list-item
         title="完善用户信息"
-        @click="wxcCellClicked"></am-list-item>
+        @click="click"></am-list-item>
+  <div style="height:40px;"></div>
+    <am-list-item
+      title="                                  退出登录"
+      arrow="empty"
+      class="bnt"
+      style="width:750px;"
+      @click="wxcButtonClicked"></am-list-item>
   </am-list>
-  <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
+  <!-- <wxc-button text="退出登录"
+      size="full"
+      class="submits"
+      type="blue"
+      @wxcButtonClicked="wxcButtonClicked"></wxc-button> -->
+  <mini-bar title="用户信息" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
   </div>
   </template>
 
 <script>
-import { AmPicker, AmList, AmListItem } from 'weex-amui'
+import { AmPicker, AmList, AmListItem, AmButton } from 'weex-amui'
 import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
 import MiniBar from '../common/MiniBar.vue'
@@ -132,7 +152,7 @@ const modal = weex.requireModule('modal')
 
 export default {
   name: 'user-doc',
-  components: { AmPicker, AmList, AmListItem, WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
+  components: { AmPicker, AmList, AmListItem, WxcMinibar, WxcGridSelect, Category, AmButton, WxcButton, WxcCell, MiniBar },
   data: () => ({
     customStyles: {
       lineSpacing: '14px',
@@ -206,7 +226,7 @@ export default {
       user.clipalm_icd = labels[0]
       updateUser(this, user)
     },
-    wxcCellClicked () {
+    click () {
       this.$store.commit('SET_menu', [0, '完善个人信息'])
     },
     onHide (type) {
@@ -291,5 +311,8 @@ export default {
   .bpStyle {
     font-size: 30px;
     margin: 10 0 10 30;
+  }
+  .bnt {
+    width: 750px;
   }
 </style>
