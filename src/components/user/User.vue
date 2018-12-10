@@ -1,5 +1,5 @@
 <template>
-  <div class="panel" v-bind:style="panel">
+  <!-- <div class="panel" v-bind:style="panel">
     <category class="category" :title="`用户积分信息`"></category>
     <text class="bpStyle">当前积分：{{user.bp}}</text>
     <category title="--选择用户功能--"></category>
@@ -45,10 +45,32 @@
         type="blue"
         @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
+  </div> -->
+  <div class="panel" v-bind:style="panel">
+    <am-list style="width: 750px" header="picker">
+      <am-picker
+        :show.sync="show"
+        title="请选择版本"
+        :data="[list_1, list_2, list_4]"
+        v-model="value"
+        @ok="onOK"
+        @hide="onHide"
+      >
+        <am-list-item
+          slot-scope="{ extra, show }"
+          title="版本"
+          :extra="extra"
+          @click="show"
+        ></am-list-item>
+      </am-picker>
+    </am-list>
+    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
+    {{list_2}}
   </div>
-</template>
+  </template>
 
 <script>
+import { AmPicker, AmList, AmListItem } from 'weex-amui'
 import { WxcMinibar, WxcGridSelect, WxcButton, WxcCell } from 'weex-ui'
 import Category from '../common/category.vue'
 import MiniBar from '../common/MiniBar.vue'
@@ -57,7 +79,7 @@ const modal = weex.requireModule('modal')
 
 export default {
   name: 'user-doc',
-  components: { WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
+  components: { AmPicker, AmList, AmListItem, WxcMinibar, WxcGridSelect, Category, WxcButton, WxcCell, MiniBar },
   data: () => ({
     customStyles: {
       lineSpacing: '14px',
@@ -71,7 +93,31 @@ export default {
       checkedBorderColor: '#ffb200',
       backgroundColor: '#ffffff',
       checkedBackgroundColor: '#1E90FF'
-    }
+    },
+    show: true,
+    value: [],
+    seasons: [
+      [
+        {
+          label: '2013',
+          value: '2013'
+        },
+        {
+          label: '2014',
+          value: '2014'
+        }
+      ],
+      [
+        {
+          label: '春',
+          value: '春'
+        },
+        {
+          label: '夏',
+          value: '夏'
+        }
+      ]
+    ]
   }),
   computed: {
     user: {
@@ -94,10 +140,10 @@ export default {
         let types = {}
         // let serverType = ''
         if (this.$store.state.Home.user.data.type) {
-          types[this.$store.state.Home.user.data.type] = { title: this.$store.state.Home.user.data.type, value: 1, checked: true }
+          types[this.$store.state.Home.user.data.type] = { label: this.$store.state.Home.user.data.type, value: 1, checked: true }
           // serverType = this.$store.state.Home.user.data.type
         } else {
-          types = { 专家用户: { title: '专家用户', value: 1, checked: true } }
+          types = { 专家用户: { label: '专家用户', value: 1, checked: true } }
         }
         // if (types[serverType]) {
         //   types[serverType].checked = true
@@ -108,10 +154,10 @@ export default {
     list_2: {
       get () {
         const versions = {
-          BJ编码版: { title: 'BJ编码版', value: 1 },
-          GB编码版: { title: 'GB编码版', value: 1 },
+          BJ编码版: { label: 'BJ编码版', value: 'BJ编码版' },
+          GB编码版: { label: 'GB编码版', value: 'GB编码版' },
           // CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
-          术语版: { title: '术语版', value: 3 }
+          术语版: { label: '术语版', value: '术语版' }
         }
         let serverVersion = ''
         if (this.$store.state.Home.user.data.clipalm_version) {
@@ -128,8 +174,8 @@ export default {
     list_3: {
       get () {
         const icds = [
-          { title: 'ICD10 6.0', value: 1 },
-          { title: 'ICD10 5.0', value: 1 }
+          { label: 'ICD10 6.0', value: 1 },
+          { label: 'ICD10 5.0', value: 1 }
         ]
         return icds
       }
@@ -137,12 +183,12 @@ export default {
     list_4: {
       get () {
         const drgs = {
-          2013: { title: '2013', value: 1 },
-          2014: { title: '2014', value: 1 },
-          2015: { title: '2015', value: 1 },
-          2016: { title: '2016', value: 1 },
-          2017: { title: '2017', value: 1 },
-          2018: { title: '2018', value: 1 }
+          2013: { label: '2013', value: 2013 },
+          2014: { label: '2014', value: 2014 },
+          2015: { label: '2015', value: 2015 },
+          2016: { label: '2016', value: 2016 },
+          2017: { label: '2017', value: 2017 },
+          2018: { label: '2018', value: 2018 }
         }
         let drgVersion = ''
         if (this.$store.state.Home.user.data.clipalm_year) {
@@ -179,6 +225,12 @@ export default {
   methods: {
     minibarRightButtonClick (e) {
       this.$store.commit('SET_menu', [0, '用户登录'])
+    },
+    onOK (value2, labels) {
+      console.log(value2, labels)
+    },
+    onHide (type) {
+      console.log('hide', type)
     },
     onSelect (params, type) {
       const user = {}
