@@ -73,22 +73,8 @@ export default {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .submits{
-    position: relative;
-    left: 23px;
-    top: 1px;
-  }
   .red{
     text-align: left;
-  }
-  .demo-title {
-    font-size: 28px;
-    background-color: #F8F8FF;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 14px;
-    padding: 10px;
   }
   .category {
     margin-top: 91px;
