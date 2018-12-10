@@ -27,7 +27,7 @@ const details = [
   {'label': '病历数', 'title': 'num_sum', 'hasArrow': false},
   {'label': 'MCC', 'title': 'mcc', 'hasArrow': false},
   {'label': 'CC', 'title': 'cc', 'hasArrow': false},
-  {'label': '手术室手术', 'title': 'p_type', 'hasArrow': false},
+  // {'label': '手术室手术', 'title': 'p_type', 'hasArrow': false},
   {'label': '机构', 'title': 'org_id', 'hasArrow': false}]
 function caseInfo (result, data) {
   result.title = '病案详情'

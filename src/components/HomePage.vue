@@ -110,10 +110,10 @@
           activeIcon: `${urlConfig.static}/images/forum_fill.png`
         }],
       tabStyles: {
-        bgColor: '#FFFFFF',
+        bgColor: '#F8F8FF',
         titleColor: '#666666',
         activeTitleColor: '#3D3D3D',
-        activeBgColor: '#FFFFFF',
+        activeBgColor: '#F8F8FF',
         isActiveTitleBold: true,
         iconWidth: 54,
         iconHeight: 54,
@@ -234,11 +234,9 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #cccccc;
   }
   .panel {
     width: 750px;
-    background-color: #F8F8FF;
     align-items: center;
     margin-left: 0px;
     border-color: #BBBBBB;
