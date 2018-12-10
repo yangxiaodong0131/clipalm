@@ -48,18 +48,41 @@
   </div> -->
   <div class="panel" v-bind:style="panel">
     <div style="height: 91px;"></div>
-    <category title="--选择用户功能--"></category>
-    <category title="--选择字典--"></category>
-    {{user.clipalm_version}}
-    <!-- <am-list header="和am-list-item一起使用" style="width:750px;">
+    <!-- <category title="--选择用户功能--"></category> -->
+    <!-- <category title="--选择字典--"></category> -->
+    <am-list style="width:750px;">
+      <am-picker
+        title="请选择"
+        :placeholder="user.type"
+        :data="types"
+        @ok="typeOk"
+        @hide="onHide">
+        <am-list-item
+          slot-scope="{ extra, show }"
+          title="用户"
+          :extra="extra"
+          @click="show">
+        </am-list-item>
+      </am-picker>
+      <am-picker
+        title="请选择"
+        :placeholder="user.clipalm_icd"
+        :data="icds"
+        @ok="icdOk"
+        @hide="onHide">
+        <am-list-item
+          slot-scope="{ extra, show }"
+          title="ICD"
+          :extra="extra"
+          @click="show">
+        </am-list-item>
+      </am-picker>
       <am-picker
         title="请选择"
         :placeholder="user.clipalm_version"
         :data="versions"
-        v-model="user.clipalm_version"
-        @ok="onOK"
-        @hide="onHide"
-        @change="onChange">
+        @ok="versionOk"
+        @hide="onHide">
         <am-list-item
           slot-scope="{ extra, show }"
           title="版本"
@@ -69,11 +92,11 @@
       </am-picker>
       <am-picker
         title="请选择"
-        :data="types"
-        v-model="value2"
-        @ok="onOK"
-        @hide="onHide"
-        placeholder="点我选择">
+        :placeholder="user.clipalm_year"
+        :data="year"
+        v-model="value4"
+        @ok="yearOk"
+        @hide="onHide">
         <am-list-item
           slot-scope="{ extra, show }"
           title="时间"
@@ -81,9 +104,13 @@
           @click="show">
         </am-list-item>
       </am-picker>
-    </am-list> -->
+    </am-list>
+    <wxc-cell label="完善用户信息"
+                :has-arrow="true"
+                style="width:750px;"
+                @wxcCellClicked="wxcCellClicked"
+                :has-top-border="false"></wxc-cell>
     <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
-    {{list_2}}
   </div>
   </template>
 
@@ -114,9 +141,14 @@ export default {
     },
     show: false,
     value: [],
-    types: [{ title: '专家用户', label: '专家用户' }, { title: '机构用户', label: '机构用户' }, { title: '个人用户', label: '个人用户' }],
-    versions: [{ label: 'BJ编码版', title: 'BJ编码版' }, { label: 'GB编码版', title: 'GB编码版' }, { label: '术语版', title: '术语版' }],
-    icds: [{ label: 'ICD10 6.0', title: 1 }, { label: 'ICD10 5.0', title: 1 }]
+    value1: [],
+    value2: [],
+    value3: [],
+    value4: [],
+    types: [{ value: '专家用户', label: '专家用户' }, { value: '机构用户', label: '机构用户' }, { value: '个人用户', label: '个人用户' }],
+    versions: [{ label: 'BJ编码版', value: 'BJ编码版' }, { label: 'GB编码版', value: 'GB编码版' }, { label: '术语版', value: '术语版' }],
+    icds: [{ label: 'ICD10 6.0', value: 'ICD10 6.0' }, { label: 'ICD10 5.0', value: 'ICD10 5.0' }],
+    year: [{ label: '2013', value: '2013' }, { label: '2014', value: '2014' }, { label: '2015', value: '2015' }, { label: '2016', value: '2016' }, { label: '2017', value: '2017' }, { label: '2018', value: '2018' }]
   }),
   computed: {
     user: {
@@ -127,72 +159,6 @@ export default {
     rightButtonShow: {
       get () {
         return this.user.admin
-      }
-    },
-    types () {
-      return [
-        { title: '专家用户', value: 1 },
-        { title: '机构用户', value: 2 },
-        { title: '个人用户', value: 3 }]
-    },
-    // list_2: {
-    //   get () {
-    //     const versions = {
-    //       BJ编码版: { label: 'BJ编码版', value: 'BJ编码版' },
-    //       GB编码版: { label: 'GB编码版', value: 'GB编码版' },
-    //       // CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
-    //       术语版: { label: '术语版', value: '术语版' }
-    //     }
-    //     let serverVersion = ''
-    //     if (this.$store.state.Home.user.data.clipalm_version) {
-    //       serverVersion = this.$store.state.Home.user.data.clipalm_version
-    //     } else {
-    //       serverVersion = 'BJ编码版'
-    //     }
-    //     if (versions[serverVersion]) {
-    //       versions[serverVersion].checked = true
-    //     }
-    //     return Object.values(versions)
-    //   }
-    // },
-    list_3: {
-      get () {
-        const icds = [
-          { label: 'ICD10 6.0', value: 1 },
-          { label: 'ICD10 5.0', value: 1 }
-        ]
-        return icds
-      }
-    },
-    list_4: {
-      get () {
-        const drgs = {
-          2013: { label: '2013', value: 2013 },
-          2014: { label: '2014', value: 2014 },
-          2015: { label: '2015', value: 2015 },
-          2016: { label: '2016', value: 2016 },
-          2017: { label: '2017', value: 2017 },
-          2018: { label: '2018', value: 2018 }
-        }
-        let drgVersion = ''
-        if (this.$store.state.Home.user.data.clipalm_year) {
-          drgVersion = this.$store.state.Home.user.data.clipalm_year
-        } else {
-          drgVersion = '2017'
-        }
-        if (drgs[drgVersion]) {
-          drgs[drgVersion].checked = true
-        }
-        return Object.values(drgs)
-      }
-    },
-    mdcs: {
-      get () {
-        const arr = this.$store.state.Home.user.data.mdc
-        if (arr) {
-          return arr.map((value, index) => { return {'title': 'MDC' + value} })
-        }
-        return []
       }
     },
     panel: {
@@ -210,11 +176,34 @@ export default {
     minibarRightButtonClick (e) {
       this.$store.commit('SET_menu', [0, '用户登录'])
     },
-    onOK (value2, labels) {
-      console.log(value2, labels)
+    yearOk (year, labels) {
+      console.log(labels)
+      const user = {}
+      user.clipalm_year = labels[0]
+      updateUser(this, user)
+    },
+    typeOk (type, labels) {
+      console.log(labels)
+      const user = {}
+      user.type = labels[0]
+      updateUser(this, user)
+    },
+    versionOk (version, labels) {
+      const user = {}
+      user.clipalm_version = labels[0]
+      updateUser(this, user)
+    },
+    icdOk (icd, labels) {
+      const user = {}
+      user.clipalm_icd = labels[0]
+      updateUser(this, user)
+    },
+    wxcCellClicked () {
+      this.$store.commit('SET_menu', [0, '完善个人信息'])
     },
     onHide (type) {
-      console.log('hide', type)
+      console.log('hide')
+      // console.log('hide', type)
     },
     onSelect (params, type) {
       const user = {}
@@ -261,6 +250,7 @@ export default {
     border-color: #BBBBBB;
     padding-top: 0;
     background-color: #F8F8FF;
+    width: 750px;
   }
   .text {
     color: #666666;
