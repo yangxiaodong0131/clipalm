@@ -210,15 +210,6 @@ export default {
 </script>
 
 <style scoped>
-  .demo-title {
-    font-size: 28px;
-    background-color: #F8F8FF;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 14px;
-    padding: 10px;
-  }
   .demo {
     width: 750px;
   }

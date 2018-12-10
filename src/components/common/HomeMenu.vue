@@ -103,75 +103,14 @@ export default {
 }
 </script>
 <style scoped>
-  .demo-title {
-    font-size: 28px;
-    background-color: #F8F8FF;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 14px;
-    padding: 5px;
-  }
   .demo {
     width: 750px;
     /* flex-direction: column;
     align-items: center; */
     /* justify-content: center; */
   }
-  .submits {
-    position: relative;
-    left: 23px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  .submitss {
-    position: relative;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  .panel {
-    margin-top: 140px;
-  }
-  .demo1 {
-    margin-top: 50px;
-    margin-left: 20px;
-  }
-  .title {
-    text-align: center;
-    height: 40px;
-    font-size: 35px;
-    background-color: rgb(224, 221, 220)
-  }
-  .special-rich {
-    margin-top: 14px;
-  }
   .bigdiv {
     margin-top: 91px;
     /* width: 550px; */
-  }
-  .item{
-    flex:1;
-    align-items: center;
-    /* border-width: 2px 1px 2px 1px; */
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
-    border-style: solid;
-    border-color: gray;
-    margin: 20px;
-    background-color: #87CEFF;
-  }
-  .row{
-    flex-direction: row;
-    width: 740px;
-  }
-  .text {
-    font-size: 27px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  .icon {
-    margin-top: 20px;
   }
 </style>

@@ -132,7 +132,6 @@ export default {
   .wxc-demo {
     position: absolute;
     top: 0;
-    background-color: #FFFFFF;
   }
   .scroller {
     flex: 1;
