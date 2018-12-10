@@ -26,7 +26,7 @@
           <text class="title" style="font-size: 20px;" v-else >无</text>
         </div>
         <div v-if="infoPage.showSubRule">
-          <category :title="`--${infoPage.subRuleTitle}--`"></category>
+          <!-- <category :title="`--${infoPage.subRuleTitle}--`"></category> -->
           <wxc-cell v-for="(rule, index) in infoPage.subRule"
             :key="index"
             :label="rule.label"
@@ -34,7 +34,7 @@
             :has-arrow="rule.hasArrow"
             @wxcCellClicked="wxcCellClicked1(rule)">
           </wxc-cell>
-          <category v-if="infoPage.showSubRuleTitle2" :title="`--${infoPage.subRuleTitle2}--`"></category>
+          <!-- <category v-if="infoPage.showSubRuleTitle2" :title="`--${infoPage.subRuleTitle2}--`"></category> -->
           <wxc-cell v-for="(rule, index) in infoPage.subRule2"
             :key="`sub2-${index}`"
             :label="rule.label"
