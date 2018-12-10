@@ -1,61 +1,19 @@
 <template>
-  <!-- <div class="panel" v-bind:style="panel">
-    <category class="category" :title="`用户积分信息`"></category>
-    <text class="bpStyle">当前积分：{{user.bp}}</text>
-    <category title="--选择用户功能--"></category>
-    <wxc-grid-select
-      class="gridSelect"
-      :single="true"
-      :cols="5"
-      :customStyles="customStyles"
-      :list="list_1"
-      @select="params => onSelect(params, 'user')">
-    </wxc-grid-select>
-    <category title="--选择字典--"></category>
-    <wxc-grid-select
-      class="gridSelect"
-      :single="true"
-      :cols="5"
-      :customStyles="customStyles"
-      :list="list_2"
-      @select="params => onSelect(params, 'version')">
-    </wxc-grid-select>
-    <category title="--选择ICD版本--"></category>
-    <wxc-grid-select
-      class="gridSelect"
-      :single="true"
-      :cols="5"
-      :customStyles="customStyles"
-      :list="list_3"
-      @select="params => onSelect(params, 'icd')">
-    </wxc-grid-select>
-    <category title="--选择DRG版本--"></category>
-    <wxc-grid-select
-      class="gridSelect"
-      :single="true"
-      :cols="5"
-      :customStyles="customStyles"
-      :list="list_4"
-      @select="params => onSelect(params, 'drg')">
-    </wxc-grid-select>
-    <div style="height:20px;"></div>
-    <wxc-button text="退出登录"
-        size="full"
-        class="submits"
-        type="blue"
-        @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
-  </div> -->
   <div class="panel" v-bind:style="panel">
     <div style="height: 91px;"></div>
-    <!-- <category title="--选择用户功能--"></category> -->
-    <!-- <category title="--选择字典--"></category> -->
     <am-list style="width:750px;">
       <div style="height:20px;"></div>
       <am-list-item
-          title="用户名"
-          arrow="empty"
-          :extra="`${user.username}`"></am-list-item>
+        title="用户名"
+        arrow="empty"
+        :extra="`${user.username}`">
+      </am-list-item>
+      <am-list-item
+        title="积分"
+        :extra="`${user.bp}`"
+        arrow="empty"
+        ></am-list-item>
+      <div style="height:25px;"></div>
       <am-picker
         title="请选择"
         :placeholder="user.type"
@@ -64,12 +22,12 @@
         @hide="onHide">
         <am-list-item
           slot-scope="{ extra, show }"
-          title="用户"
+          title="用户类型"
           :extra="extra"
           @click="show">
         </am-list-item>
       </am-picker>
-      <div style="height:35px;"></div>
+      <div style="height:25px;"></div>
       <am-picker
         title="请选择"
         :placeholder="user.clipalm_icd"
@@ -110,18 +68,7 @@
           @click="show">
         </am-list-item>
       </am-picker>
-      <div style="height:35px;"></div>
-    <!-- <wxc-cell label="完善用户信息"
-                :has-arrow="true"
-                style="width:750px;"
-                @wxcCellClicked="wxcCellClicked"
-                :has-top-border="false"></wxc-cell> -->
-      <am-list-item
-        title="用户积分"
-        :extra="`${user.bp}`"
-        arrow="empty"
-        ></am-list-item>
-      <div style="height:35px;"></div>
+      <div style="height:25px;"></div>
       <am-list-item
         title="完善用户信息"
         @click="click"></am-list-item>
@@ -133,11 +80,6 @@
       style="width:750px;"
       @click="wxcButtonClicked"></am-list-item>
   </am-list>
-  <!-- <wxc-button text="退出登录"
-      size="full"
-      class="submits"
-      type="blue"
-      @wxcButtonClicked="wxcButtonClicked"></wxc-button> -->
   <mini-bar title="用户信息" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
   </div>
   </template>
