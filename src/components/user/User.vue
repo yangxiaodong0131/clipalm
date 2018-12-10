@@ -104,13 +104,21 @@
           @click="show">
         </am-list-item>
       </am-picker>
-    </am-list>
-    <wxc-cell label="完善用户信息"
+    <!-- <wxc-cell label="完善用户信息"
                 :has-arrow="true"
                 style="width:750px;"
                 @wxcCellClicked="wxcCellClicked"
-                :has-top-border="false"></wxc-cell>
-    <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
+                :has-top-border="false"></wxc-cell> -->
+      <am-list-item
+        title="用户积分"
+        :extra="`${user.bp}`"
+        arrow="empty"
+        ></am-list-item>
+      <am-list-item
+        title="完善用户信息"
+        @click="wxcCellClicked"></am-list-item>
+  </am-list>
+  <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
   </div>
   </template>
 
