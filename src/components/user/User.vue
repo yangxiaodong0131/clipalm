@@ -49,57 +49,37 @@
   <div class="panel" v-bind:style="panel">
     <div style="height: 91px;"></div>
     <category title="--选择用户功能--"></category>
-    <am-list style="width: 750px" header="">
-      <am-picker
-        :show.sync="show"
-        title="请选择用户功能"
-        :data="[list_1]"
-        v-model="value"
-        @ok="onOK"
-        @hide="onHide"
-      >
-        <am-list-item
-          slot-scope="{ extra, show }"
-          title="用户功能"
-          :extra="extra"
-          @click="show"
-        ></am-list-item>
-      </am-picker>
-    </am-list>
     <category title="--选择字典--"></category>
-    <am-list style="width: 750px" header="">
+    {{user.clipalm_version}}
+    <am-list header="和am-list-item一起使用" style="width:750px;">
       <am-picker
-        :show.sync="show"
-        title="请选择字典"
-        :data="[list_2]"
-        v-model="value"
+        title="请选择"
+        :placeholder="user.clipalm_version"
+        :data="versions"
+        v-model="user.clipalm_version"
         @ok="onOK"
         @hide="onHide"
-      >
+        @change="onChange">
         <am-list-item
           slot-scope="{ extra, show }"
-          title="字典"
+          title="版本"
           :extra="extra"
-          @click="show"
-        ></am-list-item>
+          @click="show">
+        </am-list-item>
       </am-picker>
-    </am-list>
-    <category title="--选择DRG版本--"></category>
-    <am-list style="width: 750px" header="">
       <am-picker
-        :show.sync="show"
-        title="请选择DRG版本"
-        :data="[list_4]"
-        v-model="value"
+        title="请选择"
+        :data="types"
+        v-model="value2"
         @ok="onOK"
         @hide="onHide"
-      >
+        placeholder="点我选择">
         <am-list-item
           slot-scope="{ extra, show }"
-          title="DRG版本"
+          title="时间"
           :extra="extra"
-          @click="show"
-        ></am-list-item>
+          @click="show">
+        </am-list-item>
       </am-picker>
     </am-list>
     <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
@@ -132,30 +112,11 @@ export default {
       backgroundColor: '#ffffff',
       checkedBackgroundColor: '#1E90FF'
     },
-    show: true,
+    show: false,
     value: [],
-    seasons: [
-      [
-        {
-          label: '2013',
-          value: '2013'
-        },
-        {
-          label: '2014',
-          value: '2014'
-        }
-      ],
-      [
-        {
-          label: '春',
-          value: '春'
-        },
-        {
-          label: '夏',
-          value: '夏'
-        }
-      ]
-    ]
+    types: [{ title: '专家用户', label: '专家用户' }, { title: '机构用户', label: '机构用户' }, { title: '个人用户', label: '个人用户' }],
+    versions: [{ label: 'BJ编码版', title: 'BJ编码版' }, { label: 'GB编码版', title: 'GB编码版' }, { label: '术语版', title: '术语版' }],
+    icds: [{ label: 'ICD10 6.0', title: 1 }, { label: 'ICD10 5.0', title: 1 }]
   }),
   computed: {
     user: {
@@ -168,47 +129,32 @@ export default {
         return this.user.admin
       }
     },
-    list_1: {
-      get () {
-        // const types = {
-        //   专家用户: { title: '专家用户', value: 1 },
-        //   // 机构用户: { title: '机构用户', value: 2, disabled: 'true' },
-        //   个人用户: { title: '个人用户', value: 2 }
-        // }
-        let types = {}
-        // let serverType = ''
-        if (this.$store.state.Home.user.data.type) {
-          types[this.$store.state.Home.user.data.type] = { label: this.$store.state.Home.user.data.type, value: 1, checked: true }
-          // serverType = this.$store.state.Home.user.data.type
-        } else {
-          types = { 专家用户: { label: '专家用户', value: 1, checked: true } }
-        }
-        // if (types[serverType]) {
-        //   types[serverType].checked = true
-        // }
-        return Object.values(types)
-      }
+    types () {
+      return [
+        { title: '专家用户', value: 1 },
+        { title: '机构用户', value: 2 },
+        { title: '个人用户', value: 3 }]
     },
-    list_2: {
-      get () {
-        const versions = {
-          BJ编码版: { label: 'BJ编码版', value: 'BJ编码版' },
-          GB编码版: { label: 'GB编码版', value: 'GB编码版' },
-          // CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
-          术语版: { label: '术语版', value: '术语版' }
-        }
-        let serverVersion = ''
-        if (this.$store.state.Home.user.data.clipalm_version) {
-          serverVersion = this.$store.state.Home.user.data.clipalm_version
-        } else {
-          serverVersion = 'BJ编码版'
-        }
-        if (versions[serverVersion]) {
-          versions[serverVersion].checked = true
-        }
-        return Object.values(versions)
-      }
-    },
+    // list_2: {
+    //   get () {
+    //     const versions = {
+    //       BJ编码版: { label: 'BJ编码版', value: 'BJ编码版' },
+    //       GB编码版: { label: 'GB编码版', value: 'GB编码版' },
+    //       // CC编码版: { title: 'CC编码版', value: 1, disabled: 'true' },
+    //       术语版: { label: '术语版', value: '术语版' }
+    //     }
+    //     let serverVersion = ''
+    //     if (this.$store.state.Home.user.data.clipalm_version) {
+    //       serverVersion = this.$store.state.Home.user.data.clipalm_version
+    //     } else {
+    //       serverVersion = 'BJ编码版'
+    //     }
+    //     if (versions[serverVersion]) {
+    //       versions[serverVersion].checked = true
+    //     }
+    //     return Object.values(versions)
+    //   }
+    // },
     list_3: {
       get () {
         const icds = [
