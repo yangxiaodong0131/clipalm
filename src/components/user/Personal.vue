@@ -134,9 +134,9 @@ export default {
     border-style: solid;
     border-color: #000000;
   }
-  .submits{
+  /* .submits{
     position: relative;
     left: 23px;
     top: 1px;
-  }
+  } */
 </style>

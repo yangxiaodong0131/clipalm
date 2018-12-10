@@ -12,7 +12,6 @@
                     @wxcMinibarLeftButtonClicked="leftButtonClick">
           <image :src="`${url.static}/images/${leftIcon}2.png`"
                  slot="left"
-                 v-if="leftButtonShow"
                  style="height: 48px;width: 88px;"></image>
           <image :src="`${url.static}/images/${rightIcon}2.png`"
                  slot="right"
@@ -34,7 +33,8 @@ export default {
     title: '',
     rightIcon: '',
     leftIcon: '',
-    rightButtonShow: ''
+    rightButtonShow: '',
+    left: ''
   },
   data () {
     return {
@@ -111,17 +111,21 @@ export default {
       }
     },
     leftButtonClick () {
-      const menus = ['个人信息', '病案', '字典', 'DRG分析', '论坛']
-      if (this.menu === '个人信息') {
-        this.$store.commit('SET_menu', [0, '完善个人信息'])
-      } else if (this.menu === '找回密码') {
-        this.$store.commit('SET_menu', [0, '用户登录'])
-      } else if (this.menu === '用户统计') {
-        this.$store.commit('SET_menu', [0, '个人信息'])
-      } else if (this.infoLevel === 0) {
-        this.$store.commit('SET_menu', [this.activeTab, menus[this.activeTab]])
+      if (this.left === 'select') {
+        this.$store.commit('SET_menu', [this.activeTab, '自定义查询'])
       } else {
-        this.$store.commit('SET_infoLevel', this.infoLevel - 1)
+        const menus = ['个人信息', '病案', '字典', 'DRG分析', '论坛']
+        if (this.menu === '个人信息') {
+          this.$store.commit('SET_menu', [0, '完善个人信息'])
+        } else if (this.menu === '找回密码') {
+          this.$store.commit('SET_menu', [0, '用户登录'])
+        } else if (this.menu === '用户统计') {
+          this.$store.commit('SET_menu', [0, '个人信息'])
+        } else if (this.infoLevel === 0) {
+          this.$store.commit('SET_menu', [this.activeTab, menus[this.activeTab]])
+        } else {
+          this.$store.commit('SET_infoLevel', this.infoLevel - 1)
+        }
       }
     }
   }

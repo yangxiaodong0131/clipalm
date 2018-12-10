@@ -25,6 +25,7 @@
       <HomeMenu v-else-if="menu[1] === '病案'"></HomeMenu>
       <Introduce v-else-if="menu[1] === '介绍'"></Introduce>
       <SingleGroup v-else-if="menu[1] == '单条分组'"></SingleGroup>
+      <CustomSelect v-else-if="menu[1] == '自定义查询'"></CustomSelect>
       <Edit v-else></Edit>
     </div>
     <!-- library页 -->
@@ -32,6 +33,7 @@
       <PopRight v-if="infoLevel[2] > 0"></PopRight>
       <HomeMenu v-else-if="menu[2] === '字典'"></HomeMenu>
       <Introduce v-else-if="menu[2] === '介绍'"></Introduce>
+      <CustomSelect v-else-if="menu[2] == '自定义查询'"></CustomSelect>
       <Library v-else></Library>
     </div>
     <!-- stat页 -->
@@ -40,6 +42,7 @@
       <HomeMenu v-else-if="menu[3] === 'DRG分析'"></HomeMenu>
       <Introduce v-else-if="menu[3] === '介绍'"></Introduce>
       <Charts v-else-if="menu[3] == '报表'"></Charts>
+      <CustomSelect v-else-if="menu[3] == '自定义查询'"></CustomSelect>
       <Report v-else></Report>
     </div>
     <!-- forum页 -->
@@ -60,6 +63,7 @@
   import { WxcTabBar, Utils, WxcLoading } from 'weex-ui';
   import { getServer, getLastVersion } from '../utils/server'
   import Version from './common/Version'
+  import CustomSelect from './common/CustomSelect'
   import PopRight from './common/PopRight'
   import HomeMenu from './common/HomeMenu'
   import Introduce from './common/Introduce'
@@ -81,7 +85,7 @@
   const urlConfig = require('../utils/config.js')
   export default {
     components: { WxcTabBar, WxcLoading, User, Login, Personal, Retrieve, Edit, SingleGroup, Library,
-      Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce, Analyse },
+      Report, Forum, PopRight, ForumContent, Version, Charts, HomeMenu, Introduce, Analyse, CustomSelect },
     data: () => ({
       tabs: [{
         title: '用户',
