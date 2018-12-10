@@ -78,7 +78,11 @@ export default {
           show = false
           break
         case 'DRG分析':
-          show = false
+          if (this.activeTab === 4) {
+            show = true
+          } else {
+            show = false
+          }
           break
         case '论坛':
           show = false

@@ -51,7 +51,7 @@
     <category title="--选择用户功能--"></category>
     <category title="--选择字典--"></category>
     {{user.clipalm_version}}
-    <am-list header="和am-list-item一起使用" style="width:750px;">
+    <!-- <am-list header="和am-list-item一起使用" style="width:750px;">
       <am-picker
         title="请选择"
         :placeholder="user.clipalm_version"
@@ -81,7 +81,7 @@
           @click="show">
         </am-list-item>
       </am-picker>
-    </am-list>
+    </am-list> -->
     <mini-bar :title="`用户信息-${user.username}`" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
     {{list_2}}
   </div>
