@@ -1,6 +1,6 @@
 <template>
   <div class="demo" v-bind:style="panel">
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="left" left="select" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
       <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
@@ -11,11 +11,21 @@
         ></am-grid>
       </div>
     </div>
+    <wxc-grid-select
+      :single="false"
+      :cols="5"
+      :customStyles="customStyles"
+      :list="list"
+      @select="params => onSelect(params)"></wxc-grid-select>
+    <div v-for="(text, i) in selection" :key="i">
+      <text style="font-size: 35px;">{{text}}</text>
+      <input type="text" :placeholder="text" class="input" :autofocus=true value="" />
+    </div>
   </div>
 </template>
 
 <script>
-import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag, WxcIcon } from 'weex-ui'
+import { Utils, WxcSpecialRichText, WxcButton, WxcRichText, WxcPopover, WxcCell, WxcTag, WxcIcon, WxcGridSelect } from 'weex-ui'
 import { AmGrid } from 'weex-amui'
 import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
@@ -24,11 +34,22 @@ const modal = weex.requireModule('modal')
 const urlConfig = require('../../utils/config.js')
 const iconConfig = require('../../utils/icon.js')
 export default {
-  components: { AmGrid, WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon },
+  components: { AmGrid, WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon, WxcGridSelect },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      iconUrl: `${urlConfig.static}/images`
+      iconUrl: `${urlConfig.static}/images`,
+      customStyles: {
+        lineSpacing: '14px',
+        icon: '',
+        color: '#333333',
+        checkedColor: '#ffffff',
+        disabledColor: '#eeeeee',
+        checkedBorderColor: '#ffb200',
+        backgroundColor: '#ffffff',
+        checkedBackgroundColor: '#ffb200'
+      },
+      selection: []
     }
   },
   computed: {
@@ -50,6 +71,41 @@ export default {
     },
     user () {
       return this.$store.state.Home.user
+    },
+    list () {
+      let value = []
+      switch (this.activeTab) {
+        case 1:
+          value = [
+            {'title': '入组DRG'},
+            {'title': '主要诊断'},
+            {'title': '其他诊断'},
+            {'title': '住院天数'},
+            {'title': '住院总费用'},
+            {'title': '年龄'}]
+          break
+        case 2:
+          value = [
+            {'title': '编码'},
+            {'title': '名称'},
+            {'title': '年份'}]
+          break
+        case 3:
+          value = [
+            {'title': '编码'},
+            {'title': '年份'},
+            {'title': '版本'},
+            {'title': '平均费用'},
+            {'title': '平均住院天数'},
+            {'title': '病例数'},
+            {'title': '费用变异系数'},
+            {'title': '时间变异系数'},
+            {'title': '权重'}]
+          break
+        default:
+          break
+      }
+      return value
     }
   },
   methods: {
@@ -96,8 +152,10 @@ export default {
     wxcButtonClickedMenu (ref) {
       this.$refs[ref].wxcPopoverShow()
     },
-    onSelect (params) {
-      console.log(params)
+    onSelect ({selectIndex, checked, checkedList}) {
+      console.log(checkedList[0].title)
+      this.selection.push(checkedList[0].title)
+      console.log(this.selection)
     }
   }
 }
