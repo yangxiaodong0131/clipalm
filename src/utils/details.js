@@ -179,10 +179,10 @@ function subRule (result, data, title) {
     })
   } else if (data.icd) {
     result.showSubRule = true
-    result.subRules = []
+    result.subRules = [{}]
     result.subRules[0].title = title
-    result.subRules[0] = data.icd.map((x) => {
-      const obj = {'label': x.code, 'title': x.code, 'hasArrow': true, menu: title, all: x}
+    result.subRules[0].rules = data.icd.map((x) => {
+      const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: title, all: x}
       return obj
     })
   }
