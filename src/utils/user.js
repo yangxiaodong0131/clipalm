@@ -98,6 +98,8 @@ export function updateUser (obj, user) {
   }, res => {
     if (res.ok) {
       obj.$store.commit('SET_userData', res.data.data)
+      obj.$store.commit('SET_menu', [3, 'DRG分析'])
+      obj.$store.commit('SET_onlyInfoLevel', [3, 0])
       obj.$store.commit('SET_menu', [2, '字典'])
       obj.$store.commit('SET_onlyInfoLevel', [2, 0])
       obj.$store.commit('SET_menu', [1, '病案'])
