@@ -104,7 +104,7 @@
           activeIcon: `${urlConfig.static}/images/library_fill.png`
         }, {
           title: 'DRG分析',
-          menu: [{'DRG基础': ['DRG基础'], 'DRG专家': ['主诊未入组', '手术QY'], 'DRG机构': ['年', '半年', '季度', '月']}],
+          menu: [{'基础分析': ['DRG基础', '诊断基础', '手术基础'], 'DRG专家': ['主诊未入组', '手术QY'], 'DRG机构': ['年', '半年', '季度', '月']}],
           icon: `${urlConfig.static}/images/stat.png`,
           activeIcon: `${urlConfig.static}/images/stat_fill.png`
         }, {
