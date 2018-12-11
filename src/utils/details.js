@@ -44,9 +44,9 @@ function statInfo (result, data, menu) {
   result.title = '分析详情'
   if (data.stat && data.stat.length > 0) {
     result.showSubRule = true
-    result.subRuleTitle = `${menu}列表`
-    result.showSubRuleTitle = true
-    result.subRule = data.stat.map((x) => {
+    result.subRules = [{}]
+    result.subRules[0].title = `${menu}列表`
+    result.subRules[0].rules = data.stat.map((x) => {
       const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
       return obj
     })
@@ -58,10 +58,12 @@ function statInfoDd (result, data, menu) {
   result.details = []
   result.title = '偏差分布详情'
   result.showSubRule = true
-  result.subRuleTitle = `${menu}列表`
   result.showSubRuleTitle = false
   if (data.stat && data.stat.length > 0) {
-    result.subRule = data.stat.map((x) => {
+    result.showSubRule = true
+    result.subRules = [{}]
+    result.subRules[0].title = `${menu}列表`
+    result.subRules[0].rules = data.stat.map((x) => {
       const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: `${menu}分析`, all: x}
       return obj
     })
@@ -74,9 +76,9 @@ function statInfoOrg (result, data, menu) {
   result.title = '分析详情'
   if (data.stat && data.stat.length > 0) {
     result.showSubRule = true
-    result.subRuleTitle = `${menu}列表`
-    result.showSubRuleTitle = true
-    result.subRule = data.stat.map((x) => {
+    result.subRules = [{}]
+    result.subRules[0].title = `${menu}列表`
+    result.subRules[0].rules = data.stat.map((x) => {
       const obj = {'label': x.code, 'title': `机构: ${x.name}`, 'hasArrow': true, menu: `${menu}分析`, all: x}
       return obj
     })
@@ -96,9 +98,9 @@ function drgInfo (obj, result, data, title) {
   result.title = `${data.code}规则详情`
   if (data.adrgs) {
     result.showSubRule = true
-    result.showSubRuleTitle = true
-    result.subRuleTitle = 'ADRG列表'
-    result.subRule = data.adrgs.map((x) => {
+    result.subRules = [{}]
+    result.subRules[0].title = 'ADRG列表'
+    result.subRules[0].rules = data.adrgs.map((x) => {
       const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'ADRG', all: x}
       return obj
     })
@@ -111,9 +113,9 @@ function drgInfo (obj, result, data, title) {
   }
   if (data.drgs) {
     result.showSubRule = true
-    result.showSubRuleTitle = true
-    result.subRuleTitle = 'DRG列表'
-    result.subRule = data.drgs.map((x) => {
+    result.subRules = [{}]
+    result.subRules[0].title = 'DRG列表'
+    result.subRules[0].rules = data.drgs.map((x) => {
       const obj = {'label': x.code, 'title': x.name, 'hasArrow': true, menu: 'DRG', all: x}
       return obj
     })
@@ -177,8 +179,9 @@ function subRule (result, data, title) {
     })
   } else if (data.icd) {
     result.showSubRule = true
-    result.subRuleTitle = title
-    result.subRule = data.icd.map((x) => {
+    result.subRules = []
+    result.subRules[0].title = title
+    result.subRules[0] = data.icd.map((x) => {
       const obj = {'label': x.code, 'title': x.code, 'hasArrow': true, menu: title, all: x}
       return obj
     })
@@ -186,7 +189,7 @@ function subRule (result, data, title) {
   return result
 }
 export function getDetails (obj, menu, data) {
-  let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRule: [], showSubRuleTitle: false, subRuleTitle: ''}
+  let result = {info: data, title: '', details: details, grid: {}, showSubRule: false, subRules: [{}], showSubRuleTitle: false, subRuleTitle: ''}
   if (data) {
     if (['BJ-ICD10', 'GB-ICD10'].includes(menu)) {
       menu = 'ICD10'
