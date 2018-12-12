@@ -10,7 +10,7 @@
       @select="params => onSelect(params)"></wxc-grid-select>
     <div v-for="(text, i) in selection" :key="i">
       <text style="font-size: 35px;margin-left: 15px">{{text}}</text>
-      <input type="text" :placeholder="text" class="input" :autofocus=true value="" />
+      <input type="text" :placeholder="text" class="input" :autofocus=true @change="onChange" v-model="searchObj[text]"/>
     </div>
     <wxc-button text="查询"
               type="blue"
@@ -23,6 +23,8 @@
 <script>
 import { WxcButton, WxcGridSelect } from 'weex-ui'
 import MiniBar from './MiniBar.vue'
+import { customSearch } from '../../utils/server'
+// var modal = weex.requireModule('modal')
 export default {
   components: { WxcButton, WxcGridSelect, MiniBar },
   data () {
@@ -91,6 +93,14 @@ export default {
           break
       }
       return value
+    },
+    searchObj () {
+      const obj = {}
+      this.selection.map((x) => {
+        obj[x] = ''
+        return obj
+      })
+      return obj
     }
   },
   methods: {
@@ -103,7 +113,19 @@ export default {
       }
     },
     wxcButtonClicked () {
-
+      customSearch(this, this.searchObj)
+      // modal.alert({
+      //   message: 'event',
+      //   duration: 0.3
+      // })
+    },
+    onChange (event) {
+      console.log(event)
+      // console.log(text)
+      // modal.alert({
+      //   message: event.value,
+      //   duration: 0.3
+      // })
     }
   }
 }
