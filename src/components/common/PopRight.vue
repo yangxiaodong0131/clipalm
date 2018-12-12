@@ -14,7 +14,7 @@
         </div>
         <div v-for="(g, index) in infoPage.grid"
               :key="index">
-          <category :title="`--${index}--`"></category>
+          <category :title="`${index}`"></category>
           <div v-if="index === '分组日志'">
             <wxc-simple-flow :list="g" :themeColor="themeColor"></wxc-simple-flow>
           </div>
@@ -25,23 +25,23 @@
               :list="g"></wxc-grid-select>
           <text class="title" style="font-size: 20px;" v-else >无</text>
         </div>
-        <div v-if="infoPage.showSubRule">
-          <category :title="`--${infoPage.subRuleTitle}--`"></category>
-          <wxc-cell v-for="(rule, index) in infoPage.subRule"
+        <div v-if="infoPage.showSubRule" v-for="(subRule, index) in infoPage.subRules" :key="`subRules-${index}`">
+          <category :title="`${subRule.title}`"></category>
+          <wxc-cell v-for="(rule, index) in subRule.rules"
             :key="index"
             :label="rule.label"
             :title="rule.title"
             :has-arrow="rule.hasArrow"
             @wxcCellClicked="wxcCellClicked1(rule)">
           </wxc-cell>
-          <category v-if="infoPage.showSubRuleTitle2" :title="`--${infoPage.subRuleTitle2}--`"></category>
+          <!-- <category v-if="infoPage.showSubRuleTitle2" :title="`--${infoPage.subRuleTitle2}--`"></category>
           <wxc-cell v-for="(rule, index) in infoPage.subRule2"
             :key="`sub2-${index}`"
             :label="rule.label"
             :title="rule.title"
             :has-arrow="rule.hasArrow"
             @wxcCellClicked="wxcCellClicked1(rule)">
-          </wxc-cell>
+          </wxc-cell> -->
         </div>
         <!-- 部位表现特例 -->
         <div v-if="infoPage.showDissRule">

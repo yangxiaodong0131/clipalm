@@ -93,7 +93,13 @@ const routers = function (obj, activeTab, menu, value) {
         router = 'drgwork_wt4/expert'
         break
       case 'DRG基础':
-        url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}`
+        url = `wt4_stat_mdc_base?plat=client&version=${version}&year=${year}&order=code&page=${obj.$store.state.Stat.statPage}`
+        break
+      case '诊断基础':
+        url = `wt4_stat_icd10_clipalm?order=code&version=${version}&year=${year}&page=${obj.$store.state.Stat.statPage}`
+        break
+      case '手术基础':
+        url = `wt4_stat_icd9_clipalm?order=code&version=${version}&year=${year}&page=${obj.$store.state.Stat.statPage}`
         break
       case '偏差分布':
         url = `wt4_stat_mdc?plat=client&order=code&page=${obj.$store.state.Stat.statPage}&type=dd`

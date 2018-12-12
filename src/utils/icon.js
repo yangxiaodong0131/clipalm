@@ -18,6 +18,8 @@ module.exports = {
   'GB-ICD9': 'library_icd9_gb2.png',
   'BJ-ICD9': 'library_icd9_bj2.png',
   'DRG基础': 'stat_drg.png',
+  '诊断基础': 'stat_drg.png',
+  '手术基础': 'stat_drg.png',
   '主诊未入组': 'stat_disease2.png',
   '手术QY': 'stat_oper2.png',
   '年': 'stat_year.png',

@@ -96,6 +96,7 @@ export default {
         default:
           type = this.menu
       }
+      console.log(e)
       const details = getDetails(this, type, e)
       this.show = true
       this.page = details
