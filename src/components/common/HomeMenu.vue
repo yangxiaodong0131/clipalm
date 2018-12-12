@@ -1,6 +1,6 @@
 <template>
   <div class="demo" v-bind:style="panel">
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left" left="select" rightButtonShow="true"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="search" left="select" rightButtonShow="true"></mini-bar>
     <div class="bigdiv" v-for="(v, i) in menus" :key="`menus${i}`">
       <div v-for="(text, i) in v" :key="`menus${i}`">
         <category :title="i"></category>
@@ -10,16 +10,6 @@
           :column-num="4"
         ></am-grid>
       </div>
-    </div>
-    <wxc-grid-select
-      :single="false"
-      :cols="5"
-      :customStyles="customStyles"
-      :list="list"
-      @select="params => onSelect(params)"></wxc-grid-select>
-    <div v-for="(text, i) in selection" :key="i">
-      <text style="font-size: 35px;">{{text}}</text>
-      <input type="text" :placeholder="text" class="input" :autofocus=true value="" />
     </div>
   </div>
 </template>
@@ -151,11 +141,6 @@ export default {
     },
     wxcButtonClickedMenu (ref) {
       this.$refs[ref].wxcPopoverShow()
-    },
-    onSelect ({selectIndex, checked, checkedList}) {
-      console.log(checkedList[0].title)
-      this.selection.push(checkedList[0].title)
-      console.log(this.selection)
     }
   }
 }
@@ -168,7 +153,7 @@ export default {
     /* justify-content: center; */
   }
   .bigdiv {
-    margin-top: 91px;
+    margin-top: 90px;
     /* width: 550px; */
   }
 </style>

@@ -262,6 +262,12 @@ export function getDetails (obj, menu, data) {
       case 'DRG分析':
         result = statInfo(result, data, '')
         break
+      case '诊断DRG入组分析':
+        result = statInfo(result, data, '诊断DRG')
+        break
+      case '手术DRG入组分析':
+        result = statInfo(result, data, '手术DRG')
+        break
       case '主诊未入组':
         result = statInfo(result, data, '主诊未入组')
         break

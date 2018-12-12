@@ -4,6 +4,7 @@ const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 const urlConfig = require('./config.js')
 const routers = require('./routers.js')
+const qs = require('qs')
 
 export function getServer (obj, activeTab, menu, value = null) {
   // activeTab:页面, menu:判断查询菜单, value:查询条件
@@ -130,6 +131,16 @@ function setStore (obj, activeTab, menu, rdata) {
           details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
+        case '诊断DRG入组分析':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(obj, menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        case '手术DRG入组分析':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(obj, menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
         default:
           data = obj.$store.state.Stat.statDrg
           data = data.concat(rdata.data)
@@ -164,4 +175,43 @@ function setStore (obj, activeTab, menu, rdata) {
   }
   // 隐藏查询loading
   obj.$store.commit('SET_isLoadingShow', false)
+}
+
+export function customSearch (obj, value) {
+  console.log(obj.$store.state.Home.activeTab)
+  switch (obj.$store.state.Home.activeTab) {
+    case 1:
+      value.tab = '病案'
+      break
+    case 2:
+      value.tab = '字典'
+      break
+    case 3:
+      value.tab = 'DRG分析'
+      break
+    default:
+      break
+  }
+  stream.fetch({
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    responseType: 'json',
+    url: `${urlConfig.http}:${urlConfig.port}/${urlConfig.router}/custom_query`,
+    body: qs.stringify(value)
+  }, res => {
+    if (res.ok) {
+      switch (obj.$store.state.Home.activeTab) {
+        case 1:
+          obj.$store.commit('SET_wt4Page', 1)
+          obj.$store.commit('SET_wt4Case', res.data.data)
+          obj.$store.commit('SET_menu', [obj.$store.state.Home.activeTab, '自定义查询结果显示'])
+          break
+        default:
+          break
+      }
+    } else {
+      obj.info = '- 网络连接超时 -'
+    }
+  })
 }

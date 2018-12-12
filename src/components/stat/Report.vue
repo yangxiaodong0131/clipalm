@@ -6,7 +6,7 @@
             @wxcCellClicked="wxcIndexlistItemClicked(stat)"
             :has-margin="false"
             :has-arrow="true"
-            :extraContent="stat.desc"></wxc-cell>
+            :extraContent="stat.name"></wxc-cell>
       </cell>
       <cell style="height:200px" v-if="showMore">
         <wxc-button text="加载更多"
