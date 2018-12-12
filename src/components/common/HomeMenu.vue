@@ -153,7 +153,7 @@ export default {
     /* justify-content: center; */
   }
   .bigdiv {
-    margin-top: 91px;
+    margin-top: 90px;
     /* width: 550px; */
   }
 </style>
