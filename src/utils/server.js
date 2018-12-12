@@ -131,6 +131,16 @@ function setStore (obj, activeTab, menu, rdata) {
           details = getDetails(obj, menu, rdata.data[0])
           obj.$store.commit('SET_info', details)
           break
+        case '诊断DRG入组分析':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(obj, menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
+        case '手术DRG入组分析':
+          obj.$store.commit('SET_infoLevel', infoLevel + 1)
+          details = getDetails(obj, menu, rdata.data[0])
+          obj.$store.commit('SET_info', details)
+          break
         default:
           data = obj.$store.state.Stat.statDrg
           data = data.concat(rdata.data)

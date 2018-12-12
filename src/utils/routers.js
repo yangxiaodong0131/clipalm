@@ -166,7 +166,7 @@ const routers = function (obj, activeTab, menu, value) {
         url = `disease_drg?version=${version}&year=${year}&disease_code=${value.disease_code}&drg=${value.code}`
         break
       case '手术DRG入组分析':
-        url = `oper_drg?version=${version}&year=${year}&disease_code=${value.oper_code}&drg=${value.code}`
+        url = `oper_drg?version=${version}&year=${year}&oper_code=${value.oper_code}&drg=${value.code}`
         break
       case '帖子列表':
         url = `forum?plat=client&table=${value.b_wt4_v1_id}&dissect=${value.name}&mdc=${value.mdc}`
