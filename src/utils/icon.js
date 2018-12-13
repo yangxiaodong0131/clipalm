@@ -1,5 +1,8 @@
 const urlConfig = require('./config.js')
 const images = {
+  'logo': 'clipalm.png',
+  'message': 'message.png',
+  'more': 'more.png',
   'setting': 'setting2.png',
   'user_stat': 'table2.png',
   'home': 'home2.png',

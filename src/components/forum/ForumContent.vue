@@ -90,7 +90,7 @@ import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 import { createForum, deleteForum } from '../../utils/forum'
 const modal = weex.requireModule('modal')
-const urlConfig = require('../../utils/config.js')
+const icon = require('../../utils/icon.js')
 export default {
   components: { WxcPopup, WxcCell, WxcButton, MiniBar, WxcRichText, WxcSpecialRichText, Category },
   data () {
@@ -103,7 +103,7 @@ export default {
       reply: [],
       replyId: null,
       replyIndex: null,
-      arrawSrc: `${urlConfig.static}/images/massage.png`
+      arrawSrc: icon['message']
     }
   },
   computed: {

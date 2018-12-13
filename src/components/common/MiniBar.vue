@@ -24,7 +24,6 @@
 
 <script>
 import { WxcMinibar } from 'weex-ui'
-// const modal = weex.requireModule('modal')
 const icon = require('../../utils/icon.js')
 
 export default {

@@ -55,7 +55,7 @@ import MiniBar from '../common/MiniBar.vue'
 import { getServer } from '../../utils/server'
 import { createForum } from '../../utils/forum'
 const modal = weex.requireModule('modal')
-const urlConfig = require('../../utils/config.js')
+const icon = require('../../utils/icon.js')
 export default {
   components: { WxcSpecialRichText, WxcButton, WxcRichText, MiniBar, WxcCell },
   data: () => ({
@@ -63,7 +63,7 @@ export default {
     showNewButton: true,
     title: '',
     content: '',
-    arrawSrc: `${urlConfig.static}/images/massage.png`
+    arrawSrc: icon['message']
   }),
   computed: {
     user () {
