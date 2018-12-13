@@ -15,7 +15,6 @@
                  style="height: 48px;width: 88px;"></image>
           <image :src="`${url.static}/images/${rightIcon}2.png`"
                  slot="right"
-                 v-if="rightButtonShow"
                  style="height: 48px;width: 88px;"></image>
         </wxc-minibar>
       </div>
@@ -30,11 +29,18 @@ const urlConfig = require('../../utils/config.js')
 export default {
   components: { WxcMinibar },
   props: {
-    title: '',
-    rightIcon: '',
-    leftIcon: '',
-    rightButtonShow: '',
-    left: ''
+    title: {
+      type: String,
+      default: () => ' '
+    },
+    rightIcon: {
+      type: String,
+      default: () => 'HOME'
+    },
+    leftIcon: {
+      type: String,
+      default: () => 'SETTING'
+    }
   },
   data () {
     return {
@@ -111,7 +117,7 @@ export default {
       }
     },
     leftButtonClick () {
-      if (this.left === 'select') {
+      if (this.leftIcon === 'search') {
         this.$store.commit('SET_menu', [this.activeTab, '自定义查询'])
       } else {
         const menus = ['个人信息', '病案', '字典', 'DRG分析', '论坛']

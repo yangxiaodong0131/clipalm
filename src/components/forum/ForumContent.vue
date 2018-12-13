@@ -33,7 +33,7 @@
           @wxcButtonClicked="wxcDeleteButtonClicked"></wxc-button>
       </cell>
     </list>
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="left"></mini-bar>
   </div>
 
   <div class="demo" v-bind:style="panel" v-else>
@@ -81,7 +81,7 @@
           @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       </cell>
     </list>
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="left"></mini-bar>
   </div>
 </template>
 <script>

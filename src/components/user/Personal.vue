@@ -19,7 +19,7 @@
               class="submits"
               @wxcButtonClicked="wxcButtonClicked"></wxc-button>
     </scroller>
-    <mini-bar title="完善个人信息" rightIcon="home" leftIcon="left" rightButtonShow="true"></mini-bar>
+    <mini-bar title="完善个人信息" rightIcon="home" leftIcon="left"></mini-bar>
   </div>
 </template>
 
