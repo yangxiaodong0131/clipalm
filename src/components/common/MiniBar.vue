@@ -10,10 +10,10 @@
                     :use-default-return="false"
                     @wxcMinibarRightButtonClicked="homeButtonClick"
                     @wxcMinibarLeftButtonClicked="leftButtonClick">
-          <image :src="`${url.static}/images/${leftIcon}2.png`"
+          <image :src="miniBarLeftIcon"
                  slot="left"
                  style="height: 48px;width: 88px;"></image>
-          <image :src="`${url.static}/images/${rightIcon}2.png`"
+          <image :src="miniBarRighttIcon"
                  slot="right"
                  style="height: 48px;width: 88px;"></image>
         </wxc-minibar>
@@ -24,8 +24,8 @@
 
 <script>
 import { WxcMinibar } from 'weex-ui'
-// const modal = weex.requireModule('modal')
-const urlConfig = require('../../utils/config.js')
+const icon = require('../../utils/icon.js')
+
 export default {
   components: { WxcMinibar },
   props: {
@@ -35,11 +35,11 @@ export default {
     },
     rightIcon: {
       type: String,
-      default: () => 'HOME'
+      default: () => 'home'
     },
     leftIcon: {
       type: String,
-      default: () => 'SETTING'
+      default: () => 'setting'
     }
   },
   data () {
@@ -47,7 +47,8 @@ export default {
       rightButton: '',
       leftButton: '',
       isBottomShow: false,
-      url: urlConfig
+      miniBarLeftIcon: icon(this.leftIcon),
+      miniBarRighttIcon: icon(this.rightIcon)
     }
   },
   created () {

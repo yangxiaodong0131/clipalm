@@ -80,7 +80,7 @@
       @click="wxcButtonClicked">
     </am-nav-bar>
   </am-list>
-  <mini-bar title="用户信息" rightIcon="table" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
+  <mini-bar title="用户信息" rightIcon="user_stat" leftIcon="setting" :rightButtonShow="rightButtonShow"></mini-bar>
   </div>
   </template>
 

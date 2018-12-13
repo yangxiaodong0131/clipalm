@@ -1,4 +1,13 @@
-module.exports = {
+const urlConfig = require('./config.js')
+const images = {
+  'logo': 'clipalm.png',
+  'message': 'message.png',
+  'more': 'more.png',
+  'setting': 'setting2.png',
+  'user_stat': 'table2.png',
+  'home': 'home2.png',
+  'back': 'left2.png',
+  'search': 'search2.png',
   '用户登录': '用户登录.png',
   '完善个人信息': '完善个人信息.png',
   '找回密码': '找回密码.png',
@@ -33,4 +42,8 @@ module.exports = {
   '论坛建议': 'forum_info.png',
   '我的帖子': 'forum_my.png',
   '最新帖子': 'forum_last.png'
+}
+
+module.exports = function (iconName) {
+  return `${urlConfig.static}/images/${images[iconName]}`
 }

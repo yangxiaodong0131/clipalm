@@ -21,14 +21,12 @@ import MiniBar from '../common/MiniBar.vue'
 import Category from '../common/category.vue'
 import { getServer } from '../../utils/server'
 const modal = weex.requireModule('modal')
-const urlConfig = require('../../utils/config.js')
-const iconConfig = require('../../utils/icon.js')
+const icon = require('../../utils/icon.js')
 export default {
   components: { AmGrid, WxcButton, WxcSpecialRichText, WxcRichText, Category, MiniBar, WxcPopover, WxcCell, WxcTag, WxcIcon, WxcGridSelect },
   data () {
     return {
       height: Utils.env.getPageHeight() - 120,
-      iconUrl: `${urlConfig.static}/images`,
       customStyles: {
         lineSpacing: '14px',
         icon: '',
@@ -101,8 +99,8 @@ export default {
   methods: {
     genGrid (menu) {
       const datas = menu.map((x) => {
-        const icon = `${this.iconUrl}/${iconConfig[x]}`
-        return { text: x, icon: icon }
+        const iconPath = icon(x)
+        return { text: x, icon: iconPath }
       })
       return datas
     },

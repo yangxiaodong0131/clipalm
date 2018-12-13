@@ -42,7 +42,7 @@
         </div>
       </cell>
     </list>
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="back"></mini-bar>
   </div>
 </template>
 
@@ -51,14 +51,14 @@ import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLo
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
 import MiniBar from '../common/MiniBar.vue'
-const urlConfig = require('../../utils/config.js')
+const icon = require('../../utils/icon.js')
 export default {
   components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton, MiniBar },
   data () {
     return {
       forceValue: 0,
       refreshing: false,
-      arrawSrc: `${urlConfig.static}/images/more.png`,
+      arrawSrc: icon['more'],
       cellStyle: {
         backgroundColor: '#F8F8FF'
       },

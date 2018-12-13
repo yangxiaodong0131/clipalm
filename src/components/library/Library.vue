@@ -29,7 +29,7 @@
         </div>
       </cell>
     </list>
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="back"></mini-bar>
   </div>
 </template>
 
@@ -40,14 +40,14 @@ import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
 import PopRight from '../common/PopRight.vue'
 // const modal = weex.requireModule('modal')
-const urlConfig = require('../../utils/config.js')
+const icon = require('../../utils/icon.js')
 export default {
   components: { WxcCell, MiniBar, PopRight, WxcButton },
   data () {
     return {
       height: 400,
       isShow: false,
-      arrawSrc: `${urlConfig.static}/images/more.png`,
+      arrawSrc: icon['more'],
       show: false,
       page: {}
     }
