@@ -1,4 +1,5 @@
-module.exports = {
+const urlConfig = require('./config.js')
+const images = {
   'setting': 'setting2.png',
   'user_stat': 'table2.png',
   'home': 'home2.png',
@@ -38,4 +39,8 @@ module.exports = {
   '论坛建议': 'forum_info.png',
   '我的帖子': 'forum_my.png',
   '最新帖子': 'forum_last.png'
+}
+
+module.exports = function (iconName) {
+  return `${urlConfig.static}/images/${images[iconName]}`
 }

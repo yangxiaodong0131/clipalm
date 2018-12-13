@@ -25,8 +25,7 @@
 <script>
 import { WxcMinibar } from 'weex-ui'
 // const modal = weex.requireModule('modal')
-const urlConfig = require('../../utils/config.js')
-const iconConfig = require('../../utils/icon.js')
+const icon = require('../../utils/icon.js')
 
 export default {
   components: { WxcMinibar },
@@ -49,8 +48,8 @@ export default {
       rightButton: '',
       leftButton: '',
       isBottomShow: false,
-      miniBarLeftIcon: `${urlConfig.static}/images/${iconConfig[this.leftIcon]}`,
-      miniBarRighttIcon: `${urlConfig.static}/images/${iconConfig[this.rightIcon]}`
+      miniBarLeftIcon: icon(this.leftIcon),
+      miniBarRighttIcon: icon(this.rightIcon)
     }
   },
   created () {
