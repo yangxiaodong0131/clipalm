@@ -21,10 +21,10 @@
       <cell>
         <div class="panel" @longpress="longpress(wt4)">
           <wxc-cell
-            title="无数据"
+            title="此版本无数据"
             :has-margin="false"
             :has-arrow="false"
-            :arrow-icon="arrawSrc">
+            :desc="`当前版本:${user.clipalm_year}-${user.type}-${user.clipalm_version}-${user.clipalm_icd}`">
           </wxc-cell>
         </div>
       </cell>
@@ -56,6 +56,9 @@ export default {
     this.getData()
   },
   computed: {
+    user () {
+      return this.$store.state.Home.user.data
+    },
     activeTab () {
       return this.$store.state.Home.activeTab
     },

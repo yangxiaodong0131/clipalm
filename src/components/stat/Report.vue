@@ -15,15 +15,14 @@
           @wxcButtonClicked="fetch"></wxc-button>
       </cell>
     </list>
-    <list class="list" loadmoreoffset="20" v-else>
+    <list class="list" loadmoreoffset="20">
       <cell>
         <div class="panel">
           <wxc-cell
             title="此版本无数据"
             :has-margin="false"
             :has-arrow="false"
-            :desc="`当前版本:${user.clipalm_year}-${user.type}-${user.clipalm_version}-${user.clipalm_icd}`"
-            :arrow-icon="arrawSrc">
+            :desc="`当前版本:${user.clipalm_year}-${user.type}-${user.clipalm_version}-${user.clipalm_icd}`">
           </wxc-cell>
         </div>
       </cell>
