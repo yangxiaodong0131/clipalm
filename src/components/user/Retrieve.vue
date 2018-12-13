@@ -26,7 +26,7 @@
               @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       <wxc-button :text="loginResult" size="full" :textStyle="textStyle" :btnStyle="btnStyle2"></wxc-button>
     </scroller>
-        <mini-bar title="找回密码" rightIcon="home" leftIcon="left"></mini-bar>
+        <mini-bar title="找回密码" rightIcon="home" leftIcon="back"></mini-bar>
   </div>
 </template>
 

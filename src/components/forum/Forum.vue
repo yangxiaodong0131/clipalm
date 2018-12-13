@@ -45,7 +45,7 @@
         </div>
       </cell>
     </list>
-    <mini-bar :title="forumModule" rightIcon="home" leftIcon="left"></mini-bar>
+    <mini-bar :title="forumModule" rightIcon="home" leftIcon="back"></mini-bar>
   </div>
 </template>
 

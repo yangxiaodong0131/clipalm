@@ -1,6 +1,6 @@
 <template>
   <div class="demo" v-bind:style="panel">
-    <mini-bar :title="menu" rightIcon="home" leftIcon="left"></mini-bar>
+    <mini-bar :title="menu" rightIcon="home" leftIcon="back"></mini-bar>
     <wxc-grid-select
       class="bigdiv"
       :single="false"

@@ -15,7 +15,7 @@
       </cell>
       <cell style="height:100px"> </cell>
     </list>
-    <mini-bar title="用户统计" rightIcon="home" leftIcon="left"></mini-bar>
+    <mini-bar title="用户统计" rightIcon="home" leftIcon="back"></mini-bar>
   </div>
 </template>
 
