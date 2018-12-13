@@ -9,8 +9,8 @@
       :list="list"
       @select="params => onSelect(params)"></wxc-grid-select>
     <div v-for="(text, i) in selection" :key="i">
-      <text style="font-size: 35px;margin-left: 15px">{{text}}</text>
-      <input type="text" :placeholder="text" class="input" :autofocus=true @change="onChange" v-model="searchObj[text]"/>
+      <text style="font-size: 35px;margin-left: 15px">{{text.key}}</text>
+      <input type="text" :placeholder="text.key" class="input" value="text.key" :autofocus=true @blur="onChange(text)" v-model="searchObj[text.key]"/>
     </div>
     <wxc-button text="查询"
               type="blue"
@@ -24,7 +24,6 @@
 import { WxcButton, WxcGridSelect } from 'weex-ui'
 import MiniBar from './MiniBar.vue'
 import { customSearch } from '../../utils/server'
-// var modal = weex.requireModule('modal')
 export default {
   components: { WxcButton, WxcGridSelect, MiniBar },
   data () {
@@ -97,7 +96,7 @@ export default {
     searchObj () {
       const obj = {}
       this.selection.map((x) => {
-        obj[x] = ''
+        obj[x.key] = x.value
         return obj
       })
       return obj
@@ -105,27 +104,31 @@ export default {
   },
   methods: {
     onSelect ({selectIndex, checked, checkedList}) {
-      const index = this.selection.indexOf(this.list[selectIndex].title)
+      let index = null
+      this.selection.map((x, i) => {
+        if (x.key === this.list[selectIndex].title) {
+          index = i
+        }
+      })
       if (checked === false) {
         this.selection.splice(index, 1)
       } else {
-        this.selection.push(this.list[selectIndex].title)
+        const obj = {key: '', value: ''}
+        obj.key = this.list[selectIndex].title
+        this.selection.push(obj)
       }
     },
     wxcButtonClicked () {
       customSearch(this, this.searchObj)
-      // modal.alert({
-      //   message: 'event',
-      //   duration: 0.3
-      // })
+      const value = {show: true, query: this.searchObj}
+      this.$store.commit('SET_customQuery', [this.activeTab - 1, value])
     },
-    onChange (event) {
-      console.log(event)
-      // console.log(text)
-      // modal.alert({
-      //   message: event.value,
-      //   duration: 0.3
-      // })
+    onChange (value) {
+      this.selection.map((x) => {
+        if (x.key === value.key) {
+          x.value = this.searchObj[value]
+        }
+      })
     }
   }
 }

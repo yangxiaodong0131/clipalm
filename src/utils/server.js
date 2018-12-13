@@ -178,7 +178,6 @@ function setStore (obj, activeTab, menu, rdata) {
 }
 
 export function customSearch (obj, value) {
-  console.log(obj.$store.state.Home.activeTab)
   switch (obj.$store.state.Home.activeTab) {
     case 1:
       value.tab = '病案'
@@ -201,11 +200,19 @@ export function customSearch (obj, value) {
     body: qs.stringify(value)
   }, res => {
     if (res.ok) {
+      obj.$store.commit('SET_menu', [obj.$store.state.Home.activeTab, '自定义查询结果显示'])
       switch (obj.$store.state.Home.activeTab) {
         case 1:
           obj.$store.commit('SET_wt4Page', 1)
           obj.$store.commit('SET_wt4Case', res.data.data)
-          obj.$store.commit('SET_menu', [obj.$store.state.Home.activeTab, '自定义查询结果显示'])
+          break
+        case 2:
+          obj.$store.commit('SET_libraryPage', 1)
+          obj.$store.commit('SET_rule', res.data.data)
+          break
+        case 3:
+          obj.$store.commit('SET_statPage', 1)
+          obj.$store.commit('SET_statDrg', res.data.data)
           break
         default:
           break

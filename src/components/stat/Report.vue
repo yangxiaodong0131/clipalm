@@ -19,9 +19,10 @@
       <cell>
         <div class="panel">
           <wxc-cell
-            title="无数据"
+            title="此版本无数据"
             :has-margin="false"
             :has-arrow="false"
+            :desc="`当前版本:${user.clipalm_year}-${user.type}-${user.clipalm_version}-${user.clipalm_icd}`"
             :arrow-icon="arrawSrc">
           </wxc-cell>
         </div>
@@ -49,6 +50,9 @@ export default {
     }
   },
   computed: {
+    user () {
+      return this.$store.state.Home.user.data
+    },
     activeTab () {
       return this.$store.state.Home.activeTab
     },
