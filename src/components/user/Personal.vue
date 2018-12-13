@@ -4,14 +4,14 @@
       <div>
         <div style="height: 91px;"></div>
           <text style="height: 55px;font-size: 35px;text-align: center;">科室信息</text>
-          <input type="text" placeholder="请输入科室信息" class="input" :autofocus=true value="" v-model="personal.Department" />
+          <input type="text" placeholder="请输入科室信息" class="input" :autofocus=false value="" v-model="personal.Department" />
           <text style="height: 55px;font-size: 35px;text-align: center;">职称</text>
-          <input type="text" placeholder="请输入职称" class="input" :autofocus=true value="" v-model="personal.Title" />
+          <input type="text" placeholder="请输入职称" class="input" :autofocus=false value="" v-model="personal.Title" />
           <!--<wxc-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked"></wxc-radio>-->
       </div>
       <div>
           <text style="height: 55px;font-size: 35px;text-align: center;">所在机构</text>
-        <input type="text" placeholder="请输入所在机构" class="input" v-model="personal.org" />
+        <input type="text" placeholder="请输入所在机构" class="input" :autofocus=false v-model="personal.org" />
       </div>
       <wxc-button text="提交"
               type="blue"
