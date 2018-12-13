@@ -120,6 +120,8 @@ export default {
     },
     wxcButtonClicked () {
       customSearch(this, this.searchObj)
+      const value = {show: true, query: this.searchObj}
+      this.$store.commit('SET_customQuery', [this.activeTab - 1, value])
     },
     onChange (value) {
       this.selection.map((x) => {

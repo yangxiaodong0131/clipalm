@@ -7,6 +7,14 @@
                 :cell-style="cellStyle"
                 :extraContent="aa(stat, index)"></wxc-cell>
     </div>
+    <div class="count1" v-if="customQueryShowType">
+      <wxc-cell v-for="(item, index) in customQuery" v-bind:key="index"
+                :title="index"
+                :desc="`${item}`"
+                :cell-style="cellStyle"
+                :extraContent="aa(stat, index)"></wxc-cell>
+    </div>
+    <!-- <category v-if="customQueryShowType" :title="customQuery[0].query"></category> -->
     <!-- <text class="demo-title"  v-if="wt4Case.length !== 0">{{title.count}}</text> -->
     <list class="list" @loadmore="fetch" loadmoreoffset="20" v-if="showData">
       <cell v-for="(wt4, index) in wt4Case" v-bind:key="index" @longpress="test">
@@ -51,9 +59,10 @@ import { WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcIndexlist, WxcLo
 import { getServer } from '../../utils/server'
 import { getDetails } from '../../utils/details'
 import MiniBar from '../common/MiniBar.vue'
+import Category from '../common/category.vue'
 const icon = require('../../utils/icon.js')
 export default {
-  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton, MiniBar },
+  components: { WxcIndexlist, WxcRichText, WxcSpecialRichText, WxcPopup, WxcCell, WxcLoading, WxcPartLoading, WxcButton, MiniBar, Category },
   data () {
     return {
       forceValue: 0,
@@ -69,6 +78,19 @@ export default {
     this.getData()
   },
   computed: {
+    customQueryShowType () {
+      return this.$store.state.Home.customQuery[0].show
+    },
+    customQuery () {
+      const query = Object.keys(this.$store.state.Home.customQuery[0].query)
+      const obj = {}
+      query.map((x) => {
+        if (x !== 'tab') {
+          obj[x] = this.$store.state.Home.customQuery[0].query[x]
+        }
+      })
+      return obj
+    },
     specialConfigList () {
       const configs = []
       this.wt4Case.map((x) => {
@@ -222,6 +244,11 @@ export default {
     flex-direction: row;
     justify-content: space-around;
     margin-top: 91px;
+    background-color: #F8F8FF;
+  }
+  .count1 {
+    flex-direction: row;
+    justify-content: space-around;
     background-color: #F8F8FF;
   }
 </style>
