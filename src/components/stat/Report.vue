@@ -15,14 +15,15 @@
           @wxcButtonClicked="fetch"></wxc-button>
       </cell>
     </list>
-    <list class="list" loadmoreoffset="20">
+    <list class="list" loadmoreoffset="20" v-else>
       <cell>
         <div class="panel">
           <wxc-cell
             title="此版本无数据"
             :has-margin="false"
             :has-arrow="false"
-            :desc="`当前版本:${user.clipalm_year}-${user.type}-${user.clipalm_version}-${user.clipalm_icd}`">
+            :desc="`当前版本:${user.clipalm_year}-${user.clipalm_version}  用户类型:${user.type}`"
+            :arrow-icon="arrawSrc">
           </wxc-cell>
         </div>
       </cell>
@@ -36,6 +37,7 @@ import { WxcIndexlist, WxcPopup, WxcCell, WxcButton } from 'weex-ui'
 import { getDetails } from '../../utils/details'
 import { getServer } from '../../utils/server'
 import MiniBar from '../common/MiniBar.vue'
+const icon = require('../../utils/icon.js')
 export default {
   components: { WxcIndexlist, WxcPopup, WxcCell, MiniBar, WxcButton },
   created: function () {
@@ -45,7 +47,8 @@ export default {
     return {
       isBottomShow: false,
       height: 400,
-      info: {}
+      info: {},
+      arrawSrc: icon['more']
     }
   },
   computed: {
